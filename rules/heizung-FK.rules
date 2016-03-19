@@ -1,0 +1,108 @@
+import org.openhab.core.library.types.*
+//import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+//import org.joda.time.*
+import java.math.BigDecimal
+import java.util.Locale
+import org.openhab.core.library.types.*
+
+var String rulename = "--> Heizungssteuerung FK_Heizung: "
+
+// How to Duplicate:
+// Search and replace "FK_" --> "WZ_" 
+
+rule "FK_Heizung set heating from sitemap preset element"
+when
+  Item FK_Heizung_Preset received command
+then {
+	logInfo("RULE", rulename + "Schnellauswahl (Sitemap -> Homematic)")
+	switch (receivedCommand){
+		case 0: FK_Heizung_Lowering.sendCommand(ON)
+		case 1: FK_Heizung_Comfort.sendCommand(ON)
+	}
+	createTimer(now.plusSeconds(1)) [|
+		FK_Heizung_Preset.postUpdate(-1)
+	]
+}
+end
+
+rule "FK_Heizung set mode from sitemap select element"
+when
+  Item FK_Heizung_SetMode received command
+then {
+	logInfo("RULE", rulename + "Modus (Sitemap -> Homematic)")
+	switch (receivedCommand){
+		case 0: FK_Heizung_Auto.sendCommand(ON)
+		case 1: FK_Heizung_Manu.sendCommand(FK_Heizung_SetTemp.state as DecimalType)
+		case 2: FK_Heizung_BoostMode.sendCommand(ON)
+		case 3: FK_Heizung_SetMode.postUpdate(-1)
+	}
+}
+end
+
+rule "FK_Heizung update sitemap with window mode"
+when
+  Item FK_Fenster_State received update
+then {
+	createTimer(now.plusSeconds(15)) [|
+		//logInfo("RULE", rulename + "Fenster-Modus <" + FK_Fenster_State.state + "><" + FK_Heizung_SetTemp.state + ">")
+		if (FK_Fenster_State.state == OPEN && FK_Heizung_SetTemp.state == 12.0) {
+			//logInfo("RULE", rulename + "Fenster-Modus aktiviert")
+			FK_Heizung_SetMode.postUpdate(3)
+		} else if (FK_Fenster_State.state == CLOSED && FK_Heizung_SetTemp.state != 12.0) {
+			//logInfo("RULE", rulename + "Fenster-Modus deaktiviert")
+			FK_Heizung_SetMode.postUpdate(FK_Heizung_Mode.state)
+		} else {
+			logError("RULE", rulename + "Fenster-Modus nicht eindeutig")
+			FK_Heizung_SetMode.postUpdate(FK_Heizung_Mode.state)
+		}
+	]	
+}	
+end
+
+rule "FK_Heizung update sitemap with heating mode"
+when
+  Item FK_Heizung_Mode received update
+then {
+	//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
+	// Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
+	if (FK_Heizung_SetMode.state == 3 && FK_Heizung_Mode.state == 0) {
+		//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
+	} else {
+		FK_Heizung_SetMode.postUpdate(FK_Heizung_Mode.state)
+	}
+}	
+end
+
+rule "FK_Heizung create summary"
+when
+	Item FK_Heizung_SetTemp changed or
+	Item FK_Heizung_ActTemp changed or
+	Item FK_Heizung_Valve changed or
+	Item FK_Heizung_SetMode changed
+then {
+	if ((FK_Heizung_SetTemp.state instanceof DecimalType) && (FK_Heizung_ActTemp.state instanceof DecimalType)) {	
+		var BigDecimal setTemp = (FK_Heizung_SetTemp.state as DecimalType).toBigDecimal
+		var BigDecimal actTemp = (FK_Heizung_ActTemp.state as DecimalType).toBigDecimal
+		if (FK_Heizung_Valve.state > 50) {
+			FK_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C)   %.1f °C", setTemp, actTemp))
+		} else if (FK_Heizung_Valve.state > 0) {
+			FK_Heizung_Summary.postUpdate(String::format("( ⇡ %.1f °C)   %.1f °C", setTemp, actTemp))
+		} else if (FK_Heizung_SetMode.state == 3) {
+			FK_Heizung_Summary.postUpdate(String::format("( ⇣ Fenster offen)   %.1f °C", actTemp))
+		} else {
+			FK_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+		}
+	} else {
+		FK_Heizung_Summary.postUpdate("(unbekannt)")
+	}
+}
+end
+
+
+
+
+
+
+
+

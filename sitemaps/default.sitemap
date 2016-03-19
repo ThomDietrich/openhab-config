@@ -1,0 +1,308 @@
+sitemap w66a label="W66a openHAB Installation"
+{
+	Frame { // Datum und Sonnenauf-/untergangszeiten
+		Text item=iDateTime
+		Text label="Wetter- und Astro-Daten" icon="info" {
+			Frame {
+				Text item=Sunrise_Sunset
+				Text item=Sun_Elevation icon="" visibility=[Sun_Elevation>0]
+				Text item=Sun_Zodiac icon=""
+				Text item=Moon_Phase_Name
+				Text item=Moon_Full icon=""
+			}
+			Frame {
+				Text label="Wettervorhersage" icon="sun_clouds" {
+					Text label="kommt später..."
+					}
+				}
+			}
+		}
+		// Globale Steuerung für Betriebszustände (An-/Abwesenheit-bedingte Steuerungen)
+	Frame label="Globaler Betriebsmodus" {
+		Switch item=GlobalState label="Modus" mappings=[0="Normalbetrieb", 1="Urlaubsmodus", 2="Dauerfeuer"]
+		Text item=Presence_ThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
+		Text item=Sonos_CurrentTrack icon="speaker-black" label=". [%s]" visibility=[Sonos_CurrentTrack != "-"]
+		Text item=SpeedtestSummary {
+			Frame label="Ergebnisse" {
+				Text item=SpeedtestResultDown
+				Text item=SpeedtestResultUp
+				Text item=SpeedtestResultPing
+			}
+			Frame label="Steuerung" {
+				Text item=SpeedtestResultDate
+				Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
+				Switch item=SpeedtestRerun mappings=[ON="Start"]
+			}
+			Frame label="Statistik" {				
+				Text label="..." icon="analytics-8-icon"
+			}
+		}
+		Text item=Kodi_PlayerTitle icon="kodi" {
+			Frame label="Status" {
+				Text item=Kodi_SystemState
+				Text item=Kodi_PlayerState
+				Text item=Kodi_PlayerTitle
+				Text item=Kodi_PlayerType
+				Text item=Kodi_PlayerShowTitle
+				Switch item=Kodi_PlayerPlayPause mappings=[ON="Play", OFF="Pause"]
+			}
+		}
+		Group item=gKodi
+	}
+
+	Frame label="Beleuchtung" {
+		Switch item=Whg_Light_Preset icon="home-icon" label="." mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
+		Text item=gLights icon="light-bulb-icon1"
+		Switch item=BK_rcswitch_Balkonmagic
+		Switch item=WZ_Lacks_LEDs
+		Switch item=WZ_Lacks_Lampe
+		Switch item=WZ_rcswitch_Origami
+		Switch item=WZ_rcswitch_Expedit
+		Switch item=WZ_rcswitch_Goldf
+		Switch item=FK_rcswitch_Arbeit
+		Switch item=FK_rcswitch_Edison
+		Switch item=Kueche_Deckenlicht
+		Switch item=Flur_Deckenlicht
+		Switch item=SZ_Deckenlicht
+		Switch item=BD_Deckenlicht
+		//Text item=BD_Deckenlicht_TimerEnd visibility=[BD_Deckenlicht_TimerActive == ON]
+		Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
+		}
+	
+	Frame label="Temperaturen und Heizung" {
+		Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
+			Frame label="Temperatur" {
+				Text item=WZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+			}
+			Frame label="Heizung" {
+				Setpoint item=WZ_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Switch item=WZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+				Switch item=WZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Text item=WZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[WZ_Heizung_BoostTime > 0]
+				Text item=WZ_Heizung_Valve label="Ventilstellung [%d %%]"
+			}
+		}
+		Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
+			Frame label="Temperatur" {
+				Text item=SZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+			}
+			Frame label="Heizung" {
+				Setpoint item=SZ_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Switch item=SZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+				Switch item=SZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Text item=SZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[SZ_Heizung_BoostTime > 0]
+				Text item=SZ_Heizung_Valve label="Ventilstellung [%d %%]"
+			}
+		}
+		Text item=FK_Heizung_Summary label="Küche [%s]" {
+			Frame label="Temperatur" {
+				Text item=FK_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+			}
+			Frame label="Heizung" {
+				Setpoint item=FK_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Switch item=FK_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+				Switch item=FK_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Text item=FK_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[FK_Heizung_BoostTime > 0]
+				Text item=FK_Heizung_Valve label="Ventilstellung [%d %%]"
+			}
+		}
+		Text item=BD_Heizung_Summary label="Bad [%s]" {
+			Frame label="Temperatur" {
+				Text item=BD_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+			}
+			Frame label="Heizung" {
+				Setpoint item=BD_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Switch item=BD_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+				Switch item=BD_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Text item=BD_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[BD_Heizung_BoostTime > 0]
+				Text item=BD_Heizung_Valve label="Ventilstellung [%d %%]"
+			}
+		}
+		Text label="Heizungs-Grafiken" icon="chart" {
+			//Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
+			Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
+			//Text label="Ist-Temperatur (°C)" icon="line"
+    		/*Chart item=Temperatur label="Ist-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Temperatur label="Ist-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Temperatur label="Ist-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Temperatur label="Ist-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Temperatur label="Ist-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Temperatur label="Ist-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			/*Text label="Soll-Temperatur (°C)" icon="line"
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			Text label="Ventilöffnung (%)" icon="line"
+			Chart item=Valve_graph label="Ventil-Öffnung" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Valve_graph label="Ventil-Öffnung" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Valve_graph label="Ventil-Öffnung" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Valve_graph label="Ventil-Öffnung" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Valve_graph label="Ventil-Öffnung" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Valve_graph label="Ventil-Öffnung" period=M refresh=3600 visibility=[rrd_Chart_Period==5]*/
+		}
+	}
+	
+	Frame label="Stromverbrauch" {
+		Text item=FK_Kuehlschrank_Power icon="cat-fridge" {
+			Frame label="Blaa" {
+				Text item=FK_Kuehlschrank_Voltage
+				Text item=FK_Kuehlschrank_Current
+			}
+		}	
+		Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
+	}
+	
+/*	
+	// Diese Unterseiten zeigen die verschiedenen Heizungs-Grafiken und Steckdosen-Messwerte an:	
+	Frame label="Messwerte und Grafiken" {
+		Text label="Heizungs-Grafiken" icon="chart" {
+			Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
+			Text label="Ist-Temperatur (°C)" icon="line"
+    		Chart item=Temp_graph label="Ist-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Temp_graph label="Ist-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Temp_graph label="Ist-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Temp_graph label="Ist-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Temp_graph label="Ist-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Temp_graph label="Ist-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			Text label="Soll-Temperatur (°C)" icon="line"
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Tsoll_graph label="Soll-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Tsoll_graph label="Soll-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			Text label="Ventilöffnung (%)" icon="line"
+			Chart item=Valve_graph label="Ventil-Öffnung" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+    		Chart item=Valve_graph label="Ventil-Öffnung" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
+    		Chart item=Valve_graph label="Ventil-Öffnung" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
+			Chart item=Valve_graph label="Ventil-Öffnung" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+			Chart item=Valve_graph label="Ventil-Öffnung" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+			Chart item=Valve_graph label="Ventil-Öffnung" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			}
+		Text label="Steckdosen-Messwerte" icon="chart" {
+			Frame {
+				Text item=iSteckdose1_Leistung
+				Text item=iSteckdose1_Strom
+				Text item=iSteckdose1_Spannung
+				Text item= iSteckdose1_Frequenz
+				Text item=iSteckdose1_Zaehler
+			}
+			Frame {
+				Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
+				Text label="Stromverbrauch (W)" icon="line"
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=D refresh=1800 visibility=[rrd_Chart_Period==1]
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
+				Chart item=iSteckdose1_Leistung label="Stromverbrauch" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
+			}
+		}
+	}
+
+// Diese Unterseite zeigt Einstellungen (Eco-, Comfort-Werte für Heizung etc.) an:
+	Frame label="Voreinstellungen" {
+		Text label="Temperatur-Sollwerte für die Schnell-Einstellung" icon="settings" {
+			Frame label="Wohnzimmer"{
+				Setpoint item=WZ_Heizung_EcoTemp minValue=12.0 maxValue=20.0 step=0.5
+				Setpoint item=WZ_Heizung_ComfTemp minValue=17.0 maxValue=25.0 step=0.5
+			}
+		}
+	}
+
+// Diese Unterseite zeigt verschiedene Wartungsdaten (Batterien, RSSI etc.) an:
+	Frame label="Wartungs- und interne Daten" {
+		Group item=Batterie label="Batterie" icon="info" valuecolor=[>1.5="green", >0.0="red"]
+		Group item=RSSI label="Funkempfang" icon="info" valuecolor=[>-66.0="green", >-71.0="orange", <=-71.0="red"]
+		// Hinweis: valuecolor scheint mit Gruppen nicht zu funktionieren!!
+	}
+
+	Frame label="Weather" {
+		Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="Uninitialized"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
+			Frame {
+				Text item=Weather_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+				Text item=Weather_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+				Text item=Weather_Humidity
+				Text item=Weather_Humidex
+				Text item=Weather_LastUpdate visibility=[Weather_LastUpdate>30] valuecolor=[Weather_LastUpdate>120="orange", Weather_LastUpdate>300="red"]
+			}
+			Frame {
+				Switch item=Weather_Chart_Period label="Chart Period" mappings=[0="Hour", 1="Day", 2="Week"]
+				Chart item=Weather_Chart period=h refresh=6000 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="Uninitialized"]
+				Chart item=Weather_Chart period=D refresh=30000 visibility=[Weather_Chart_Period==1]
+				Chart item=Weather_Chart period=W refresh=30000 visibility=[Weather_Chart_Period==2]
+			}
+		}
+	}
+	Frame label="Date" {
+		Text item=Date
+	}
+	Frame label="Demo" {
+		Text label="Group Demo" icon="firstfloor" {
+			Switch item=Beleuchtung mappings=[OFF="All Off"]
+			Group item=Heizungen
+			Group item=Fenster
+			Text item=Temperaturen
+		}
+		Text label="Widget Overview" icon="chart" {
+			Frame label="Binary Widgets" {
+				Switch item=DemoSwitch label="Toggle Switch"
+				Switch item=DemoSwitch label="Button Switch" mappings=[ON="On"]
+			}
+			Frame label="Discrete Widgets" {
+				Selection item=Scene_General label="Scene Selection" mappings=[0=off, 1=TV, 2=Dinner, 3=Reading]
+				Switch item=Scene_General label="Scene" mappings=[1=TV, 2=Dinner, 3=Reading]
+				Setpoint item=Temperature_Setpoint minValue=16 maxValue=28 step=0.5
+			}
+			Frame label="Percent-based Widgets" {
+				Slider item=DimmedLight switchSupport
+				Colorpicker item=RGBLight icon="slider"
+				Switch item=DemoShutter
+				Slider item=DemoBlinds
+			}
+			Frame label="Map/Location" {
+				Mapview item=DemoLocation height=10
+			}
+			
+		}
+		Text label="Multimedia" icon="video" {
+			Frame label="Radio Control" {
+				Selection item=Radio_Station mappings=[0=off, 1=HR3, 2=SWR3, 3=FFH]
+				Slider item=Volume
+			}
+			Frame label="Multimedia Widgets" {
+				Image url="http://localhost:8080/images/splash-ipad-h.png" label="openHAB" {
+					Text label="http://www.openHAB.org" icon="icon"
+				}
+				Video url="http://demo.openhab.org/Hue.m4v"
+				Webview url="http://heise-online.mobi/" height=8
+			}
+		}
+	}
+*/
+
+	Frame label="Admin Status" {
+		Group item=gRSSI
+		Group item=gPower
+		Group item=gHeatAct
+		Group item=gHeatValve valuecolor=[0="green"]
+		Group item=gFenster valuecolor=[0="green"]
+		Group item=gBatterie valuecolor=[0="green"]
+		Group item=gLights 
+	    Group item=gUnreach
+	    Group item=gPending
+	}
+	Frame label="Admin Alles" {
+		Group item=Whg label="Alle Elemente der Wohnung" icon="house"
+	}
+	Frame label="Räume"{
+		Group item=BD label="Bad"
+		Group item=FK label="Flur/Küche"
+		Group item=SZ label="Schlafzimmer"
+		Group item=WZ label="Wohnzimmer"
+		Group item=BK label="Balkon"
+	}
+}

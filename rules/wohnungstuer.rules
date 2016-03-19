@@ -1,0 +1,41 @@
+import org.openhab.core.library.types.*
+//import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+//import org.joda.time.*
+
+var Timer willkommen_timer = null
+var Integer willkommen_timer_minutes = 15
+var String rulename = "--> Willkommenslicht: "
+
+rule "Willkommenslicht nach Wohnungstuer"
+when
+  	Item Wohnungstuer_State changed from CLOSED to OPEN
+then {
+	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+	if (Night_State.state == ON && FK_rcswitch_Edison.state == OFF && Presence_ThN5.state == OFF){
+		sendCommand(FK_rcswitch_Edison, ON)
+		logInfo ("RULE", rulename + "nach Dämmerung, Eddison ein. Timer wird gesetzt")
+		willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
+			sendCommand(FK_rcswitch_Edison, OFF)
+			logInfo ("RULE", rulename + "Timer abgelaufen, Eddison aus.")
+			if (willkommen_timer != null) {
+				willkommen_timer.cancel
+				willkommen_timer = null
+			}
+		]
+	}
+}
+end
+
+
+rule "Willkommenslicht Timer loeschen"
+when
+  	Item BD_Deckenlicht received update 
+then {
+	if (willkommen_timer != null) {
+		willkommen_timer.cancel
+		willkommen_timer = null
+		logInfo ("RULE", rulename + "Timer nach Aktivität (Bad) gelöscht.")
+	}
+}
+end

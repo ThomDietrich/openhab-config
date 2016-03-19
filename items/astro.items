@@ -1,0 +1,54 @@
+
+Group Astro (Whg)
+
+// Datum, Uhrzeit und Astro-Daten
+DateTime	iDateTime			"Heute [%1$tA, %1$td.%1$tm.%1$tY]" 					<clock>		(Astro)	{ntp="Europe/Berlin:de_DE"} 
+String		Season_Name			"Jahreszeit [MAP(astro.map):%s]"								(Astro)	{astro="planet=sun, type=season, property=name"}
+//
+DateTime	Sunset_Time			"Sonnenuntergang [%1$tH:%1$tM Uhr]"     			<sun>		(Astro)	{astro="planet=sun, type=set, property=start"}
+Switch		Sunset_Event		"Sonnenuntergang Event"    							<sun>		(Astro)	{astro="planet=sun, type=set, property=start"}
+DateTime	Night_Start_Time	"Nacht Beginn [%1$tH:%1$tM Uhr]"	    			<moon>		(Astro)	{astro="planet=sun, type=night, property=start"}
+Switch		Night_Start_Event	"Nacht Beginn Event"			    				<moon>		(Astro)	{astro="planet=sun, type=night, property=start"}
+DateTime	Night_End_Time		"Nacht Ende [%1$tH:%1$tM Uhr]"		    			<moon>		(Astro)	{astro="planet=sun, type=night, property=end"}
+Switch		Night_End_Event		"Nacht Ende Event"					    			<moon>		(Astro)	{astro="planet=sun, type=night, property=end"}
+DateTime	Sunrise_Time		"Sonnenaufgang [%1$tH:%1$tM Uhr]"    				<sun>		(Astro)	{astro="planet=sun, type=rise, property=end"}
+Switch		Sunrise_Event		"Sonnenaufgang Event"    							<sun>		(Astro)	{astro="planet=sun, type=rise, property=end"}
+//
+String		Sunrise_Sunset		"Sonnenauf-/Sonnnuntergang [%s]"					<sun>		(Astro)	
+Switch		Night_State			"Nacht"															(Astro)
+//
+Number		Sun_Elevation		"Sonnenhöhe [%.1f °]" 								<sun>		(Astro)	{astro="planet=sun, type=position, property=elevation"}
+String		Sun_Zodiac			"Tierkreiszeichen [MAP(astro.map):%s]"				<sun>		(Astro)	{astro="planet=sun, type=zodiac, property=sign"}
+String		Moon_Phase_Name		"Mondphase [MAP(astro.map):%s]"						<moon>		(Astro)	{astro="planet=moon, type=phase, property=name"}
+DateTime	Moon_Full			"Vollmond [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"			<moon>		(Astro)	{astro="planet=moon, type=phase, property=full"}
+
+/* EXAMPLE
+ * https://community.openhab.org/t/explanation-of-eveningnight-and-morningnight/2194
+ * 
+ * MorningNight_Start	00:00
+ * MorningNight_Stop	04:00
+ * Night_Stop			05:02
+ * AstroDawn_Start		05:00
+ * AstroDawn_Stop		05:45
+ * NauticDawn_Start		05:45
+ * NauticDawn_Stop		06:27
+ * CivilDawn_Start		06:27
+ * CivilDawn_Stop		07:02
+ * Sunrise_Start		07:02
+ * Sunrise_Stop			07:06
+ * Daylight_Start		07:06
+ * Noon_Start			13:17
+ * Noon_Stop			13:18
+ * Daylight_Stop		19:27
+ * Sunset_Start			19:27
+ * Sunset_Stop			19:31
+ * CivilDusk_Start		19:31
+ * CivilDusk_Stop		20:06
+ * NauticDusk_Start		20:06
+ * NauticDusk_Stop		20:48
+ * AstroDusk_Start		20:48
+ * AstroDusk_Stop		21:33
+ * Night_Start			21:33
+ * EveningNight_Start	21:33
+ * EveningNight_Stop	00:00
+ */

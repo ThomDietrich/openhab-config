@@ -1,0 +1,72 @@
+import org.openhab.core.library.types.*
+//import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+
+
+rule "OpenHAB system started - astro"
+when
+	System started
+then {
+	logInfo("RULE", "--> openHAB system started astro rule... waiting 20s")	
+	// delayed startup because the rules engine starts to early...
+	createTimer(now.plusSeconds(20)) [|
+		logInfo("RULE", "--> openHAB system started +20s rule")
+		var DateTimeType sunrise = new DateTimeType(getAstroSunriseStart(now.toDate, 50.689, 10.926))
+		var DateTimeType sunset = new DateTimeType(getAstroSunsetStart(now.toDate, 50.689, 10.926))
+		Sunrise_Time.postUpdate(sunrise)
+		Sunset_Time.postUpdate(sunset)
+		if (now.isAfter(sunset.calendar.timeInMillis) || now.isBefore(sunrise.calendar.timeInMillis)) {
+			logInfo("RULE", "--> Night_State ON")
+			postUpdate(Night_State, ON)
+		} else {
+			logInfo("RULE", "--> Night_State OFF")
+			postUpdate(Night_State, OFF)
+		}
+	]
+}
+end
+
+
+rule "Sunrise/Sunset changed"
+when
+	Item Sunrise_Time changed
+	or Item Sunset_Time changed
+then
+	logInfo("RULE", "--> SunriseSunset changed")
+	var DateTime sunrise = new DateTime((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
+	var DateTime sunset = new DateTime((Sunset_Time.state as DateTimeType).calendar.timeInMillis)
+	Sunrise_Sunset.postUpdate(String::format("%02d:%02d / %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
+end
+
+
+rule "Night_State update"
+when
+	Item Sunset_Event changed to OFF or
+	Item Sunrise_Event changed to ON
+then
+	logInfo("RULE", "--> Night_State set to " + previousState)
+	postUpdate(Night_State, previousState)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

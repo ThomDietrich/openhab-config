@@ -1,0 +1,32 @@
+//
+Aries=Widder
+Taurus=Stier
+Gemini=Zwilling
+Cancer=Krebs
+Leo=Löwe
+Virgo=Jungfrau
+Libra=Waage
+Scorpio=Skorpion
+Sagittarius=Schütze
+Capricorn=Steinbock
+Aquarius=Wassermann
+Pisces=Fisch
+
+//
+Spring=Frühling
+Summer=Sommer
+Autumn=Herbst
+Winter=Winter
+
+//
+New=Neumond
+Waxing\u0020Crescent=zunehmender Halbmond
+First\u0020Quarter=erstes Viertel
+Waxing\u0020Gibbous=zunehmender Mond
+Full=Vollmond
+Waning\u0020Gibbous=abnehmender Mond
+Third\u0020Quarter=letztes Viertel
+Waning\u0020Crescent=abnehmender Halbmond
+
+//
+-=-Fehler bei der Initialisierung-

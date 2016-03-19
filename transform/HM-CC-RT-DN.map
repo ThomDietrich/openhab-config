@@ -1,0 +1,25 @@
+// HM-CC-RT-DN.map / 20150413
+// Marianne Spiller <github@spiller.me>
+
+// MODE
+-1=-Unbestimmt-
+0=Automatik
+AUTO-MODE=Automatik
+1=Manuell
+MANU-MODE=Manuell
+2=(-Urlaub-)
+PARTY-MODE=(-Urlaub-)
+3=Boost
+BOOST-MODE=Boost
+
+// ERROR
+NO_FAULT=Kein Fehler
+VALVE_TIGHT=Ventil undicht
+ADJUSTING_RANGE_TOO_LARGE=Stellbereich zu gross
+ADJUSTING_RANGE_TOO_SMALL=Stellbereich zu klein
+COMMUNICATION_ERROR=Geraetekommunikation gestoert
+LOWBAT=Batteriespannung zu gering
+VALVE_ERROR_POSITION=Ventilposition
+
+// UNSET
+-=-Fehler bei der Initialisierung-

@@ -1,0 +1,79 @@
+import org.openhab.core.library.types.*
+//import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+
+// Timer für das automatische Ausschalten
+var Timer badlicht_timer = null
+var Integer badlicht_timer_minutes = 30
+var String rulename = "--> Badtür-Automatik: "
+
+
+rule "Badtür-Automatik: Duration Update"
+when
+	Time cron "0 * * * * ?"
+then {
+	if (BD_Deckenlicht_TimerActive.state == ON) {
+		logInfo("RULE", rulename + "updating timer duration")
+		var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
+		//logInfo("RULE", rulename + "Deadline: " + timeEnd)
+		var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
+		//logInfo("RULE", rulename + "Duration: " + timeDuration)
+		BD_Deckenlicht_TimerDuration.postUpdate(timeDuration)
+	}
+}
+end
+
+rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
+when
+  	Item BD_Tuer_State changed from CLOSED to OPEN
+then {
+	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+	if (Night_State.state == ON) {
+		if (BD_Deckenlicht.state == OFF) {
+			sendCommand(BD_Deckenlicht, ON)
+			logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+			
+			var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+			BD_Deckenlicht_TimerActive.postUpdate(ON)
+			postUpdate(BD_Deckenlicht_TimerEnd, new DateTimeType(deadline.toCalendar(null)))
+			
+			badlicht_timer = createTimer(deadline) [|
+				if (badlicht_timer != null) {
+					badlicht_timer.cancel
+					badlicht_timer = null
+					BD_Deckenlicht_TimerActive.postUpdate(OFF)
+					logInfo("RULE", rulename + "Deckenlicht Timer abgelaufen, Deckenlicht aus.")
+					sendCommand(BD_Deckenlicht, OFF)
+				}
+			]
+			logInfo("RULE", rulename + "Deckenlicht Timer gesetzt.")
+		} else {
+			//door opened, light's already on, timer running
+			if (badlicht_timer != null) {
+				var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+				postUpdate(BD_Deckenlicht_TimerEnd, new DateTimeType(deadline.toCalendar(null)))
+				BD_Deckenlicht_TimerActive.postUpdate(ON)
+				badlicht_timer.reschedule(deadline)
+				logInfo("RULE", rulename + "Deckenlicht Timer verlängert.")
+			} else {
+				logInfo("RULE", rulename + "Deckenlicht bereits an, keine Aktion.")				
+			}
+		}
+	}
+}
+end
+
+rule "Badtür-Automatik: Lichtschalter überschreibt"
+when
+	Item BD_Deckenlicht received update
+then {
+	if (badlicht_timer != null) {
+		badlicht_timer.cancel
+		badlicht_timer = null
+		BD_Deckenlicht_TimerActive.postUpdate(OFF)
+		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer.")
+	}
+	// schalten des Lichts geschieht bei diesem Schaltelement automatisch
+}
+end

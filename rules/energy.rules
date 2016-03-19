@@ -1,0 +1,63 @@
+
+
+
+rule "BD_Deckenlicht_Power" when Item BD_Deckenlicht changed	//ON										//OFF
+then 		if (previousState != ON) BD_Deckenlicht_Power.postUpdate(7.5) else BD_Deckenlicht_Power.postUpdate(0)	end
+
+
+
+rule "Flur_Deckenlicht_Power" when Item Flur_Deckenlicht changed	//ON										//OFF
+then 		if (previousState != ON) Flur_Deckenlicht_Power.postUpdate(0.0) else Flur_Deckenlicht_Power.postUpdate(0) end
+
+
+
+rule "Kueche_Deckenlicht_Power" when Item Kueche_Deckenlicht changed	//ON										//OFF
+then 		if (previousState != ON) Kueche_Deckenlicht_Power.postUpdate(23.0) else Kueche_Deckenlicht_Power.postUpdate(0) end
+
+
+
+rule "SZ_Deckenlicht_Power" when Item SZ_Deckenlicht changed	//ON										//OFF
+then 		if (previousState != ON) SZ_Deckenlicht_Power.postUpdate(10.2) else SZ_Deckenlicht_Power.postUpdate(0)	end
+
+
+
+rule "WZ_Lacks_LEDs_Power" when Item WZ_Lacks_LEDs changed	//ON										//OFF
+then 		if (previousState != ON) WZ_Lacks_LEDs_Power.postUpdate(17.0) else WZ_Lacks_LEDs_Power.postUpdate(0) end
+
+
+
+rule "WZ_Lacks_Lampe_Power" when Item WZ_Lacks_Lampe changed	//ON										//OFF
+then 		if (previousState != ON) WZ_Lacks_Lampe_Power.postUpdate(60.0) else WZ_Lacks_Lampe_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Origami_Power" when Item WZ_rcswitch_Origami changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Origami_Power.postUpdate(19.0) else WZ_rcswitch_Origami_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Expedit_Power" when Item WZ_rcswitch_Expedit changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Expedit_Power.postUpdate(2.8) else WZ_rcswitch_Expedit_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Goldf_Power" when Item WZ_rcswitch_Goldf changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Goldf_Power.postUpdate(40.0) else WZ_rcswitch_Goldf_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Edison_Power" when Item WZ_rcswitch_Edison changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Edison_Power.postUpdate(118.0) else WZ_rcswitch_Edison_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Arbeit_Power" when Item WZ_rcswitch_Arbeit changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Arbeit_Power.postUpdate(8.5) else WZ_rcswitch_Arbeit_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Balkonmagic_Power" when Item WZ_rcswitch_Balkonmagic changed	//ON										//OFF
+then 		if (previousState != ON) WZ_rcswitch_Balkonmagic_Power.postUpdate(42.0) else WZ_rcswitch_Balkonmagic_Power.postUpdate(0) end
+
+
+

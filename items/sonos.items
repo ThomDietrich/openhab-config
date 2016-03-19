@@ -1,0 +1,15 @@
+
+Group 	Sonos	"Sonos Soundsystem"	<speaker_black>	(Whg)
+
+String Sonos_CurrentTrack  "Current Track [%s]"  (Sonos)   {sonos="[sonosFK:currenttrack]"}
+Switch PlayLivingRoom "Play/Pause"        (Sonos)   {sonos="[ON:sonosFK:play],[OFF:sonosFK:pause]"}
+Switch next		"Next track"        (Sonos)   {sonos="[ON:sonosFK:next]"}
+
+Dimmer Sonos_volume    (Sonos) { sonos="[sonosFK:volume]" }
+
+/* SONOS
+ * Wohnzimmer (ZP90) UDN uuid:RINCON_B8E93794664C01400
+ * Küche (S3) with UDN uuid:RINCON_B8E93736496A01400
+ *  (S1) UDN uuid:RINCON_B8E937ED0A1601400
+ *  (S1) UDN uuid:RINCON_B8E937E0539601400
+ */

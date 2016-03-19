@@ -1,0 +1,59 @@
+
+//Die Hauptgruppe für die Wohnung
+Group 	Whg		"Hotel zur Birke"		<house>
+
+// Räume
+Group 	BD		"Bad"					<bath>			(Whg)
+Group 	FK		"Flur-Küche"			<kitchen>		(Whg)
+Group 	SZ		"Schlafzimmer"			<bedroom>		(Whg)
+Group 	WZ		"Wohnzimmer"			<video>			(Whg)
+Group 	BK		"Balkon"				<garden>		(Whg)
+
+// Sondergruppen
+Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<light>			(Whg)
+Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 		(Whg)
+Group:Switch:OR(ON, OFF) 		gHeatValve 		"Aktive Heizkörper [%d ]"									<heating> 		(Whg)
+Group:Number:AVG 				gHeatAct		"Raumtemperaturen [%.1f °C]" 								<temperature>	(Whg)
+Group:Number:AVG 				gHeatSet		"Raumtemperaturen Soll [%.1f °C]" 							<temperature>	(Whg)
+Group			 				gHeatMode		"Raumtemperaturen Mode [%.1f °C]" 							<temperature>	(Whg)
+Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>		(Whg)
+Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>		(Whg)
+Group:Number:SUM				gEnergyCnt		"Energiezähler [%.1f Wh]" 									<energy>		(Whg)
+Group:Number:MIN 				gRSSI			"RSSI aller Geräte [%d dBm]" 								<radio>			(Whg)
+Group:Number:SUM				gUnreach		"Nicht erreichbare Geräte [%d]"												(Whg)
+Group:Number:SUM				gPending		"Geräte mit ausstehender Konfig. [%d]"										(Whg)
+
+//
+Group							W				"Wartung"																	(Whg)
+//Gruppe für alle Number/Switch Elemente die bei Systemstart auf -1 gestellt werden
+Group	gInitNone "Initialisierung mit (-1)"	(Whg)
+
+// Gruppen für die grafische Persistenz und für die einzelne Grafiken...
+Group persistGraph	(Whg)
+//Group Temp_graph	(Whg)
+//Group Valve_graph	(Whg)
+//Group Tsoll_graph	(Whg)
+// Gruppe für die mapdb-Persistenz der Einstellungswerte
+Group persistValue  (Whg)
+
+
+
+/* Globaler GlobalState der Wohnung:
+ * -1. Ruhezustand
+ *  0. Automatik-Betrieb (default)
+ *  1. Abwesend/Spar-Betrieb
+ *  2. Anwesend/Komfort-Betrieb
+ */
+Number GlobalState
+// Switch zum Umschalten der Darstellungszeiträume für die Grafiken...
+Number rrd_Chart_Period
+
+Number 		Whg_Light_Preset		"Wohnung Beleuchtung Schnellauswahl"		<switch>	(Whg)
+
+Location	Whg_Locaton				"Weimarer Straße 66a, Ilmenau"							(Astro)
+
+Switch		Presence_ThN5			"Anwesenheit ThN5"							<present>	(Whg)   {nh="ThN5"}
+
+Switch		BD_Deckenlicht_TimerActive		"Bad Deckenlicht Timer Active"					(BD)
+DateTime	BD_Deckenlicht_TimerEnd			"Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"		(BD)
+Number		BD_Deckenlicht_TimerDuration	"Bad Deckenlicht Timer Restzeit [%d min]"		(BD)
