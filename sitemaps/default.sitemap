@@ -19,7 +19,7 @@ sitemap w66a label="W66a openHAB Installation"
 		Text item=Presence_ThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
 		Text item=SonosSummary icon="speaker-black" label=". [%s]"
 		Group item=gSonos
-		Text item=KodiSummary icon="kodi" {
+		Text item=KodiSummary label="Kodi Mediacenter" icon="kodi" {
 			Frame label="Status" {
 				Switch item=KodiSystemState
 				Text item=KodiPlayerState
@@ -30,7 +30,6 @@ sitemap w66a label="W66a openHAB Installation"
 				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
 			}
 		}
-		Group item=gKodi
 		Text item=SpeedtestSummary {
 			Frame label="Ergebnisse" {
 				Text item=SpeedtestResultDown
@@ -65,58 +64,67 @@ sitemap w66a label="W66a openHAB Installation"
 		Switch item=BD_Deckenlicht
 		//Text item=BD_Deckenlicht_TimerEnd visibility=[BD_Deckenlicht_TimerActive == ON]
 		Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
-		}
+	}
 	
 	Frame label="Temperaturen und Heizung" {
 		Switch item=GlobalState label="Modus" mappings=[0="Normalbetrieb", 1="Urlaubsmodus", 2="Dauerfeuer"]
+		
 		Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
 			Frame label="Temperatur" {
 				Text item=WZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
 			}
 			Frame label="Heizung" {
-				Setpoint item=WZ_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+				Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
 				Switch item=WZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=WZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Switch item=WZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
 				Text item=WZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[WZ_Heizung_BoostTime > 0]
 				Text item=WZ_Heizung_Valve label="Ventilstellung [%d %%]"
 			}
 		}
+		
 		Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
 			Frame label="Temperatur" {
 				Text item=SZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
 			}
 			Frame label="Heizung" {
-				Setpoint item=SZ_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+				Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
 				Switch item=SZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=SZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Switch item=SZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
 				Text item=SZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[SZ_Heizung_BoostTime > 0]
 				Text item=SZ_Heizung_Valve label="Ventilstellung [%d %%]"
 			}
 		}
-		Text item=FK_Heizung_Summary label="Küche [%s]" {
+		
+		Text item=FK_Heizung_Summary label="Flur/Küche [%s]" {
 			Frame label="Temperatur" {
 				Text item=FK_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
 			}
 			Frame label="Heizung" {
-				Setpoint item=FK_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Setpoint item=FK_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+				Setpoint item=FK_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
 				Switch item=FK_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=FK_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Switch item=FK_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
 				Text item=FK_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[FK_Heizung_BoostTime > 0]
 				Text item=FK_Heizung_Valve label="Ventilstellung [%d %%]"
 			}
 		}
+		
 		Text item=BD_Heizung_Summary label="Bad [%s]" {
 			Frame label="Temperatur" {
 				Text item=BD_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
 			}
 			Frame label="Heizung" {
-				Setpoint item=BD_Heizung_SetTemp label="Stellwert [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+				Setpoint item=BD_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+				Setpoint item=BD_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
 				Switch item=BD_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=BD_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 2="B", 3="F"]
+				Switch item=BD_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
 				Text item=BD_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[BD_Heizung_BoostTime > 0]
 				Text item=BD_Heizung_Valve label="Ventilstellung [%d %%]"
 			}
 		}
+		
 		Text label="Heizungs-Grafiken" icon="chart" {
 			//Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
 			Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"

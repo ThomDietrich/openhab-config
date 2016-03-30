@@ -32,6 +32,14 @@
 
 // http://www.eq-3.de/Downloads/PDFs/Dokumentation_und_Tutorials/HM_Script_Teil_4_Datenpunkte_1_503.pdf
 
+// Die Modus Variablen können sich im Integer Bereich zwischen verschiedenen Zuständen bewegen.
+// Bedeutung *_Heizung_Mode bzw. *_Heizung_SetMode 
+//  0:       Automatik           Automatik
+//  1:       Manuell             Manuell
+//  2:       Urlaub              (nicht genutzt)
+//  3:       Boost               Boost
+//  4:       (nicht belegt)      Fenster Absenkung
+
 //HM-CC-RT-DN Heizkörperthermostat
 Number BD_Heizung_RSSI				"BD_Heizung RSSI [%d dBm]"													(BD,W,gRSSI)		{homematic="address=LEQ0851363, channel=0, parameter=RSSI_DEVICE"}
 Switch BD_Heizung_Unreach			"BD_Heizung unreachable"									<siren>			(BD,W,gUnreach)		{homematic="address=LEQ0851363, channel=0, parameter=UNREACH"}

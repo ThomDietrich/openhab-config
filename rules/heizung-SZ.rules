@@ -34,8 +34,8 @@ then {
 	switch (receivedCommand){
 		case 0: SZ_Heizung_Auto.sendCommand(ON)
 		case 1: SZ_Heizung_Manu.sendCommand(SZ_Heizung_SetTemp.state as DecimalType)
-		case 2: SZ_Heizung_BoostMode.sendCommand(ON)
-		case 3: SZ_Heizung_SetMode.postUpdate(-1)
+		case 3: SZ_Heizung_BoostMode.sendCommand(ON)
+		case 4: SZ_Heizung_SetMode.postUpdate(-1)
 	}
 }
 end
@@ -48,7 +48,7 @@ then {
 		//logInfo("RULE", rulename + "Fenster-Modus <" + SZ_Fenster_State.state + "><" + SZ_Heizung_SetTemp.state + ">")
 		if (SZ_Fenster_State.state == OPEN && SZ_Heizung_SetTemp.state == 12.0) {
 			//logInfo("RULE", rulename + "Fenster-Modus aktiviert")
-			SZ_Heizung_SetMode.postUpdate(3)
+			SZ_Heizung_SetMode.postUpdate(4)
 		} else if (SZ_Fenster_State.state == CLOSED && SZ_Heizung_SetTemp.state != 12.0) {
 			//logInfo("RULE", rulename + "Fenster-Modus deaktiviert")
 			SZ_Heizung_SetMode.postUpdate(SZ_Heizung_Mode.state)
@@ -66,7 +66,7 @@ when
 then {
 	//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
 	// Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
-	if (SZ_Heizung_SetMode.state == 3 && SZ_Heizung_Mode.state == 0) {
+	if (SZ_Heizung_SetMode.state == 4 && SZ_Heizung_Mode.state == 0) {
 		//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
 	} else {
 		SZ_Heizung_SetMode.postUpdate(SZ_Heizung_Mode.state)
@@ -82,16 +82,26 @@ when
 	Item SZ_Heizung_SetMode changed
 then {
 	if ((SZ_Heizung_SetTemp.state instanceof DecimalType) && (SZ_Heizung_ActTemp.state instanceof DecimalType)) {	
-		var BigDecimal setTemp = (SZ_Heizung_SetTemp.state as DecimalType).toBigDecimal
-		var BigDecimal actTemp = (SZ_Heizung_ActTemp.state as DecimalType).toBigDecimal
-		if (SZ_Heizung_Valve.state > 50) {
-			SZ_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C)   %.1f °C", setTemp, actTemp))
+		val BigDecimal setTemp = (SZ_Heizung_SetTemp.state as DecimalType).toBigDecimal
+		val BigDecimal actTemp = (SZ_Heizung_ActTemp.state as DecimalType).toBigDecimal
+		val mode = if (SZ_Heizung_SetMode.state == 1) "⚙" else if (SZ_Heizung_SetMode.state == 2) "🔥" else ""
+		
+		if (SZ_Heizung_Valve.state > 60) {
+			SZ_Heizung_Summary.postUpdate(String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+		} else if (SZ_Heizung_Valve.state > 40) {
+			SZ_Heizung_Summary.postUpdate(String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+		} else if (SZ_Heizung_Valve.state > 20) {
+			SZ_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
 		} else if (SZ_Heizung_Valve.state > 0) {
-			SZ_Heizung_Summary.postUpdate(String::format("( ⇡ %.1f °C)   %.1f °C", setTemp, actTemp))
-		} else if (SZ_Heizung_SetMode.state == 3) {
-			SZ_Heizung_Summary.postUpdate(String::format("( ⇣ Fenster offen)   %.1f °C", actTemp))
+			SZ_Heizung_Summary.postUpdate(String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
 		} else {
-			SZ_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+			if (SZ_Heizung_SetMode.state == 1) {
+				SZ_Heizung_Summary.postUpdate(String::format("%s %.1f °C", mode, actTemp))
+			} else if (SZ_Heizung_SetMode.state == 4) {
+				SZ_Heizung_Summary.postUpdate(String::format("( ↻ Fenster offen)  %.1f °C", actTemp))
+			} else {
+				SZ_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+			}
 		}
 	} else {
 		SZ_Heizung_Summary.postUpdate("(unbekannt)")
