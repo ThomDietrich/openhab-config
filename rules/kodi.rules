@@ -3,6 +3,18 @@ import org.openhab.core.library.types.*
 import org.openhab.model.script.actions.*
 import org.joda.time.*
 
+rule "Kodi init"
+when
+	System started
+then {
+	if (KodiTitleShow.state == Uninitialized) KodiTitleShow.postUpdate("")
+	if (KodiTitle.state == Uninitialized) KodiTitle.postUpdate("")
+	if (KodiPlayerState.state == Uninitialized) KodiPlayerState.postUpdate("Stop")
+	if (KodiSystemState.state == Uninitialized) KodiSystemState.postUpdate(OFF)
+	if (KodiSummary.state == Uninitialized || KodiSummary.state == "") KodiSummary.postUpdate("⁉ (unbekannt)")
+}
+end
+
 rule "Kodi Summary update"
 when
 	Item KodiSystemState changed or 

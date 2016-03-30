@@ -17,9 +17,16 @@ sitemap w66a label="W66a openHAB Installation"
 		}
 		Text item=iDateTime
 		Text item=Presence_ThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
-		Text item=SonosSummary icon="speaker-black" label=". [%s]"
-		Group item=gSonos
-		Text item=KodiSummary label="Kodi Mediacenter" icon="kodi" {
+		Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
+			Frame {
+				Switch item=SonosPlayPause
+				Text item=SonosCurrTrack
+				Text item=SonosCurrTitle visibility=[SonosCurrTitle != ""]
+				Text item=SonosCurrAlbum visibility=[SonosCurrAlbum != ""]
+				Text item=SonosCurrArtist visibility=[SonosCurrArtist != ""]
+			}
+		}
+		Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
 			Frame label="Status" {
 				Switch item=KodiSystemState
 				Text item=KodiPlayerState

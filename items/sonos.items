@@ -1,24 +1,25 @@
 
 Group 	gSonos	"Sonos Soundsystem"	<"speaker-black">	(Whg)
 
-Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosFK:play],[OFF:sonosFK:pause]"}
-//Switch SonosPlay			"Play"					(gSonos)	{sonos=">[ON:sonosFK:play]"}
-//Switch SonosPause			"Pause"					(gSonos)	{sonos=">[ON:sonosFK:pause]"}
-//Switch SonosStop			"Stop"					(gSonos)	{sonos=">[ON:sonosFK:stop]"}
-//Switch SonosNext			"Next"					(gSonos)	{sonos=">[ON:sonosFK:next]"}
+Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosWZ:play],[OFF:sonosWZ:pause]"}
+//Switch SonosPlay			"Play"					(gSonos)	{sonos="[ON:sonosWZ:play]"}
+//Switch SonosPause			"Pause"					(gSonos)	{sonos="[ON:sonosWZ:pause]"}
+//Switch SonosStop			"Stop"					(gSonos)	{sonos="[ON:sonosWZ:stop]"}
+//Switch SonosNext			"Next"					(gSonos)	{sonos="[ON:sonosWZ:next]"}
+ 
+//String SonosZone1			"Zonename [%s]"			(gSonos)	{sonos="[sonosWZ:zonename]"}
+//String SonosZone2			"Zonegroup [%s]"		(gSonos)	{sonos="[sonosWZ:zonegroup]"}
+//String SonosZone3			"Zonegroup uuid [%s]"	(gSonos)	{sonos="[sonosWZ:zonegroupid]"}
 
-//String SonosZone1			"Zonename [%s]"			(gSonos)	{sonos="<[sonosFK:zonename]"}
-//String SonosZone2			"Zonegroup [%s]"		(gSonos)	{sonos="<[sonosFK:zonegroup]"}
-//String SonosZone3			"Zonegroup uuid [%s]"	(gSonos)	{sonos="<[sonosFK:zonegroupid]"}
+//String SonosState			"State [%s]"			(gSonos)	{sonos="[sonosWZ:transportstate]"} 
+String SonosCurrTrack		"Current Track [%s]"	(gSonos)	{sonos="[sonosWZ:currenttrack]"}
+String SonosCurrTitle		"Current Title [%s]"	(gSonos)	{sonos="[sonosWZ:currenttitle]"}
+String SonosCurrAlbum		"Current Album [%s]"	(gSonos)	{sonos="[sonosWZ:currentalbum]"}
+String SonosCurrArtist		"Current Artist [%s]"	(gSonos)	{sonos="[sonosWZ:currentartist]"}
 
-String SonosCurrTrack		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currenttrack]"}
-String SonosCurrTitle		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currenttitle]"}
-String SonosCurrArtist		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currentartist]"}
-String SonosCurrAlbum		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currentalbum]"}
+//Dimmer SonosVolume			"Volume [%s]"			(gSonos)	{sonos="[sonosWZ:volume]"}
 
-//Dimmer SonosVolume			"Volume [%s]"			(gSonos)	{sonos="[sonosFK:volume]"}
-
-String SonosSummary			"Sonos [%s]"			(gSonos) 
+String SonosSummary			"Sonos Summary [%s]"			(gSonos) 
 
 /* SONOS
  * Wohnzimmer (ZP90) UDN uuid:RINCON_B8E93794664C01400

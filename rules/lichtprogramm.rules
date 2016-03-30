@@ -42,10 +42,6 @@ rule "Wohnzimmer Taster unten kurz"
 when Item WZ_Taster_1Short changed to ON then Whg_Light_Preset.sendCommand(0)
 end
 
-rule "Sonos Test"
-when Item Sonos_CurrentTrack changed then logInfo("RULE", "----> Sonos: '" + Sonos_CurrentTrack.state + "'")
-end
-
 
 rule "Wohnzimmer Taster Licht an"
 when
