@@ -2,21 +2,21 @@
 Group 	gSonos	"Sonos Soundsystem"	<"speaker-black">	(Whg)
 
 Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosFK:play],[OFF:sonosFK:pause]"}
-Switch SonosPlay			"Play"					(gSonos)	{sonos=">[ON:sonosFK:play]"}
-Switch SonosPause			"Pause"					(gSonos)	{sonos=">[ON:sonosFK:pause]"}
-Switch SonosStop			"Stop"					(gSonos)	{sonos=">[ON:sonosFK:stop]"}
-Switch SonosNext			"Next"					(gSonos)	{sonos=">[ON:sonosFK:next]"}
+//Switch SonosPlay			"Play"					(gSonos)	{sonos=">[ON:sonosFK:play]"}
+//Switch SonosPause			"Pause"					(gSonos)	{sonos=">[ON:sonosFK:pause]"}
+//Switch SonosStop			"Stop"					(gSonos)	{sonos=">[ON:sonosFK:stop]"}
+//Switch SonosNext			"Next"					(gSonos)	{sonos=">[ON:sonosFK:next]"}
 
-String SonosZone1			"Zonename [%s]"			(gSonos)	{sonos="<[sonosFK:zonename]"}
-String SonosZone2			"Zonegroup [%s]"		(gSonos)	{sonos="<[sonosFK:zonegroup]"}
-String SonosZone3			"Zonegroup uuid [%s]"	(gSonos)	{sonos="<[sonosFK:zonegroupid]"}
+//String SonosZone1			"Zonename [%s]"			(gSonos)	{sonos="<[sonosFK:zonename]"}
+//String SonosZone2			"Zonegroup [%s]"		(gSonos)	{sonos="<[sonosFK:zonegroup]"}
+//String SonosZone3			"Zonegroup uuid [%s]"	(gSonos)	{sonos="<[sonosFK:zonegroupid]"}
 
 String SonosCurrTrack		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currenttrack]"}
 String SonosCurrTitle		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currenttitle]"}
 String SonosCurrArtist		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currentartist]"}
 String SonosCurrAlbum		"Current Track [%s]"	(gSonos)	{sonos="<[sonosFK:currentalbum]"}
 
-Dimmer SonosVolume			"Volume [%s]"			(gSonos)	{sonos="[sonosFK:volume]"}
+//Dimmer SonosVolume			"Volume [%s]"			(gSonos)	{sonos="[sonosFK:volume]"}
 
 String SonosSummary			"Sonos [%s]"			(gSonos) 
 

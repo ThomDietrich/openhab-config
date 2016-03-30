@@ -21,12 +21,13 @@ sitemap w66a label="W66a openHAB Installation"
 		Group item=gSonos
 		Text item=KodiSummary icon="kodi" {
 			Frame label="Status" {
-				Text item=Kodi_SystemState
-				Text item=Kodi_PlayerState
-				Text item=Kodi_PlayerTitle
-				Text item=Kodi_PlayerType
-				Text item=Kodi_PlayerShowTitle
-				Switch item=Kodi_PlayerPlayPause mappings=[ON="Play", OFF="Pause"]
+				Switch item=KodiSystemState
+				Text item=KodiPlayerState
+				Text item=KodiTitleShow visibility=[KodiTitleShow != ""]
+				Text item=KodiTitle visibility=[KodiTitle != ""]
+			}
+			Frame label="Steuerung"  visibility=[KodiPlayerState != "Stop"] {
+				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
 			}
 		}
 		Group item=gKodi
