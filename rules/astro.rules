@@ -36,7 +36,7 @@ then
 	logInfo("RULE", "--> SunriseSunset changed")
 	var DateTime sunrise = new DateTime((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
 	var DateTime sunset = new DateTime((Sunset_Time.state as DateTimeType).calendar.timeInMillis)
-	Sunrise_Sunset.postUpdate(String::format("%02d:%02d / %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
+	Sunrise_Sunset.postUpdate(String::format("🌅 %02d:%02d   🌇 %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
 end
 
 

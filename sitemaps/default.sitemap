@@ -5,9 +5,10 @@ sitemap w66a label="W66a openHAB Installation"
 			Frame {
 				Text item=Sunrise_Sunset
 				Text item=Sun_Elevation icon="" visibility=[Sun_Elevation>0]
-				Text item=Sun_Zodiac icon=""
+				Text item=Sun_Zodiac icon="zodiac-icon"
 				Text item=Moon_Phase_Name
-				Text item=Moon_Full icon=""
+				Text item=Moon_Full icon="full-moon"
+				Switch item=Night_State mappings=[OFF="Tag", ON="Nacht"]
 			}
 			Frame {
 				Text label="Wettervorhersage" icon="sun_clouds" {
