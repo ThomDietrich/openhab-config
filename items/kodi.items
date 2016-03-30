@@ -1,16 +1,15 @@
 
-Group 	gKodi	"Kodi Mediacenter"	(Whg)
+Group 	gKodi	"Kodi Mediacenter"	<kodi> (Whg)
 
-Switch Kodi_SystemState  "System State [%s]"  (gKodi)   {xbmc="<[#livingRoom|System.State]"}
-String Kodi_PlayerState  "Player State [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.State]"}
-String Kodi_PlayerTitle  "Player Title [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Title]"}
-String Kodi_PlayerType  "Player Type [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Type]"}
-String Kodi_PlayerArtist  "Player Artist [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Artist]"}
-String Kodi_PlayerAlbum  "Player Album [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Album]"}
-String Kodi_PlayerLabel  "Player Label [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Label]"}
-String Kodi_PlayerPosition  "Player Prozent [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Position.Percentage]"}
-Number Kodi_PlayerPosition2  "Player Prozent [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Position.Percentage]"}
-String Kodi_PlayerTime  "Player Prozent [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Position.Time]"}
-String Kodi_PlayerShowTitle  "Player Show Track [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.ShowTitle]"}
-Switch Kodi_PlayerPlayPause  "Player PlayPause"  (gKodi)   {xbmc=">[#livingRoom|Player.PlayPause]"}
-Switch Kodi_Notif  "Player Notification"  (gKodi)   {xbmc=">[#livingRoom|GUI.ShowNotification]"}
+Switch KodiSystemState		"Kodi State"  (gKodi)   {xbmc="<[#livingRoom|System.State]"}
+String KodiPlayerState		"Kodi Player State [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.State]"}
+String KodiTitle			"Episode/Movie Title [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Title]"}
+String KodiTitleShow		"Show Title [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.ShowTitle]"}
+String KodiPlayerType		"Type [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Type]"}
+String KodiPlayerArtist		"Artist [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Artist]"}
+String KodiPlayerAlbum		"Album [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Album]"}
+String KodiPlayerLabel		"Label [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Label]"}
+Switch KodiPlayerPlayPause	"PlayPause"  (gKodi)   {xbmc=">[#livingRoom|Player.PlayPause]"}
+Switch KodiNotif 			"Notification"  (gKodi)   {xbmc=">[#livingRoom|GUI.ShowNotification]"}
+
+String KodiSummary			"Summary [%s]"  (gKodi)

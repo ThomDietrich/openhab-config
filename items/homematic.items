@@ -50,8 +50,8 @@ Switch BD_Heizung_Comfort			"BD_Heizung Konfort Modus"									<temperature> 	(B
 Number BD_Heizung_Mode				"BD_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"			<temperature>	(BD,gHeatMode)		{homematic="address=LEQ0851363, channel=4, parameter=CONTROL_MODE"}
 Number BD_Heizung_SetMode			"BD_Heizung Betriebsart Auswahl [MAP(HM-CC-RT-DN.map):%s]"	<"heating-80">	(BD,gInitNone)
 Number BD_Heizung_Preset			"BD_Heizung Soll-Temperatur Schnellauswahl"					<"heating-40">	(BD,gInitNone)
-Number BD_Heizung_EcoTemp			"BD_Heizung Spar-Temperatur [%.1f °C]"										(value_persist)
-Number BD_Heizung_ComfTemp			"BD_Heizung Komfort-Temperatur [%.1f °C]"									(value_persist)
+Number BD_Heizung_EcoTemp			"BD_Heizung Spar-Temperatur [%.1f °C]"										(BD,value_persist)
+Number BD_Heizung_ComfTemp			"BD_Heizung Komfort-Temperatur [%.1f °C]"									(BD,value_persist)
 String BD_Heizung_Summary			"BD_Heizung Übersicht [%s]"									<heating>		(BD)
 
 Number FK_Heizung_RSSI				"FK_Heizung RSSI [%d dBm]"													(FK,W,gRSSI)		{homematic="address=LEQ0857855, channel=0, parameter=RSSI_DEVICE"}
@@ -71,8 +71,8 @@ Switch FK_Heizung_Comfort			"FK_Heizung Konfort Modus"									<temperature> 	(F
 Number FK_Heizung_Mode				"FK_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"			<temperature>	(FK,gHeatMode)		{homematic="address=LEQ0857855, channel=4, parameter=CONTROL_MODE"}
 Number FK_Heizung_SetMode			"FK_Heizung Betriebsart Auswahl [MAP(HM-CC-RT-DN.map):%s]"	<"heating-80">	(FK,gInitNone)
 Number FK_Heizung_Preset			"FK_Heizung Soll-Temperatur Schnellauswahl"					<"heating-40">	(FK,gInitNone)
-Number FK_Heizung_EcoTemp			"FK_Heizung Spar-Temperatur [%.1f °C]"										(value_persist)
-Number FK_Heizung_ComfTemp			"FK_Heizung Komfort-Temperatur [%.1f °C]"									(value_persist)
+Number FK_Heizung_EcoTemp			"FK_Heizung Spar-Temperatur [%.1f °C]"										(FK,value_persist)
+Number FK_Heizung_ComfTemp			"FK_Heizung Komfort-Temperatur [%.1f °C]"									(FK,value_persist)
 String FK_Heizung_Summary			"FK_Heizung Übersicht [%s]"									<heating>		(FK)
 
 Number SZ_Heizung_RSSI				"SZ_Heizung RSSI [%d dBm]"													(SZ,W,gRSSI)		{homematic="address=LEQ0778898, channel=0, parameter=RSSI_DEVICE"}
@@ -92,8 +92,8 @@ Switch SZ_Heizung_Comfort			"SZ_Heizung Konfort Modus"									<temperature> 	(S
 Number SZ_Heizung_Mode				"SZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"			<temperature>	(SZ,gHeatMode)		{homematic="address=LEQ0778898, channel=4, parameter=CONTROL_MODE"}
 Number SZ_Heizung_SetMode			"SZ_Heizung Betriebsart Auswahl [MAP(HM-CC-RT-DN.map):%s]"	<"heating-80">	(SZ,gInitNone)
 Number SZ_Heizung_Preset			"SZ_Heizung Soll-Temperatur Schnellauswahl"					<"heating-40">	(SZ,gInitNone)
-Number SZ_Heizung_EcoTemp			"SZ_Heizung Spar-Temperatur [%.1f °C]"										(value_persist)
-Number SZ_Heizung_ComfTemp			"SZ_Heizung Komfort-Temperatur [%.1f °C]"									(value_persist)
+Number SZ_Heizung_EcoTemp			"SZ_Heizung Spar-Temperatur [%.1f °C]"										(SZ,value_persist)
+Number SZ_Heizung_ComfTemp			"SZ_Heizung Komfort-Temperatur [%.1f °C]"									(SZ,value_persist)
 String SZ_Heizung_Summary			"SZ_Heizung Übersicht [%s]"									<heating>		(SZ)
 
 Number WZ_Heizung_RSSI				"WZ_Heizung RSSI [%d dBm]"													(WZ,W,gRSSI)		{homematic="address=LEQ0785556, channel=0, parameter=RSSI_DEVICE"}
@@ -113,8 +113,8 @@ Switch WZ_Heizung_Comfort			"WZ_Heizung Konfort Modus"									<temperature> 	(W
 Number WZ_Heizung_Mode				"WZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"			<temperature>	(WZ,gHeatMode)		{homematic="address=LEQ0785556, channel=4, parameter=CONTROL_MODE"}
 Number WZ_Heizung_SetMode			"WZ_Heizung Betriebsart Auswahl [MAP(HM-CC-RT-DN.map):%s]"	<"heating-80">	(WZ,gInitNone)
 Number WZ_Heizung_Preset			"WZ_Heizung Soll-Temperatur Schnellauswahl"					<"heating-40">	(WZ,gInitNone)
-Number WZ_Heizung_EcoTemp			"WZ_Heizung Spar-Temperatur [%.1f °C]"										(value_persist)
-Number WZ_Heizung_ComfTemp			"WZ_Heizung Komfort-Temperatur [%.1f °C]"									(value_persist)
+Number WZ_Heizung_EcoTemp			"WZ_Heizung Spar-Temperatur [%.1f °C]"										(WZ,value_persist)
+Number WZ_Heizung_ComfTemp			"WZ_Heizung Komfort-Temperatur [%.1f °C]"									(WZ,value_persist)
 String WZ_Heizung_Summary			"WZ_Heizung Übersicht [%s]"									<heating>		(WZ)
 
 //HM-ES-PMSw1-Pl Steckdose mit Leistungsmessung
@@ -228,12 +228,12 @@ Number WZ_Lacks_Lampe_Power			"Lacksleuchter Lampe Leistung [%.0f W]" 	<energy> 
 
 //HM-MOD-Re-8 8-Kanal-Empfangsmodul
 Switch WZ_rcswitch_Origami			"Origami"									<hue> 		(WZ, gLights)		{homematic="address=LEQ1522328, channel=1, parameter=STATE"}
-Switch WZ_rcswitch_Expedit			"Expedit"									<hue> 		(WZ, gLights)		{homematic="address=LEQ1522328, channel=2, parameter=STATE"}
+Switch rcswitch_K2					"rcswitch Kanal2 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=2, parameter=STATE"}
 Switch WZ_rcswitch_Goldf			"Goldfruchtpalme"							<hue> 		(WZ, gLights)		{homematic="address=LEQ1522328, channel=3, parameter=STATE"}
 Switch FK_rcswitch_Edison			"Edison"									<switch> 	(FK, gLights)		{homematic="address=LEQ1522328, channel=4, parameter=STATE"}
 Switch FK_rcswitch_Arbeit			"Arbeitsbeleuchtung"						<whites> 	(FK, gLights)		{homematic="address=LEQ1522328, channel=5, parameter=STATE"}
 Switch BK_rcswitch_Balkonmagic		"Balkonmagic"								<whites> 	(BK, gLights)		{homematic="address=LEQ1522328, channel=6, parameter=STATE"}
-Switch rcswitch_K7					"rcswitch Kanal7 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=7, parameter=STATE"}
+Switch WZ_rcswitch_Expedit			"Expedit"									<hue>		(WZ, gLights)		{homematic="address=LEQ1522328, channel=7, parameter=STATE"}
 Switch rcswitch_K8					"rcswitch Kanal8 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=8, parameter=STATE"}
 Number rcswitch_RSSI				"rcswitch RSSI [%d dBm]"								(BD,W,gRSSI)		{homematic="address=LEQ1522328, channel=0, parameter=RSSI_DEVICE"}
 Switch rcswitch_Unreach				"rcswitch unreachable"						<siren>		(BD,W,gUnreach)		{homematic="address=LEQ1522328, channel=0, parameter=UNREACH"}               

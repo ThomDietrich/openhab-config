@@ -1,5 +1,5 @@
 
-Group Astro (Whg)
+Group Astro <sun_clouds> (Whg)
 
 // Datum, Uhrzeit und Astro-Daten
 DateTime	iDateTime			"Heute [%1$tA, %1$td.%1$tm.%1$tY]" 					<clock>		(Astro)	{ntp="Europe/Berlin:de_DE"} 

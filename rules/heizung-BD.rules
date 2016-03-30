@@ -84,14 +84,27 @@ then {
 	if ((BD_Heizung_SetTemp.state instanceof DecimalType) && (BD_Heizung_ActTemp.state instanceof DecimalType)) {	
 		var BigDecimal setTemp = (BD_Heizung_SetTemp.state as DecimalType).toBigDecimal
 		var BigDecimal actTemp = (BD_Heizung_ActTemp.state as DecimalType).toBigDecimal
-		if (BD_Heizung_Valve.state > 50) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C)   %.1f °C", setTemp, actTemp))
+		var String mode = ""
+		if (BD_Heizung_SetMode.state == 0) mode = "A"
+		else if (BD_Heizung_SetMode.state == 1) mode = "M"
+		else if (BD_Heizung_SetMode.state == 2) mode = "🔥"
+		
+		if (BD_Heizung_Valve.state > 60) {
+			BD_Heizung_Summary.postUpdate(String::format("( ⟰ %.1f °C)  %s  %.1f °C", setTemp, mode, actTemp))
+		} else if (BD_Heizung_Valve.state > 40) {
+			BD_Heizung_Summary.postUpdate(String::format("( ⤊ %.1f °C)  %s  %.1f °C", setTemp, mode, actTemp))
+		} else if (BD_Heizung_Valve.state > 20) {
+			BD_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C)  %s  %.1f °C", setTemp, mode, actTemp))
 		} else if (BD_Heizung_Valve.state > 0) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⇡ %.1f °C)   %.1f °C", setTemp, actTemp))
-		} else if (BD_Heizung_SetMode.state == 3) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⇣ Fenster offen)   %.1f °C", actTemp))
+			BD_Heizung_Summary.postUpdate(String::format("( ↑ %.1f °C)  %s  %.1f °C", setTemp, mode, actTemp))
 		} else {
-			BD_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+			if (BD_Heizung_SetMode.state == 1) {
+				BD_Heizung_Summary.postUpdate(String::format("( ⇅ M)  %.1f °C", setTemp, mode, actTemp))
+			} else if (BD_Heizung_SetMode.state == 3) {
+				BD_Heizung_Summary.postUpdate(String::format("( ↻ Fenster offen)  %.1f °C", actTemp))
+			} else {
+				BD_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+			}
 		}
 	} else {
 		BD_Heizung_Summary.postUpdate("(unbekannt)")
