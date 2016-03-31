@@ -1,7 +1,7 @@
 
 Group 	gSonos	"Sonos Soundsystem"	<"speaker-black">	(Whg)
 
-Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosWZ:play],[OFF:sonosWZ:pause]"}
+//Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosWZ:play],[OFF:sonosWZ:pause]"}
 //Switch SonosPlay			"Play"					(gSonos)	{sonos="[ON:sonosWZ:play]"}
 //Switch SonosPause			"Pause"					(gSonos)	{sonos="[ON:sonosWZ:pause]"}
 //Switch SonosStop			"Stop"					(gSonos)	{sonos="[ON:sonosWZ:stop]"}

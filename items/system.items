@@ -10,22 +10,22 @@ Group 	WZ		"Wohnzimmer"			<video>			(Whg)
 Group 	BK		"Balkon"				<garden>		(Whg)
 
 // Sondergruppen
-Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<light>			(Whg)
-Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 		(Whg)
-Group:Switch:OR(ON, OFF) 		gHeatValve 		"Aktive Heizkörper [%d ]"									<heating> 		(Whg)
-Group:Number:AVG 				gHeatAct		"Raumtemperaturen [%.1f °C]" 								<temperature>	(Whg)
-Group:Number:AVG 				gHeatSet		"Raumtemperaturen Soll [%.1f °C]" 							<temperature>	(Whg)
-Group			 				gHeatMode		"Raumtemperaturen Mode [%.1f °C]" 							<temperature>	(Whg)
-Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>		(Whg)
-Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>		(Whg)
-Group:Number:SUM				gEnergyCnt		"Energiezähler [%.1f Wh]" 									<energy>		(Whg)
-Group:Number:MIN 				gRSSI			"RSSI aller Geräte [%d dBm]" 								<radio>			(Whg)
-Group:Number:SUM				gUnreach		"Nicht erreichbare Geräte [%d]"												(Whg)
-Group:Number:SUM				gPending		"Geräte mit ausstehender Konfig. [%d]"										(Whg)
+Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<"light-bulb-icon1">(Whg)
+Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 			(Whg)
+Group:Switch:OR(ON, OFF) 		gHeatValve 		"Aktive Heizkörper [%d ]"									<heating> 			(Whg)
+Group:Number:AVG 				gHeatAct		"Raumtemperaturen [%.1f °C]" 								<temperature>		(Whg)
+Group:Number:AVG 				gHeatSet		"Raumtemperaturen Soll [%.1f °C]" 							<temperature>		(Whg)
+Group			 				gHeatMode		"Raumtemperaturen Mode [%.1f °C]" 							<temperature>		(Whg)
+Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>			(Whg)
+Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>			(Whg)
+Group:Number:SUM				gEnergyCnt		"Energiezähler [%.1f Wh]" 									<energy>			(Whg)
+Group:Number:MIN 				gRSSI			"RSSI aller Geräte [%d dBm]" 								<radio>				(Whg)
+Group:Number:SUM				gUnreach		"Nicht erreichbare Geräte [%d]"													(Whg)
+Group:Number:SUM				gPending		"Geräte mit ausstehender Konfig. [%d]"											(Whg)
 
 //
-Group							W				"Wartung"																	(Whg)
-//Gruppe für alle Number/Switch Elemente die bei Systemstart auf -1 gestellt werden
+Group							W				"Wartung"																		(Whg)
+//Gruppe für alle Number/Switch Elemente die bei Systemstart auf -1 gestellt werden	
 Group	gInitNone "Initialisierung mit (-1)"	(Whg)
 
 /* Globaler GlobalState der Wohnung:

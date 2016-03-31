@@ -180,23 +180,23 @@ Switch  BD_Tuer_Unreach				"Bad Tür unreachable"						<siren>		(BD,W,gUnreach)	
 Switch  BD_Tuer_Pending				"Bad Tür config pending"					<siren>		(BD,W,gPending)		{homematic="address=LEQ1466850, channel=0, parameter=CONFIG_PENDING"}        
 Switch  BD_Tuer_LowBat				"Bad Tür Batterie"							<battery> 	(BD,W,gBatterie)	{homematic="address=LEQ1466850, channel=1, parameter=LOWBAT"}
 
-Contact Wohnungstuer_State			"Wohnungstür [MAP(window.map):%s]"			<contact> 	(BD,gFenster)		{homematic="address=LEQ0922808, channel=1, parameter=STATE"}
-Number  Wohnungstuer_RSSI			"Wohnungstür RSSI [%d dBm]"								(BD,W,gRSSI)		{homematic="address=LEQ0922808, channel=0, parameter=RSSI_DEVICE"}
-Switch  Wohnungstuer_Unreach		"Wohnungstür unreachable"					<siren>		(BD,W,gUnreach)		{homematic="address=LEQ0922808, channel=0, parameter=UNREACH"}               
-Switch  Wohnungstuer_Pending		"Wohnungstür config pending"				<siren>		(BD,W,gPending)		{homematic="address=LEQ0922808, channel=0, parameter=CONFIG_PENDING"}        
-Switch  Wohnungstuer_LowBat			"Wohnungstür Batterie"						<battery> 	(BD,W,gBatterie)	{homematic="address=LEQ0922808, channel=1, parameter=LOWBAT"}
+Contact Wohnungstuer_State			"Wohnungstür [MAP(window.map):%s]"			<contact> 	(Whg,gFenster)		{homematic="address=LEQ0922808, channel=1, parameter=STATE"}
+Number  Wohnungstuer_RSSI			"Wohnungstür RSSI [%d dBm]"								(Whg,W,gRSSI)		{homematic="address=LEQ0922808, channel=0, parameter=RSSI_DEVICE"}
+Switch  Wohnungstuer_Unreach		"Wohnungstür unreachable"					<siren>		(Whg,W,gUnreach)		{homematic="address=LEQ0922808, channel=0, parameter=UNREACH"}               
+Switch  Wohnungstuer_Pending		"Wohnungstür config pending"				<siren>		(Whg,W,gPending)		{homematic="address=LEQ0922808, channel=0, parameter=CONFIG_PENDING"}        
+Switch  Wohnungstuer_LowBat			"Wohnungstür Batterie"						<battery> 	(Whg,W,gBatterie)	{homematic="address=LEQ0922808, channel=1, parameter=LOWBAT"}
 
-Contact FK_Fenster_State			"Küche Fenster [MAP(window.map):%s]"		<contact> 	(BD,gFenster)		{homematic="address=MEQ0029864, channel=1, parameter=STATE"}
-Number  FK_Fenster_RSSI				"Küche Fenster RSSI [%d dBm]"							(BD,W,gRSSI)		{homematic="address=MEQ0029864, channel=0, parameter=RSSI_DEVICE"}
-Switch  FK_Fenster_Unreach			"Küche Fenster unreachable"					<siren>		(BD,W,gUnreach)		{homematic="address=MEQ0029864, channel=0, parameter=UNREACH"}               
-Switch  FK_Fenster_Pending			"Küche Fenster config pending"				<siren>		(BD,W,gPending)		{homematic="address=MEQ0029864, channel=0, parameter=CONFIG_PENDING"}        
-Switch  FK_Fenster_LowBat			"Küche Fenster Batterie"					<battery> 	(BD,W,gBatterie)	{homematic="address=MEQ0029864, channel=1, parameter=LOWBAT"}
+Contact FK_Fenster_State			"Küche Fenster [MAP(window.map):%s]"		<contact> 	(FK,gFenster)		{homematic="address=MEQ0029864, channel=1, parameter=STATE"}
+Number  FK_Fenster_RSSI				"Küche Fenster RSSI [%d dBm]"							(FK,W,gRSSI)		{homematic="address=MEQ0029864, channel=0, parameter=RSSI_DEVICE"}
+Switch  FK_Fenster_Unreach			"Küche Fenster unreachable"					<siren>		(FK,W,gUnreach)		{homematic="address=MEQ0029864, channel=0, parameter=UNREACH"}               
+Switch  FK_Fenster_Pending			"Küche Fenster config pending"				<siren>		(FK,W,gPending)		{homematic="address=MEQ0029864, channel=0, parameter=CONFIG_PENDING"}        
+Switch  FK_Fenster_LowBat			"Küche Fenster Batterie"					<battery> 	(FK,W,gBatterie)	{homematic="address=MEQ0029864, channel=1, parameter=LOWBAT"}
 
-Contact SZ_Fenster_State			"Schlafzimmer Fenster [MAP(window.map):%s]"	<contact> 	(BD,gFenster)		{homematic="address=LEQ0919429, channel=1, parameter=STATE"}
-Number  SZ_Fenster_RSSI				"Schlafzimmer Fenster RSSI [%d dBm]"					(BD,W,gRSSI)		{homematic="address=LEQ0919429, channel=0, parameter=RSSI_DEVICE"}
-Switch  SZ_Fenster_Unreach			"Schlafzimmer Fenster unreachable"			<siren>		(BD,W,gUnreach)		{homematic="address=LEQ0919429, channel=0, parameter=UNREACH"}               
-Switch  SZ_Fenster_Pending			"Schlafzimmer Fenster config pending"		<siren>		(BD,W,gPending)		{homematic="address=LEQ0919429, channel=0, parameter=CONFIG_PENDING"}        
-Switch  SZ_Fenster_LowBat			"Schlafzimmer Fenster Batterie"				<battery> 	(BD,W,gBatterie)	{homematic="address=LEQ0919429, channel=1, parameter=LOWBAT"}
+Contact SZ_Fenster_State			"Schlafzimmer Fenster [MAP(window.map):%s]"	<contact> 	(SZ,gFenster)		{homematic="address=LEQ0919429, channel=1, parameter=STATE"}
+Number  SZ_Fenster_RSSI				"Schlafzimmer Fenster RSSI [%d dBm]"					(SZ,W,gRSSI)		{homematic="address=LEQ0919429, channel=0, parameter=RSSI_DEVICE"}
+Switch  SZ_Fenster_Unreach			"Schlafzimmer Fenster unreachable"			<siren>		(SZ,W,gUnreach)		{homematic="address=LEQ0919429, channel=0, parameter=UNREACH"}               
+Switch  SZ_Fenster_Pending			"Schlafzimmer Fenster config pending"		<siren>		(SZ,W,gPending)		{homematic="address=LEQ0919429, channel=0, parameter=CONFIG_PENDING"}        
+Switch  SZ_Fenster_LowBat			"Schlafzimmer Fenster Batterie"				<battery> 	(SZ,W,gBatterie)	{homematic="address=LEQ0919429, channel=1, parameter=LOWBAT"}
 
 
 //HM-LC-Sw1PBU-FM Unterputz-Schaltaktor 1-fach
@@ -204,54 +204,54 @@ Switch BD_Deckenlicht				"Bad Deckenlicht"							<switch>	(BD,gLights)		{homemat
 Number BD_Deckenlicht_RSSI			"Bad Deckenlicht RSSI [%d dBm]"							(BD,W,gRSSI)		{homematic="address=LEQ0493737, channel=0, parameter=RSSI_DEVICE"}
 Switch BD_Deckenlicht_Unreach		"Bad Deckenlicht unreachable"				<siren>		(BD,W,gUnreach)		{homematic="address=LEQ0493737, channel=0, parameter=UNREACH"}               
 Switch BD_Deckenlicht_Pending		"Bad Deckenlicht config pending"			<siren>		(BD,W,gPending)		{homematic="address=LEQ0493737, channel=0, parameter=CONFIG_PENDING"}   
-Number BD_Deckenlicht_Power			"Bad Deckenlicht Leistung [%.0f W]" 		<energy> 	(BD, gPower)
+Number BD_Deckenlicht_Power			"Bad Deckenlicht Leistung [%.0f W]" 		<energy> 	(BD,gPower)
 
 Switch SZ_Deckenlicht				"Schlafzimmer Deckenlicht"					<switch>	(SZ,gLights)		{homematic="address=LEQ1293514, channel=1, parameter=STATE"}
 Number SZ_Deckenlicht_RSSI			"Schlafzimmer Deckenlicht RSSI [%d dBm]"				(SZ,W,gRSSI)		{homematic="address=LEQ1293514, channel=0, parameter=RSSI_DEVICE"}
 Switch SZ_Deckenlicht_Unreach		"Schlafzimmer Deckenlicht unreachable"		<siren>		(SZ,W,gUnreach)		{homematic="address=LEQ1293514, channel=0, parameter=UNREACH"}               
 Switch SZ_Deckenlicht_Pending		"Schlafzimmer Deckenlicht config pending"	<siren>		(SZ,W,gPending)		{homematic="address=LEQ1293514, channel=0, parameter=CONFIG_PENDING"}   
-Number SZ_Deckenlicht_Power			"Schlafzimmer Deckenlicht Leistung [%.0f W]" <energy> 	(SZ, gPower)
+Number SZ_Deckenlicht_Power			"Schlafzimmer Deckenlicht Leistung [%.0f W]" <energy> 	(SZ,gPower)
 
 Switch Flur_Deckenlicht				"Flur Deckenlicht"							<switch>	(FK,gLights)		{homematic="address=LEQ1293495, channel=1, parameter=STATE"}
 Number Flur_Deckenlicht_RSSI		"Flur Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{homematic="address=LEQ1293495, channel=0, parameter=RSSI_DEVICE"}
 Switch Flur_Deckenlicht_Unreach		"Flur Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{homematic="address=LEQ1293495, channel=0, parameter=UNREACH"}               
 Switch Flur_Deckenlicht_Pending		"Flur Deckenlicht config pending"			<siren>		(FK,W,gPending)		{homematic="address=LEQ1293495, channel=0, parameter=CONFIG_PENDING"}   
-Number Flur_Deckenlicht_Power		"Flur Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK, gPower)
+Number Flur_Deckenlicht_Power		"Flur Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK,gPower)
 
 //HM-LC-Sw1-FM Unterputzschalter 1-fach
 Switch Kueche_Deckenlicht			"Küche Deckenlicht"							<switch>	(FK,gLights)		{homematic="address=LEQ0425711, channel=1, parameter=STATE"}
 Number Kueche_Deckenlicht_RSSI		"Küche Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{homematic="address=LEQ0425711, channel=0, parameter=RSSI_DEVICE"}
 Switch Kueche_Deckenlicht_Unreach	"Küche Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{homematic="address=LEQ0425711, channel=0, parameter=UNREACH"}               
 Switch Kueche_Deckenlicht_Pending	"Küche Deckenlicht config pending"			<siren>		(FK,W,gPending)		{homematic="address=LEQ0425711, channel=0, parameter=CONFIG_PENDING"}   
-Number Kueche_Deckenlicht_Power		"Küche Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK, gPower)
+Number Kueche_Deckenlicht_Power		"Küche Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK,gPower)
 
 //HM-LC-Sw2-FM
-Switch WZ_Lacks_LEDs				"Lacksleuchter LEDs"						<switch>	(WZ, gLights)		{homematic="address=LEQ0883550, channel=1, parameter=STATE"}
-Switch WZ_Lacks_Lampe				"Lacksleuchter Lampe"						<switch>	(WZ, gLights)		{homematic="address=LEQ0883550, channel=2, parameter=STATE"}
-Number WZ_Lacks_RSSI				"Lacksleuchter RSSI [%d dBm]"							(BD,W,gRSSI)		{homematic="address=LEQ0883550, channel=0, parameter=RSSI_DEVICE"}
-Switch WZ_Lacks_Unreach				"Lacksleuchter unreachable"					<siren>		(BD,W,gUnreach)		{homematic="address=LEQ0883550, channel=0, parameter=UNREACH"}               
-Switch WZ_Lacks_Pending				"Lacksleuchter config pending"				<siren>		(BD,W,gPending)		{homematic="address=LEQ0883550, channel=0, parameter=CONFIG_PENDING"}   
-Number WZ_Lacks_LEDs_Power			"Lacksleuchter LEDs Leistung [%.0f W]" 		<energy> 	(FK, gPower)
-Number WZ_Lacks_Lampe_Power			"Lacksleuchter Lampe Leistung [%.0f W]" 	<energy> 	(FK, gPower)
+Switch WZ_Lacks_LEDs				"Lacksleuchter LEDs"						<switch>	(WZ,gLights)		{homematic="address=LEQ0883550, channel=1, parameter=STATE"}
+Switch WZ_Lacks_Lampe				"Lacksleuchter Lampe"						<switch>	(WZ,gLights)		{homematic="address=LEQ0883550, channel=2, parameter=STATE"}
+Number WZ_Lacks_RSSI				"Lacksleuchter RSSI [%d dBm]"							(WZ,W,gRSSI)		{homematic="address=LEQ0883550, channel=0, parameter=RSSI_DEVICE"}
+Switch WZ_Lacks_Unreach				"Lacksleuchter unreachable"					<siren>		(WZ,W,gUnreach)		{homematic="address=LEQ0883550, channel=0, parameter=UNREACH"}               
+Switch WZ_Lacks_Pending				"Lacksleuchter config pending"				<siren>		(WZ,W,gPending)		{homematic="address=LEQ0883550, channel=0, parameter=CONFIG_PENDING"}   
+Number WZ_Lacks_LEDs_Power			"Lacksleuchter LEDs Leistung [%.0f W]" 		<energy> 	(WZ,gPower)
+Number WZ_Lacks_Lampe_Power			"Lacksleuchter Lampe Leistung [%.0f W]" 	<energy> 	(WZ,gPower)
 
 //HM-MOD-Re-8 8-Kanal-Empfangsmodul
-Switch WZ_rcswitch_Origami			"Origami"									<hue> 		(WZ, gLights)		{homematic="address=LEQ1522328, channel=1, parameter=STATE"}
+Switch WZ_rcswitch_Origami			"Origami"									<hue> 		(WZ,gLights)		{homematic="address=LEQ1522328, channel=1, parameter=STATE"}
 Switch rcswitch_K2					"rcswitch Kanal2 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=2, parameter=STATE"}
-Switch WZ_rcswitch_Goldf			"Goldfruchtpalme"							<hue> 		(WZ, gLights)		{homematic="address=LEQ1522328, channel=3, parameter=STATE"}
-Switch FK_rcswitch_Edison			"Edison"									<switch> 	(FK, gLights)		{homematic="address=LEQ1522328, channel=4, parameter=STATE"}
-Switch FK_rcswitch_Arbeit			"Arbeitsbeleuchtung"						<whites> 	(FK, gLights)		{homematic="address=LEQ1522328, channel=5, parameter=STATE"}
-Switch BK_rcswitch_Balkonmagic		"Balkonmagic"								<whites> 	(BK, gLights)		{homematic="address=LEQ1522328, channel=6, parameter=STATE"}
-Switch WZ_rcswitch_Expedit			"Expedit"									<hue>		(WZ, gLights)		{homematic="address=LEQ1522328, channel=7, parameter=STATE"}
+Switch WZ_rcswitch_Goldf			"Goldfruchtpalme"							<hue> 		(WZ,gLights)		{homematic="address=LEQ1522328, channel=3, parameter=STATE"}
+Switch FK_rcswitch_Edison			"Edison"									<switch> 	(FK,gLights)		{homematic="address=LEQ1522328, channel=4, parameter=STATE"}
+Switch FK_rcswitch_Arbeit			"Arbeitsbeleuchtung"						<whites> 	(FK,gLights)		{homematic="address=LEQ1522328, channel=5, parameter=STATE"}
+Switch BK_rcswitch_Balkonmagic		"Balkonmagic"								<whites> 	(BK,gLights)		{homematic="address=LEQ1522328, channel=6, parameter=STATE"}
+Switch WZ_rcswitch_Expedit			"Expedit"									<hue>		(WZ,gLights)		{homematic="address=LEQ1522328, channel=7, parameter=STATE"}
 Switch rcswitch_K8					"rcswitch Kanal8 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=8, parameter=STATE"}
-Number rcswitch_RSSI				"rcswitch RSSI [%d dBm]"								(BD,W,gRSSI)		{homematic="address=LEQ1522328, channel=0, parameter=RSSI_DEVICE"}
-Switch rcswitch_Unreach				"rcswitch unreachable"						<siren>		(BD,W,gUnreach)		{homematic="address=LEQ1522328, channel=0, parameter=UNREACH"}               
-Switch rcswitch_Pending				"rcswitch config pending"					<siren>		(BD,W,gPending)		{homematic="address=LEQ1522328, channel=0, parameter=CONFIG_PENDING"}   
-Number WZ_rcswitch_Origami_Power	"Origami Leistung [%.0f W]" 				<energy> 	(FK, gPower)
-Number WZ_rcswitch_Expedit_Power	"Expedit Leistung [%.0f W]" 				<energy> 	(FK, gPower)
-Number WZ_rcswitch_Goldf_Power		"Goldfruchtpalme Leistung [%.0f W]" 		<energy> 	(FK, gPower)
-Number WZ_rcswitch_Edison_Power		"Edison Leistung [%.0f W]" 					<energy> 	(FK, gPower)
-Number WZ_rcswitch_Arbeit_Power		"Arbeitsbeleuchtung Leistung [%.0f W]" 		<energy> 	(FK, gPower)
-Number WZ_rcswitch_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" 			<energy> 	(FK, gPower)
+Number rcswitch_RSSI				"rcswitch RSSI [%d dBm]"								(Whg,W,gRSSI)		{homematic="address=LEQ1522328, channel=0, parameter=RSSI_DEVICE"}
+Switch rcswitch_Unreach				"rcswitch unreachable"						<siren>		(Whg,W,gUnreach)	{homematic="address=LEQ1522328, channel=0, parameter=UNREACH"}               
+Switch rcswitch_Pending				"rcswitch config pending"					<siren>		(Whg,W,gPending)	{homematic="address=LEQ1522328, channel=0, parameter=CONFIG_PENDING"}   
+Number WZ_rcswitch_Origami_Power	"Origami Leistung [%.0f W]" 				<energy> 	(WZ,gPower)
+Number WZ_rcswitch_Goldf_Power		"Goldfruchtpalme Leistung [%.0f W]" 		<energy> 	(WZ,gPower)
+Number FK_rcswitch_Edison_Power		"Edison Leistung [%.0f W]" 					<energy> 	(FK,gPower)
+Number FK_rcswitch_Arbeit_Power		"Arbeitsbeleuchtung Leistung [%.0f W]" 		<energy> 	(FK,gPower)
+Number BK_rcswitch_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" 			<energy> 	(BK,gPower)
+Number WZ_rcswitch_Expedit_Power	"Expedit Leistung [%.0f W]" 				<energy> 	(WZ,gPower)
 
 
 

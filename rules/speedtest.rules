@@ -3,6 +3,14 @@ import org.openhab.core.persistence.*
 import org.openhab.model.script.actions.*
 import org.joda.time.*
 
+rule "Speedtest init"
+when
+	System started
+then {
+	if (SpeedtestSummary.state == Uninitialized) SpeedtestSummary.postUpdate("⁉ (unbekannt)")
+}
+end
+
 rule "Speedtest"
 when
   	//Time cron "0 0 5 * * ?" or
