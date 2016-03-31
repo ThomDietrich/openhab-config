@@ -1,14 +1,15 @@
 sitemap w66a label="W66a openHAB Installation"
 {
-	Frame { // Datum und Sonnenauf-/untergangszeiten
-		Text label="Wetter- und Astro" icon="info" {
+	Frame {
+		Text item=CurrDateTime label="Wetter- und Astro [%s]" icon="weather-icon" {
 			Frame {
-				Text item=Sunrise_Sunset
-				Text item=Sun_Elevation icon="" visibility=[Sun_Elevation>0]
-				Text item=Sun_Zodiac icon="zodiac-icon"
-				Text item=Moon_Phase_Name
-				Text item=Moon_Full icon="full-moon"
-				Switch item=Night_State mappings=[OFF="Tag", ON="Nacht"]
+				Text item=SunriseSunset
+				Text item=SunElevation icon="sunmoon" visibility=[SunElevation>0]
+				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation>0]
+				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+				Text item=MoonPhaseName
+				Text item=MoonFull icon="full-moon"
+				Text item=Zodiac icon="zodiac-icon"
 			}
 			Frame {
 				Text label="Wettervorhersage" icon="sun_clouds" {
@@ -16,9 +17,8 @@ sitemap w66a label="W66a openHAB Installation"
 				}
 			}
 		}
-		Text item=iDateTime
 		Text item=Presence_ThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
-		Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
+		/*Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
 			Frame {
 				Switch item=SonosPlayPause
 				Text item=SonosCurrTrack
@@ -26,7 +26,8 @@ sitemap w66a label="W66a openHAB Installation"
 				Text item=SonosCurrAlbum visibility=[SonosCurrAlbum != ""]
 				Text item=SonosCurrArtist visibility=[SonosCurrArtist != ""]
 			}
-		}
+		}*/
+		Text item=SonosCurrTrack
 		Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
 			Frame label="Status" {
 				Switch item=KodiSystemState
@@ -57,7 +58,7 @@ sitemap w66a label="W66a openHAB Installation"
 	}
 	Frame label="Beleuchtung" {
 		Switch item=Whg_Light_Preset icon="home-icon" label="." mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
-		Text item=gLights icon="light-bulb-icon1"
+		Text item=gLights
 		Switch item=BK_rcswitch_Balkonmagic
 		Switch item=WZ_Lacks_LEDs
 		Switch item=WZ_Lacks_Lampe
@@ -157,6 +158,7 @@ sitemap w66a label="W66a openHAB Installation"
 			Chart item=Valve_graph label="Ventil-Öffnung" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
 			Chart item=Valve_graph label="Ventil-Öffnung" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
 			Chart item=Valve_graph label="Ventil-Öffnung" period=M refresh=3600 visibility=[rrd_Chart_Period==5]*/
+			Text label="kommt später..."
 		}
 	}
 	
@@ -167,7 +169,7 @@ sitemap w66a label="W66a openHAB Installation"
 				Text item=FK_Kuehlschrank_Current
 			}
 		}
-		Text label="weitere folgen..."	
+		Text label="kommt später..."
 		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
 	}
 

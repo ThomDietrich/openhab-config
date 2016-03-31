@@ -14,14 +14,14 @@ then {
 		logInfo("RULE", "--> openHAB system started +20s rule")
 		var DateTimeType sunrise = new DateTimeType(getAstroSunriseStart(now.toDate, 50.689, 10.926))
 		var DateTimeType sunset = new DateTimeType(getAstroSunsetStart(now.toDate, 50.689, 10.926))
-		Sunrise_Time.postUpdate(sunrise)
-		Sunset_Time.postUpdate(sunset)
+		SunriseTime.postUpdate(sunrise)
+		SunsetTime.postUpdate(sunset)
 		if (now.isAfter(sunset.calendar.timeInMillis) || now.isBefore(sunrise.calendar.timeInMillis)) {
 			logInfo("RULE", "--> Night_State ON")
-			postUpdate(Night_State, ON)
+			postUpdate(NightState, ON)
 		} else {
 			logInfo("RULE", "--> Night_State OFF")
-			postUpdate(Night_State, OFF)
+			postUpdate(NightState, OFF)
 		}
 	]
 }
@@ -34,9 +34,9 @@ when
 	or Item Sunset_Time changed
 then
 	logInfo("RULE", "--> SunriseSunset changed")
-	var DateTime sunrise = new DateTime((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
-	var DateTime sunset = new DateTime((Sunset_Time.state as DateTimeType).calendar.timeInMillis)
-	Sunrise_Sunset.postUpdate(String::format("🌅 %02d:%02d   🌇 %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
+	var DateTime sunrise = new DateTime((SunriseTime.state as DateTimeType).calendar.timeInMillis)
+	var DateTime sunset = new DateTime((SunsetTime.state as DateTimeType).calendar.timeInMillis)
+	SunriseSunset.postUpdate(String::format("🌅 %02d:%02d   🌇 %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
 end
 
 
@@ -46,7 +46,7 @@ when
 	Item Sunrise_Event changed to ON
 then
 	logInfo("RULE", "--> Night_State set to " + previousState)
-	postUpdate(Night_State, previousState)
+	postUpdate(NightState, previousState)
 end
 
 
