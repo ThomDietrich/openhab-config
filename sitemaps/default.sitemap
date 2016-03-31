@@ -1,7 +1,7 @@
 sitemap w66a label="W66a openHAB Installation"
 {
 	Frame {
-		Text item=CurrDateTime label="Wetter- und Astro [%s]" icon="weather-icon" {
+		Text item=CurrDateTime label="Wetter- und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
 			Frame {
 				Text item=SunriseSunset
 				Text item=SunElevation icon="sunmoon" visibility=[SunElevation>0]
