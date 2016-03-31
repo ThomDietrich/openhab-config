@@ -1,4 +1,4 @@
-ON=Anwesend
-OFF=Abwesend
-undefined=unbekannt
--=unbekannt
+ON=✔ Anwesend
+OFF=✘ Abwesend
+undefined=⁉ unbekannt
+-=⁉ unbekannt

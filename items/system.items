@@ -12,10 +12,6 @@ Group 	BK		"Balkon"				<garden>		(Whg)
 // Sondergruppen
 Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<"light-bulb-icon1">(Whg)
 Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 			(Whg)
-Group:Switch:OR(ON, OFF) 		gHeatValve 		"Aktive Heizkörper [%d ]"									<heating> 			(Whg)
-Group:Number:AVG 				gHeatAct		"Raumtemperaturen [%.1f °C]" 								<temperature>		(Whg)
-Group:Number:AVG 				gHeatSet		"Raumtemperaturen Soll [%.1f °C]" 							<temperature>		(Whg)
-Group			 				gHeatMode		"Raumtemperaturen Mode [%.1f °C]" 							<temperature>		(Whg)
 Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>			(Whg)
 Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>			(Whg)
 Group:Number:SUM				gEnergyCnt		"Energiezähler [%.1f Wh]" 									<energy>			(Whg)
@@ -28,18 +24,13 @@ Group							W				"Wartung"																		(Whg)
 //Gruppe für alle Number/Switch Elemente die bei Systemstart auf -1 gestellt werden	
 Group	gInitNone "Initialisierung mit (-1)"	(Whg)
 
-/* Globaler GlobalState der Wohnung:
- * -1. Ruhezustand
- *  0. Automatik-Betrieb (default)
- *  1. Abwesend/Spar-Betrieb
- *  2. Anwesend/Komfort-Betrieb
- */
-Number GlobalState
-
 Number 		Whg_Light_Preset		"Wohnung Beleuchtung Schnellauswahl"		<switch>	(Whg)
 
-Switch		Presence_ThN5			"Anwesenheit ThN5"							<present>	(Whg)   {nh="ThN5"}
+Switch		PresenceThN5			"Anwesenheit ThN5"							<present>	(Whg)   {nh="ThN5"}
+Switch		PresenceThN9			"Anwesenheit ThN9"							<present>	(Whg)   {nh="ThN9"}
+Switch		PresencePC				"Zustand PC"								<present>	(Whg)   {nh="Birke"}
 
 Switch		BD_Deckenlicht_TimerActive		"Bad Deckenlicht Timer Active"					(BD)
 DateTime	BD_Deckenlicht_TimerEnd			"Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"		(BD)
 Number		BD_Deckenlicht_TimerDuration	"Bad Deckenlicht Timer Restzeit [%d min]"		(BD)
+

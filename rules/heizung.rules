@@ -3,8 +3,10 @@ import org.openhab.core.library.types.*
 import org.openhab.model.script.actions.*
 //import org.joda.time.*
 
-var String rulename = "--> Heizungssteuerung: "
-
+val String rulename = "--> Heizungssteuerung: "
+val Number AUTOMATIK = 0
+val Number ABWESEND = 1
+val Number DAUERFEUER = 2
 
 rule "OpenHAB system started"
 when
@@ -30,7 +32,41 @@ then {
 			item.postUpdate(-1)
 		)
 		//
+		WhgHeatState.postUpdate(-1)
+		//
 		logInfo("RULE", rulename + "Schnellwahlwerte bei Systemstart initialisiert")
 	]
 }
 end
+
+
+rule "Heizmodus umschalten"
+when
+	Item WhgHeatState received command
+then {
+	logInfo("RULE", rulename + "Wohnung Heizmodus")
+	if (receivedCommand == AUTOMATIK) {
+		logInfo("RULE", rulename + "Wohnung Heizmodus: Automatik")
+		BD_Heizung_Auto.sendCommand(ON)
+		FK_Heizung_Auto.sendCommand(ON)
+		SZ_Heizung_Auto.sendCommand(ON)
+		WZ_Heizung_Auto.sendCommand(ON)
+	} else if (receivedCommand == ABWESEND) {
+		logInfo("RULE", rulename + "Wohnung Heizmodus: Abwesend")
+		BD_Heizung_Manu.sendCommand(15.0)
+		FK_Heizung_Manu.sendCommand(15.0)
+		SZ_Heizung_Manu.sendCommand(15.0)
+		WZ_Heizung_Manu.sendCommand(15.0)
+	} else if (receivedCommand == DAUERFEUER) {
+		logInfo("RULE", rulename + "Wohnung Heizmodus: Dauerfeuer")
+		BD_Heizung_Manu.sendCommand(21.0)
+		FK_Heizung_Manu.sendCommand(21.0)
+		SZ_Heizung_Manu.sendCommand(21.0)
+		WZ_Heizung_Manu.sendCommand(21.0)
+	} else {
+		logError("RULE", rulename + "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
+	}
+	WhgHeatState.postUpdate(-1)
+}
+end
+	
