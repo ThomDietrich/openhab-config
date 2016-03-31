@@ -1,15 +1,16 @@
 
 Group 	gKodi	"Kodi Mediacenter"	<kodi> (Whg)
 
-Switch KodiSystemState		"Kodi State"  (gKodi)   {xbmc="<[#livingRoom|System.State]"}
-String KodiPlayerState		"Player State [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.State]"}
-Switch KodiPlayPause		"Play Pause"  (gKodi)   {xbmc=">[#livingRoom|Player.PlayPause]"}
-String KodiTitle			"Episode/Movie Title [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Title]"}
-String KodiTitleShow		"Show Title [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.ShowTitle]"}
+Switch KodiSystemState		"Kodi State"  				(gKodi)	{xbmc="<[#livingRoom|System.State]"}
+String KodiPlayerState		"Player State [%s]"			(gKodi)	{xbmc="<[#livingRoom|Player.State]"}
+Switch KodiPlayPause		"Play Pause"				(gKodi)	{xbmc=">[#livingRoom|Player.PlayPause]"}
+String KodiTitle			"Episode/Movie Title [%s]"	(gKodi)	{xbmc="<[#livingRoom|Player.Title]"}
+String KodiTitleShow		"Show Title [%s]"			(gKodi)	{xbmc="<[#livingRoom|Player.ShowTitle]"}
 //String KodiPlayerType		"Type [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Type]"}
-//String KodiPlayerArtist		"Artist [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Artist]"}
-//String KodiPlayerAlbum		"Album [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Album]"}
-//String KodiPlayerLabel		"Label [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Label]"}
-Switch KodiNotif 			"Notification"  (gKodi)   {xbmc=">[#livingRoom|GUI.ShowNotification]"}
+//String KodiPlayerArtist	"Artist [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Artist]"}
+//String KodiPlayerAlbum	"Album [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Album]"}
+//String KodiPlayerLabel	"Label [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Label]"}
+String KodiNotificationText	"Notification [%s]"			(gKodi)	{xbmc=">[#livingRoom|GUI.ShowNotification]"}
+Switch KodiNotification		"Trigger Notification"		(gKodi)
 
 String KodiSummary			"Summary [%s]"  (gKodi)

@@ -17,7 +17,9 @@ sitemap w66a label="W66a openHAB Installation"
 				}
 			}
 		}
-		Text item=Presence_ThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
+		Text item=PresenceThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
+		Text item=PresenceThN9 label="Anwesenheit ThN9 [MAP(presence.map):%s]"
+		Text item=PresencePC label="PC [MAP(active.map):%s]"
 		/*Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
 			Frame {
 				Switch item=SonosPlayPause
@@ -35,8 +37,9 @@ sitemap w66a label="W66a openHAB Installation"
 				Text item=KodiTitleShow visibility=[KodiTitleShow != ""]
 				Text item=KodiTitle visibility=[KodiTitle != ""]
 			}
-			Frame label="Steuerung"  visibility=[KodiPlayerState != "Stop"] {
+			Frame label="Steuerung" {
 				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
+				Switch item=KodiNotification mappings=[ON="Say Hello! :)"]
 			}
 		}
 		Text item=SpeedtestSummary {
@@ -76,7 +79,7 @@ sitemap w66a label="W66a openHAB Installation"
 	}
 	
 	Frame label="Temperaturen und Heizung" {
-		Switch item=GlobalState label="Modus" mappings=[0="Normalbetrieb", 1="Urlaubsmodus", 2="Dauerfeuer"]
+		Switch item=WhgHeatState label="Modus" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
 		
 		Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
 			Frame label="Temperatur" {
@@ -134,9 +137,9 @@ sitemap w66a label="W66a openHAB Installation"
 			}
 		}
 		
+		Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
 		Text label="Heizungs-Grafiken" icon="chart" {
 			//Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
-			Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
 			//Text label="Ist-Temperatur (°C)" icon="line"
     		/*Chart item=Temperatur label="Ist-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
     		Chart item=Temperatur label="Ist-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
@@ -169,8 +172,8 @@ sitemap w66a label="W66a openHAB Installation"
 				Text item=FK_Kuehlschrank_Current
 			}
 		}
-		Text label="kommt später..."
-		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
+		//Text label="kommt später..."
+		Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
 	}
 
 	Frame label="Admin" {
