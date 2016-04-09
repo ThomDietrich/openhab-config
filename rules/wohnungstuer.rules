@@ -12,7 +12,7 @@ when
   	Item Wohnungstuer_State changed from CLOSED to OPEN
 then {
 	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
-	if (Night_State.state == ON && FK_rcswitch_Edison.state == OFF && Presence_ThN5.state == OFF){
+	if (NightState.state == ON && FK_rcswitch_Edison.state == OFF && PresenceThN5.state == OFF){
 		sendCommand(FK_rcswitch_Edison, ON)
 		logInfo ("RULE", rulename + "nach Dämmerung, Eddison ein. Timer wird gesetzt")
 		willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
@@ -23,6 +23,9 @@ then {
 				willkommen_timer = null
 			}
 		]
+	}
+	if (RuleWhgDoorNotif.state == ON) {
+		pushover("Wohnungstür wurde geöffnet!")
 	}
 }
 end

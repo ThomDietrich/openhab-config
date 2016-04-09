@@ -9,7 +9,7 @@ rule "Balkonmagic an bei Sonnenuntergang und wenn Anwesend"
 when
   	Item Night_Start_Event received update ON
 then {
-	if (Presence_ThN5.state == ON) {	
+	if (PresenceThN5.state == ON) {	
 		sendCommand(BK_rcswitch_Balkonmagic, ON)
 	}
 	logInfo ("RULE", rulename + "eingeschaltet.")

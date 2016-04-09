@@ -2,7 +2,7 @@ import org.openhab.core.library.types.*
 //import org.openhab.core.persistence.*
 import org.openhab.model.script.actions.*
 import org.joda.time.*
-
+ 
 // Timer für das automatische Ausschalten
 var Timer badlicht_timer = null
 var Integer badlicht_timer_minutes = 30
@@ -14,7 +14,7 @@ when
 	Time cron "0 * * * * ?"
 then {
 	if (BD_Deckenlicht_TimerActive.state == ON) {
-		logInfo("RULE", rulename + "updating timer duration")
+		//logInfo("RULE", rulename + "updating timer duration")
 		var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
 		//logInfo("RULE", rulename + "Deadline: " + timeEnd)
 		var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
@@ -28,11 +28,11 @@ rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
 when
   	Item BD_Tuer_State changed from CLOSED to OPEN
 then {
-	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
-	if (Night_State.state == ON) {
+	//logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+	if (NightState.state == ON) {
 		if (BD_Deckenlicht.state == OFF) {
 			sendCommand(BD_Deckenlicht, ON)
-			logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+			//logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
 			
 			var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
 			BD_Deckenlicht_TimerActive.postUpdate(ON)

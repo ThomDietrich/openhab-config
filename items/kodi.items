@@ -11,6 +11,6 @@ String KodiTitleShow		"Show Title [%s]"			(gKodi)	{xbmc="<[#livingRoom|Player.Sh
 //String KodiPlayerAlbum	"Album [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Album]"}
 //String KodiPlayerLabel	"Label [%s]"  (gKodi)   {xbmc="<[#livingRoom|Player.Label]"}
 String KodiNotificationText	"Notification [%s]"			(gKodi)	{xbmc=">[#livingRoom|GUI.ShowNotification]"}
-Switch KodiNotification		"Trigger Notification"		(gKodi)
+Number KodiNotificationId	"Trigger Notification"		(gKodi)
 
 String KodiSummary			"Summary [%s]"  (gKodi)

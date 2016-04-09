@@ -1,63 +1,76 @@
 
 
-
-rule "BD_Deckenlicht_Power" when Item BD_Deckenlicht changed	//ON										//OFF
-then 		if (previousState != ON) BD_Deckenlicht_Power.postUpdate(7.5) else BD_Deckenlicht_Power.postUpdate(0)	end
-
-
-
-rule "Flur_Deckenlicht_Power" when Item Flur_Deckenlicht changed	//ON										//OFF
-then 		if (previousState != ON) Flur_Deckenlicht_Power.postUpdate(0.0) else Flur_Deckenlicht_Power.postUpdate(0) end
-
-
-
-rule "Kueche_Deckenlicht_Power" when Item Kueche_Deckenlicht changed	//ON										//OFF
-then 		if (previousState != ON) Kueche_Deckenlicht_Power.postUpdate(23.0) else Kueche_Deckenlicht_Power.postUpdate(0) end
-
+rule "Energieverbrauch init"
+when
+	System started or
+	Time is midnight
+then {
+	createTimer(now.plusSeconds(20)) [|
+		gPower.members.forEach(item |
+			if (item.state != ON) item.postUpdate(0)
+		)
+	]
+}
+end
 
 
-rule "SZ_Deckenlicht_Power" when Item SZ_Deckenlicht changed	//ON										//OFF
-then 		if (previousState != ON) SZ_Deckenlicht_Power.postUpdate(10.2) else SZ_Deckenlicht_Power.postUpdate(0)	end
+rule "BD_Deckenlicht_Power" when Item BD_Deckenlicht received update	//ON										//OFF
+then 		if (BD_Deckenlicht.state == ON) BD_Deckenlicht_Power.postUpdate(7.5) else BD_Deckenlicht_Power.postUpdate(0)	end
 
 
 
-rule "WZ_Lacks_LEDs_Power" when Item WZ_Lacks_LEDs changed	//ON										//OFF
-then 		if (previousState != ON) WZ_Lacks_LEDs_Power.postUpdate(17.0) else WZ_Lacks_LEDs_Power.postUpdate(0) end
+rule "Flur_Deckenlicht_Power" when Item Flur_Deckenlicht received update	//ON										//OFF
+then 		if (Flur_Deckenlicht.state == ON) Flur_Deckenlicht_Power.postUpdate(0.0) else Flur_Deckenlicht_Power.postUpdate(0) end
 
 
 
-rule "WZ_Lacks_Lampe_Power" when Item WZ_Lacks_Lampe changed	//ON										//OFF
-then 		if (previousState != ON) WZ_Lacks_Lampe_Power.postUpdate(60.0) else WZ_Lacks_Lampe_Power.postUpdate(0) end
+rule "Kueche_Deckenlicht_Power" when Item Kueche_Deckenlicht received update	//ON										//OFF
+then 		if (Kueche_Deckenlicht.state == ON) Kueche_Deckenlicht_Power.postUpdate(23.0) else Kueche_Deckenlicht_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Origami_Power" when Item WZ_rcswitch_Origami changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Origami_Power.postUpdate(19.0) else WZ_rcswitch_Origami_Power.postUpdate(0) end
+rule "SZ_Deckenlicht_Power" when Item SZ_Deckenlicht received update	//ON										//OFF
+then 		if (SZ_Deckenlicht.state == ON) SZ_Deckenlicht_Power.postUpdate(10.2) else SZ_Deckenlicht_Power.postUpdate(0)	end
 
 
 
-rule "WZ_rcswitch_Expedit_Power" when Item WZ_rcswitch_Expedit changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Expedit_Power.postUpdate(2.8) else WZ_rcswitch_Expedit_Power.postUpdate(0) end
+rule "WZ_Lacks_LEDs_Power" when Item WZ_Lacks_LEDs received update	//ON										//OFF
+then 		if (WZ_Lacks_LEDs.state == ON) WZ_Lacks_LEDs_Power.postUpdate(17.0) else WZ_Lacks_LEDs_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Goldf_Power" when Item WZ_rcswitch_Goldf changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Goldf_Power.postUpdate(40.0) else WZ_rcswitch_Goldf_Power.postUpdate(0) end
+rule "WZ_Lacks_Lampe_Power" when Item WZ_Lacks_Lampe received update	//ON										//OFF
+then 		if (WZ_Lacks_Lampe.state == ON) WZ_Lacks_Lampe_Power.postUpdate(60.0) else WZ_Lacks_Lampe_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Edison_Power" when Item WZ_rcswitch_Edison changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Edison_Power.postUpdate(118.0) else WZ_rcswitch_Edison_Power.postUpdate(0) end
+rule "WZ_rcswitch_Origami_Power" when Item WZ_rcswitch_Origami received update	//ON										//OFF
+then 		if (WZ_rcswitch_Origami.state == ON) WZ_rcswitch_Origami_Power.postUpdate(19.0) else WZ_rcswitch_Origami_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Arbeit_Power" when Item WZ_rcswitch_Arbeit changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Arbeit_Power.postUpdate(8.5) else WZ_rcswitch_Arbeit_Power.postUpdate(0) end
+rule "WZ_rcswitch_Expedit_Power" when Item WZ_rcswitch_Expedit received update	//ON										//OFF
+then 		if (WZ_rcswitch_Expedit.state == ON) WZ_rcswitch_Expedit_Power.postUpdate(2.8) else WZ_rcswitch_Expedit_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Balkonmagic_Power" when Item WZ_rcswitch_Balkonmagic changed	//ON										//OFF
-then 		if (previousState != ON) WZ_rcswitch_Balkonmagic_Power.postUpdate(42.0) else WZ_rcswitch_Balkonmagic_Power.postUpdate(0) end
+rule "WZ_rcswitch_Goldf_Power" when Item WZ_rcswitch_Goldf received update	//ON										//OFF
+then 		if (WZ_rcswitch_Goldf.state == ON) WZ_rcswitch_Goldf_Power.postUpdate(40.0) else WZ_rcswitch_Goldf_Power.postUpdate(0) end
+
+
+
+rule "FK_rcswitch_Edison_Power" when Item FK_rcswitch_Edison received update	//ON										//OFF
+then 		if (FK_rcswitch_Edison.state == ON) FK_rcswitch_Edison_Power.postUpdate(118.0) else FK_rcswitch_Edison_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Arbeit_Power" when Item FK_rcswitch_Arbeit received update	//ON										//OFF
+then 		if (FK_rcswitch_Arbeit.state == ON) FK_rcswitch_Arbeit_Power.postUpdate(8.5) else FK_rcswitch_Arbeit_Power.postUpdate(0) end
+
+
+
+rule "WZ_rcswitch_Balkonmagic_Power" when Item BK_rcswitch_Balkonmagic received update	//ON										//OFF
+then 		if (BK_rcswitch_Balkonmagic.state == ON) BK_rcswitch_Balkonmagic_Power.postUpdate(42.0) else BK_rcswitch_Balkonmagic_Power.postUpdate(0) end
 
 
 

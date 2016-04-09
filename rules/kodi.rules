@@ -49,11 +49,24 @@ end
 
 rule "Kodi Notification triggered"
 when
-	Item KodiNotification received update
+	Item KodiNotificationId received command
 then {
 	//logInfo("RULE", "Kodi Notification triggered")
-	KodiNotificationText.sendCommand("Hello! :)")
-	KodiNotification.postUpdate(OFF)
+	var String msg = "a" 
+	switch (receivedCommand) {
+		case 1: msg = "Hello! :)"
+		case 2: msg = "Stop being lazy!"
+		case 3: msg = "Go to bed! :P"
+		case 4: msg = "Lalalaaa :-S"
+		case 5: msg = "Banana :)"
+		case 6: msg = "Call me >:O"
+	}
+	
+	KodiNotificationText.sendCommand(msg)
+	createTimer(now.plusSeconds(3)) [|
+		//KodiNotificationText.sendCommand("")	
+		KodiNotificationId.postUpdate(-1)
+	]
 }
 end
 
