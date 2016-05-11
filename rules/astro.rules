@@ -16,6 +16,7 @@ then {
 		var DateTimeType sunset = new DateTimeType(getAstroSunsetStart(now.toDate, 50.689, 10.926))
 		SunriseTime.postUpdate(sunrise)
 		SunsetTime.postUpdate(sunset)
+		//TODO fails
 		if (now.isAfter(sunset.calendar.timeInMillis) || now.isBefore(sunrise.calendar.timeInMillis)) {
 			logInfo("RULE", "--> Night_State ON")
 			postUpdate(NightState, ON)

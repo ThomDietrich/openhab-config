@@ -2,19 +2,21 @@ sitemap w66a label="W66a openHAB Installation"
 {
 	Frame {
 		Text item=CurrDateTime label="Wetter- und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
-			Frame {
+			Frame label="Jetzt" {
 				Text item=SunriseSunset
+				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+				Text item=SunriseTime icon="Sunrise-icon" visibility=[NightState == ON]
+				Text item=SunsetTime icon="Sunset-icon" visibility=[NightState == OFF]
 				Text item=SunElevation icon="sunmoon" visibility=[SunElevation>0]
 				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation>0]
-				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+			}
+			Frame label="Mondphase"{			
 				Text item=MoonPhaseName
 				Text item=MoonFull icon="full-moon"
 				Text item=Zodiac icon="zodiac-icon"
 			}
-			Frame {
-				Text label="Wettervorhersage" icon="sun_clouds" {
-					Text label="kommt später..."
-				}
+			Frame label="Wettervorhersage"{
+				Text label="kommt später..." icon="sun_clouds"
 			}
 		}
 		Text item=PresenceThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
@@ -71,6 +73,7 @@ sitemap w66a label="W66a openHAB Installation"
 		Switch item=WZ_rcswitch_Goldf
 		Switch item=FK_rcswitch_Arbeit
 		Switch item=FK_rcswitch_Edison
+		Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
 		Switch item=Kueche_Deckenlicht
 		Switch item=Flur_Deckenlicht
 		Switch item=SZ_Deckenlicht
@@ -138,7 +141,7 @@ sitemap w66a label="W66a openHAB Installation"
 			}
 		}
 		
-		Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
+		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
 		//Text label="Heizungs-Grafiken" icon="chart" {
 			//Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
 			//Text label="Ist-Temperatur (°C)" icon="line"
@@ -174,10 +177,13 @@ sitemap w66a label="W66a openHAB Installation"
 			}
 		}
 		Text label="kommt später..."
-		Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
+		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
 	}
 
 	Frame label="Admin" {
+		Text label="Optionen" {
+			Switch item=RuleWhgDoorNotif
+		}
 		Text label="Status" icon="info" {
 			Group item=gRSSI
 			Group item=gPower

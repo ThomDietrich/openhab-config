@@ -35,8 +35,8 @@ then {
 			//logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
 			
 			var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+			BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
 			BD_Deckenlicht_TimerActive.postUpdate(ON)
-			postUpdate(BD_Deckenlicht_TimerEnd, new DateTimeType(deadline.toCalendar(null)))
 			
 			badlicht_timer = createTimer(deadline) [|
 				if (badlicht_timer != null) {

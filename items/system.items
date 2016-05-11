@@ -34,4 +34,8 @@ Switch		BD_Deckenlicht_TimerActive		"Bad Deckenlicht Timer Active"					(BD)
 DateTime	BD_Deckenlicht_TimerEnd			"Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"		(BD)
 Number		BD_Deckenlicht_TimerDuration	"Bad Deckenlicht Timer Restzeit [%d min]"		(BD)
 
+Switch		Wohnungstuer_TimerActive		"Wohnungstür Timer Active"						(Whg)
+DateTime	Wohnungstuer_TimerEnd			"Wohnungstür Timer [%1$tH:%1$tM Uhr]"			(Whg)
+Number		Wohnungstuer_TimerDuration		"Wohnungstür Timer Restzeit [%d min]"			(Whg)
+
 Switch		RuleWhgDoorNotif		"Wohnungstür Benachr."									(Whg)
