@@ -8,7 +8,7 @@ Strategies {
 
 Items {
     gHeatAct*, gHeatSet*, gHeatValve*, gHeatMode*					: strategy = everyChange, everyHour
-    gPower*, gEnergyCnt*											: strategy = everyChange, everyHour
+    gPower*															: strategy = everyChange, everyHour
     gRSSI* 															: strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing		: strategy = everyChange
 	Presence_ThN5													: strategy = everyChange
