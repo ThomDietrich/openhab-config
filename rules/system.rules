@@ -1,10 +1,3 @@
-import org.openhab.core.library.types.*
-import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
-import org.joda.time.*
-
-
-// https://eclipse.org/xtend/documentation/203_xtend_expressions.html
 
 
 rule "OpenHAB system started"
@@ -25,7 +18,7 @@ then {
 			item.postUpdate(-1)
 		)
 		gPower.members.forEach(item |
-			if (item.state == Uninitialized) item.postUpdate(0)
+			if (item.state == NULL) item.postUpdate(0)
 		)
 	] 
 }
@@ -37,20 +30,6 @@ when
 	System shuts down
 then {
 	logInfo("RULE", "--> openHAB shutting down rule")
-}
-end
-
-
-rule "midnight resets"
-when
-	Time is midnight
-then {
-	logInfo("RULE", "--> midnight rule")
-/*	// Zeitraum für die rrd-Charts
-	rrd_Chart_Period.postUpdate(1)
-	rrd_Weather_Period.postUpdate(1)
-	// Globaler Zustand auf Automatik
-	GlobalState.sendCommand(0) */
 }
 end
 

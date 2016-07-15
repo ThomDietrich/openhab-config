@@ -1,0 +1,3 @@
+Thing	network:device:ThN5		[ hostname="192.168.0.10", port="0", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="false" ]
+Thing	network:device:ThN9		[ hostname="192.168.0.20", port="0", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="false" ]
+Thing	network:device:BirkePC	[ hostname="192.168.0.2", port="0", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="false" ]

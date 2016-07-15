@@ -1,7 +1,4 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
-//import org.joda.time.*
+
 
 val String rulename = "--> Heizungssteuerung: "
 val Number AUTOMATIK = 0
@@ -16,17 +13,17 @@ then {
 	createTimer(now.plusSeconds(15)) [|
 		logInfo("RULE", rulename + "openHAB system started +15s rule") 
 		//
-		if (BD_Heizung_EcoTemp.state == Uninitialized) BD_Heizung_EcoTemp.postUpdate(17.0)
-		if (BD_Heizung_ComfTemp.state == Uninitialized) BD_Heizung_ComfTemp.postUpdate(21.0)
+		if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
+		if (BD_Heizung_ComfTemp.state == NULL) BD_Heizung_ComfTemp.postUpdate(21.0)
 		//
-		if (FK_Heizung_EcoTemp.state == Uninitialized) FK_Heizung_EcoTemp.postUpdate(17.0)
-		if (FK_Heizung_ComfTemp.state == Uninitialized) FK_Heizung_ComfTemp.postUpdate(21.0)
+		if (FK_Heizung_EcoTemp.state == NULL) FK_Heizung_EcoTemp.postUpdate(17.0)
+		if (FK_Heizung_ComfTemp.state == NULL) FK_Heizung_ComfTemp.postUpdate(21.0)
 		//
-		if (SZ_Heizung_EcoTemp.state == Uninitialized) SZ_Heizung_EcoTemp.postUpdate(17.0)
-		if (SZ_Heizung_ComfTemp.state == Uninitialized) SZ_Heizung_ComfTemp.postUpdate(21.0)
+		if (SZ_Heizung_EcoTemp.state == NULL) SZ_Heizung_EcoTemp.postUpdate(17.0)
+		if (SZ_Heizung_ComfTemp.state == NULL) SZ_Heizung_ComfTemp.postUpdate(21.0)
 		//
-		if (WZ_Heizung_EcoTemp.state == Uninitialized) WZ_Heizung_EcoTemp.postUpdate(17.0)
-		if (WZ_Heizung_ComfTemp.state == Uninitialized) WZ_Heizung_ComfTemp.postUpdate(21.0)
+		if (WZ_Heizung_EcoTemp.state == NULL) WZ_Heizung_EcoTemp.postUpdate(17.0)
+		if (WZ_Heizung_ComfTemp.state == NULL) WZ_Heizung_ComfTemp.postUpdate(21.0)
 		//
 		gInitNone.members.forEach(item |
 			item.postUpdate(-1)

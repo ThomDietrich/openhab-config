@@ -26,9 +26,10 @@ Group	gInitNone "Initialisierung mit (-1)"	(Whg)
 
 Number 		Whg_Light_Preset		"Wohnung Beleuchtung Schnellauswahl"		<switch>	(Whg)
 
-Switch		PresenceThN5			"Anwesenheit ThN5"							<present>	(Whg)   {nh="ThN5"}
-Switch		PresenceThN9			"Anwesenheit ThN9"							<present>	(Whg)   {nh="ThN9"}
-Switch		PresencePC				"Zustand PC"								<present>	(Whg)   {nh="Birke"}
+Switch		PresenceThN5			"Anwesenheit ThN5"							<present>	(Whg)   { channel="network:device:ThN5:online" }
+Number		PresenceThN5Time		"Anwesenheit ThN5 seit [%d min]"			<present>	(Whg)   { channel="network:device:ThN5:time" }
+Switch		PresenceThN9			"Anwesenheit ThN9"							<present>	(Whg)   { channel="network:device:ThN9:online" }
+Switch		PresencePC				"Zustand PC"								<present>	(Whg)   { channel="network:device:BirkePC:online" }
 
 Switch		BD_Deckenlicht_TimerActive		"Bad Deckenlicht Timer Active"					(BD)
 DateTime	BD_Deckenlicht_TimerEnd			"Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"		(BD)

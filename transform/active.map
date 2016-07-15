@@ -1,4 +1,3 @@
-ON=✔ Eingeshalten
-OFF=✘ Ausgeschalten
-undefined=⁉ unbekannt
--=⁉ unbekannt
+ON=Ein ✔
+OFF=Aus ✘
+NULL=unbekannt ⁉

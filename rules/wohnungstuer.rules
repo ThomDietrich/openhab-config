@@ -1,12 +1,16 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
 import org.joda.time.*
 
 var Timer willkommen_timer = null
 var Integer willkommen_timer_minutes = 15
 var String rulename = "--> Willkommenslicht: "
 
+rule "Wohnungstür-Automatik: Init"
+when
+	System started
+then {
+	if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
+}
+end
 
 rule "Wohnungstür-Automatik: Duration Update"
 when

@@ -24,11 +24,12 @@ sitemap w66a label="W66a openHAB Installation"
 		Text item=PresencePC label="PC [MAP(active.map):%s]"
 		Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
 			Frame {
-				Switch item=SonosPlayPause
-				Text item=SonosCurrTrack
-				Text item=SonosCurrTitle visibility=[SonosCurrTitle != ""]
-				Text item=SonosCurrAlbum visibility=[SonosCurrAlbum != ""]
-				Text item=SonosCurrArtist visibility=[SonosCurrArtist != ""]
+				Default item=SonosController
+				Slider  item=SonosVolume
+				Switch  item=SonosMute
+				Switch  item=SonosLED
+				Text    item=SonosCurrentTrack
+				Text    item=SonosState
 			}
 		}
 		Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
@@ -205,3 +206,4 @@ sitemap w66a label="W66a openHAB Installation"
 		Group item=Whg label="Alle Elemente" icon="house"
 	}
 }
+

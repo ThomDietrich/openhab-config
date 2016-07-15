@@ -1,5 +1,3 @@
 CLOSED=geschlossen
 OPEN=offen
-UNDEFINED=unbekannt
-
--=-Fehler bei der Initialisierung-
+NULL=unbekannt

@@ -1,6 +1,3 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
 import org.joda.time.*
  
 // Timer für das automatische Ausschalten
@@ -8,6 +5,14 @@ var Timer badlicht_timer = null
 var Integer badlicht_timer_minutes = 30
 var String rulename = "--> Badtür-Automatik: "
 
+
+rule "Badtür-Automatik: Init"
+when
+	System started
+then {
+	if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
+}
+end
 
 rule "Badtür-Automatik: Duration Update"
 when

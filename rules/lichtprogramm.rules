@@ -1,7 +1,4 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
-//import org.joda.time.*
+
 
 var String rulename = "--> Lichtprogramm: "
 
@@ -117,9 +114,9 @@ then {
 			)
 		}
 	}
-	//createTimer(now.plusSeconds(3)) [|
-	//	Whg_Light_Preset.postUpdate(-1)
-	//]
+	createTimer(now.plusSeconds(3)) [|
+		Whg_Light_Preset.postUpdate(-1)
+	]
 }
 end
 

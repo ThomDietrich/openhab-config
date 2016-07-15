@@ -1,23 +1,12 @@
 
 Group 	gSonos	"Sonos Soundsystem"	<"speaker-black">	(Whg)
 
-//Switch SonosPlayPause		"Play/Pause"			(gSonos)	{sonos="[ON:sonosWZ:play],[OFF:sonosWZ:pause]"}
-//Switch SonosPlay			"Play"					(gSonos)	{sonos="[ON:sonosWZ:play]"}
-//Switch SonosPause			"Pause"					(gSonos)	{sonos="[ON:sonosWZ:pause]"}
-//Switch SonosStop			"Stop"					(gSonos)	{sonos="[ON:sonosWZ:stop]"}
-//Switch SonosNext			"Next"					(gSonos)	{sonos="[ON:sonosWZ:next]"}
- 
-//String SonosZone1			"Zonename [%s]"			(gSonos)	{sonos="[sonosWZ:zonename]"}
-//String SonosZone2			"Zonegroup [%s]"		(gSonos)	{sonos="[sonosWZ:zonegroup]"}
-//String SonosZone3			"Zonegroup uuid [%s]"	(gSonos)	{sonos="[sonosWZ:zonegroupid]"}
-
-//String SonosState			"State [%s]"			(gSonos)	{sonos="[sonosWZ:transportstate]"} 
-String SonosCurrTrack		"Current Track [%s]"	(gSonos)	{sonos="[sonosWZ:currenttrack]"}
-String SonosCurrTitle		"Current Title [%s]"	(gSonos)	{sonos="[sonosWZ:currenttitle]"}
-String SonosCurrAlbum		"Current Album [%s]"	(gSonos)	{sonos="[sonosWZ:currentalbum]"}
-String SonosCurrArtist		"Current Artist [%s]"	(gSonos)	{sonos="[sonosWZ:currentartist]"}
-
-//Dimmer SonosVolume			"Volume [%s]"			(gSonos)	{sonos="[sonosWZ:volume]"}
+Player SonosController   "Controller"                          (gSonos) {channel="sonos:PLAY3:Kueche:control"}
+Dimmer SonosVolume       "Volume [%.1f %%]" <soundvolume>      (gSonos) {channel="sonos:PLAY3:Kueche:volume"}
+Switch SonosMute         "Mute"             <soundvolume_mute> (gSonos) {channel="sonos:PLAY3:Kueche:mute"}
+Switch SonosLED          "LED"              <switch>           (gSonos) {channel="sonos:PLAY3:Kueche:led"}
+String SonosCurrentTrack "Now playing [%s]" <text>             (gSonos) {channel="sonos:PLAY3:Kueche:currenttrack"}
+String SonosState        "Status [%s]"      <text>             (gSonos) {channel="sonos:PLAY3:Kueche:state"}
 
 String SonosSummary			"Sonos Summary [%s]"			(gSonos) 
 

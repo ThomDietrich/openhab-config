@@ -1,8 +1,4 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
 import org.joda.time.*
-
 
 rule "OpenHAB system started - astro"
 when

@@ -1,10 +1,5 @@
-import org.openhab.core.library.types.*
-//import org.openhab.core.persistence.*
-import org.openhab.model.script.actions.*
-//import org.joda.time.*
 import java.math.BigDecimal
 import java.util.Locale
-import org.openhab.core.library.types.*
 
 var String rulename = "--> Heizungssteuerung BD_Heizung: "
 

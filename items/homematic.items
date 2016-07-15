@@ -33,126 +33,125 @@
 // http://www.eq-3.de/Downloads/PDFs/Dokumentation_und_Tutorials/HM_Script_Teil_4_Datenpunkte_1_503.pdf
 
 //HM-ES-PMSw1-Pl Steckdose mit Leistungsmessung
-Switch BD_Waschmaschine_State		"Waschmaschine Zustand"						(BD)						{homematic="address=LEQ1275872, channel=1, parameter=STATE"}
-Number BD_Waschmaschine_EnergyCount	"Waschmaschine Energiezähler [%.0f Wh]" 	(BD, gEnergyCnt)			{homematic="address=LEQ1275872, channel=2, parameter=ENERGY_COUNTER"}
-Number BD_Waschmaschine_Power		"Waschmaschine Leistung [%.0f W]" 			<energy> (BD, gPower)		{homematic="address=LEQ1275872, channel=2, parameter=POWER"}
-Number BD_Waschmaschine_Current 	"Waschmaschine Strom [%.1f mA]"				(BD)						{homematic="address=LEQ1275872, channel=2, parameter=CURRENT"}
-Number BD_Waschmaschine_Voltage		"Waschmaschine Spannung [%.0f V]"			(BD)						{homematic="address=LEQ1275872, channel=2, parameter=VOLTAGE"}
-Number BD_Waschmaschine_Frequency	"Waschmaschine Frequenz [%.1f Hz]"	 		(BD)						{homematic="address=LEQ1275872, channel=2, parameter=FREQUENCY"}
-Number BD_Waschmaschine_RSSI		"Waschmaschine RSSI [%d dBm]"				(BD,W,gRSSI)				{homematic="address=LEQ1275872, channel=0, parameter=RSSI_DEVICE"}
-Switch BD_Waschmaschine_Unreach		"Waschmaschine unreachable"					<siren> (BD,W,gUnreach)		{homematic="address=LEQ1275872, channel=0, parameter=UNREACH"}
-Switch BD_Waschmaschine_Pending		"Waschmaschine config pending"				<siren> (BD,W,gPending)		{homematic="address=LEQ1275872, channel=0, parameter=CONFIG_PENDING"}
+Switch BD_Waschmaschine_State		"Waschmaschine Zustand"						(BD)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:1#STATE" }
+Number BD_Waschmaschine_EnergyCount	"Waschmaschine Energiezähler [%.0f Wh]" 	(BD, gEnergyCnt)			{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:2#ENERGY_COUNTER" }
+Number BD_Waschmaschine_Power		"Waschmaschine Leistung [%.0f W]" 			<energy> (BD, gPower)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:2#POWER" }
+Number BD_Waschmaschine_Current 	"Waschmaschine Strom [%.1f mA]"				(BD)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:2#CURRENT" }
+Number BD_Waschmaschine_Voltage		"Waschmaschine Spannung [%.0f V]"			(BD)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:2#VOLTAGE" }
+Number BD_Waschmaschine_Frequency	"Waschmaschine Frequenz [%.1f Hz]"	 		(BD)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:2#FREQUENCY" }
+Number BD_Waschmaschine_RSSI		"Waschmaschine RSSI [%d dBm]"				(BD,W,gRSSI)				{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:0#RSSI_DEVICE" }
+Switch BD_Waschmaschine_Unreach		"Waschmaschine unreachable"					<siren> (BD,W,gUnreach)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:0#UNREACH" }
+Switch BD_Waschmaschine_Pending		"Waschmaschine config pending"				<siren> (BD,W,gPending)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:0#CONFIG_PENDING" }
 
-Switch FK_Kuehlschrank_State		"Kühlschrank Zustand"						(FK)						{homematic="address=LEQ1275907, channel=1, parameter=STATE"}
-Number FK_Kuehlschrank_EnergyCount	"Kühlschrank Energiezähler [%.1f Wh]" 		(FK, gEnergyCnt)			{homematic="address=LEQ1275907, channel=2, parameter=ENERGY_COUNTER"}
-Number FK_Kuehlschrank_Power		"Kühlschrank Leistung [%.1f W]" 			<energy> (FK, gPower)		{homematic="address=LEQ1275907, channel=2, parameter=POWER"}
-Number FK_Kuehlschrank_Current 		"Kühlschrank Strom [%.1f mA]"				(FK)						{homematic="address=LEQ1275907, channel=2, parameter=CURRENT"}
-Number FK_Kuehlschrank_Voltage		"Kühlschrank Spannung [%.1f V]"				(FK)						{homematic="address=LEQ1275907, channel=2, parameter=VOLTAGE"}
-Number FK_Kuehlschrank_Frequency	"Kühlschrank Frequenz [%.1f Hz]"	 		(FK)						{homematic="address=LEQ1275907, channel=2, parameter=FREQUENCY"}
-Number FK_Kuehlschrank_RSSI			"Kühlschrank RSSI [%d dBm]"					(FK,W,gRSSI)				{homematic="address=LEQ1275907, channel=0, parameter=RSSI_DEVICE"}
-Switch FK_Kuehlschrank_Unreach		"Kühlschrank unreachable"					<siren> (FK,W,gUnreach)		{homematic="address=LEQ1275907, channel=0, parameter=UNREACH"}
-Switch FK_Kuehlschrank_Pending		"Kühlschrank config pending"				<siren> (FK,W,gPending)		{homematic="address=LEQ1275907, channel=0, parameter=CONFIG_PENDING"}
+Switch FK_Kuehlschrank_State		"Kühlschrank Zustand"						(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:1#STATE" }
+Number FK_Kuehlschrank_EnergyCount	"Kühlschrank Energiezähler [%.1f Wh]" 		(FK, gEnergyCnt)			{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:2#ENERGY_COUNTER" }
+Number FK_Kuehlschrank_Power		"Kühlschrank Leistung [%.1f W]" 			<energy> (FK, gPower)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:2#POWER" } 
+Number FK_Kuehlschrank_Current 		"Kühlschrank Strom [%.1f mA]"				(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:2#CURRENT" }
+Number FK_Kuehlschrank_Voltage		"Kühlschrank Spannung [%.1f V]"				(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:2#VOLTAGE" }
+Number FK_Kuehlschrank_Frequency	"Kühlschrank Frequenz [%.1f Hz]"	 		(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:2#FREQUENCY" }
+Number FK_Kuehlschrank_RSSI			"Kühlschrank RSSI [%d dBm]"					(FK,W,gRSSI)				{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:0#RSSI_DEVICE" }
+Switch FK_Kuehlschrank_Unreach		"Kühlschrank unreachable"					<siren> (FK,W,gUnreach)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:0#UNREACH" }
+Switch FK_Kuehlschrank_Pending		"Kühlschrank config pending"				<siren> (FK,W,gPending)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275907:0#CONFIG_PENDING" }
 
-Switch FK_Spuelmaschine_State		"Spülmaschine Zustand"						(FK)						{homematic="address=LEQ1275865, channel=1, parameter=STATE"}
-Number FK_Spuelmaschine_EnergyCount "Spülmaschine Energiezähler [%.1f Wh]" 		(FK, gEnergyCnt)			{homematic="address=LEQ1275865, channel=2, parameter=ENERGY_COUNTER"}
-Number FK_Spuelmaschine_Power		"Spülmaschine Leistung [%.1f W]" 			<energy> (FK, gPower) 		{homematic="address=LEQ1275865, channel=2, parameter=POWER"}
-Number FK_Spuelmaschine_Current 	"Spülmaschine Strom [%.1f mA]"				(FK)						{homematic="address=LEQ1275865, channel=2, parameter=CURRENT"}
-Number FK_Spuelmaschine_Voltage		"Spülmaschine Spannung [%.1f V]"			(FK)						{homematic="address=LEQ1275865, channel=2, parameter=VOLTAGE"}
-Number FK_Spuelmaschine_Frequency	"Spülmaschine Frequenz [%.1f Hz]"	 		(FK)						{homematic="address=LEQ1275865, channel=2, parameter=FREQUENCY"}
-Number FK_Spuelmaschine_RSSI		"Spülmaschine RSSI [%d dBm]"				(FK,W,gRSSI)				{homematic="address=LEQ1275865, channel=0, parameter=RSSI_DEVICE"}
-Switch FK_Spuelmaschine_Unreach		"Spülmaschine unreachable"					<siren> (FK,W,gUnreach)		{homematic="address=LEQ1275865, channel=0, parameter=UNREACH"}
-Switch FK_Spuelmaschine_Pending		"Spülmaschine config pending"				<siren> (FK,W,gPending)		{homematic="address=LEQ1275865, channel=0, parameter=CONFIG_PENDING"}
+Switch FK_Spuelmaschine_State		"Spülmaschine Zustand"						(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:1#STATE" }
+Number FK_Spuelmaschine_EnergyCount "Spülmaschine Energiezähler [%.1f Wh]" 		(FK, gEnergyCnt)			{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:2#ENERGY_COUNTER" }
+Number FK_Spuelmaschine_Power		"Spülmaschine Leistung [%.1f W]" 			<energy> (FK, gPower) 		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:2#POWER" }
+Number FK_Spuelmaschine_Current 	"Spülmaschine Strom [%.1f mA]"				(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:2#CURRENT" }
+Number FK_Spuelmaschine_Voltage		"Spülmaschine Spannung [%.1f V]"			(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:2#VOLTAGE" }
+Number FK_Spuelmaschine_Frequency	"Spülmaschine Frequenz [%.1f Hz]"	 		(FK)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:2#FREQUENCY" }
+Number FK_Spuelmaschine_RSSI		"Spülmaschine RSSI [%d dBm]"				(FK,W,gRSSI)				{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:0#RSSI_DEVICE" }
+Switch FK_Spuelmaschine_Unreach		"Spülmaschine unreachable"					<siren> (FK,W,gUnreach)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:0#UNREACH" }
+Switch FK_Spuelmaschine_Pending		"Spülmaschine config pending"				<siren> (FK,W,gPending)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275865:0#CONFIG_PENDING" }
 
-Switch WZ_Medientechnik_State		"Medientechnik Zustand"						(WZ)						{homematic="address=MEQ0272771, channel=1, parameter=STATE"}
-Number WZ_Medientechnik_EnergyCount	"Medientechnik Energiezähler [%.1f Wh]" 	(WZ, gEnergyCnt)			{homematic="address=MEQ0272771, channel=2, parameter=ENERGY_COUNTER"}
-Number WZ_Medientechnik_Power		"Medientechnik Leistung [%.1f W]" 			<energy> (WZ, gPower) 		{homematic="address=MEQ0272771, channel=2, parameter=POWER"}
-Number WZ_Medientechnik_Current 	"Medientechnik Strom [%.1f mA]"				(WZ)						{homematic="address=MEQ0272771, channel=2, parameter=CURRENT"}
-Number WZ_Medientechnik_Voltage		"Medientechnik Spannung [%.1f V]"			(WZ)						{homematic="address=MEQ0272771, channel=2, parameter=VOLTAGE"}
-Number WZ_Medientechnik_Frequency	"Medientechnik Frequenz [%.1f Hz]"	 		(WZ)						{homematic="address=MEQ0272771, channel=2, parameter=FREQUENCY"}
-Number WZ_Medientechnik_RSSI		"Medientechnik RSSI [%d dBm]"				(WZ,W,gRSSI)				{homematic="address=MEQ0272771, channel=0, parameter=RSSI_DEVICE"}
-Switch WZ_Medientechnik_Unreach		"Medientechnik unreachable"					<siren> (WZ,W,gUnreach)		{homematic="address=MEQ0272771, channel=0, parameter=UNREACH"}
-Switch WZ_Medientechnik_Pending		"Medientechnik config pending"				<siren> (WZ,W,gPending)		{homematic="address=MEQ0272771, channel=0, parameter=CONFIG_PENDING"}
+Switch WZ_Medientechnik_State		"Medientechnik Zustand"						(WZ)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:1#STATE" }
+Number WZ_Medientechnik_EnergyCount	"Medientechnik Energiezähler [%.1f Wh]" 	(WZ, gEnergyCnt)			{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:2#ENERGY_COUNTER" }
+Number WZ_Medientechnik_Power		"Medientechnik Leistung [%.1f W]" 			<energy> (WZ, gPower) 		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:2#POWER" }
+Number WZ_Medientechnik_Current 	"Medientechnik Strom [%.1f mA]"				(WZ)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:2#CURRENT" }
+Number WZ_Medientechnik_Voltage		"Medientechnik Spannung [%.1f V]"			(WZ)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:2#VOLTAGE" }
+Number WZ_Medientechnik_Frequency	"Medientechnik Frequenz [%.1f Hz]"	 		(WZ)						{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:2#FREQUENCY" }
+Number WZ_Medientechnik_RSSI		"Medientechnik RSSI [%d dBm]"				(WZ,W,gRSSI)				{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#RSSI_DEVICE" }
+Switch WZ_Medientechnik_Unreach		"Medientechnik unreachable"					<siren> (WZ,W,gUnreach)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#UNREACH" }
+Switch WZ_Medientechnik_Pending		"Medientechnik config pending"				<siren> (WZ,W,gPending)		{ channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#CONFIG_PENDING" }
 
 
 //HM-Sec-SCo Tür-/Fensterkontakt optisch
-Contact BD_Fenster_State			"Bad Fenster [MAP(window.map):%s]"			<contact> 	(BD,gFenster)		{homematic="address=MEQ0029848, channel=1, parameter=STATE"}
-Number  BD_Fenster_RSSI				"Bad Fenster RSSI [%d dBm]"								(BD,W,gRSSI)		{homematic="address=MEQ0029848, channel=0, parameter=RSSI_DEVICE"}
-Switch  BD_Fenster_Unreach			"Bad Fenster unreachable"					<siren>		(BD,W,gUnreach)		{homematic="address=MEQ0029848, channel=0, parameter=UNREACH"}               
-Switch  BD_Fenster_Pending			"Bad Fenster config pending"				<siren>		(BD,W,gPending)		{homematic="address=MEQ0029848, channel=0, parameter=CONFIG_PENDING"}        
-Switch  BD_Fenster_LowBat			"Bad Fenster Batterie"						<battery> 	(BD,W,gBatterie)	{homematic="address=MEQ0029848, channel=1, parameter=LOWBAT"}
+Contact BD_Fenster_State			"Bad Fenster [MAP(window.map):%s]"			<contact> 	(BD,gFenster)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:1#STATE" }
+Number  BD_Fenster_RSSI				"Bad Fenster RSSI [%d dBm]"								(BD,W,gRSSI)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#RSSI_DEVICE" }
+Switch  BD_Fenster_Unreach			"Bad Fenster unreachable"					<siren>		(BD,W,gUnreach)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#UNREACH" }               
+Switch  BD_Fenster_Pending			"Bad Fenster config pending"				<siren>		(BD,W,gPending)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#CONFIG_PENDING" }        
+Switch  BD_Fenster_LowBat			"Bad Fenster Batterie"						<battery> 	(BD,W,gBatterie)	{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:1#LOWBAT" }
 
-Contact BD_Tuer_State				"Bad Tür [MAP(window.map):%s]"				<contact> 	(BD,gFenster)		{homematic="address=LEQ1466850, channel=1, parameter=STATE"}
-Number  BD_Tuer_RSSI				"Bad Tür RSSI [%d dBm]"									(BD,W,gRSSI)		{homematic="address=LEQ1466850, channel=0, parameter=RSSI_DEVICE"}
-Switch  BD_Tuer_Unreach				"Bad Tür unreachable"						<siren>		(BD,W,gUnreach)		{homematic="address=LEQ1466850, channel=0, parameter=UNREACH"}               
-Switch  BD_Tuer_Pending				"Bad Tür config pending"					<siren>		(BD,W,gPending)		{homematic="address=LEQ1466850, channel=0, parameter=CONFIG_PENDING"}        
-Switch  BD_Tuer_LowBat				"Bad Tür Batterie"							<battery> 	(BD,W,gBatterie)	{homematic="address=LEQ1466850, channel=1, parameter=LOWBAT"}
+Contact BD_Tuer_State				"Bad Tür [MAP(window.map):%s]"				<contact> 	(BD,gFenster)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#STATE" }
+Number  BD_Tuer_RSSI				"Bad Tür RSSI [%d dBm]"									(BD,W,gRSSI)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#RSSI_DEVICE" }
+Switch  BD_Tuer_Unreach				"Bad Tür unreachable"						<siren>		(BD,W,gUnreach)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#UNREACH" }               
+Switch  BD_Tuer_Pending				"Bad Tür config pending"					<siren>		(BD,W,gPending)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#CONFIG_PENDING" }        
+Switch  BD_Tuer_LowBat				"Bad Tür Batterie"							<battery> 	(BD,W,gBatterie)	{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#LOWBAT" }
 
-Contact Wohnungstuer_State			"Wohnungstür [MAP(window.map):%s]"			<contact> 	(Whg,gFenster)		{homematic="address=LEQ0922808, channel=1, parameter=STATE"}
-Number  Wohnungstuer_RSSI			"Wohnungstür RSSI [%d dBm]"								(Whg,W,gRSSI)		{homematic="address=LEQ0922808, channel=0, parameter=RSSI_DEVICE"}
-Switch  Wohnungstuer_Unreach		"Wohnungstür unreachable"					<siren>		(Whg,W,gUnreach)		{homematic="address=LEQ0922808, channel=0, parameter=UNREACH"}               
-Switch  Wohnungstuer_Pending		"Wohnungstür config pending"				<siren>		(Whg,W,gPending)		{homematic="address=LEQ0922808, channel=0, parameter=CONFIG_PENDING"}        
-Switch  Wohnungstuer_LowBat			"Wohnungstür Batterie"						<battery> 	(Whg,W,gBatterie)	{homematic="address=LEQ0922808, channel=1, parameter=LOWBAT"}
+Contact Wohnungstuer_State			"Wohnungstür [MAP(window.map):%s]"			<contact> 	(Whg,gFenster)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#STATE" }
+Number  Wohnungstuer_RSSI			"Wohnungstür RSSI [%d dBm]"								(Whg,W,gRSSI)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#RSSI_DEVICE" }
+Switch  Wohnungstuer_Unreach		"Wohnungstür unreachable"					<siren>		(Whg,W,gUnreach)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#UNREACH" }               
+Switch  Wohnungstuer_Pending		"Wohnungstür config pending"				<siren>		(Whg,W,gPending)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#CONFIG_PENDING" }        
+Switch  Wohnungstuer_LowBat			"Wohnungstür Batterie"						<battery> 	(Whg,W,gBatterie)	{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#LOWBAT" }
 
-Contact FK_Fenster_State			"Küche Fenster [MAP(window.map):%s]"		<contact> 	(FK,gFenster)		{homematic="address=MEQ0029864, channel=1, parameter=STATE"}
-Number  FK_Fenster_RSSI				"Küche Fenster RSSI [%d dBm]"							(FK,W,gRSSI)		{homematic="address=MEQ0029864, channel=0, parameter=RSSI_DEVICE"}
-Switch  FK_Fenster_Unreach			"Küche Fenster unreachable"					<siren>		(FK,W,gUnreach)		{homematic="address=MEQ0029864, channel=0, parameter=UNREACH"}               
-Switch  FK_Fenster_Pending			"Küche Fenster config pending"				<siren>		(FK,W,gPending)		{homematic="address=MEQ0029864, channel=0, parameter=CONFIG_PENDING"}        
-Switch  FK_Fenster_LowBat			"Küche Fenster Batterie"					<battery> 	(FK,W,gBatterie)	{homematic="address=MEQ0029864, channel=1, parameter=LOWBAT"}
+Contact FK_Fenster_State			"Küche Fenster [MAP(window.map):%s]"		<contact> 	(FK,gFenster)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#STATE" }
+Number  FK_Fenster_RSSI				"Küche Fenster RSSI [%d dBm]"							(FK,W,gRSSI)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#RSSI_DEVICE" }
+Switch  FK_Fenster_Unreach			"Küche Fenster unreachable"					<siren>		(FK,W,gUnreach)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#UNREACH" }               
+Switch  FK_Fenster_Pending			"Küche Fenster config pending"				<siren>		(FK,W,gPending)		{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#CONFIG_PENDING" }        
+Switch  FK_Fenster_LowBat			"Küche Fenster Batterie"					<battery> 	(FK,W,gBatterie)	{ channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#LOWBAT" }
 
-Contact SZ_Fenster_State			"Schlafzimmer Fenster [MAP(window.map):%s]"	<contact> 	(SZ,gFenster)		{homematic="address=LEQ0919429, channel=1, parameter=STATE"}
-Number  SZ_Fenster_RSSI				"Schlafzimmer Fenster RSSI [%d dBm]"					(SZ,W,gRSSI)		{homematic="address=LEQ0919429, channel=0, parameter=RSSI_DEVICE"}
-Switch  SZ_Fenster_Unreach			"Schlafzimmer Fenster unreachable"			<siren>		(SZ,W,gUnreach)		{homematic="address=LEQ0919429, channel=0, parameter=UNREACH"}               
-Switch  SZ_Fenster_Pending			"Schlafzimmer Fenster config pending"		<siren>		(SZ,W,gPending)		{homematic="address=LEQ0919429, channel=0, parameter=CONFIG_PENDING"}        
-Switch  SZ_Fenster_LowBat			"Schlafzimmer Fenster Batterie"				<battery> 	(SZ,W,gBatterie)	{homematic="address=LEQ0919429, channel=1, parameter=LOWBAT"}
-
+Contact SZ_Fenster_State			"Schlafzimmer Fenster [MAP(window.map):%s]"	<contact> 	(SZ,gFenster)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#STATE" }
+Number  SZ_Fenster_RSSI				"Schlafzimmer Fenster RSSI [%d dBm]"					(SZ,W,gRSSI)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#RSSI_DEVICE" }
+Switch  SZ_Fenster_Unreach			"Schlafzimmer Fenster unreachable"			<siren>		(SZ,W,gUnreach)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#UNREACH" }               
+Switch  SZ_Fenster_Pending			"Schlafzimmer Fenster config pending"		<siren>		(SZ,W,gPending)		{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#CONFIG_PENDING" }        
+Switch  SZ_Fenster_LowBat			"Schlafzimmer Fenster Batterie"				<battery> 	(SZ,W,gBatterie)	{ channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#LOWBAT" }
 
 //HM-LC-Sw1PBU-FM Unterputz-Schaltaktor 1-fach
-Switch BD_Deckenlicht				"Bad Deckenlicht"							<switch>	(BD,gLights)		{homematic="address=LEQ0493737, channel=1, parameter=STATE"}
-Number BD_Deckenlicht_RSSI			"Bad Deckenlicht RSSI [%d dBm]"							(BD,W,gRSSI)		{homematic="address=LEQ0493737, channel=0, parameter=RSSI_DEVICE"}
-Switch BD_Deckenlicht_Unreach		"Bad Deckenlicht unreachable"				<siren>		(BD,W,gUnreach)		{homematic="address=LEQ0493737, channel=0, parameter=UNREACH"}               
-Switch BD_Deckenlicht_Pending		"Bad Deckenlicht config pending"			<siren>		(BD,W,gPending)		{homematic="address=LEQ0493737, channel=0, parameter=CONFIG_PENDING"}   
+Switch BD_Deckenlicht				"Bad Deckenlicht"							<switch>	(BD,gLights)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:1#STATE" }
+Number BD_Deckenlicht_RSSI			"Bad Deckenlicht RSSI [%d dBm]"							(BD,W,gRSSI)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#RSSI_DEVICE" }
+Switch BD_Deckenlicht_Unreach		"Bad Deckenlicht unreachable"				<siren>		(BD,W,gUnreach)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#UNREACH" }               
+Switch BD_Deckenlicht_Pending		"Bad Deckenlicht config pending"			<siren>		(BD,W,gPending)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#CONFIG_PENDING" }   
 Number BD_Deckenlicht_Power			"Bad Deckenlicht Leistung [%.0f W]" 		<energy> 	(BD,gPower)
 
-Switch SZ_Deckenlicht				"Schlafzimmer Deckenlicht"					<switch>	(SZ,gLights)		{homematic="address=LEQ1293514, channel=1, parameter=STATE"}
-Number SZ_Deckenlicht_RSSI			"Schlafzimmer Deckenlicht RSSI [%d dBm]"				(SZ,W,gRSSI)		{homematic="address=LEQ1293514, channel=0, parameter=RSSI_DEVICE"}
-Switch SZ_Deckenlicht_Unreach		"Schlafzimmer Deckenlicht unreachable"		<siren>		(SZ,W,gUnreach)		{homematic="address=LEQ1293514, channel=0, parameter=UNREACH"}               
-Switch SZ_Deckenlicht_Pending		"Schlafzimmer Deckenlicht config pending"	<siren>		(SZ,W,gPending)		{homematic="address=LEQ1293514, channel=0, parameter=CONFIG_PENDING"}   
+Switch SZ_Deckenlicht				"Schlafzimmer Deckenlicht"					<switch>	(SZ,gLights)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:1#STATE" }
+Number SZ_Deckenlicht_RSSI			"Schlafzimmer Deckenlicht RSSI [%d dBm]"				(SZ,W,gRSSI)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#RSSI_DEVICE" }
+Switch SZ_Deckenlicht_Unreach		"Schlafzimmer Deckenlicht unreachable"		<siren>		(SZ,W,gUnreach)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#UNREACH" }               
+Switch SZ_Deckenlicht_Pending		"Schlafzimmer Deckenlicht config pending"	<siren>		(SZ,W,gPending)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#CONFIG_PENDING" }   
 Number SZ_Deckenlicht_Power			"Schlafzimmer Deckenlicht Leistung [%.0f W]" <energy> 	(SZ,gPower)
 
-Switch Flur_Deckenlicht				"Flur Deckenlicht"							<switch>	(FK,gLights)		{homematic="address=LEQ1293495, channel=1, parameter=STATE"}
-Number Flur_Deckenlicht_RSSI		"Flur Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{homematic="address=LEQ1293495, channel=0, parameter=RSSI_DEVICE"}
-Switch Flur_Deckenlicht_Unreach		"Flur Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{homematic="address=LEQ1293495, channel=0, parameter=UNREACH"}               
-Switch Flur_Deckenlicht_Pending		"Flur Deckenlicht config pending"			<siren>		(FK,W,gPending)		{homematic="address=LEQ1293495, channel=0, parameter=CONFIG_PENDING"}   
+Switch Flur_Deckenlicht				"Flur Deckenlicht"							<switch>	(FK,gLights)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:1#STATE" }
+Number Flur_Deckenlicht_RSSI		"Flur Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#RSSI_DEVICE" }
+Switch Flur_Deckenlicht_Unreach		"Flur Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#UNREACH" }               
+Switch Flur_Deckenlicht_Pending		"Flur Deckenlicht config pending"			<siren>		(FK,W,gPending)		{ channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#CONFIG_PENDING" }   
 Number Flur_Deckenlicht_Power		"Flur Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK,gPower)
 
 //HM-LC-Sw1-FM Unterputzschalter 1-fach
-Switch Kueche_Deckenlicht			"Küche Deckenlicht"							<switch>	(FK,gLights)		{homematic="address=LEQ0425711, channel=1, parameter=STATE"}
-Number Kueche_Deckenlicht_RSSI		"Küche Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{homematic="address=LEQ0425711, channel=0, parameter=RSSI_DEVICE"}
-Switch Kueche_Deckenlicht_Unreach	"Küche Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{homematic="address=LEQ0425711, channel=0, parameter=UNREACH"}               
-Switch Kueche_Deckenlicht_Pending	"Küche Deckenlicht config pending"			<siren>		(FK,W,gPending)		{homematic="address=LEQ0425711, channel=0, parameter=CONFIG_PENDING"}   
+Switch Kueche_Deckenlicht			"Küche Deckenlicht"							<switch>	(FK,gLights)		{ channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:1#STATE" }
+Number Kueche_Deckenlicht_RSSI		"Küche Deckenlicht RSSI [%d dBm]"						(FK,W,gRSSI)		{ channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#RSSI_DEVICE" }
+Switch Kueche_Deckenlicht_Unreach	"Küche Deckenlicht unreachable"				<siren>		(FK,W,gUnreach)		{ channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#UNREACH" }               
+Switch Kueche_Deckenlicht_Pending	"Küche Deckenlicht config pending"			<siren>		(FK,W,gPending)		{ channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#CONFIG_PENDING" }   
 Number Kueche_Deckenlicht_Power		"Küche Deckenlicht Leistung [%.0f W]" 		<energy> 	(FK,gPower)
 
 //HM-LC-Sw2-FM
-Switch WZ_Lacks_LEDs				"Lacksleuchter LEDs"						<switch>	(WZ,gLights)		{homematic="address=LEQ0883550, channel=1, parameter=STATE"}
-Switch WZ_Lacks_Lampe				"Lacksleuchter Lampe"						<switch>	(WZ,gLights)		{homematic="address=LEQ0883550, channel=2, parameter=STATE"}
-Number WZ_Lacks_RSSI				"Lacksleuchter RSSI [%d dBm]"							(WZ,W,gRSSI)		{homematic="address=LEQ0883550, channel=0, parameter=RSSI_DEVICE"}
-Switch WZ_Lacks_Unreach				"Lacksleuchter unreachable"					<siren>		(WZ,W,gUnreach)		{homematic="address=LEQ0883550, channel=0, parameter=UNREACH"}               
-Switch WZ_Lacks_Pending				"Lacksleuchter config pending"				<siren>		(WZ,W,gPending)		{homematic="address=LEQ0883550, channel=0, parameter=CONFIG_PENDING"}   
+Switch WZ_Lacks_LEDs				"Lacksleuchter LEDs"						<switch>	(WZ,gLights)		{ channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:1#STATE" }
+Switch WZ_Lacks_Lampe				"Lacksleuchter Lampe"						<switch>	(WZ,gLights)		{ channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:2#STATE" }
+Number WZ_Lacks_RSSI				"Lacksleuchter RSSI [%d dBm]"							(WZ,W,gRSSI)		{ channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#RSSI_DEVICE" }
+Switch WZ_Lacks_Unreach				"Lacksleuchter unreachable"					<siren>		(WZ,W,gUnreach)		{ channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#UNREACH" }               
+Switch WZ_Lacks_Pending				"Lacksleuchter config pending"				<siren>		(WZ,W,gPending)		{ channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#CONFIG_PENDING" }   
 Number WZ_Lacks_LEDs_Power			"Lacksleuchter LEDs Leistung [%.0f W]" 		<energy> 	(WZ,gPower)
 Number WZ_Lacks_Lampe_Power			"Lacksleuchter Lampe Leistung [%.0f W]" 	<energy> 	(WZ,gPower)
 
 //HM-MOD-Re-8 8-Kanal-Empfangsmodul
-Switch WZ_rcswitch_Origami			"Origami"									<hue> 		(WZ,gLights)		{homematic="address=LEQ1522328, channel=1, parameter=STATE"}
-Switch rcswitch_K2					"rcswitch Kanal2 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=2, parameter=STATE"}
-Switch WZ_rcswitch_Goldf			"Goldfruchtpalme"							<hue> 		(WZ,gLights)		{homematic="address=LEQ1522328, channel=3, parameter=STATE"}
-Switch FK_rcswitch_Edison			"Edison"									<switch> 	(FK,gLights)		{homematic="address=LEQ1522328, channel=4, parameter=STATE"}
-Switch FK_rcswitch_Arbeit			"Arbeitsbeleuchtung"						<whites> 	(FK,gLights)		{homematic="address=LEQ1522328, channel=5, parameter=STATE"}
-Switch BK_rcswitch_Balkonmagic		"Balkonmagic"								<whites> 	(BK,gLights)		{homematic="address=LEQ1522328, channel=6, parameter=STATE"}
-Switch WZ_rcswitch_Expedit			"Expedit"									<hue>		(WZ,gLights)		{homematic="address=LEQ1522328, channel=7, parameter=STATE"}
-Switch rcswitch_K8					"rcswitch Kanal8 - nicht belegt"			<switch>						{homematic="address=LEQ1522328, channel=8, parameter=STATE"}
-Number rcswitch_RSSI				"rcswitch RSSI [%d dBm]"								(Whg,W,gRSSI)		{homematic="address=LEQ1522328, channel=0, parameter=RSSI_DEVICE"}
-Switch rcswitch_Unreach				"rcswitch unreachable"						<siren>		(Whg,W,gUnreach)	{homematic="address=LEQ1522328, channel=0, parameter=UNREACH"}               
-Switch rcswitch_Pending				"rcswitch config pending"					<siren>		(Whg,W,gPending)	{homematic="address=LEQ1522328, channel=0, parameter=CONFIG_PENDING"}   
+Switch WZ_rcswitch_Origami			"Origami"									<hue> 		(WZ,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:1#STATE" }
+Switch rcswitch_K2					"rcswitch Kanal2 - nicht belegt"			<switch>						{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:2#STATE" }
+Switch WZ_rcswitch_Goldf			"Goldfruchtpalme"							<hue> 		(WZ,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:3#STATE" }
+Switch FK_rcswitch_Edison			"Edison"									<switch> 	(FK,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
+Switch FK_rcswitch_Arbeit			"Arbeitsbeleuchtung"						<whites> 	(FK,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:5#STATE" }
+Switch BK_rcswitch_Balkonmagic		"Balkonmagic"								<whites> 	(BK,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:6#STATE" }
+Switch WZ_rcswitch_Expedit			"Expedit"									<hue>		(WZ,gLights)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }
+Switch rcswitch_K8					"rcswitch Kanal8 - nicht belegt"			<switch>						{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:8#STATE" }
+Number rcswitch_RSSI				"rcswitch RSSI [%d dBm]"								(Whg,W,gRSSI)		{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#RSSI_DEVICE" }
+Switch rcswitch_Unreach				"rcswitch unreachable"						<siren>		(Whg,W,gUnreach)	{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#UNREACH" }               
+Switch rcswitch_Pending				"rcswitch config pending"					<siren>		(Whg,W,gPending)	{ channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#CONFIG_PENDING" }   
 Number WZ_rcswitch_Origami_Power	"Origami Leistung [%.0f W]" 				<energy> 	(WZ,gPower)
 Number WZ_rcswitch_Goldf_Power		"Goldfruchtpalme Leistung [%.0f W]" 		<energy> 	(WZ,gPower)
 Number FK_rcswitch_Edison_Power		"Edison Leistung [%.0f W]" 					<energy> 	(FK,gPower)
@@ -169,70 +168,67 @@ Number WZ_rcswitch_Expedit_Power	"Expedit Leistung [%.0f W]" 				<energy> 	(WZ,g
 // oben:   2
 // unten:  1
 // TODO: keine Batterie?
-Switch FK_Taster_Schrank_1Short		"Küchenschrank Taster 1Kurz"						(FK)					{homematic="address=MEQ0023751, channel=1, parameter=PRESS_SHORT"}
-Switch FK_Taster_Schrank_1Long		"Küchenschrank Taster 1Lang"						(FK)					{homematic="address=MEQ0023751, channel=1, parameter=PRESS_LONG"}
-Switch FK_Taster_Schrank_1LongRel	"Küchenschrank Taster 1LangEnde"					(FK)					{homematic="address=MEQ0023751, channel=1, parameter=PRESS_LONG_RELEASE"}
-Switch FK_Taster_Schrank_2Short		"Küchenschrank Taster 2Kurz"						(FK)					{homematic="address=MEQ0023751, channel=2, parameter=PRESS_SHORT"}
-Switch FK_Taster_Schrank_2Long		"Küchenschrank Taster 2Lang"						(FK)					{homematic="address=MEQ0023751, channel=2, parameter=PRESS_LONG"}
-Switch FK_Taster_Schrank_2LongRel	"Küchenschrank Taster 2LangEnde"					(FK)					{homematic="address=MEQ0023751, channel=2, parameter=PRESS_LONG_RELEASE"}
-Number FK_Taster_Schrank_RSSI		"Küchenschrank Taster RSSI [%d dBm]"				(FK,W,gRSSI)			{homematic="address=MEQ0023751, channel=0, parameter=RSSI_DEVICE"}
-Switch FK_Taster_Schrank_Unreach	"Küchenschrank Taster unreachable"					<siren> (FK,W,gUnreach)	{homematic="address=MEQ0023751, channel=0, parameter=UNREACH"}               
-Switch FK_Taster_Schrank_Pending	"Küchenschrank Taster config pending"				<siren> (FK,W,gPending)	{homematic="address=MEQ0023751, channel=0, parameter=CONFIG_PENDING"}   
+Switch FK_Taster_Schrank_1Short		"Küchenschrank Taster 1Kurz"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_SHORT" }
+Switch FK_Taster_Schrank_1Long		"Küchenschrank Taster 1Lang"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_LONG" }
+Switch FK_Taster_Schrank_1LongRel	"Küchenschrank Taster 1LangEnde"					(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_LONG_RELEASE" }
+Switch FK_Taster_Schrank_2Short		"Küchenschrank Taster 2Kurz"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_SHORT" }
+Switch FK_Taster_Schrank_2Long		"Küchenschrank Taster 2Lang"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_LONG" }
+Switch FK_Taster_Schrank_2LongRel	"Küchenschrank Taster 2LangEnde"					(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_LONG_RELEASE" }
+Number FK_Taster_Schrank_RSSI		"Küchenschrank Taster RSSI [%d dBm]"				(FK,W,gRSSI)			{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#RSSI_DEVICE" }
+Switch FK_Taster_Schrank_Unreach	"Küchenschrank Taster unreachable"					<siren> (FK,W,gUnreach)	{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#UNREACH" }               
+Switch FK_Taster_Schrank_Pending	"Küchenschrank Taster config pending"				<siren> (FK,W,gPending)	{ channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#CONFIG_PENDING" }   
 
-Switch FK_Taster_Fuse_1Short		"Sicherungskasten Taster 1Kurz"						(FK)					{homematic="address=LEQ0570990, channel=1, parameter=PRESS_SHORT"}
-Switch FK_Taster_Fuse_1Long			"Sicherungskasten Taster 1Lang"						(FK)					{homematic="address=LEQ0570990, channel=1, parameter=PRESS_LONG"}
-Switch FK_Taster_Fuse_1LongRel		"Sicherungskasten Taster 1LangEnde"					(FK)					{homematic="address=LEQ0570990, channel=1, parameter=PRESS_LONG_RELEASE"}
-Switch FK_Taster_Fuse_2Short		"Sicherungskasten Taster 2Kurz"						(FK)					{homematic="address=LEQ0570990, channel=2, parameter=PRESS_SHORT"}
-Switch FK_Taster_Fuse_2Long			"Sicherungskasten Taster 2Lang"						(FK)					{homematic="address=LEQ0570990, channel=2, parameter=PRESS_LONG"}
-Switch FK_Taster_Fuse_2LongRel		"Sicherungskasten Taster 2LangEnde"					(FK)					{homematic="address=LEQ0570990, channel=2, parameter=PRESS_LONG_RELEASE"}
-Number FK_Taster_Fuse_RSSI			"Sicherungskasten Taster RSSI [%d dBm]"				(FK,W,gRSSI)			{homematic="address=LEQ0570990, channel=0, parameter=RSSI_DEVICE"}
-Switch FK_Taster_Fuse_Unreach		"Sicherungskasten Taster unreachable"				<siren> (FK,W,gUnreach)	{homematic="address=LEQ0570990, channel=0, parameter=UNREACH"}               
-Switch FK_Taster_Fuse_Pending		"Sicherungskasten Taster config pending"			<siren> (FK,W,gPending)	{homematic="address=LEQ0570990, channel=0, parameter=CONFIG_PENDING"}   
+Switch FK_Taster_Fuse_1Short		"Sicherungskasten Taster 1Kurz"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_SHORT" }
+Switch FK_Taster_Fuse_1Long			"Sicherungskasten Taster 1Lang"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_LONG" }
+Switch FK_Taster_Fuse_1LongRel		"Sicherungskasten Taster 1LangEnde"					(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_LONG_RELEASE" }
+Switch FK_Taster_Fuse_2Short		"Sicherungskasten Taster 2Kurz"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_SHORT" }
+Switch FK_Taster_Fuse_2Long			"Sicherungskasten Taster 2Lang"						(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_LONG" }
+Switch FK_Taster_Fuse_2LongRel		"Sicherungskasten Taster 2LangEnde"					(FK)					{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_LONG_RELEASE" }
+Number FK_Taster_Fuse_RSSI			"Sicherungskasten Taster RSSI [%d dBm]"				(FK,W,gRSSI)			{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#RSSI_DEVICE" }
+Switch FK_Taster_Fuse_Unreach		"Sicherungskasten Taster unreachable"				<siren> (FK,W,gUnreach)	{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#UNREACH" }               
+Switch FK_Taster_Fuse_Pending		"Sicherungskasten Taster config pending"			<siren> (FK,W,gPending)	{ channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#CONFIG_PENDING" }   
 
 //HM-PB-2-FM
-Switch WZ_Taster_1Short				"Wohnzimmer Taster 1Kurz"							(WZ)					{homematic="address=LEQ1332306, channel=1, parameter=PRESS_SHORT"}
-Switch WZ_Taster_1Long				"Wohnzimmer Taster 1Lang"							(WZ)					{homematic="address=LEQ1332306, channel=1, parameter=PRESS_LONG"}
-Switch WZ_Taster_1LongRel			"Wohnzimmer Taster 1LangEnde"						(WZ)					{homematic="address=LEQ1332306, channel=1, parameter=PRESS_LONG_RELEASE"}
-Switch WZ_Taster_2Short				"Wohnzimmer Taster 2Kurz"							(WZ)					{homematic="address=LEQ1332306, channel=2, parameter=PRESS_SHORT"}
-Switch WZ_Taster_2Long				"Wohnzimmer Taster 2Lang"							(WZ)					{homematic="address=LEQ1332306, channel=2, parameter=PRESS_LONG"}
-Switch WZ_Taster_2LongRel			"Wohnzimmer Taster 2LangEnde"						(WZ)					{homematic="address=LEQ1332306, channel=2, parameter=PRESS_LONG_RELEASE"}
-Number WZ_Taster_RSSI				"Wohnzimmer Taster RSSI [%d dBm]"					(WZ,W,gRSSI)			{homematic="address=LEQ1332306, channel=0, parameter=RSSI_DEVICE"}
-Switch WZ_Taster_Unreach			"Wohnzimmer Taster unreachable"						<siren> (WZ,W,gUnreach)	{homematic="address=LEQ1332306, channel=0, parameter=UNREACH"}               
-Switch WZ_Taster_Pending			"Wohnzimmer Taster config pending"					<siren> (WZ,W,gPending)	{homematic="address=LEQ1332306, channel=0, parameter=CONFIG_PENDING"}   
+Switch WZ_Taster_1Short				"Wohnzimmer Taster 1Kurz"							(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_SHORT" }
+Switch WZ_Taster_1Long				"Wohnzimmer Taster 1Lang"							(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_LONG" }
+Switch WZ_Taster_1LongRel			"Wohnzimmer Taster 1LangEnde"						(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_LONG_RELEASE" }
+Switch WZ_Taster_2Short				"Wohnzimmer Taster 2Kurz"							(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_SHORT" }
+Switch WZ_Taster_2Long				"Wohnzimmer Taster 2Lang"							(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_LONG" }
+Switch WZ_Taster_2LongRel			"Wohnzimmer Taster 2LangEnde"						(WZ)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_LONG_RELEASE" }
+Number WZ_Taster_RSSI				"Wohnzimmer Taster RSSI [%d dBm]"					(WZ,W,gRSSI)			{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#RSSI_DEVICE" }
+Switch WZ_Taster_Unreach			"Wohnzimmer Taster unreachable"						<siren> (WZ,W,gUnreach)	{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#UNREACH" }               
+Switch WZ_Taster_Pending			"Wohnzimmer Taster config pending"					<siren> (WZ,W,gPending)	{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#CONFIG_PENDING" }   
 
-Switch FK_Taster_Tokyo_1Short		"Flur Taster Tokyo 1Kurz"							(FK)					{homematic="address=LEQ0396742, channel=1, parameter=PRESS_SHORT"}
-Switch FK_Taster_Tokyo_1Long		"Flur Taster Tokyo 1Lang"							(FK)					{homematic="address=LEQ0396742, channel=1, parameter=PRESS_LONG"}
-Switch FK_Taster_Tokyo_1LongRel		"Flur Taster Tokyo 1LangEnde"						(FK)					{homematic="address=LEQ0396742, channel=1, parameter=PRESS_LONG_RELEASE"}
-Switch FK_Taster_Tokyo_2Short		"Flur Taster Tokyo 2Kurz"							(FK)					{homematic="address=LEQ0396742, channel=2, parameter=PRESS_SHORT"}
-Switch FK_Taster_Tokyo_2Long		"Flur Taster Tokyo 2Lang"							(FK)					{homematic="address=LEQ0396742, channel=2, parameter=PRESS_LONG"}
-Switch FK_Taster_Tokyo_2LongRel		"Flur Taster Tokyo 2LangEnde"						(FK)					{homematic="address=LEQ0396742, channel=2, parameter=PRESS_LONG_RELEASE"}
-Number FK_Taster_Tokyo_RSSI			"Flur Taster Tokyo RSSI [%d dBm]"					(FK,W,gRSSI)			{homematic="address=LEQ0396742, channel=0, parameter=RSSI_DEVICE"}
-Switch FK_Taster_Tokyo_Unreach		"Flur Taster Tokyo unreachable"						<siren> (FK,W,gUnreach)	{homematic="address=LEQ0396742, channel=0, parameter=UNREACH"}               
-Switch FK_Taster_Tokyo_Pending		"Flur Taster Tokyo config pending"					<siren> (FK,W,gPending)	{homematic="address=LEQ0396742, channel=0, parameter=CONFIG_PENDING"}
-
+Switch FK_Taster_Tokyo_1Short		"Flur Taster Tokyo 1Kurz"							(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_SHORT" }
+Switch FK_Taster_Tokyo_1Long		"Flur Taster Tokyo 1Lang"							(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_LONG" }
+Switch FK_Taster_Tokyo_1LongRel		"Flur Taster Tokyo 1LangEnde"						(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_LONG_RELEASE" }
+Switch FK_Taster_Tokyo_2Short		"Flur Taster Tokyo 2Kurz"							(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_SHORT" }
+Switch FK_Taster_Tokyo_2Long		"Flur Taster Tokyo 2Lang"							(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_LONG" }
+Switch FK_Taster_Tokyo_2LongRel		"Flur Taster Tokyo 2LangEnde"						(FK)					{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_LONG_RELEASE" }
+Number FK_Taster_Tokyo_RSSI			"Flur Taster Tokyo RSSI [%d dBm]"					(FK,W,gRSSI)			{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#RSSI_DEVICE" }
+Switch FK_Taster_Tokyo_Unreach		"Flur Taster Tokyo unreachable"						<siren> (FK,W,gUnreach)	{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#UNREACH" }               
+Switch FK_Taster_Tokyo_Pending		"Flur Taster Tokyo config pending"					<siren> (FK,W,gPending)	{ channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#CONFIG_PENDING" }
 
 //HM-RC-8 Fernbedienung 8 Tasten
-Switch Fernbedienung_Taste1			"Fernbedienung_Taste1"								(Whg)					{homematic="address=LEQ0790268, channel=1, parameter=PRESS_SHORT"}
-Switch Fernbedienung_Taste2			"Fernbedienung_Taste2"								(Whg)					{homematic="address=LEQ0790268, channel=2, parameter=PRESS_SHORT"}
-Switch Fernbedienung_Taste3			"Fernbedienung_Taste3"								(Whg)					{homematic="address=LEQ0790268, channel=3, parameter=PRESS_SHORT"}
-Number Fernbedienung_RSSI			"Fernbedienung RSSI [%d dBm]"						(Whg,W,gRSSI)			{homematic="address=LEQ0790268, channel=0, parameter=RSSI_DEVICE"}
-Switch Fernbedienung_Unreach		"Fernbedienung unreachable"							<siren> (Whg,W,gUnreach) {homematic="address=LEQ0790268, channel=0, parameter=UNREACH"}               
-Switch Fernbedienung_Pending		"Fernbedienung config pending"						<siren> (Whg,W,gPending) {homematic="address=LEQ0790268, channel=0, parameter=CONFIG_PENDING"}   
-
+Switch Fernbedienung_Taste1			"Fernbedienung_Taste1"								(Whg)					{ channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:1#PRESS_SHORT" }
+Switch Fernbedienung_Taste2			"Fernbedienung_Taste2"								(Whg)					{ channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:2#PRESS_SHORT" }
+Switch Fernbedienung_Taste3			"Fernbedienung_Taste3"								(Whg)					{ channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:3#PRESS_SHORT" }
+Number Fernbedienung_RSSI			"Fernbedienung RSSI [%d dBm]"						(Whg,W,gRSSI)			{ channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#RSSI_DEVICE" }
+Switch Fernbedienung_Unreach		"Fernbedienung unreachable"							<siren> (Whg,W,gUnreach) { channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#UNREACH" }               
+Switch Fernbedienung_Pending		"Fernbedienung config pending"						<siren> (Whg,W,gPending) { channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#CONFIG_PENDING" }   
 
 //HM-RC-Sec4-2 Fernbedienung Schlüsselanhänger
-Switch Keychain_Tast1			"Schlüsselanhänger Taste extern scharf"					(Whg)					{homematic="address=LEQ0496553, channel=1, parameter=PRESS_SHORT"}
-Switch Keychain_Tast2			"Schlüsselanhänger Taste intern unscharf"				(Whg)					{homematic="address=LEQ0496553, channel=2, parameter=PRESS_SHORT"}
-Switch Keychain_Tast3			"Schlüsselanhänger Taste unscharf"						(Whg)					{homematic="address=LEQ0496553, channel=3, parameter=PRESS_SHORT"}
-Switch Keychain_Tast4			"Schlüsselanhänger Taste Licht"							(Whg)					{homematic="address=LEQ0496553, channel=4, parameter=PRESS_SHORT"}
-Number Keychain_RSSI			"Schlüsselanhänger RSSI [%d dBm]"						(Whg,W,gRSSI)			{homematic="address=LEQ0496553, channel=0, parameter=RSSI_DEVICE"}
-Switch Keychain_Unreach			"Schlüsselanhänger unreachable"							<siren> (Whg,W,gUnreach) {homematic="address=LEQ0496553, channel=0, parameter=UNREACH"}               
-Switch Keychain_Pending			"Schlüsselanhänger config pending"						<siren> (Whg,W,gPending) {homematic="address=LEQ0496553, channel=0, parameter=CONFIG_PENDING"}   
+Switch Keychain_Tast1			"Schlüsselanhänger Taste extern scharf"					(Whg)					{ channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:1#PRESS_SHORT" }
+Switch Keychain_Tast2			"Schlüsselanhänger Taste intern unscharf"				(Whg)					{ channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:2#PRESS_SHORT" }
+Switch Keychain_Tast3			"Schlüsselanhänger Taste unscharf"						(Whg)					{ channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:3#PRESS_SHORT" }
+Switch Keychain_Tast4			"Schlüsselanhänger Taste Licht"							(Whg)					{ channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:4#PRESS_SHORT" }
+Number Keychain_RSSI			"Schlüsselanhänger RSSI [%d dBm]"						(Whg,W,gRSSI)			{ channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:0#RSSI_DEVICE" }
+Switch Keychain_Unreach			"Schlüsselanhänger unreachable"							<siren> (Whg,W,gUnreach) { channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:0#UNREACH" }
+Switch Keychain_Pending			"Schlüsselanhänger config pending"						<siren> (Whg,W,gPending) { channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:0#CONFIG_PENDING" }
 
 
 //Datapoints neu laden
-Switch Reload_Datapoints		"Reload Datapoints"										(Whg)					{homematic="action=RELOAD_DATAPOINTS"}
-Switch Reload_RSSI				"Reload all RSSI values"								(Whg,gRSSI)				{homematic="action=RELOAD_RSSI"}
+//Switch Reload_Datapoints		"Reload Datapoints"										(Whg)					{ channel=homematic:GATEWAY-EXTRAS-HOMEGEAR:ccu:GWE00000000:0#RELOAD_ALL_FROM_GATEWAY}
 
 
 

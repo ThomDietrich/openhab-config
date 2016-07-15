@@ -1,10 +1,12 @@
-import org.openhab.core.library.types.DateTimeType
-  
+
+
 rule "Speedtest init"
 when
 	System started
 then {
-	if (SpeedtestSummary.state == Uninitialized || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
+	if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
+	if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
+	if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
 }
 end
 
