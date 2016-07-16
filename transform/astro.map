@@ -1,32 +1,32 @@
 //
-Aries=♈ Widder
-Taurus=♉ Stier
-Gemini=♊ Zwilling
-Cancer=♋ Krebs
-Leo=♌ Löwe
-Virgo=♍ Jungfrau
-Libra=♎ Waage
-Scorpio=♏ Skorpion
-Sagittarius=♐ Schütze
-Capricorn=♑ Steinbock
-Aquarius=♒ Wassermann
-Pisces=♓ Fisch
+ARIES=♈ Widder
+TAURUS=♉ Stier
+GEMINI=♊ Zwilling
+CANCER=♋ Krebs
+LEO=♌ Löwe
+VIRGO=♍ Jungfrau
+LIBRA=♎ Waage
+SCORPIO=♏ Skorpion
+SAGITTARIUS=♐ Schütze
+CAPRICORN=♑ Steinbock
+AQUARIUS=♒ Wassermann
+PISCES=♓ Fisch
 
 //
-Spring=Frühling
-Summer=Sommer
-Autumn=Herbst
-Winter=Winter
+SPRING=Frühling
+SUMMER=Sommer
+AUTUMN=Herbst
+WINTER=Winter
 
 //
-New=🌑 Neumond
-Waxing\u0020Crescent=zunehmender Halbmond
-First\u0020Quarter=🌓 erstes Viertel
-Waxing\u0020Gibbous=zunehmender Mond
-Full=🌕 Vollmond
-Waning\u0020Gibbous=abnehmender Mond
-Third\u0020Quarter=🌗 letztes Viertel
-Waning\u0020Crescent=abnehmender Halbmond
+NEW=🌑 Neumond
+WAXING_CRESCENT=🌑→🌓 zunehmender Halbmond
+FIRST_QUARTER=🌓 erstes Viertel
+WAXING_GIBBOUS=🌓→🌕 zunehmender Mond
+FULL=🌕 Vollmond
+WANING_GIBBOUS=🌕→🌗 abnehmender Mond
+THIRD_QUARTER=🌗 letztes Viertel
+WANING_CRESCENT=🌗→🌑 abnehmender Halbmond
 
 //
 -=-Fehler bei der Initialisierung-

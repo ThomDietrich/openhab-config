@@ -1,17 +1,16 @@
 sitemap w66a label="W66a openHAB Installation"
 {
 	Frame {
-		Text item=CurrDateTime label="Wetter- und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
+		Text item=CurrDateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
 			Frame label="Jetzt" {
-				Text item=SunriseSunset
-				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
 				Text item=SunriseTime icon="Sunrise-icon" visibility=[NightState == ON]
 				Text item=SunsetTime icon="Sunset-icon" visibility=[NightState == OFF]
-				Text item=SunElevation icon="sunmoon" visibility=[SunElevation>0]
-				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation>0]
+				Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
+				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
 			}
 			Frame label="Mondphase"{			
 				Text item=MoonPhaseName
+				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
 				Text item=MoonFull icon="full-moon"
 				Text item=Zodiac icon="zodiac-icon"
 			}
@@ -19,9 +18,9 @@ sitemap w66a label="W66a openHAB Installation"
 				Text label="kommt später..." icon="sun_clouds"
 			}
 		}
-		Text item=PresenceThN5 label="Anwesenheit ThN5 [MAP(presence.map):%s]"
-		Text item=PresenceThN9 label="Anwesenheit ThN9 [MAP(presence.map):%s]"
+		Text item=PresenceThN5 label="Handy ThN5 [MAP(presence.map):%s]"
 		Text item=PresencePC label="PC [MAP(active.map):%s]"
+		Text item=PresenceThN9 label="Tablet ThN9 [MAP(presence.map):%s]"
 		Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
 			Frame {
 				Default item=SonosController
@@ -40,10 +39,14 @@ sitemap w66a label="W66a openHAB Installation"
 				Text item=KodiTitle visibility=[KodiTitle != ""]
 			}
 			Frame label="Steuerung" {
+				Switch item=KodiPlayPause label="Play" icon="play" mappings=[ON="Play"] visibility=[KodiPlayerState=="Pause"]
+				Switch item=KodiPlayPause label="Pause" icon="pause" mappings=[ON="Pause"] visibility=[KodiPlayerState=="Play"]
+				Switch item=KodiStop label="Stop" mappings=[ON="Stop"] visibility=[KodiPlayerState=="Play", KodiPlayerState=="Pause"]
 				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
-				Text label="Show Notification on TV:"
+			}
+			Frame label="Einblendung" {
 				Switch item=KodiNotificationId icon="" label="" mappings=[1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P"]
-				Switch item=KodiNotificationId icon="" label="" mappings=[4="Lalaalaaaaa :-S", 5="Banana :)", 6="Call me >:O"]
+				Switch item=KodiNotificationId icon="" label="" mappings=[4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
 			}
 		}
 		Text item=SpeedtestSummary {

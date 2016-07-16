@@ -1,0 +1,1 @@
+Thing	ntp:ntp:de  [ hostname="de.pool.ntp.org", refreshInterval=60, refreshNtp=300, locale=de ]
