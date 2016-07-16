@@ -4,16 +4,13 @@ rule "OpenHAB system started - astro"
 when
 	System started
 then {
-	logInfo("RULE", "--> openHAB system started astro rule... waiting 20s")	
 	// delayed startup because the rules engine starts to early...
-	createTimer(now.plusSeconds(20)) [|
-		logInfo("RULE", "--> openHAB system started +20s rule")
-		var DateTimeType sunrise = new DateTimeType(getAstroSunriseStart(now.toDate, 50.689, 10.926))
-		var DateTimeType sunset = new DateTimeType(getAstroSunsetStart(now.toDate, 50.689, 10.926))
-		SunriseTime.postUpdate(sunrise)
-		SunsetTime.postUpdate(sunset)
-		//TODO fails
-		if (now.isAfter(sunset.calendar.timeInMillis) || now.isBefore(sunrise.calendar.timeInMillis)) {
+	createTimer(now.plusSeconds(8)) [|
+		logInfo("RULE", "--> astro init")
+		AstroRules.
+		if (now.isAfter((SunsetTime.state as DateTimeType).calendar.timeInMillis) ||
+			now.isBefore((SunriseTime.state as DateTimeType).calendar.timeInMillis)
+		) {
 			logInfo("RULE", "--> Night_State ON")
 			postUpdate(NightState, ON)
 		} else {
@@ -25,18 +22,6 @@ then {
 end
 
 
-rule "Sunrise/Sunset changed"
-when
-	Item Sunrise_Time changed
-	or Item Sunset_Time changed
-then
-	logInfo("RULE", "--> SunriseSunset changed")
-	var DateTime sunrise = new DateTime((SunriseTime.state as DateTimeType).calendar.timeInMillis)
-	var DateTime sunset = new DateTime((SunsetTime.state as DateTimeType).calendar.timeInMillis)
-	SunriseSunset.postUpdate(String::format("🌅 %02d:%02d   🌇 %02d:%02d", sunrise.getHourOfDay(), sunrise.getMinuteOfHour(), sunset.getHourOfDay(), sunset.getMinuteOfHour()))
-end
-
-
 rule "Night_State update"
 when
 	Item Sunset_Event changed to OFF or
@@ -45,8 +30,6 @@ then
 	logInfo("RULE", "--> Night_State set to " + previousState)
 	postUpdate(NightState, previousState)
 end
-
-
 
 
 

@@ -2,26 +2,25 @@
 Group Astro <sun_clouds> (Whg)
 
 // Datum, Uhrzeit und Astro-Daten
-//DateTime	CurrDateTime		"Heute [%1$tA, %1$td.%1$tm.%1$tY]" 					<clock>		(Astro)	{ntp="Europe/Berlin:de_DE"} 
-String		SeasonName			"Jahreszeit [MAP(astro.map):%s]"								(Astro)	{channel="astro:sun:home:season#name"}
+DateTime	CurrDateTime		"Heute [%1$tA, %1$td.%1$tm.%1$tY]" 					<clock>		(Astro)	{ channel="ntp:ntp:de:dateTime" }
+String		SeasonName			"Jahreszeit [MAP(astro.map):%s]"								(Astro)	{ channel="astro:sun:home:season#name" }
 //
-DateTime	SunsetTime			"Sonnenuntergang [%1$tH:%1$tM Uhr]"     			<sun>		(Astro)	{channel="astro:sun:home:set#start"}
-Switch		SunsetEvent			"Sonnenuntergang Event"    							<sun>		(Astro)	{channel="astro:sun:home:set#start"}
-DateTime	NightStartTime		"Nacht Beginn [%1$tH:%1$tM Uhr]"	    			<moon>		(Astro)	{channel="astro:sun:home:night#start"}
-Switch		NightStartEvent		"Nacht Beginn Event"			    				<moon>		(Astro)	{channel="astro:sun:home:night#start"}
-DateTime	NightEndTime		"Nacht Ende [%1$tH:%1$tM Uhr]"		    			<moon>		(Astro)	{channel="astro:sun:home:night#end"}
-Switch		NightEndEvent		"Nacht Ende Event"					    			<moon>		(Astro)	{channel="astro:sun:home:night#end"}
-DateTime	SunriseTime			"Sonnenaufgang [%1$tH:%1$tM Uhr]"    				<sun>		(Astro)	{channel="astro:sun:home:rise#end"}
-Switch		SunriseEvent		"Sonnenaufgang Event"    							<sun>		(Astro)	{channel="astro:sun:home:rise#end"}
+DateTime	SunsetTime			"Sonnenuntergang [%1$tH:%1$tM Uhr]"     			<sun>		(Astro)	{ channel="astro:sun:home:set#start" }
+Switch		SunsetEvent			"Sonnenuntergang Event"    							<sun>		(Astro)	{ channel="astro:sun:home:set#start" }
+DateTime	NightStartTime		"Nacht Beginn [%1$tH:%1$tM Uhr]"	    			<moon>		(Astro)	{ channel="astro:sun:home:night#start" }
+Switch		NightStartEvent		"Nacht Beginn Event"			    				<moon>		(Astro)	{ channel="astro:sun:home:night#start" }
+DateTime	NightEndTime		"Nacht Ende [%1$tH:%1$tM Uhr]"		    			<moon>		(Astro)	{ channel="astro:sun:home:night#end" }
+Switch		NightEndEvent		"Nacht Ende Event"					    			<moon>		(Astro)	{ channel="astro:sun:home:night#end" }
+DateTime	SunriseTime			"Sonnenaufgang [%1$tH:%1$tM Uhr]"    				<sun>		(Astro)	{ channel="astro:sun:home:rise#end" }
+Switch		SunriseEvent		"Sonnenaufgang Event"    							<sun>		(Astro)	{ channel="astro:sun:home:rise#end" }
 //
-String		SunriseSunset		"Sonnenauf-&-untergang [%s]"						<sun>		(Astro)	
 Switch		NightState			"Nacht"															(Astro)
 //
-Number		SunElevation		"Sonnenhöhe [%.1f °]" 								<sun>		(Astro)	{channel="astro:sun:home:position#elevation"}
-String		Zodiac				"Tierkreiszeichen [MAP(astro.map):%s]"				<sun>		(Astro)	{channel="astro:sun:home:zodiac#sign"}
-Number		MoonElevation		"Mondhöhe [%.1f °]" 								<moon>		(Astro)	{channel="astro:moon:home:position#elevation"}
-String		MoonPhaseName		"Mondphase [MAP(astro.map):%s]"						<moon>		(Astro)	{channel="astro:moon:home:phase#name"}
-DateTime	MoonFull			"Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon>	(Astro)	{channel="astro:moon:home:phase#full"}
+Number		SunElevation		"Sonnenhöhe [%.1f °]" 								<sun>		(Astro)	{ channel="astro:sun:home:position#elevation" }
+String		Zodiac				"Tierkreiszeichen [MAP(astro.map):%s]"				<sun>		(Astro)	{ channel="astro:sun:home:zodiac#sign" } 
+Number		MoonElevation		"Mondhöhe [%.1f °]" 								<moon>		(Astro)	{ channel="astro:moon:home:position#elevation" }
+String		MoonPhaseName		"Mondphase [MAP(astro.map):%s]"						<moon>		(Astro)	{ channel="astro:moon:home:phase#name" }
+DateTime	MoonFull			"Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon>	(Astro)	{ channel="astro:moon:home:phase#full" }
 
 /* EXAMPLE
  * https://community.openhab.org/t/explanation-of-eveningnight-and-morningnight/2194
