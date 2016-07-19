@@ -3,16 +3,16 @@ sitemap w66a label="W66a openHAB Installation"
 	Frame {
 		Text item=CurrDateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
 			Frame label="Jetzt" {
-				Text item=SunriseTime icon="Sunrise-icon" visibility=[NightState == ON]
-				Text item=SunsetTime icon="Sunset-icon" visibility=[NightState == OFF]
+				Text item=SunriseTime icon="sunrise" visibility=[NightState == ON]
+				Text item=SunsetTime icon="sunset" visibility=[NightState == OFF]
 				Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
 				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
 			}
 			Frame label="Mondphase"{			
 				Text item=MoonPhaseName
 				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
-				Text item=MoonFull icon="full-moon"
-				Text item=Zodiac icon="zodiac-icon"
+				Text item=MoonFull icon="fullmoon"
+				Text item=Zodiac icon="zodiac"
 			}
 			Frame label="Wettervorhersage"{
 				Text label="kommt später..." icon="sun_clouds"
@@ -174,7 +174,7 @@ sitemap w66a label="W66a openHAB Installation"
 	}
 	
 	Frame label="Stromverbrauch" {
-		Text item=FK_Kuehlschrank_Power icon="cat-fridge" {
+		Text item=FK_Kuehlschrank_Power icon="catfridge" {
 			Frame label="Blaa" {
 				Text item=FK_Kuehlschrank_Voltage
 				Text item=FK_Kuehlschrank_Current
