@@ -10,7 +10,7 @@ Group 	WZ		"Wohnzimmer"			<video>			(Whg)
 Group 	BK		"Balkon"				<garden>		(Whg)
 
 // Sondergruppen
-Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<"light-bulb-icon1">(Whg)
+Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<light>				(Whg)
 Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 			(Whg)
 Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>			(Whg)
 Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>			(Whg)
@@ -26,8 +26,7 @@ Group	gInitNone "Initialisierung mit (-1)"	(Whg)
 
 Number 		Whg_Light_Preset		"Wohnung Beleuchtung Schnellauswahl"		<switch>	(Whg)
 
-Switch		PresenceThN5			"Anwesenheit ThN5"							<present>	(Whg)   { channel="network:device:ThN5:online" }
-Number		PresenceThN5Time		"Anwesenheit ThN5 seit [%d min]"			<present>	(Whg)   { channel="network:device:ThN5:time" }
+Switch		PresenceThN5			"Anwesenheit ThN5"							<like>		(Whg)   { channel="network:device:ThN5:online" }
 Switch		PresenceThN9			"Anwesenheit ThN9"							<present>	(Whg)   { channel="network:device:ThN9:online" }
 Switch		PresencePC				"Zustand PC"								<present>	(Whg)   { channel="network:device:BirkePC:online" }
 
@@ -40,3 +39,9 @@ DateTime	Wohnungstuer_TimerEnd			"Wohnungstür Timer [%1$tH:%1$tM Uhr]"			(Whg)
 Number		Wohnungstuer_TimerDuration		"Wohnungstür Timer Restzeit [%d min]"			(Whg)
 
 Switch		RuleWhgDoorNotif		"Wohnungstür Benachr."									(Whg)
+
+//Wschmaschine:
+// - >  10 W: Wäsche aktiv
+// - <   2 W: fertig
+// - < 0,5 W: aus
+Number		BD_Waschmaschine_OpState		"Betriebszustand Waschmaschine [%d ]"			(Whg)

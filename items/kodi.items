@@ -1,8 +1,8 @@
 
 Group 	gKodi	"Kodi Mediacenter"	<kodi> (Whg)
 
-Switch KodiSystemState		"Kodi State"  				(gKodi)	{xbmc="<[#livingRoom|System.State]"}
-String KodiPlayerState		"Player State [%s]"			(gKodi)	{xbmc="<[#livingRoom|Player.State]"}
+Switch KodiSystemState		"Kodi State"  				<kodi>	(gKodi)	{xbmc="<[#livingRoom|System.State]"}
+String KodiPlayerState		"Player State [%s]"			<like>	(gKodi)	{xbmc="<[#livingRoom|Player.State]"}
 Switch KodiPlayPause		"Play/Pause"				(gKodi)	{xbmc=">[#livingRoom|Player.PlayPause]", autoupdate="false"}
 Switch KodiStop				"Stop"						(gKodi)	{xbmc=">[#livingRoom|Player.Stop]", autoupdate="false"}
 String KodiTitle			"Episode/Movie Title [%s]"	(gKodi)	{xbmc="<[#livingRoom|Player.Title]"}

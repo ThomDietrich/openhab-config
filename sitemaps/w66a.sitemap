@@ -33,16 +33,15 @@ sitemap w66a label="W66a openHAB Installation"
 		}
 		Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
 			Frame label="Status" {
-				Switch item=KodiSystemState
-				Text item=KodiPlayerState
-				Text item=KodiTitleShow visibility=[KodiTitleShow != ""]
-				Text item=KodiTitle visibility=[KodiTitle != ""]
+				Text item=KodiSystemState label="Kodi [MAP(active.map):%s]" 
+				Text item=KodiPlayerState label="Player [%s]"
+				Text item=KodiTitleShow label="Serientitel [%s]" visibility=[KodiTitleShow != ""]
+				Text item=KodiTitle label="Episodentitel [%s]" visibility=[KodiTitleShow != ""]
+				Text item=KodiTitle label="Titel [%s]" visibility=[KodiTitleShow == ""]
 			}
 			Frame label="Steuerung" {
-				Switch item=KodiPlayPause label="Play" icon="play" mappings=[ON="Play"] visibility=[KodiPlayerState=="Pause"]
-				Switch item=KodiPlayPause label="Pause" icon="pause" mappings=[ON="Pause"] visibility=[KodiPlayerState=="Play"]
-				Switch item=KodiStop label="Stop" mappings=[ON="Stop"] visibility=[KodiPlayerState=="Play", KodiPlayerState=="Pause"]
 				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
+				Switch item=KodiStop label="Stop" mappings=[ON="Stop"] visibility=[KodiPlayerState != "Stop"]
 			}
 			Frame label="Einblendung" {
 				Switch item=KodiNotificationId icon="" label="" mappings=[1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P"]
@@ -62,12 +61,12 @@ sitemap w66a label="W66a openHAB Installation"
 				Switch item=SpeedtestRerun mappings=[ON="Start"]
 			}
 			Frame label="Statistik" {				
-				Text label="..." icon="analytics-8-icon"
+				Text label="..." icon="speedtest_analytics8"
 			}
 		}
 	}
 	Frame label="Beleuchtung" {
-		Switch item=Whg_Light_Preset icon="home-icon" label="." mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
+		Switch item=Whg_Light_Preset icon="light" label="" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
 		Text item=gLights
 		Switch item=BK_rcswitch_Balkonmagic
 		Switch item=WZ_Lacks_LEDs
@@ -82,12 +81,11 @@ sitemap w66a label="W66a openHAB Installation"
 		Switch item=Flur_Deckenlicht
 		Switch item=SZ_Deckenlicht
 		Switch item=BD_Deckenlicht
-		//Text item=BD_Deckenlicht_TimerEnd visibility=[BD_Deckenlicht_TimerActive == ON]
 		Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
 	}
 	
 	Frame label="Temperaturen und Heizung" {
-		Switch item=WhgHeatState label="Modus" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
+		Switch item=WhgHeatState label="" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
 		
 		Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
 			Frame label="Temperatur" {
@@ -146,31 +144,6 @@ sitemap w66a label="W66a openHAB Installation"
 		}
 		
 		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
-		//Text label="Heizungs-Grafiken" icon="chart" {
-			//Switch item=rrd_Chart_Period label="Zeitraum..." mappings=[0="4 Std.", 1="Tag", 2="3 Tage", 3="Woche", 4="2 Wochen", 5="Monat"]
-			//Text label="Ist-Temperatur (°C)" icon="line"
-    		/*Chart item=Temperatur label="Ist-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
-    		Chart item=Temperatur label="Ist-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
-    		Chart item=Temperatur label="Ist-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
-			Chart item=Temperatur label="Ist-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
-			Chart item=Temperatur label="Ist-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
-			Chart item=Temperatur label="Ist-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
-			/*Text label="Soll-Temperatur (°C)" icon="line"
-    		Chart item=Tsoll_graph label="Soll-Temperatur" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
-    		Chart item=Tsoll_graph label="Soll-Temperatur" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
-    		Chart item=Tsoll_graph label="Soll-Temperatur" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
-			Chart item=Tsoll_graph label="Soll-Temperatur" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
-			Chart item=Tsoll_graph label="Soll-Temperatur" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
-			Chart item=Tsoll_graph label="Soll-Temperatur" period=M refresh=3600 visibility=[rrd_Chart_Period==5]
-			Text label="Ventilöffnung (%)" icon="line"
-			Chart item=Valve_graph label="Ventil-Öffnung" period=4h refresh=900 visibility=[rrd_Chart_Period==0, rrd_Chart_Period=="Uninitialized"]
-    		Chart item=Valve_graph label="Ventil-Öffnung" period=D refresh=1800 visibility=[rrd_Chart_Period==1]  
-    		Chart item=Valve_graph label="Ventil-Öffnung" period=3D refresh=1800 visibility=[rrd_Chart_Period==2]  
-			Chart item=Valve_graph label="Ventil-Öffnung" period=W refresh=3600 visibility=[rrd_Chart_Period==3]
-			Chart item=Valve_graph label="Ventil-Öffnung" period=2W refresh=3600 visibility=[rrd_Chart_Period==4]
-			Chart item=Valve_graph label="Ventil-Öffnung" period=M refresh=3600 visibility=[rrd_Chart_Period==5]*/
-			//Text label="kommt später..."
-		//}
 	}
 	
 	Frame label="Stromverbrauch" {

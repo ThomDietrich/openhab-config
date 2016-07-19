@@ -4,7 +4,7 @@ Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
 	Thing	HG-HM-CC-RT-DN		LEQ0785556
 	Thing	HG-HM-CC-RT-DN		LEQ0851363
 	Thing	HG-HM-CC-RT-DN		LEQ0857855
-	
+	        
 	Thing	HG-HM-ES-PMSw1-Pl	LEQ1275872
 	Thing	HG-HM-ES-PMSw1-Pl	LEQ1275907
 	Thing	HG-HM-ES-PMSw1-Pl	LEQ1275865
@@ -27,6 +27,6 @@ Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
 	Thing	HG-HM-RC-8			LEQ0790268
 	Thing	HG-HM-RC-Sec4-2		LEQ0496553
 	
-	Thing GATEWAY-EXTRAS-HOMEGEAR GWE00000000
 	Thing GATEWAY-EXTRAS-CCU GWE00000000
+	Thing GATEWAY-EXTRAS-HOMEGEAR GWE00000000
 }

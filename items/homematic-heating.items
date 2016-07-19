@@ -10,14 +10,14 @@ Group			 				gHeatMode		"Raumtemperaturen Mode [%.1f °C]" 							<temperature>	
  *  1. Abwesend/Urlaubs-Betrieb
  *  2. Dauerfeuer-Betrieb
  */
-Number WhgHeatState "Wohnung Heizmodus [%d]" (Whg)
+Number WhgHeatState "Wohnung Heizmodus [%d]" <heating> (Whg)
 
 // Die Modus Variablen können sich im Integer Bereich zwischen verschiedenen Zuständen bewegen.
 // Bedeutung *_Heizung_Mode bzw. *_Heizung_SetMode 
 //  0:       Automatik           Automatik
 //  1:       Manuell             Manuell
 //  2:       Urlaub              (nicht genutzt)
-//  3:       Boost               Boost
+//  3:       Boost               Boost  
 //  4:       (nicht belegt)      Fenster Absenkung
 
 //HM-CC-RT-DN Heizkörperthermostat
