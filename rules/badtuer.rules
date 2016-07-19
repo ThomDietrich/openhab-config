@@ -3,14 +3,16 @@ import org.joda.time.*
 // Timer für das automatische Ausschalten
 var Timer badlicht_timer = null
 var Integer badlicht_timer_minutes = 30
-var String rulename = "--> Badtür-Automatik: "
+var String rulename = "--> Badtür-Automatik: " 
 
 
 rule "Badtür-Automatik: Init"
 when
 	System started
 then {
-	if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
+	createTimer(now.plusSeconds(180)) [|
+		if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
+	]
 }
 end
 
@@ -33,7 +35,7 @@ rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
 when
   	Item BD_Tuer_State changed from CLOSED to OPEN
 then {
-	//logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
 	if (NightState.state == ON) {
 		if (BD_Deckenlicht.state == OFF) {
 			sendCommand(BD_Deckenlicht, ON)

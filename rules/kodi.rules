@@ -3,11 +3,13 @@ rule "Kodi init"
 when
 	System started
 then {
-	//if (KodiTitleShow.state == NULL) KodiTitleShow.postUpdate("")
-	//if (KodiTitle.state == NULL) KodiTitle.postUpdate("")
-	//if (KodiPlayerState.state == NULL) KodiPlayerState.postUpdate("Stop")
-	if (KodiSystemState.state == NULL) KodiSystemState.postUpdate(OFF)
-	if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("⁉ (unbekannt)")
+	createTimer(now.plusSeconds(175)) [|
+		//if (KodiTitleShow.state == NULL) KodiTitleShow.postUpdate("")
+		//if (KodiTitle.state == NULL) KodiTitle.postUpdate("")
+		//if (KodiPlayerState.state == NULL) KodiPlayerState.postUpdate("Stop")
+		if (KodiSystemState.state == NULL) KodiSystemState.postUpdate(OFF)
+		if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("⁉ (unbekannt)")
+	]
 }
 end
 
@@ -15,17 +17,16 @@ rule "Kodi Summary update"
 when
 	Item KodiSystemState changed or 
 	Item KodiPlayerState changed or 
-	Item KodiTitleShow changed or 
 	Item KodiTitle changed
 then {
-	//logInfo("RULE", "Kodi update")
+	logInfo("RULE", "--> Kodi Summary update")
 	val status = if (KodiPlayerState.state == "Play") "⏯" else if (KodiPlayerState.state == "Pause") "⏸" else "⏹"
 	val title = (KodiTitle.state as StringType).toString
 	val show = (KodiTitleShow.state as StringType).toString
 	
-	var String summary
-	if (KodiSystemState.state == OFF) summary = "✖ (nicht aktiv)"
-	else if (KodiPlayerState.state == "Stop") summary = String::format("%s (inaktiv)", status, title)
+	var summary = ""
+	if (KodiSystemState.state == OFF) summary = "✖  nicht aktiv"
+	else if (KodiPlayerState.state == "Stop") summary = "⏹ inaktiv"
 	else if (KodiTitleShow.state == "") summary = String::format("%s %s", status, title)
 	else summary = String::format("%s %s: %s", status, show, title)
 	

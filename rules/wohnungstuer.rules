@@ -8,7 +8,9 @@ rule "Wohnungstür-Automatik: Init"
 when
 	System started
 then {
-	if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
+	createTimer(now.plusSeconds(175)) [|
+		if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
+	]
 }
 end
 

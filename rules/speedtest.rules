@@ -4,9 +4,11 @@ rule "Speedtest init"
 when
 	System started
 then {
-	if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
-	if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
-	if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
+	createTimer(now.plusSeconds(195)) [|
+		if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
+		if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
+		if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
+	]
 }
 end
 

@@ -10,7 +10,7 @@ when
 	System started or
 	Time is midnight
 then {
-	createTimer(now.plusSeconds(15)) [|
+	createTimer(now.plusSeconds(190)) [|
 		logInfo("RULE", rulename + "openHAB system started +15s rule") 
 		//
 		if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
@@ -25,9 +25,7 @@ then {
 		if (WZ_Heizung_EcoTemp.state == NULL) WZ_Heizung_EcoTemp.postUpdate(17.0)
 		if (WZ_Heizung_ComfTemp.state == NULL) WZ_Heizung_ComfTemp.postUpdate(21.0)
 		//
-		gInitNone.members.forEach(item |
-			item.postUpdate(-1)
-		)
+		gInitNone.members.forEach(item | item.postUpdate(-1))
 		//
 		WhgHeatState.postUpdate(-1)
 		//

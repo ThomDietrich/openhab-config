@@ -4,10 +4,8 @@ rule "OpenHAB system started - astro"
 when
 	System started
 then {
-	// delayed startup because the rules engine starts to early...
-	createTimer(now.plusSeconds(8)) [|
+	createTimer(now.plusSeconds(180)) [|
 		logInfo("RULE", "--> astro init")
-		AstroRules.
 		if (now.isAfter((SunsetTime.state as DateTimeType).calendar.timeInMillis) ||
 			now.isBefore((SunriseTime.state as DateTimeType).calendar.timeInMillis)
 		) {

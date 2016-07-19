@@ -4,10 +4,8 @@ rule "OpenHAB system started"
 when
 	System started
 then {
-	logInfo("RULE", "--> openHAB system started rule... waiting 10s")	
-	// delayed startup because the rules engine starts to early...
-	createTimer(now.plusSeconds(10)) [|
-		logInfo("RULE", "--> openHAB system started +10s rule")
+	createTimer(now.plusSeconds(165)) [|
+		logInfo("RULE", "--> openHAB system started rule")
 		// Zeitraum für die rrd-Charts
 		//rrd_Chart_Period.postUpdate(1)
 		//rrd_Weather_Period.postUpdate(1)
