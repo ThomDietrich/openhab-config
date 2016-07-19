@@ -4,40 +4,77 @@ var String rulename = "--> Lichtprogramm: "
 
 
 rule "Schranktaster Arbeitsbeleuchtung ON"
-when Item FK_Taster_Schrank_2Short changed to ON then FK_rcswitch_Arbeit.sendCommand(ON)
+when 
+	Item FK_Taster_Schrank_2Short changed to ON
+then {
+	FK_rcswitch_Arbeit.sendCommand(ON)
+}
 end
 
 rule "Schranktaster Arbeitsbeleuchtung OFF"
-when Item FK_Taster_Schrank_1Short changed to ON then FK_rcswitch_Arbeit.sendCommand(OFF)
+when
+	Item FK_Taster_Schrank_1Short changed to ON
+then {
+	FK_rcswitch_Arbeit.sendCommand(OFF)
+}
 end
 
-rule "Schranktaster Deckenlicht ON"
-when Item FK_Taster_Schrank_2Long changed to ON then Kueche_Deckenlicht.sendCommand(ON)
+
+
+
+rule "Flur Taster oben kurz"
+when
+	Item FK_Taster_Tokyo_2Short changed to ON or
+	Item FK_Taster_Fuse_2Short changed to ON
+then {
+	Whg_Light_Preset.sendCommand(2)
+}
+end
+rule "Flur Taster oben lang"
+when
+	Item FK_Taster_Tokyo_2Long changed to ON or
+	Item FK_Taster_Fuse_2Long changed to ON
+then {
+	Whg_Light_Preset.sendCommand(1)
+}
 end
 
-rule "Schranktaster Deckenlicht OFF"
-when Item FK_Taster_Schrank_1Long changed to ON then Kueche_Deckenlicht.sendCommand(OFF)
+rule "Flur Taster unten kurz"
+when
+	Item FK_Taster_Tokyo_1Short changed to ON or
+	Item FK_Taster_Fuse_1Short changed to ON
+then {
+	Whg_Light_Preset.sendCommand(0)
+}
 end
 
-rule "Flur Taster Tokyo oben kurz"
-when Item FK_Taster_Tokyo_2Short changed to ON then FK_rcswitch_Edison.sendCommand(ON)
+rule "Flur Taster unten lang"
+when
+	Item FK_Taster_Tokyo_1Long changed to ON or
+	Item FK_Taster_Fuse_1Long changed to ON
+then {
+	Whg_Light_Preset.sendCommand(0)
+}
 end
 
-rule "Flur Taster Tokyo unten kurz"
-when Item FK_Taster_Tokyo_1Short changed to ON then FK_rcswitch_Edison.sendCommand(OFF)
-end
 
-rule "Flur Taster Tokyo unten lang"
-when Item FK_Taster_Tokyo_1Long changed to ON then Whg_Light_Preset.sendCommand(0)
-end
 
 rule "Wohnzimmer Taster oben kurz"
-when Item WZ_Taster_2Short changed to ON then Whg_Light_Preset.sendCommand(2)
+when
+	Item WZ_Taster_2Short changed to ON
+then {
+	Whg_Light_Preset.sendCommand(2)
+}
 end
 
 rule "Wohnzimmer Taster unten kurz"
-when Item WZ_Taster_1Short changed to ON then Whg_Light_Preset.sendCommand(0)
+when
+	Item WZ_Taster_1Short changed to ON
+then {
+	Whg_Light_Preset.sendCommand(0)
+}
 end
+
 
 
 rule "Wohnzimmer Taster Licht an"
@@ -45,12 +82,10 @@ when
   	Item Fernbedienung_Taste1 received update ON
 then {
 	logInfo ("RULE", "Fernbedienung 1")
-	//if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis)) {	
-		sendCommand(WZ_rcswitch_Origami, ON)
-		sendCommand(WZ_Lacks_LEDs, ON)
-		sendCommand(WZ_rcswitch_Expedit, ON)
-		sendCommand(BK_rcswitch_Balkonmagic, ON)
-	//}
+	sendCommand(WZ_rcswitch_Origami, ON)
+	sendCommand(WZ_Lacks_LEDs, ON)
+	sendCommand(WZ_rcswitch_Expedit, ON)
+	sendCommand(BK_rcswitch_Balkonmagic, ON)
 }
 end
 rule "Wohnzimmer Taster Licht aus"
@@ -58,12 +93,10 @@ when
   	Item Fernbedienung_Taste2 received update ON
 then {
 	logInfo ("RULE", "Fernbedienung 2")
-	//if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis)) {	
-		sendCommand(WZ_rcswitch_Origami, OFF)
-		sendCommand(WZ_Lacks_LEDs, OFF)
-		sendCommand(WZ_rcswitch_Expedit, OFF)
-		sendCommand(BK_rcswitch_Balkonmagic, OFF)
-	//}
+	sendCommand(WZ_rcswitch_Origami, OFF)
+	sendCommand(WZ_Lacks_LEDs, OFF)
+	sendCommand(WZ_rcswitch_Expedit, OFF)
+	sendCommand(BK_rcswitch_Balkonmagic, OFF)
 }
 end
 
