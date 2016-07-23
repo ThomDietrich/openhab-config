@@ -1,4 +1,30 @@
+
 import org.joda.time.*
+
+rule "elevation"
+when
+	Item SunElevation changed
+then
+	if(SunElevation.state >  0){
+		if(NightState.state != ON){
+			logInfo("RULE", "Sun is crossing the horizon, switching to daylight mode")
+			NightState.sendCommand(ON)
+			SunriseEvent.sendCommand(ON)
+			createTimer(now.plusSeconds(3)) [|
+				SunriseEvent.sendCommand(OFF)
+			]
+		}
+	} else {
+		if(NightState.state != OFF) {
+			logInfo("RULE", "Sun is crossing the horizon, switching to night mode")
+			NightState.sendCommand(OFF)
+			SunsetEvent.sendCommand(ON)
+			createTimer(now.plusSeconds(3)) [|
+				SunsetEvent.sendCommand(OFF)
+			]
+		}
+	}
+end
 
 rule "OpenHAB system started - astro"
 when

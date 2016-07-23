@@ -21,11 +21,11 @@ when
 	Time cron "0 * * * * ?"
 then {
 	if (BD_Deckenlicht_TimerActive.state == ON) {
-		//logInfo("RULE", rulename + "updating timer duration")
+		logInfo("RULE", rulename + "updating timer duration")
 		var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
-		//logInfo("RULE", rulename + "Deadline: " + timeEnd)
+		logInfo("RULE", rulename + "Deadline: " + timeEnd)
 		var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
-		//logInfo("RULE", rulename + "Duration: " + timeDuration)
+		logInfo("RULE", rulename + "Duration: " + timeDuration)
 		BD_Deckenlicht_TimerDuration.postUpdate(timeDuration)
 	}
 }
@@ -39,7 +39,7 @@ then {
 	if (NightState.state == ON) {
 		if (BD_Deckenlicht.state == OFF) {
 			sendCommand(BD_Deckenlicht, ON)
-			//logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+			logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
 			
 			var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
 			BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
@@ -75,9 +75,12 @@ rule "Badtür-Automatik: Lichtschalter überschreibt"
 when
 	Item BD_Deckenlicht received update
 then {
+	logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer?")
 	if (badlicht_timer != null) {
+		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer??")
 		badlicht_timer.cancel
 		badlicht_timer = null
+		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer???")
 		BD_Deckenlicht_TimerActive.postUpdate(OFF)
 		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer.")
 	}
