@@ -4,5 +4,5 @@
 *.things linguist-language=Xtend
 *.map linguist-language=Xtend
 *.cfg linguist-language=INI
-*.cfg linguist-vendored=false
-*.svg linguist-vendored=false
+*.cfg linguist-documentation=false
+*.svg linguist-documentation=false
