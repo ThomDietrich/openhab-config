@@ -52,3 +52,5 @@ DateTime    MoonFull            "Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1
  * EveningNight_Start   21:33
  * EveningNight_Stop    00:00
  */
+
+// vim: syntax=Xtend
