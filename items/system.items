@@ -39,3 +39,5 @@ Switch      RuleWhgDoorNotif                "Wohnungstür Benachr."             
 
 Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d ]"       <washingmach>   (Whg)
 Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d ]"        <dishwasher>    (Whg)
+
+// vim: syntax=Xtend

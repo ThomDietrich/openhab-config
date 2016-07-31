@@ -7,61 +7,62 @@ val Number DAUERFEUER = 2
 
 rule "OpenHAB system started"
 when
-	System started or
-	Time is midnight
+    System started or
+    Time is midnight
 then {
-	createTimer(now.plusSeconds(190)) [|
-		logInfo("RULE", rulename + "openHAB system started +15s rule") 
-		//
-		if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
-		if (BD_Heizung_ComfTemp.state == NULL) BD_Heizung_ComfTemp.postUpdate(21.0)
-		//
-		if (FK_Heizung_EcoTemp.state == NULL) FK_Heizung_EcoTemp.postUpdate(17.0)
-		if (FK_Heizung_ComfTemp.state == NULL) FK_Heizung_ComfTemp.postUpdate(21.0)
-		//
-		if (SZ_Heizung_EcoTemp.state == NULL) SZ_Heizung_EcoTemp.postUpdate(17.0)
-		if (SZ_Heizung_ComfTemp.state == NULL) SZ_Heizung_ComfTemp.postUpdate(21.0)
-		//
-		if (WZ_Heizung_EcoTemp.state == NULL) WZ_Heizung_EcoTemp.postUpdate(17.0)
-		if (WZ_Heizung_ComfTemp.state == NULL) WZ_Heizung_ComfTemp.postUpdate(21.0)
-		//
-		gInitNone.members.forEach(item | item.postUpdate(-1))
-		//
-		WhgHeatState.postUpdate(-1)
-		//
-		logInfo("RULE", rulename + "Schnellwahlwerte bei Systemstart initialisiert")
-	]
+    createTimer(now.plusSeconds(190)) [|
+        logInfo("RULE", rulename + "openHAB system started +15s rule")
+        //
+        if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
+        if (BD_Heizung_ComfTemp.state == NULL) BD_Heizung_ComfTemp.postUpdate(21.0)
+        //
+        if (FK_Heizung_EcoTemp.state == NULL) FK_Heizung_EcoTemp.postUpdate(17.0)
+        if (FK_Heizung_ComfTemp.state == NULL) FK_Heizung_ComfTemp.postUpdate(21.0)
+        //
+        if (SZ_Heizung_EcoTemp.state == NULL) SZ_Heizung_EcoTemp.postUpdate(17.0)
+        if (SZ_Heizung_ComfTemp.state == NULL) SZ_Heizung_ComfTemp.postUpdate(21.0)
+        //
+        if (WZ_Heizung_EcoTemp.state == NULL) WZ_Heizung_EcoTemp.postUpdate(17.0)
+        if (WZ_Heizung_ComfTemp.state == NULL) WZ_Heizung_ComfTemp.postUpdate(21.0)
+        //
+        gInitNone.members.forEach(item | item.postUpdate(-1))
+        //
+        WhgHeatState.postUpdate(-1)
+        //
+        logInfo("RULE", rulename + "Schnellwahlwerte bei Systemstart initialisiert")
+    ]
 }
 end
 
 
 rule "Heizmodus umschalten"
 when
-	Item WhgHeatState received command
+    Item WhgHeatState received command
 then {
-	logInfo("RULE", rulename + "Wohnung Heizmodus")
-	if (receivedCommand == AUTOMATIK) {
-		logInfo("RULE", rulename + "Wohnung Heizmodus: Automatik")
-		BD_Heizung_Auto.sendCommand(ON)
-		FK_Heizung_Auto.sendCommand(ON)
-		SZ_Heizung_Auto.sendCommand(ON)
-		WZ_Heizung_Auto.sendCommand(ON)
-	} else if (receivedCommand == ABWESEND) {
-		logInfo("RULE", rulename + "Wohnung Heizmodus: Abwesend")
-		BD_Heizung_Manu.sendCommand(15.0)
-		FK_Heizung_Manu.sendCommand(15.0)
-		SZ_Heizung_Manu.sendCommand(15.0)
-		WZ_Heizung_Manu.sendCommand(15.0)
-	} else if (receivedCommand == DAUERFEUER) {
-		logInfo("RULE", rulename + "Wohnung Heizmodus: Dauerfeuer")
-		BD_Heizung_Manu.sendCommand(21.0)
-		FK_Heizung_Manu.sendCommand(21.0)
-		SZ_Heizung_Manu.sendCommand(21.0)
-		WZ_Heizung_Manu.sendCommand(21.0)
-	} else {
-		logError("RULE", rulename + "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
-	}
-	WhgHeatState.postUpdate(-1)
+    logInfo("RULE", rulename + "Wohnung Heizmodus")
+    if (receivedCommand == AUTOMATIK) {
+        logInfo("RULE", rulename + "Wohnung Heizmodus: Automatik")
+        BD_Heizung_Auto.sendCommand(ON)
+        FK_Heizung_Auto.sendCommand(ON)
+        SZ_Heizung_Auto.sendCommand(ON)
+        WZ_Heizung_Auto.sendCommand(ON)
+    } else if (receivedCommand == ABWESEND) {
+        logInfo("RULE", rulename + "Wohnung Heizmodus: Abwesend")
+        BD_Heizung_Manu.sendCommand(15.0)
+        FK_Heizung_Manu.sendCommand(15.0)
+        SZ_Heizung_Manu.sendCommand(15.0)
+        WZ_Heizung_Manu.sendCommand(15.0)
+    } else if (receivedCommand == DAUERFEUER) {
+        logInfo("RULE", rulename + "Wohnung Heizmodus: Dauerfeuer")
+        BD_Heizung_Manu.sendCommand(21.0)
+        FK_Heizung_Manu.sendCommand(21.0)
+        SZ_Heizung_Manu.sendCommand(21.0)
+        WZ_Heizung_Manu.sendCommand(21.0)
+    } else {
+        logError("RULE", rulename + "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
+    }
+    WhgHeatState.postUpdate(-1)
 }
 end
-	
+
+// vim: syntax=Xtend

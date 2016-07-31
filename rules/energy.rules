@@ -72,5 +72,4 @@ then if (FK_rcswitch_Arbeit.state == ON) FK_rcswitch_Arbeit_Power.postUpdate(8.5
 rule "WZ_rcswitch_Balkonmagic_Power" when Item BK_rcswitch_Balkonmagic received update	//ON										//OFF
 then if (BK_rcswitch_Balkonmagic.state == ON) BK_rcswitch_Balkonmagic_Power.postUpdate(42.0) else BK_rcswitch_Balkonmagic_Power.postUpdate(0) end
 
-
-
+// vim: syntax=Xtend

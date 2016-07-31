@@ -30,3 +30,5 @@ Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
 	Thing GATEWAY-EXTRAS-CCU GWE00000000
 	Thing GATEWAY-EXTRAS-HOMEGEAR GWE00000000
 }
+
+// vim: syntax=Xtend

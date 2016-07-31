@@ -4,22 +4,23 @@ var String rulename = "--> Waschmaschine Überwachung: "
 
 rule "Waschmaschine Überwachung: Init"
 when
-	System started
+    System started
 then {
-	createTimer(now.plusSeconds(170)) [|
-		if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(-1)
-	]
+    createTimer(now.plusSeconds(170)) [|
+        if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(-1)
+    ]
 }
 end
 
 rule "Waschmaschine Überwachung: Verbrauchszuordnung"
 when
-	Item BD_Waschmaschine_Power changed
+    Item BD_Waschmaschine_Power changed
 then {
-	logInfo("RULE", rulename + "Verbrauchszuordnung")
-	if (BD_Waschmaschine_Power.state < 0.5) BD_Waschmaschine_OpState.postUpdate(0)
-	else if (BD_Waschmaschine_Power.state < 2) BD_Waschmaschine_OpState.postUpdate(1)
-	else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(2)
+    logInfo("RULE", rulename + "Verbrauchszuordnung")
+    if (BD_Waschmaschine_Power.state < 0.5) BD_Waschmaschine_OpState.postUpdate(0)
+    else if (BD_Waschmaschine_Power.state < 2) BD_Waschmaschine_OpState.postUpdate(1)
+    else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(2)
 }
 end
- 
+
+// vim: syntax=Xtend

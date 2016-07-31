@@ -222,4 +222,4 @@ Switch Keychain_Pending             "Schlüsselanhänger config pending"        
 //Datapoints neu laden
 //Switch Reload_Datapoints      "Reload Datapoints"                                         (Whg)               {channel=homematic:GATEWAY-EXTRAS-HOMEGEAR:ccu:GWE00000000:0#RELOAD_ALL_FROM_GATEWAY}
 
-// vim: set syntax=Xtend
+// vim: syntax=Xtend

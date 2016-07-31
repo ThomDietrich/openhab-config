@@ -2,62 +2,33 @@
 
 rule "OpenHAB system started"
 when
-	System started
+    System started
 then {
-	createTimer(now.plusSeconds(165)) [|
-		logInfo("RULE", "--> openHAB system started rule")
-		// Zeitraum für die rrd-Charts
-		//rrd_Chart_Period.postUpdate(1)
-		//rrd_Weather_Period.postUpdate(1)
+    createTimer(now.plusSeconds(165)) [|
+        logInfo("RULE", "--> openHAB system started rule")
+        // Zeitraum für die rrd-Charts
+        //rrd_Chart_Period.postUpdate(1)
+        //rrd_Weather_Period.postUpdate(1)
 
-		// Globaler Zustand (An-/Abwesenheit) für die Steuerung und Anzeige der zuletzt gemachten Aktion
-		logInfo("RULE", "--> Globale Zustände und Presets rücksetzen")
-		gInitNone.members.forEach(item |
-			item.postUpdate(-1)
-		)
-		gPower.members.forEach(item |
-			if (item.state == NULL) item.postUpdate(0)
-		)
-	] 
+        // Globaler Zustand (An-/Abwesenheit) für die Steuerung und Anzeige der zuletzt gemachten Aktion
+        logInfo("RULE", "--> Globale Zustände und Presets rücksetzen")
+        gInitNone.members.forEach(item |
+            item.postUpdate(-1)
+        )
+        gPower.members.forEach(item |
+            if (item.state == NULL) item.postUpdate(0)
+        )
+    ]
 }
 end
 
 
 rule "OpenHAB system shutting down"
 when
-	System shuts down
+    System shuts down
 then {
-	logInfo("RULE", "--> openHAB shutting down rule")
+    logInfo("RULE", "--> openHAB shutting down rule")
 }
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// vim: syntax=Xtend

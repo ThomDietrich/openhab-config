@@ -8,3 +8,5 @@ Number      SpeedtestResultUp       "Uplink [%.2f Mbit/s]"                      
 String      SpeedtestRunning        "Speedtest running ... [%s]"                                <"speedtest_new">           (gSpeedtest)
 Switch      SpeedtestRerun          "Manuell starten"                                           <"speedtest_reload2">       (gSpeedtest)
 DateTime    SpeedtestResultDate     "Zuletzt ausgeführt [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]"   <"speedtest_problem4">      (gSpeedtest)
+
+// vim: syntax=Xtend

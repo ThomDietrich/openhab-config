@@ -13,3 +13,5 @@ Number FK_rcswitch_Edison_Power      "Edison Leistung [%.0f W]"              <en
 Number FK_rcswitch_Arbeit_Power      "Arbeitsbeleuchtung Leistung [%.0f W]"  <energy>    (FK,gPower)
 Number BK_rcswitch_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]"         <energy>    (BK,gPower)
 Number WZ_rcswitch_Expedit_Power     "Expedit Leistung [%.0f W]"             <energy>    (WZ,gPower)
+
+// vim: syntax=Xtend

@@ -6,67 +6,69 @@ var String rulename = "--> Willkommenslicht: "
 
 rule "Wohnungstür-Automatik: Init"
 when
-	System started
+    System started
 then {
-	createTimer(now.plusSeconds(175)) [|
-		if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
-	]
+    createTimer(now.plusSeconds(175)) [|
+        if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
+    ]
 }
 end
 
 rule "Wohnungstür-Automatik: Duration Update"
 when
-	Time cron "0 * * * * ?"
+    Time cron "0 * * * * ?"
 then {
-	if (Wohnungstuer_TimerActive.state == ON) {
-		//logInfo("RULE", rulename + "updating timer duration")
-		var DateTime timeEnd = new DateTime((Wohnungstuer_TimerEnd.state as DateTimeType).calendar.timeInMillis)
-		//logInfo("RULE", rulename + "Deadline: " + timeEnd)
-		var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
-		//logInfo("RULE", rulename + "Duration: " + timeDuration)
-		Wohnungstuer_TimerDuration.postUpdate(timeDuration)
-	}
+    if (Wohnungstuer_TimerActive.state == ON) {
+        //logInfo("RULE", rulename + "updating timer duration")
+        var DateTime timeEnd = new DateTime((Wohnungstuer_TimerEnd.state as DateTimeType).calendar.timeInMillis)
+        //logInfo("RULE", rulename + "Deadline: " + timeEnd)
+        var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
+        //logInfo("RULE", rulename + "Duration: " + timeDuration)
+        Wohnungstuer_TimerDuration.postUpdate(timeDuration)
+    }
 }
 end
 
 rule "Willkommenslicht nach Wohnungstuer"
 when
-  	Item Wohnungstuer_State changed from CLOSED to OPEN
+    Item Wohnungstuer_State changed from CLOSED to OPEN
 then {
-	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
-	if (NightState.state == ON && FK_rcswitch_Edison.state == OFF && PresenceThN5.state == OFF){
-		sendCommand(FK_rcswitch_Edison, ON)
-		
-		var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
-		Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
-		Wohnungstuer_TimerActive.postUpdate(ON)
-		
-		logInfo ("RULE", rulename + "Eddison ein. Timer wird gesetzt")
-		willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
-			if (willkommen_timer != null) {
-				willkommen_timer.cancel
-				willkommen_timer = null
-				Wohnungstuer_TimerActive.postUpdate(OFF)
-				logInfo ("RULE", rulename + "Timer abgelaufen, Eddison aus.")
-				sendCommand(FK_rcswitch_Edison, OFF)
-			}
-		]
-	}
-	if (RuleWhgDoorNotif.state == ON) {
-		pushover("Wohnungstür wurde geöffnet!")
-	}
+    logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+    if (NightState.state == ON && FK_rcswitch_Edison.state == OFF && PresenceThN5.state == OFF){
+        sendCommand(FK_rcswitch_Edison, ON)
+
+        var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
+        Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
+        Wohnungstuer_TimerActive.postUpdate(ON)
+
+        logInfo ("RULE", rulename + "Eddison ein. Timer wird gesetzt")
+        willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
+            if (willkommen_timer != null) {
+                willkommen_timer.cancel
+                willkommen_timer = null
+                Wohnungstuer_TimerActive.postUpdate(OFF)
+                logInfo ("RULE", rulename + "Timer abgelaufen, Eddison aus.")
+                sendCommand(FK_rcswitch_Edison, OFF)
+            }
+        ]
+    }
+    if (RuleWhgDoorNotif.state == ON) {
+        pushover("Wohnungstür wurde geöffnet!")
+    }
 }
 end
 
 rule "Willkommenslicht Timer mit Badlicht loeschen"
 when
-  	Item BD_Deckenlicht received update 
+    Item BD_Deckenlicht received update
 then {
-	if (willkommen_timer != null) {
-		willkommen_timer.cancel
-		willkommen_timer = null
-		Wohnungstuer_TimerActive.postUpdate(OFF)
-		logInfo ("RULE", rulename + "Timer nach Aktivität (Bad) gelöscht.")
-	}
+    if (willkommen_timer != null) {
+        willkommen_timer.cancel
+        willkommen_timer = null
+        Wohnungstuer_TimerActive.postUpdate(OFF)
+        logInfo ("RULE", rulename + "Timer nach Aktivität (Bad) gelöscht.")
+    }
 }
 end
+
+// vim: syntax=Xtend

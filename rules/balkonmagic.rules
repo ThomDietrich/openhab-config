@@ -26,3 +26,5 @@ then {
 	}
 }
 end
+
+// vim: syntax=Xtend

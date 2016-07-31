@@ -87,3 +87,5 @@ then {
 	// schalten des Lichts geschieht bei diesem Schaltelement automatisch
 }
 end
+
+// vim: syntax=Xtend

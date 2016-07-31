@@ -182,3 +182,4 @@ sitemap w66a label="W66a openHAB Installation" {
     }
 }
 
+// vim: syntax=Xtend

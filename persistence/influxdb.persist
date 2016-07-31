@@ -14,3 +14,5 @@ Items {
     Presence_ThN5                                                   : strategy = everyChange
 
 }
+
+// vim: syntax=Xtend

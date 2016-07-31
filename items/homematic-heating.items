@@ -104,3 +104,5 @@ Number WZ_Heizung_Preset            "WZ_Heizung Soll-Temperatur Schnellauswahl" 
 Number WZ_Heizung_EcoTemp           "WZ_Heizung Spar-Temperatur [%.1f °C]"                                      (WZ,value_persist)
 Number WZ_Heizung_ComfTemp          "WZ_Heizung Komfort-Temperatur [%.1f °C]"                                   (WZ,value_persist)
 String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <heating>       (WZ)
+
+// vim: syntax=Xtend

@@ -2,58 +2,60 @@
 
 rule "Speedtest init"
 when
-	System started
+    System started
 then {
-	createTimer(now.plusSeconds(195)) [|
-		if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
-		if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
-		if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
-	]
+    createTimer(now.plusSeconds(195)) [|
+        if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
+        if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
+        if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
+    ]
 }
 end
 
 rule "Speedtest"
 when
-  	//Time cron "0 0 5 * * ?" or
-  	//Time cron "0 0 13 * * ?"
-  	Time cron "0 0 * * * ?" or
-  	Item SpeedtestRerun received command ON
+    //Time cron "0 0 5 * * ?" or
+    //Time cron "0 0 13 * * ?"
+    Time cron "0 0 * * * ?" or
+    Item SpeedtestRerun received command ON
 then {
-	logInfo("RULE", "--> speedtest executed...")
-	SpeedtestRunning.postUpdate("Messung läuft...")
-	
-	// update timestamp for last execution
-	SpeedtestResultDate.postUpdate(new DateTimeType())
-	
-	// execute the script, you may have to change the path depending on your system
-	var String speedtestCliOutput = executeCommandLine("/usr/local/bin/speedtest-cli@@--simple", 120*1000)
-	
-	// for debugging:
-	//var String speedtestCliOutput = "Ping: 43.32 ms\nDownload: 21.64 Mbit/s\nUpload: 4.27 Mbit/s"
-	//logInfo("RULE", "--> speedtest output:\n" + speedtestCliOutput + "\n\n")
-	
-	SpeedtestRunning.postUpdate("Datenauswertung...")
-	
-	// starts off with a fairly simple error check, should be enough to catch all problems I can think of
-	if (speedtestCliOutput.startsWith("Ping") && speedtestCliOutput.endsWith("Mbit/s")) {		
-    	var String[] results = speedtestCliOutput.split("\\r?\\n")
-    	var float ping = new java.lang.Float(results.get(0).split(" ").get(1))
-    	var float down = new java.lang.Float(results.get(1).split(" ").get(1))
-    	var float up   = new java.lang.Float(results.get(2).split(" ").get(1))
-		SpeedtestResultPing.postUpdate(ping)
-		SpeedtestResultDown.postUpdate(down)
-		SpeedtestResultUp.postUpdate(up)
-		SpeedtestSummary.postUpdate(String::format("ᐁ  %.1f Mbit/s  ᐃ %.1f Mbit/s (%.0f ms)", down, up, ping))
-		SpeedtestRunning.postUpdate("-")
-		logInfo("RULE", "--> speedtest finished.")
-	} else {
-		SpeedtestResultPing.postUpdate(0)
-		SpeedtestResultDown.postUpdate(0)
-		SpeedtestResultUp.postUpdate(0)
-		SpeedtestSummary.postUpdate("(unbekannt)")
-		SpeedtestRunning.postUpdate("Fehler bei der Ausführung")
-		logError("RULE", "--> speedtest failed. Output:\n" + speedtestCliOutput + "\n\n")
-	}
-	SpeedtestRerun.postUpdate(OFF)
+    logInfo("RULE", "--> speedtest executed...")
+    SpeedtestRunning.postUpdate("Messung läuft...")
+
+    // update timestamp for last execution
+    SpeedtestResultDate.postUpdate(new DateTimeType())
+
+    // execute the script, you may have to change the path depending on your system
+    var String speedtestCliOutput = executeCommandLine("/usr/local/bin/speedtest-cli@@--simple", 120*1000)
+
+    // for debugging:
+    //var String speedtestCliOutput = "Ping: 43.32 ms\nDownload: 21.64 Mbit/s\nUpload: 4.27 Mbit/s"
+    //logInfo("RULE", "--> speedtest output:\n" + speedtestCliOutput + "\n\n")
+
+    SpeedtestRunning.postUpdate("Datenauswertung...")
+
+    // starts off with a fairly simple error check, should be enough to catch all problems I can think of
+    if (speedtestCliOutput.startsWith("Ping") && speedtestCliOutput.endsWith("Mbit/s")) {
+        var String[] results = speedtestCliOutput.split("\\r?\\n")
+        var float ping = new java.lang.Float(results.get(0).split(" ").get(1))
+        var float down = new java.lang.Float(results.get(1).split(" ").get(1))
+        var float up   = new java.lang.Float(results.get(2).split(" ").get(1))
+        SpeedtestResultPing.postUpdate(ping)
+        SpeedtestResultDown.postUpdate(down)
+        SpeedtestResultUp.postUpdate(up)
+        SpeedtestSummary.postUpdate(String::format("ᐁ  %.1f Mbit/s  ᐃ %.1f Mbit/s (%.0f ms)", down, up, ping))
+        SpeedtestRunning.postUpdate("-")
+        logInfo("RULE", "--> speedtest finished.")
+    } else {
+        SpeedtestResultPing.postUpdate(0)
+        SpeedtestResultDown.postUpdate(0)
+        SpeedtestResultUp.postUpdate(0)
+        SpeedtestSummary.postUpdate("(unbekannt)")
+        SpeedtestRunning.postUpdate("Fehler bei der Ausführung")
+        logError("RULE", "--> speedtest failed. Output:\n" + speedtestCliOutput + "\n\n")
+    }
+    SpeedtestRerun.postUpdate(OFF)
 }
 end
+
+// vim: syntax=Xtend

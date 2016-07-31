@@ -15,3 +15,5 @@ String KodiNotificationText "Notification [%s]"                 (gKodi) {xbmc=">
 Number KodiNotificationId   "Trigger Notification"              (gKodi)
 
 String KodiSummary          "Summary [%s]"                      (gKodi)
+
+// vim: syntax=Xtend

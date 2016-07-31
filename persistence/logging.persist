@@ -13,3 +13,5 @@ Items {
     // log all temperatures on every change
     Temperature* -> "temperatures" : strategy=everyChange
 }
+
+// vim: syntax=Xtend

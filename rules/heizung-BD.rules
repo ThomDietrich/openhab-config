@@ -4,20 +4,20 @@ import java.util.Locale
 var String rulename = "--> Heizungssteuerung BD_Heizung: "
 
 // How to Duplicate:
-// Search and replace "BD_" --> "WZ_" 
+// Search and replace "BD_" --> "WZ_"
 
 rule "BD_Heizung set heating from sitemap preset element"
 when
   Item BD_Heizung_Preset received command
 then {
-	logInfo("RULE", rulename + "Schnellauswahl (Sitemap -> Homematic)")
-	switch (receivedCommand){
-		case 0: BD_Heizung_Lowering.sendCommand(ON)
-		case 1: BD_Heizung_Comfort.sendCommand(ON)
-	}
-	createTimer(now.plusSeconds(1)) [|
-		BD_Heizung_Preset.postUpdate(-1)
-	]
+    logInfo("RULE", rulename + "Schnellauswahl (Sitemap -> Homematic)")
+    switch (receivedCommand){
+        case 0: BD_Heizung_Lowering.sendCommand(ON)
+        case 1: BD_Heizung_Comfort.sendCommand(ON)
+    }
+    createTimer(now.plusSeconds(1)) [|
+        BD_Heizung_Preset.postUpdate(-1)
+    ]
 }
 end
 
@@ -25,13 +25,13 @@ rule "BD_Heizung set mode from sitemap select element"
 when
   Item BD_Heizung_SetMode received command
 then {
-	logInfo("RULE", rulename + "Modus (Sitemap -> Homematic)")
-	switch (receivedCommand){
-		case 0: BD_Heizung_Auto.sendCommand(ON)
-		case 1: BD_Heizung_Manu.sendCommand(BD_Heizung_SetTemp.state as DecimalType)
-		case 3: BD_Heizung_BoostMode.sendCommand(ON)
-		case 4: BD_Heizung_SetMode.postUpdate(-1)
-	}
+    logInfo("RULE", rulename + "Modus (Sitemap -> Homematic)")
+    switch (receivedCommand){
+        case 0: BD_Heizung_Auto.sendCommand(ON)
+        case 1: BD_Heizung_Manu.sendCommand(BD_Heizung_SetTemp.state as DecimalType)
+        case 3: BD_Heizung_BoostMode.sendCommand(ON)
+        case 4: BD_Heizung_SetMode.postUpdate(-1)
+    }
 }
 end
 
@@ -39,75 +39,69 @@ rule "BD_Heizung update sitemap with window mode"
 when
   Item BD_Fenster_State received update
 then {
-	createTimer(now.plusSeconds(15)) [|
-		//logInfo("RULE", rulename + "Fenster-Modus <" + BD_Fenster_State.state + "><" + BD_Heizung_SetTemp.state + ">")
-		if (BD_Fenster_State.state == OPEN && BD_Heizung_SetTemp.state == 12.0) {
-			//logInfo("RULE", rulename + "Fenster-Modus aktiviert")
-			BD_Heizung_SetMode.postUpdate(4)
-		} else if (BD_Fenster_State.state == CLOSED && BD_Heizung_SetTemp.state != 12.0) {
-			//logInfo("RULE", rulename + "Fenster-Modus deaktiviert")
-			BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
-		} else {
-			logError("RULE", rulename + "Fenster-Modus nicht eindeutig")
-			BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
-		}
-	]	
-}	
+    createTimer(now.plusSeconds(15)) [|
+        //logInfo("RULE", rulename + "Fenster-Modus <" + BD_Fenster_State.state + "><" + BD_Heizung_SetTemp.state + ">")
+        if (BD_Fenster_State.state == OPEN && BD_Heizung_SetTemp.state == 12.0) {
+            //logInfo("RULE", rulename + "Fenster-Modus aktiviert")
+            BD_Heizung_SetMode.postUpdate(4)
+        } else if (BD_Fenster_State.state == CLOSED && BD_Heizung_SetTemp.state != 12.0) {
+            //logInfo("RULE", rulename + "Fenster-Modus deaktiviert")
+            BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
+        } else {
+            logError("RULE", rulename + "Fenster-Modus nicht eindeutig")
+            BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
+        }
+    ]
+}
 end
 
 rule "BD_Heizung update sitemap with heating mode"
 when
   Item BD_Heizung_Mode received update
 then {
-	//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
-	// Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
-	if (BD_Heizung_SetMode.state == 4 && BD_Heizung_Mode.state == 0) {
-		//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
-	} else {
-		BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
-	}
-}	
+    //logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
+    // Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
+    if (BD_Heizung_SetMode.state == 4 && BD_Heizung_Mode.state == 0) {
+        //logInfo("RULE", rulename + "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
+    } else {
+        BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
+    }
+}
 end
 
 rule "BD_Heizung create summary"
 when
-	Item BD_Heizung_SetTemp changed or
-	Item BD_Heizung_ActTemp changed or
-	Item BD_Heizung_Valve changed or
-	Item BD_Heizung_SetMode changed
+    Item BD_Heizung_SetTemp changed or
+    Item BD_Heizung_ActTemp changed or
+    Item BD_Heizung_Valve changed or
+    Item BD_Heizung_SetMode changed
 then {
-	if ((BD_Heizung_SetTemp.state instanceof DecimalType) && (BD_Heizung_ActTemp.state instanceof DecimalType)) {	
-		val BigDecimal setTemp = (BD_Heizung_SetTemp.state as DecimalType).toBigDecimal
-		val BigDecimal actTemp = (BD_Heizung_ActTemp.state as DecimalType).toBigDecimal
-		val mode = if (BD_Heizung_SetMode.state == 1) "⚙" else if (BD_Heizung_SetMode.state == 2) "🔥" else ""
-		
-		if (BD_Heizung_Valve.state > 60) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
-		} else if (BD_Heizung_Valve.state > 40) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
-		} else if (BD_Heizung_Valve.state > 20) {
-			BD_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
-		} else if (BD_Heizung_Valve.state > 0) {
-			BD_Heizung_Summary.postUpdate(String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
-		} else {
-			if (BD_Heizung_SetMode.state == 1) {
-				BD_Heizung_Summary.postUpdate(String::format("%s %.1f °C", mode, actTemp))
-			} else if (BD_Heizung_SetMode.state == 4) {
-				BD_Heizung_Summary.postUpdate(String::format("( ↻ Fenster offen)  %.1f °C", actTemp))
-			} else {
-				BD_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
-			}
-		}
-	} else {
-		BD_Heizung_Summary.postUpdate("(unbekannt)")
-	}
+    if ((BD_Heizung_SetTemp.state instanceof DecimalType) && (BD_Heizung_ActTemp.state instanceof DecimalType)) {
+        val BigDecimal setTemp = (BD_Heizung_SetTemp.state as DecimalType).toBigDecimal
+        val BigDecimal actTemp = (BD_Heizung_ActTemp.state as DecimalType).toBigDecimal
+        val mode = if (BD_Heizung_SetMode.state == 1) "⚙" else if (BD_Heizung_SetMode.state == 2) "🔥" else ""
+
+        if (BD_Heizung_Valve.state > 60) {
+            BD_Heizung_Summary.postUpdate(String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+        } else if (BD_Heizung_Valve.state > 40) {
+            BD_Heizung_Summary.postUpdate(String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+        } else if (BD_Heizung_Valve.state > 20) {
+            BD_Heizung_Summary.postUpdate(String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+        } else if (BD_Heizung_Valve.state > 0) {
+            BD_Heizung_Summary.postUpdate(String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
+        } else {
+            if (BD_Heizung_SetMode.state == 1) {
+                BD_Heizung_Summary.postUpdate(String::format("%s %.1f °C", mode, actTemp))
+            } else if (BD_Heizung_SetMode.state == 4) {
+                BD_Heizung_Summary.postUpdate(String::format("( ↻ Fenster offen)  %.1f °C", actTemp))
+            } else {
+                BD_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+            }
+        }
+    } else {
+        BD_Heizung_Summary.postUpdate("(unbekannt)")
+    }
 }
 end
 
-
-
-
-
-
-
-
+// vim: syntax=Xtend

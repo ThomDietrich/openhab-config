@@ -55,22 +55,4 @@ then
 	postUpdate(NightState, previousState)
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// vim: syntax=Xtend

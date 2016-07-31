@@ -16,3 +16,4 @@ String SonosState        "Status [%s]"        <text>             (gSonos) {chann
 
 String SonosSummary      "Sonos Summary [%s]"                    (gSonos)
 
+// vim: syntax=Xtend
