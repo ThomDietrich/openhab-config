@@ -1,0 +1,47 @@
+import org.joda.time.*
+
+val MODE_OFF = 0
+val MODE_STANDBY = 1
+val MODE_ACTIVE = 2
+val MODE_FINISHED = 3
+
+rule "Waschmaschine Überwachung: Init"
+when
+    System started
+then {
+    createTimer(now.plusSeconds(170)) [|
+        if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
+		if (FK_Spuelmaschine_OpState == NULL) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+    ]
+}
+end
+
+rule "Waschmaschine Überwachung: Verbrauchszuordnung"
+when
+    Item BD_Waschmaschine_Power changed
+then {
+    //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
+    if (BD_Waschmaschine_Power.state < 0.5) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
+    else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(MODE_ACTIVE)
+	else if (BD_Waschmaschine_Power.state < 2) {
+		if (BD_Waschmaschine_OpState.state == MODE_OFF) BD_Waschmaschine_OpState.postUpdate(MODE_STANDBY)
+		else if (BD_Waschmaschine_OpState.state == MODE_ACTIVE) BD_Waschmaschine_OpState.postUpdate(MODE_FINISHED)
+    }
+}
+end
+
+rule "Spuelmaschine Überwachung: Verbrauchszuordnung"
+when
+    Item FK_Spuelmaschine_Power changed
+then {
+    //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
+    if (FK_Spuelmaschine_Power.state < 0.1) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+    else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
+	else if (FK_Spuelmaschine_Power.state < 1) {
+		if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
+		else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
+    }
+}
+end
+
+// vim: syntax=Xtend
