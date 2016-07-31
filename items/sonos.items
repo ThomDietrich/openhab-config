@@ -1,18 +1,18 @@
-
-Group 	gSonos	"Sonos Soundsystem"	<"speaker-black">	(Whg)
-
-Player SonosController   "Controller"                          (gSonos) {channel="sonos:PLAY3:Kueche:control"}
-Dimmer SonosVolume       "Volume [%.1f %%]" <soundvolume>      (gSonos) {channel="sonos:PLAY3:Kueche:volume"}
-Switch SonosMute         "Mute"             <soundvolume_mute> (gSonos) {channel="sonos:PLAY3:Kueche:mute"}
-Switch SonosLED          "LED"              <switch>           (gSonos) {channel="sonos:PLAY3:Kueche:led"}
-String SonosCurrentTrack "Now playing [%s]" <text>             (gSonos) {channel="sonos:PLAY3:Kueche:currenttrack"}
-String SonosState        "Status [%s]"      <text>             (gSonos) {channel="sonos:PLAY3:Kueche:state"}
-
-String SonosSummary			"Sonos Summary [%s]"			(gSonos) 
-
 /* SONOS
  * Wohnzimmer (ZP90) UDN uuid:RINCON_B8E93794664C01400
  * Küche (S3) with UDN uuid:RINCON_B8E93736496A01400
  *  (S1) UDN uuid:RINCON_B8E937ED0A1601400
  *  (S1) UDN uuid:RINCON_B8E937E0539601400
  */
+
+Group  gSonos            "Sonos Soundsystem"  <"speaker-black">  (Whg)
+
+Player SonosController   "Controller"                            (gSonos) {channel="sonos:PLAY3:Kueche:control"}
+Dimmer SonosVolume       "Volume [%.1f %%]"   <soundvolume>      (gSonos) {channel="sonos:PLAY3:Kueche:volume"}
+Switch SonosMute         "Mute"               <soundvolume_mute> (gSonos) {channel="sonos:PLAY3:Kueche:mute"}
+Switch SonosLED          "LED"                <switch>           (gSonos) {channel="sonos:PLAY3:Kueche:led"}
+String SonosCurrentTrack "Now playing [%s]"   <text>             (gSonos) {channel="sonos:PLAY3:Kueche:currenttrack"}
+String SonosState        "Status [%s]"        <text>             (gSonos) {channel="sonos:PLAY3:Kueche:state"}
+
+String SonosSummary      "Sonos Summary [%s]"                    (gSonos)
+

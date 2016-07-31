@@ -150,8 +150,8 @@ Number WZ_Lacks_Lampe_Power         "Lacksleuchter Lampe Leistung [%.0f W]"     
 //Switch WZ_rcswitch_Expedit        "Expedit"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }
 //Switch rcswitch_K8                "rcswitch Kanal8 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:8#STATE" }
 Number rcswitch_RSSI                "rcswitch RSSI [%d dBm]"                                (Whg,W,gRSSI)       { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#RSSI_DEVICE" }
-Switch rcswitch_Unreach             "rcswitch unreachable"                      <siren>     (Whg,W,gUnreach)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#UNREACH" }               
-Switch rcswitch_Pending             "rcswitch config pending"                   <siren>     (Whg,W,gPending)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#CONFIG_PENDING" }   
+Switch rcswitch_Unreach             "rcswitch unreachable"                      <siren>     (Whg,W,gUnreach)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#UNREACH" }
+Switch rcswitch_Pending             "rcswitch config pending"                   <siren>     (Whg,W,gPending)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#CONFIG_PENDING" }
 
 //HM-PB-2-WM55
 // PRESS_SHORT:         ON,OFF          nach kurzem Druck

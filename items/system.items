@@ -1,44 +1,41 @@
 
-//Die Hauptgruppe für die Wohnung
-Group 	Whg		"Hotel zur Birke"		<house>
-
+// Hauptgruppe für Wohnung
+Group   Whg "Hotel zur Birke"   <house>
 // Räume
-Group 	BD		"Bad"					<bath>			(Whg)
-Group 	FK		"Flur-Küche"			<kitchen>		(Whg)
-Group 	SZ		"Schlafzimmer"			<bedroom>		(Whg)
-Group 	WZ		"Wohnzimmer"			<video>			(Whg)
-Group 	BK		"Balkon"				<garden>		(Whg)
+Group   BD  "Bad"               <bath>      (Whg)
+Group   FK  "Flur-Küche"        <kitchen>   (Whg)
+Group   SZ  "Schlafzimmer"      <bedroom>   (Whg)
+Group   WZ  "Wohnzimmer"        <video>     (Whg)
+Group   BK  "Balkon"            <garden>    (Whg)
 
 // Sondergruppen
-Group:Switch:OR(ON, OFF) 		gLights			"Komplette Beleuchtung [%d ]" 								<light>				(Whg)
-Group:Switch:OR(ON, OFF) 		gBatterie 		"Batteriestände [%d ]"										<battery> 			(Whg)
-Group:Contact:OR(OPEN, CLOSED) 	gFenster 		"Offene Fenster [%d ]"										<contact>			(Whg)
-Group:Number:SUM				gPower			"Aktueller Stromverbrauch [%.1f W]" 						<energy>			(Whg)
-Group:Number:SUM				gEnergyCnt		"Energiezähler [%.1f Wh]" 									<energy>			(Whg)
-Group:Number:MIN 				gRSSI			"RSSI aller Geräte [%d dBm]" 								<radio>				(Whg)
-Group:Number:SUM				gUnreach		"Nicht erreichbare Geräte [%d]"													(Whg)
-Group:Number:SUM				gPending		"Geräte mit ausstehender Konfig. [%d]"											(Whg)
+Group:Switch:OR(ON, OFF)        gLights     "Komplette Beleuchtung [%d ]"               <light>         (Whg)
+Group:Switch:OR(ON, OFF)        gBatterie   "Batteriestände [%d ]"                      <battery>       (Whg)
+Group:Contact:OR(OPEN, CLOSED)  gFenster    "Offene Fenster [%d ]"                      <contact>       (Whg)
+Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)
+Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (Whg)
+Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <radio>         (Whg)
+Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"                             (Whg)
+Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"                      (Whg)
 
-//
-Group							W				"Wartung"																		(Whg)
-//Gruppe für alle Number/Switch Elemente die bei Systemstart auf -1 gestellt werden	
-Group	gInitNone "Initialisierung mit (-1)"	(Whg)
+Group W "Wartung" (Whg)
+Group gInitNone "Initialisierung mit (-1)" (Whg)
 
-Number 		Whg_Light_Preset		"Wohnung Beleuchtung Schnellauswahl"		<switch>	(Whg)
+Switch      PresenceThN5                    "Anwesenheit ThN5"                          <like>          (Whg)   { channel="network:device:ThN5:online" }
+Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg)   { channel="network:device:ThN9:online" }
+Switch      PresencePC                      "Zustand PC"                                <present>       (Whg)   { channel="network:device:BirkePC:online" }
 
-Switch		PresenceThN5			"Anwesenheit ThN5"							<like>		(Whg)   { channel="network:device:ThN5:online" }
-Switch		PresenceThN9			"Anwesenheit ThN9"							<present>	(Whg)   { channel="network:device:ThN9:online" }
-Switch		PresencePC				"Zustand PC"								<present>	(Whg)   { channel="network:device:BirkePC:online" }
+Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl"        <switch>        (Whg)
 
-Switch		BD_Deckenlicht_TimerActive		"Bad Deckenlicht Timer Active"					(BD)
-DateTime	BD_Deckenlicht_TimerEnd			"Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"		(BD)
-Number		BD_Deckenlicht_TimerDuration	"Bad Deckenlicht Timer Restzeit [%d min]"		(BD)
+Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
+DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)
+Number      BD_Deckenlicht_TimerDuration    "Bad Deckenlicht Timer Restzeit [%d min]"                   (BD)
 
-Switch		Wohnungstuer_TimerActive		"Wohnungstür Timer Active"						(Whg)
-DateTime	Wohnungstuer_TimerEnd			"Wohnungstür Timer [%1$tH:%1$tM Uhr]"			(Whg)
-Number		Wohnungstuer_TimerDuration		"Wohnungstür Timer Restzeit [%d min]"			(Whg)
+Switch      Wohnungstuer_TimerActive        "Wohnungstür Timer Active"                                  (Whg)
+DateTime    Wohnungstuer_TimerEnd           "Wohnungstür Timer [%1$tH:%1$tM Uhr]"                       (Whg)
+Number      Wohnungstuer_TimerDuration      "Wohnungstür Timer Restzeit [%d min]"                       (Whg)
 
-Switch		RuleWhgDoorNotif		"Wohnungstür Benachr."									(Whg)
+Switch      RuleWhgDoorNotif                "Wohnungstür Benachr."                                      (Whg)
 
-Number		BD_Waschmaschine_OpState		"Betriebszustand Waschmaschine [%d ]"	<washingmach>		(Whg)
-Number		FK_Spuelmaschine_OpState		"Betriebszustand Spülmaschine [%d ]"	<dishwasher>		(Whg)
+Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d ]"       <washingmach>   (Whg)
+Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d ]"        <dishwasher>    (Whg)
