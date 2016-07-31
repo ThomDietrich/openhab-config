@@ -40,8 +40,5 @@ Number		Wohnungstuer_TimerDuration		"Wohnungstür Timer Restzeit [%d min]"			(Wh
 
 Switch		RuleWhgDoorNotif		"Wohnungstür Benachr."									(Whg)
 
-//Wschmaschine:
-// - >  10 W: Wäsche aktiv
-// - <   2 W: fertig
-// - < 0,5 W: aus
-Number		BD_Waschmaschine_OpState		"Betriebszustand Waschmaschine [%d ]"			(Whg)
+Number		BD_Waschmaschine_OpState		"Betriebszustand Waschmaschine [%d ]"	<washingmach>		(Whg)
+Number		FK_Spuelmaschine_OpState		"Betriebszustand Spülmaschine [%d ]"	<dishwasher>		(Whg)

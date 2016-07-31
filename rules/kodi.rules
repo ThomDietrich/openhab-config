@@ -28,7 +28,7 @@ then {
 	if (KodiSystemState.state == OFF) summary = "✖  nicht aktiv"
 	else if (KodiPlayerState.state == "Stop") summary = "⏹ inaktiv"
 	else if (KodiTitleShow.state == "") summary = String::format("%s %s", status, title)
-	else summary = String::format("%s %s: %s", status, show, title)
+	else summary = String::format("%s: %s %s", show, title, status)
 	
 	KodiSummary.postUpdate(summary)
 }
@@ -54,9 +54,9 @@ then {
 		case 1: msg = "Hello! :)"
 		case 2: msg = "Stop being lazy!"
 		case 3: msg = "Go to bed! :P"
-		case 4: msg = "Lalalaaa :-S"
-		case 5: msg = "Banana :)"
-		case 6: msg = "Call me >:O"
+		case 4: msg = "I love this show!!!"
+		case 5: msg = "Meh."
+		case 6: msg = "Garbage! :O"
 	}
 	
 	KodiNotificationText.sendCommand(msg)

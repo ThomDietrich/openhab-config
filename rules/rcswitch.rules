@@ -1,0 +1,17 @@
+rule "OpenHAB system started - rcswitch off"
+when
+	System started
+then {
+	createTimer(now.plusSeconds(180)) [|
+		logInfo("RULE", "--> rcswitch all to defined state OFF")
+		sendCommand(WZ_rcswitch_Origami, OFF)
+		sendCommand(rcswitch_K2, OFF)
+		sendCommand(WZ_rcswitch_Goldf, OFF)
+		sendCommand(FK_rcswitch_Edison, OFF)
+		sendCommand(FK_rcswitch_Arbeit, OFF)
+		sendCommand(BK_rcswitch_Balkonmagic, OFF)
+		sendCommand(WZ_rcswitch_Expedit, OFF)
+		sendCommand(rcswitch_K8, OFF)
+	]
+}
+end

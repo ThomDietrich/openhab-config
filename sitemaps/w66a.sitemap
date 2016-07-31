@@ -1,185 +1,184 @@
-sitemap w66a label="W66a openHAB Installation"
-{
-	Frame {
-		Text item=CurrDateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
-			Frame label="Jetzt" {
-				Text item=SunriseTime icon="sunrise" visibility=[NightState == ON]
-				Text item=SunsetTime icon="sunset" visibility=[NightState == OFF]
-				Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
-				Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
-			}
-			Frame label="Mondphase"{			
-				Text item=MoonPhaseName
-				Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
-				Text item=MoonFull icon="fullmoon"
-				Text item=Zodiac icon="zodiac"
-			}
-			Frame label="Wettervorhersage"{
-				Text label="kommt später..." icon="sun_clouds"
-			}
-		}
-		Text item=PresenceThN5 label="Handy ThN5 [MAP(presence.map):%s]"
-		Text item=PresencePC label="PC [MAP(active.map):%s]"
-		Text item=PresenceThN9 label="Tablet ThN9 [MAP(presence.map):%s]"
-		Text item=SonosSummary label="Sonos [%s]" icon="speaker-black" {
-			Frame {
-				Default item=SonosController
-				Slider  item=SonosVolume
-				Switch  item=SonosMute
-				Switch  item=SonosLED
-				Text    item=SonosCurrentTrack
-				Text    item=SonosState
-			}
-		}
-		Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
-			Frame label="Status" {
-				Text item=KodiSystemState label="Kodi [MAP(active.map):%s]" 
-				Text item=KodiPlayerState label="Player [%s]"
-				Text item=KodiTitleShow label="Serientitel [%s]" visibility=[KodiTitleShow != ""]
-				Text item=KodiTitle label="Episodentitel [%s]" visibility=[KodiTitleShow != ""]
-				Text item=KodiTitle label="Titel [%s]" visibility=[KodiTitleShow == ""]
-			}
-			Frame label="Steuerung" {
-				Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
-				Switch item=KodiStop label="Stop" mappings=[ON="Stop"] visibility=[KodiPlayerState != "Stop"]
-			}
-			Frame label="Einblendung" {
-				Switch item=KodiNotificationId icon="" label="" mappings=[1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P"]
-				Switch item=KodiNotificationId icon="" label="" mappings=[4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
-			}
-		}
-		Text item=SpeedtestSummary {
-			Frame label="Ergebnisse" {
-				Text item=SpeedtestResultDown
-				Text item=SpeedtestResultUp
-				Text item=SpeedtestResultPing
-			}
-			// Globale Steuerung für Betriebszustände (An-/Abwesenheit-bedingte Steuerungen)
-			Frame label="Steuerung" {
-				Text item=SpeedtestResultDate
-				Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
-				Switch item=SpeedtestRerun mappings=[ON="Start"]
-			}
-			Frame label="Statistik" {				
-				Text label="..." icon="speedtest_analytics8"
-			}
-		}
-	}
-	Frame label="Beleuchtung" {
-		Switch item=Whg_Light_Preset icon="light" label="" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
-		Text item=gLights
-		Switch item=BK_rcswitch_Balkonmagic
-		Switch item=WZ_Lacks_LEDs
-		Switch item=WZ_Lacks_Lampe
-		Switch item=WZ_rcswitch_Origami
-		Switch item=WZ_rcswitch_Expedit
-		Switch item=WZ_rcswitch_Goldf
-		Switch item=FK_rcswitch_Arbeit
-		Switch item=FK_rcswitch_Edison
-		Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
-		Switch item=Kueche_Deckenlicht
-		Switch item=Flur_Deckenlicht
-		Switch item=SZ_Deckenlicht
-		Switch item=BD_Deckenlicht
-		Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
-	}
-	
-	Frame label="Temperaturen und Heizung" {
-		Switch item=WhgHeatState label="" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
-		
-		Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
-			Frame label="Temperatur" {
-				Text item=WZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
-			}
-			Frame label="Heizung" {
-				Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
-				Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
-				Switch item=WZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=WZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
-				Text item=WZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[WZ_Heizung_BoostTime > 0]
-				Text item=WZ_Heizung_Valve label="Ventilstellung [%d %%]"
-			}
-		}
-		
-		Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
-			Frame label="Temperatur" {
-				Text item=SZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
-			}
-			Frame label="Heizung" {
-				Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
-				Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
-				Switch item=SZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=SZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
-				Text item=SZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[SZ_Heizung_BoostTime > 0]
-				Text item=SZ_Heizung_Valve label="Ventilstellung [%d %%]"
-			}
-		}
-		
-		Text item=FK_Heizung_Summary label="Flur/Küche [%s]" {
-			Frame label="Temperatur" {
-				Text item=FK_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
-			}
-			Frame label="Heizung" {
-				Setpoint item=FK_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
-				Setpoint item=FK_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
-				Switch item=FK_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=FK_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
-				Text item=FK_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[FK_Heizung_BoostTime > 0]
-				Text item=FK_Heizung_Valve label="Ventilstellung [%d %%]"
-			}
-		}
-		
-		Text item=BD_Heizung_Summary label="Bad [%s]" {
-			Frame label="Temperatur" {
-				Text item=BD_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
-			}
-			Frame label="Heizung" {
-				Setpoint item=BD_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
-				Setpoint item=BD_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
-				Switch item=BD_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
-				Switch item=BD_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
-				Text item=BD_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[BD_Heizung_BoostTime > 0]
-				Text item=BD_Heizung_Valve label="Ventilstellung [%d %%]"
-			}
-		}
-		
-		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=2&fullscreen&width=500&height=350&from=now-6h&to=now"
-	}
-	
-	Frame label="Stromverbrauch" {
-		Text item=FK_Kuehlschrank_Power icon="catfridge" {
-			Frame label="Blaa" {
-				Text item=FK_Kuehlschrank_Voltage
-				Text item=FK_Kuehlschrank_Current
-			}
-		}
-		Text label="kommt später..."
-		//Image label="aktuelle Temperaturen" refresh=10000 url="http://171.33.187.253:3000/render/dashboard-solo/db/w66a-openhab?panelId=3&fullscreen&width=500&height=400&from=now-6h&to=now"
-	}
+sitemap w66a label="W66a openHAB Installation" {
+    Frame {
+        Text item=CurrDateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="weather-icon" {
+            Frame label="Jetzt" {
+                Text item=SunriseTime icon="sunrise" visibility=[NightState == ON]
+                Text item=SunsetTime icon="sunset" visibility=[NightState == OFF]
+                Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
+                Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+            }
+            Frame label="Mondphase" {
+                Text item=MoonPhaseName
+                Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
+                Text item=MoonFull icon="fullmoon"
+                Text item=Zodiac icon="zodiac"
+            }
+            Frame label="Wettervorhersage"{
+                Text label="kommt später..." icon="sun_clouds"
+            }
+        }
+        Text item=PresencePC label="PC [MAP(active.map):%s]" icon="like"
+        Text item=PresenceThN5 icon="nexus5" label="Handy ThN5 [MAP(presence.map):%s]"
+        Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
+        Text item=SonosSummary label="Sonos [%s]" icon="sonos" {
+            Frame {
+                Default item=SonosController
+                Slider  item=SonosVolume
+                Switch  item=SonosMute
+                Switch  item=SonosLED
+                Text    item=SonosCurrentTrack
+                Text    item=SonosState
+            }
+        }
+        Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
+            Frame label="Status" {
+                Text item=KodiSystemState label="Kodi [MAP(active.map):%s]"
+                Text item=KodiPlayerState label="Player [%s]"
+                Text item=KodiTitleShow label="Serientitel [%s]" visibility=[KodiTitleShow != ""]
+                Text item=KodiTitle label="Episodentitel [%s]" visibility=[KodiTitleShow != ""]
+                Text item=KodiTitle label="Titel [%s]" visibility=[KodiTitleShow == ""]
+            }
+            Frame label="Steuerung" {
+                Switch item=KodiPlayPause mappings=[ON="Play/Pause"] visibility=[KodiPlayerState != "Stop"]
+                Switch item=KodiStop label="Stop" mappings=[ON="Stop"] visibility=[KodiPlayerState != "Stop"]
+            }
+            Frame label="Einblendung" {
+                Selection item=KodiNotificationId icon="" label="Nachricht einblenden..." mappings=[1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P", 4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
+            }
+        }
+        Text item=SpeedtestSummary {
+            Frame label="Ergebnisse" {
+                Text item=SpeedtestResultDown
+                Text item=SpeedtestResultUp
+                Text item=SpeedtestResultPing
+            }
+            // Globale Steuerung für Betriebszustände (An-/Abwesenheit-bedingte Steuerungen)
+            Frame label="Steuerung" {
+                Text item=SpeedtestResultDate
+                Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
+                Switch item=SpeedtestRerun mappings=[ON="Start"]
+            }
+            Frame label="Statistik" {
+                Text label="..." icon="speedtest_analytics8"
+            }
+        }
+    }
+    Frame label="Beleuchtung" {
+        Switch item=Whg_Light_Preset icon="light" label="" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
+        Text item=gLights
+        Switch item=BK_rcswitch_Balkonmagic
+        Switch item=WZ_Lacks_LEDs
+        Switch item=WZ_Lacks_Lampe
+        Switch item=WZ_rcswitch_Origami
+        Switch item=WZ_rcswitch_Expedit
+        Switch item=WZ_rcswitch_Goldf
+        Switch item=FK_rcswitch_Arbeit
+        Switch item=FK_rcswitch_Edison
+        Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
+        Switch item=Kueche_Deckenlicht
+        Switch item=Flur_Deckenlicht
+        Switch item=SZ_Deckenlicht
+        Switch item=BD_Deckenlicht
+        Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
+    }
 
-	Frame label="Admin" {
-		Text label="Optionen" {
-			Switch item=RuleWhgDoorNotif
-		}
-		Text label="Status" icon="info" {
-			Group item=gRSSI
-			Group item=gPower
-			Group item=gHeatAct
-			Group item=gHeatValve valuecolor=[0="green"]
-			Group item=gFenster valuecolor=[0="green"]
-			Group item=gBatterie valuecolor=[0="green"]
-			Group item=gLights 
-		    Group item=gUnreach
-		    Group item=gPending
-		}
-		Text label="Räume" icon="groundfloor" {
-			Group item=BD label="Bad"
-			Group item=FK label="Flur/Küche"
-			Group item=SZ label="Schlafzimmer"
-			Group item=WZ label="Wohnzimmer"
-			Group item=BK label="Balkon"
-		}
-		Group item=Whg label="Alle Elemente" icon="house"
-	}
+    Frame label="Temperaturen und Heizung" {
+        Switch item=WhgHeatState label="" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
+        Text label="" icon=""
+
+        Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
+            Frame label="Temperatur" {
+                Text item=WZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+            }
+            Frame label="Heizung" {
+                Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+                Setpoint item=WZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+                Switch item=WZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+                Switch item=WZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
+                Text item=WZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[WZ_Heizung_BoostTime > 0]
+                Text item=WZ_Heizung_Valve label="Ventilstellung [%d %%]"
+            }
+        }
+
+        Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
+            Frame label="Temperatur" {
+                Text item=SZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+            }
+            Frame label="Heizung" {
+                Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+                Setpoint item=SZ_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+                Switch item=SZ_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+                Switch item=SZ_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
+                Text item=SZ_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[SZ_Heizung_BoostTime > 0]
+                Text item=SZ_Heizung_Valve label="Ventilstellung [%d %%]"
+            }
+        }
+
+        Text item=FK_Heizung_Summary label="Flur/Küche [%s]" {
+            Frame label="Temperatur" {
+                Text item=FK_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+            }
+            Frame label="Heizung" {
+                Setpoint item=FK_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0
+                Setpoint item=FK_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5
+                Switch item=FK_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+                Switch item=FK_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
+                Text item=FK_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[FK_Heizung_BoostTime > 0]
+                Text item=FK_Heizung_Valve label="Ventilstellung [%d %%]"
+            }
+        }
+
+        Text item=BD_Heizung_Summary label="Bad [%s]" {
+            Frame label="Temperatur" {
+                Text item=BD_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
+            }
+            Frame label="Heizung" {
+                Switch item=BD_Heizung_OnOff label="Heizung inaktiv" mappings=[ON="Aktivieren"] visibility=[BD_Heizung_OnOff == OFF]
+                Setpoint item=BD_Heizung_SetTemp label="Stellwert (±1) [%.1f °C]" minValue=4.5 maxValue=30.5 step=1.0 visibility=[BD_Heizung_OnOff == ON]
+                Setpoint item=BD_Heizung_SetTemp label="Stellwert (±½) [%.1f °C]" minValue=4.5 maxValue=30.5 step=0.5 visibility=[BD_Heizung_OnOff == ON]
+                Switch item=BD_Heizung_Preset label="Schnellwahl" mappings=[0="Spar", 1="Komfort"]
+                Switch item=BD_Heizung_SetMode label="Betriebsart" mappings=[0="A", 1="M", 3="B", 4="F"]
+                Text item=BD_Heizung_BoostTime label="Boost-Restzeit [%d min]" visibility=[BD_Heizung_BoostTime > 0]
+                Text item=BD_Heizung_Valve label="Ventilstellung [%d %%]" visibility=[BD_Heizung_OnOff == ON]
+            }
+        }
+        Image label="Temperaturen" refresh=60000
+              url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=4&width=700&height=350&from=now-48h&to=now"
+    }
+
+    Frame label="Verbraucher" {
+        Text item=FK_Spuelmaschine_OpState label="Spülmaschine [MAP(operation.map):%s]" valuecolor=[1="olive", 2="green", 3="maroon"]
+        Text item=BD_Waschmaschine_OpState label="Waschmaschine [MAP(operation.map):%s]" valuecolor=[1="olive", 2="green", 3="maroon"]
+        Text item=FK_Kuehlschrank_Power label="Kühlschrank [%.1f W]" icon="catfridge"
+        Image label="Verbraucher" refresh=60000
+              url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=3&width=700&height=350&from=now-48h&to=now"
+        Image label="Beleuchtung" refresh=60000
+              url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=2&width=700&height=350&from=now-48h&to=now"
+    }
+
+    Frame label="Admin" {
+        Text label="Optionen" {
+            Switch item=RuleWhgDoorNotif
+        }
+        Text label="Status" icon="info" {
+            Group item=gRSSI
+            Group item=gPower
+            Group item=gHeatAct
+            Group item=gHeatValve valuecolor=[0="green"]
+            Group item=gFenster valuecolor=[0="green"]
+            Group item=gBatterie valuecolor=[0="green"]
+            Group item=gLights
+            Group item=gUnreach
+            Group item=gPending
+        }
+        Text label="Räume" icon="groundfloor" {
+            Group item=BD label="Bad"
+            Group item=FK label="Flur/Küche"
+            Group item=SZ label="Schlafzimmer"
+            Group item=WZ label="Wohnzimmer"
+            Group item=BK label="Balkon"
+        }
+        Group item=Whg label="Alle Elemente" icon="house"
+    }
 }
 
