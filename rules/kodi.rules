@@ -8,7 +8,7 @@ then {
         //if (KodiTitle.state == NULL) KodiTitle.postUpdate("")
         //if (KodiPlayerState.state == NULL) KodiPlayerState.postUpdate("Stop")
         if (KodiSystemState.state == NULL) KodiSystemState.postUpdate(OFF)
-        if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("⁉ (unbekannt)")
+        if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("(unbekannt) ⁉")
     ]
 }
 end
@@ -25,9 +25,9 @@ then {
     val show = (KodiTitleShow.state as StringType).toString
 
     var summary = ""
-    if (KodiSystemState.state == OFF) summary = "✖  nicht aktiv"
-    else if (KodiPlayerState.state == "Stop") summary = "⏹ inaktiv"
-    else if (KodiTitleShow.state == "") summary = String::format("%s %s", status, title)
+    if (KodiSystemState.state == OFF) summary = "nicht aktiv ✘"
+    else if (KodiPlayerState.state == "Stop") summary = "inaktiv ⏹"
+    else if (KodiTitleShow.state == "") summary = String::format("%s %s", title, status)
     else summary = String::format("%s: %s %s", show, title, status)
 
     KodiSummary.postUpdate(summary)

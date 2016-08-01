@@ -1,5 +1,3 @@
-import org.joda.time.*
-
 val MODE_OFF = 0
 val MODE_STANDBY = 1
 val MODE_ACTIVE = 2
@@ -16,14 +14,20 @@ then {
 }
 end
 
+/**
+ * Waschmaschine
+ * Aus: 0,05 - 0,07 W
+ * Standby/Fertig: 4,3W
+ * Aktiv: bis 2300W (bisher gesehener Mindestwert 4,55W)
+ */
 rule "Waschmaschine Überwachung: Verbrauchszuordnung"
 when
     Item BD_Waschmaschine_Power changed
 then {
     //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
-    if (BD_Waschmaschine_Power.state < 0.5) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
+    if (BD_Waschmaschine_Power.state < 0.2) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
     else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(MODE_ACTIVE)
-	else if (BD_Waschmaschine_Power.state < 2) {
+	else if (BD_Waschmaschine_Power.state < 4.5) {
 		if (BD_Waschmaschine_OpState.state == MODE_OFF) BD_Waschmaschine_OpState.postUpdate(MODE_STANDBY)
 		else if (BD_Waschmaschine_OpState.state == MODE_ACTIVE) BD_Waschmaschine_OpState.postUpdate(MODE_FINISHED)
     }
