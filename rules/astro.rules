@@ -23,14 +23,14 @@ when
 	Item SunElevation changed
 then
 	if(SunElevation.state >  0){
-		if(NightState.state != ON){
-			logInfo("RULE", "Sun is crossing the horizon, switching to daylight mode")
-			postUpdate(NightState, ON)
+		if(NightState.state != OFF){
+			logInfo("RULE", "--> Sun is crossing the horizon, switching to daylight mode")
+			postUpdate(NightState, OFF)
 		}
 	} else {
-		if(NightState.state != OFF) {
-			logInfo("RULE", "Sun is crossing the horizon, switching to night mode")
-			postUpdate(NightState, OFF)
+		if(NightState.state != ON) {
+			logInfo("RULE", "--> Sun is crossing the horizon, switching to night mode")
+			postUpdate(NightState, ON)
 		}
 	}
 end

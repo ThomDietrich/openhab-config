@@ -13,7 +13,6 @@ String KodiTitleShow        "Show Title [%s]"                   (gKodi) {xbmc="<
 //String KodiPlayerLabel    "Label [%s]"                        (gKodi) {xbmc="<[#livingRoom|Player.Label]"}
 String KodiNotificationText "Notification [%s]"                 (gKodi) {xbmc=">[#livingRoom|GUI.ShowNotification]", autoupdate="false"}
 Number KodiNotificationId   "Trigger Notification"              (gKodi)
-
 String KodiSummary          "Summary [%s]"                      (gKodi)
 
 // vim: syntax=Xtend

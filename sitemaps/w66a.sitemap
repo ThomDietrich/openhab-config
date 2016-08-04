@@ -11,14 +11,14 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=Zodiac icon="zodiac"
                 Text item=MoonFull icon="fullmoon"
                      visibility=[MoonPhase == WAXING_CRESCENT,
-                     	         MoonPhase == FIRST_QUARTER,
-                     	         MoonPhase == WAXING_GIBBOUS,
-                     	         MoonPhase == FULL]
+                                 MoonPhase == FIRST_QUARTER,
+                                 MoonPhase == WAXING_GIBBOUS,
+                                 MoonPhase == FULL]
                 Text item=MoonNew icon="fullmoon"
                      visibility=[MoonPhase == WANING_GIBBOUS,
-                     	         MoonPhase == THIRD_QUARTER,
-                     	         MoonPhase == WANING_CRESCENT,
-                     	         MoonPhase == NEW]
+                                 MoonPhase == THIRD_QUARTER,
+                                 MoonPhase == WANING_CRESCENT,
+                                 MoonPhase == NEW]
             }
             Frame label="Wettervorhersage"{
                 Text label="kommt später..." icon="sun_clouds"
@@ -52,7 +52,7 @@ sitemap w66a label="W66a openHAB Installation" {
             Frame label="Einblendung" visibility=[KodiPlayerState != "Stop"]{
                 Selection item=KodiNotificationId icon="" label="Nachricht einblenden..."
                           mappings=[0="Klick mich!", 1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P",
-                          	        4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
+                                    4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
             }
         }
         Text item=SpeedtestSummary {
@@ -67,8 +67,10 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
                 Switch item=SpeedtestRerun mappings=[ON="Start"]
             }
-            Frame label="Statistik" {
-                Text label="..." icon="speedtest_analytics8"
+            Frame label="Statistik" icon="speedtest_analytics8" { //TODO dokumentieren: icon wird nicht angezeigt
+                Text label="" icon="speedtest_analytics8"
+                Image label="Speedtest" icon="speedtest_analytics8" refresh=60000
+                      url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
     }
