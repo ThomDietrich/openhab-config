@@ -31,6 +31,7 @@
 */
 
 // http://www.eq-3.de/Downloads/PDFs/Dokumentation_und_Tutorials/HM_Script_Teil_4_Datenpunkte_1_503.pdf
+// http://www.eq-3.de/Downloads/eq3/download%20bereich/hm_web_ui_doku/hm_devices_Endkunden.pdf
 
 //HM-ES-PMSw1-Pl Steckdose mit Leistungsmessung
 Switch BD_Waschmaschine_State       "Waschmaschine Zustand"                     (BD)                            {channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:LEQ1275872:1#STATE"}

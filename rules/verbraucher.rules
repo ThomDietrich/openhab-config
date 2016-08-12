@@ -34,14 +34,25 @@ then {
 }
 end
 
+
+//TODO: Power wechselt beim Einschalten mehrfach zwischen ACTIVE and FINISHED, Timer einbauen!
+// 2016-08-05 15:38:53.390 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 66.31 to 0.70
+// 2016-08-05 15:39:01.490 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 0.70 to 45.25
+// 2016-08-05 15:39:09.411 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 45.25 to 141.67
+// 2016-08-05 15:39:17.456 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 141.67 to 0.68
+// 2016-08-05 15:39:25.401 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 0.68 to 167.85
+// 2016-08-05 15:39:34.170 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 167.85 to 91.66
+// 2016-08-05 15:39:41.419 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 91.66 to 0.68
+// 2016-08-05 15:39:49.411 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 0.68 to 160.08
+ 
 rule "Spuelmaschine Überwachung: Verbrauchszuordnung"
 when
     Item FK_Spuelmaschine_Power changed
 then {
     //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
-    if (FK_Spuelmaschine_Power.state < 0.1) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+    if (FK_Spuelmaschine_Power.state < 0.03) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
-	else if (FK_Spuelmaschine_Power.state < 1) {
+	else if (FK_Spuelmaschine_Power.state < 0.75) {
 		if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
 		else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
     }
