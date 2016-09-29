@@ -142,14 +142,14 @@ Number WZ_Lacks_LEDs_Power          "Lacksleuchter LEDs Leistung [%.0f W]"      
 Number WZ_Lacks_Lampe_Power         "Lacksleuchter Lampe Leistung [%.0f W]"     <energy>    (WZ,gPower)
 
 //HM-MOD-Re-8 8-Kanal-Empfangsmodul
-//Switch WZ_rcswitch_Origami        "Origami"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:1#STATE" }
-//Switch rcswitch_K2                "rcswitch Kanal2 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:2#STATE" }
-//Switch WZ_rcswitch_Goldf          "Goldfruchtpalme"                           <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:3#STATE" }
-//Switch FK_rcswitch_Edison         "Edison"                                    <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
-//Switch FK_rcswitch_Arbeit         "Arbeitsbeleuchtung"                        <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:5#STATE" }
-//Switch BK_rcswitch_Balkonmagic    "Balkonmagic"                               <switch>    (BK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:6#STATE" }
-//Switch WZ_rcswitch_Expedit        "Expedit"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }
-//Switch rcswitch_K8                "rcswitch Kanal8 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:8#STATE" }
+Switch WZ_rcswitch_Origami          "Origami"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:1#STATE" }
+Switch rcswitch_K2                  "rcswitch Kanal2 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:2#STATE" }
+Switch WZ_rcswitch_Goldf            "Goldfruchtpalme"                           <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:3#STATE" }
+Switch FK_rcswitch_Edison           "Edison"                                    <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
+Switch FK_rcswitch_Arbeit           "Arbeitsbeleuchtung"                        <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:5#STATE" }
+Switch BK_rcswitch_Balkonmagic      "Balkonmagic"                               <switch>    (BK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:6#STATE" }
+Switch WZ_rcswitch_Expedit          "Expedit"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }
+Switch rcswitch_K8                  "rcswitch Kanal8 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:8#STATE" }
 Number rcswitch_RSSI                "rcswitch RSSI [%d dBm]"                                (Whg,W,gRSSI)       { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#RSSI_DEVICE" }
 Switch rcswitch_Unreach             "rcswitch unreachable"                      <siren>     (Whg,W,gUnreach)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#UNREACH" }
 Switch rcswitch_Pending             "rcswitch config pending"                   <siren>     (Whg,W,gPending)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#CONFIG_PENDING" }
