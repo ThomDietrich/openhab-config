@@ -7,17 +7,16 @@ var String rulename = "--> Willkommenslicht: "
 rule "Wohnungstür-Automatik: Init"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(175)) [|
         if (Wohnungstuer_TimerActive.state == NULL) Wohnungstuer_TimerActive.postUpdate(OFF)
     ]
-}
 end
 
 rule "Wohnungstür-Automatik: Duration Update"
 when
     Time cron "0 * * * * ?"
-then {
+then
     if (Wohnungstuer_TimerActive.state == ON) {
         //logInfo("RULE", rulename + "updating timer duration")
         var DateTime timeEnd = new DateTime((Wohnungstuer_TimerEnd.state as DateTimeType).calendar.timeInMillis)
@@ -26,13 +25,12 @@ then {
         //logInfo("RULE", rulename + "Duration: " + timeDuration)
         Wohnungstuer_TimerDuration.postUpdate(timeDuration)
     }
-}
 end
 
 rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
-then {
+then
     logInfo ("RULE", rulename + "Türsensor ausgelöst.")
     if (NightState.state == ON && FK_rcswitch_Edison.state == OFF && PresenceThN5.state == OFF){
         sendCommand(FK_rcswitch_Edison, ON)
@@ -52,23 +50,21 @@ then {
             }
         ]
     }
-    if (RuleWhgDoorNotif.state == ON) {
+    if (RuleWhgDoorNotif.state == ON && PresenceThN5.state == OFF) {
         pushover("Wohnungstür wurde geöffnet!")
     }
-}
 end
 
 rule "Willkommenslicht Timer mit Badlicht loeschen"
 when
     Item BD_Deckenlicht received update
-then {
+then
     if (willkommen_timer != null) {
         willkommen_timer.cancel
         willkommen_timer = null
         Wohnungstuer_TimerActive.postUpdate(OFF)
         logInfo ("RULE", rulename + "Timer nach Aktivität (Bad) gelöscht.")
     }
-}
 end
 
 // vim: syntax=Xtend

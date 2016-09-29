@@ -9,7 +9,7 @@ rule "OpenHAB system started"
 when
     System started or
     Time is midnight
-then {
+then
     createTimer(now.plusSeconds(190)) [|
         logInfo("RULE", rulename + "openHAB system started +15s rule")
         //
@@ -31,14 +31,13 @@ then {
         //
         logInfo("RULE", rulename + "Schnellwahlwerte bei Systemstart initialisiert")
     ]
-}
 end
 
 
 rule "Heizmodus umschalten"
 when
     Item WhgHeatState received command
-then {
+then
     logInfo("RULE", rulename + "Wohnung Heizmodus")
     if (receivedCommand == AUTOMATIK) {
         logInfo("RULE", rulename + "Wohnung Heizmodus: Automatik")
@@ -62,7 +61,6 @@ then {
         logError("RULE", rulename + "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
     }
     WhgHeatState.postUpdate(-1)
-}
 end
 
 // vim: syntax=Xtend

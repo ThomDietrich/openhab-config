@@ -2,7 +2,7 @@
 rule "Kodi init"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(175)) [|
         //if (KodiTitleShow.state == NULL) KodiTitleShow.postUpdate("")
         //if (KodiTitle.state == NULL) KodiTitle.postUpdate("")
@@ -10,7 +10,6 @@ then {
         if (KodiSystemState.state == NULL) KodiSystemState.postUpdate(OFF)
         if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("(unbekannt) ⁉")
     ]
-}
 end
 
 rule "Kodi Summary update"
@@ -18,7 +17,7 @@ when
     Item KodiSystemState changed or
     Item KodiPlayerState changed or
     Item KodiTitle changed
-then {
+then
     logInfo("RULE", "--> Kodi Summary update")
     val status = if (KodiPlayerState.state == "Play") "⏯" else if (KodiPlayerState.state == "Pause") "⏸" else "⏹"
     val title = (KodiTitle.state as StringType).toString
@@ -31,23 +30,21 @@ then {
     else summary = String::format("%s: %s %s", show, title, status)
 
     KodiSummary.postUpdate(summary)
-}
 end
 
 
 rule "Kodi reset PlayPause controls"
 when
     Item KodiPlayPause received command
-then {
+then
     //logInfo("RULE", "Kodi reset PlayPause controls")
     KodiPlayPause.postUpdate(OFF)
-}
 end
 
 rule "Kodi Notification triggered"
 when
     Item KodiNotificationId received command
-then {
+then
     //logInfo("RULE", "Kodi Notification triggered")
     var String msg = "a"
     switch (receivedCommand) {
@@ -64,7 +61,6 @@ then {
         //KodiNotificationText.sendCommand("")
         KodiNotificationId.postUpdate(-1)
     ]
-}
 end
 
 // vim: syntax=Xtend syntax=openhab

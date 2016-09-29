@@ -9,7 +9,7 @@ var String rulename = "--> Heizungssteuerung BD_Heizung: "
 rule "BD_Heizung set heating from sitemap preset element"
 when
   Item BD_Heizung_Preset received command
-then {
+then
     logInfo("RULE", rulename + "Schnellauswahl (Sitemap -> Homematic)")
     switch (receivedCommand){
         case 0: BD_Heizung_Lowering.sendCommand(ON)
@@ -18,13 +18,12 @@ then {
     createTimer(now.plusSeconds(1)) [|
         BD_Heizung_Preset.postUpdate(-1)
     ]
-}
 end
 
 rule "BD_Heizung set mode from sitemap select element"
 when
   Item BD_Heizung_SetMode received command
-then {
+then
     logInfo("RULE", rulename + "Modus (Sitemap -> Homematic)")
     switch (receivedCommand){
         case 0: BD_Heizung_Auto.sendCommand(ON)
@@ -32,13 +31,12 @@ then {
         case 3: BD_Heizung_BoostMode.sendCommand(ON)
         case 4: BD_Heizung_SetMode.postUpdate(-1)
     }
-}
 end
 
 rule "BD_Heizung update sitemap with window mode"
 when
   Item BD_Fenster_State received update
-then {
+then
     createTimer(now.plusSeconds(15)) [|
         //logInfo("RULE", rulename + "Fenster-Modus <" + BD_Fenster_State.state + "><" + BD_Heizung_SetTemp.state + ">")
         if (BD_Fenster_State.state == OPEN && BD_Heizung_SetTemp.state == 12.0) {
@@ -52,13 +50,12 @@ then {
             BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
         }
     ]
-}
 end
 
 rule "BD_Heizung update sitemap with heating mode"
 when
   Item BD_Heizung_Mode received update
-then {
+then
     //logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
     // Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
     if (BD_Heizung_SetMode.state == 4 && BD_Heizung_Mode.state == 0) {
@@ -66,7 +63,6 @@ then {
     } else {
         BD_Heizung_SetMode.postUpdate(BD_Heizung_Mode.state)
     }
-}
 end
 
 rule "BD_Heizung create summary"
@@ -75,7 +71,7 @@ when
     Item BD_Heizung_ActTemp changed or
     Item BD_Heizung_Valve changed or
     Item BD_Heizung_SetMode changed
-then {
+then
     if ((BD_Heizung_SetTemp.state instanceof DecimalType) && (BD_Heizung_ActTemp.state instanceof DecimalType)) {
         val BigDecimal setTemp = (BD_Heizung_SetTemp.state as DecimalType).toBigDecimal
         val BigDecimal actTemp = (BD_Heizung_ActTemp.state as DecimalType).toBigDecimal
@@ -101,7 +97,6 @@ then {
     } else {
         BD_Heizung_Summary.postUpdate("(unbekannt)")
     }
-}
 end
 
 // vim: syntax=Xtend

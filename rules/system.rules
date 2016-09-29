@@ -3,7 +3,7 @@
 rule "OpenHAB system started"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(165)) [|
         logInfo("RULE", "--> openHAB system started rule")
         // Zeitraum für die rrd-Charts
@@ -19,16 +19,14 @@ then {
             if (item.state == NULL) item.postUpdate(0)
         )
     ]
-}
 end
 
 
 rule "OpenHAB system shutting down"
 when
     System shuts down
-then {
+then
     logInfo("RULE", "--> openHAB shutting down rule")
-}
 end
 
 // vim: syntax=Xtend

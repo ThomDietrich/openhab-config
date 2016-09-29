@@ -9,17 +9,16 @@ var String rulename = "--> Badtür-Automatik: "
 rule "Badtür-Automatik: Init"
 when
 	System started
-then {
+then
 	createTimer(now.plusSeconds(180)) [|
 		if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
 	]
-}
 end
 
 rule "Badtür-Automatik: Duration Update"
 when
 	Time cron "0 * * * * ?"
-then {
+then
 	if (BD_Deckenlicht_TimerActive.state == ON) {
 		logInfo("RULE", rulename + "updating timer duration")
 		var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
@@ -28,13 +27,12 @@ then {
 		logInfo("RULE", rulename + "Duration: " + timeDuration)
 		BD_Deckenlicht_TimerDuration.postUpdate(timeDuration)
 	}
-}
 end
 
 rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
 when
   	Item BD_Tuer_State changed from CLOSED to OPEN
-then {
+then
 	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
 	if (NightState.state == ON) {
 		if (BD_Deckenlicht.state == OFF) {
@@ -68,13 +66,12 @@ then {
 			}
 		}
 	}
-}
 end
 
 rule "Badtür-Automatik: Lichtschalter überschreibt"
 when
 	Item BD_Deckenlicht received update
-then {
+then
 	logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer?")
 	if (badlicht_timer != null) {
 		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer??")
@@ -85,7 +82,6 @@ then {
 		logInfo ("RULE", rulename + "manueller Tastendruck löscht Timer.")
 	}
 	// schalten des Lichts geschieht bei diesem Schaltelement automatisch
-}
 end
 
 // vim: syntax=Xtend

@@ -4,13 +4,12 @@ rule "Energieverbrauch init"
 when
 	System started or
 	Time is midnight
-then {
+then
 	createTimer(now.plusSeconds(180)) [|
 		gPower.members.forEach(item |
 			if (item.state == NULL) item.postUpdate(0)
 		)
 	]
-}
 end
 
 

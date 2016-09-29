@@ -3,13 +3,12 @@
 rule "Speedtest init"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(195)) [|
         if (SpeedtestRerun.state == NULL) SpeedtestRerun.postUpdate(OFF)
         if (SpeedtestRunning.state == NULL) SpeedtestRunning.postUpdate("-")
         if (SpeedtestSummary.state == NULL || SpeedtestSummary.state == "") SpeedtestSummary.postUpdate("⁉ (unbekannt)")
     ]
-}
 end
 
 rule "Speedtest"
@@ -18,7 +17,7 @@ when
     //Time cron "0 0 13 * * ?"
     Time cron "0 0 * * * ?" or
     Item SpeedtestRerun received command ON
-then {
+then
     logInfo("RULE", "--> speedtest executed...")
     SpeedtestRunning.postUpdate("Messung läuft...")
 
@@ -55,7 +54,6 @@ then {
         logError("RULE", "--> speedtest failed. Output:\n" + speedtestCliOutput + "\n\n")
     }
     SpeedtestRerun.postUpdate(OFF)
-}
 end
 
 // vim: syntax=Xtend

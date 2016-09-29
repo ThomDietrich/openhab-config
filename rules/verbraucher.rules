@@ -6,12 +6,11 @@ val MODE_FINISHED = 3
 rule "Waschmaschine Überwachung: Init"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(170)) [|
         if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
 		if (FK_Spuelmaschine_OpState == NULL) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     ]
-}
 end
 
 /**
@@ -23,7 +22,7 @@ end
 rule "Waschmaschine Überwachung: Verbrauchszuordnung"
 when
     Item BD_Waschmaschine_Power changed
-then {
+then
     //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
     if (BD_Waschmaschine_Power.state < 0.2) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
     else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(MODE_ACTIVE)
@@ -31,9 +30,16 @@ then {
 		if (BD_Waschmaschine_OpState.state == MODE_OFF) BD_Waschmaschine_OpState.postUpdate(MODE_STANDBY)
 		else if (BD_Waschmaschine_OpState.state == MODE_ACTIVE) BD_Waschmaschine_OpState.postUpdate(MODE_FINISHED)
     }
-}
 end
 
+rule "Waschmaschine Überwachung: Benachrichtigung"
+when
+    Item BD_Waschmaschine_OpState changed
+then
+    if (BD_Waschmaschine_OpState.state == MODE_FINISHED) {
+    	pushover("Waschmaschine fertig!")
+    }
+end
 
 //TODO: Power wechselt beim Einschalten mehrfach zwischen ACTIVE and FINISHED, Timer einbauen!
 // 2016-08-05 15:38:53.390 [ItemStateChangedEvent     ] - FK_Spuelmaschine_Power changed from 66.31 to 0.70
@@ -48,7 +54,7 @@ end
 rule "Spuelmaschine Überwachung: Verbrauchszuordnung"
 when
     Item FK_Spuelmaschine_Power changed
-then {
+then
     //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
     if (FK_Spuelmaschine_Power.state < 0.03) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
@@ -56,7 +62,6 @@ then {
 		if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
 		else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
     }
-}
 end
 
 // vim: syntax=Xtend

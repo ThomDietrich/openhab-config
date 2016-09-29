@@ -2,7 +2,7 @@
 rule "OpenHAB system started - astro"
 when
 	System started
-then {
+then
 	createTimer(now.plusSeconds(180)) [|
 		logInfo("RULE", "--> astro init")
 		if (now.isAfter((SunsetTime.state as DateTimeType).calendar.timeInMillis) ||
@@ -15,7 +15,6 @@ then {
 			postUpdate(NightState, OFF)
 		}
 	]
-}
 end
 
 rule "Update NightState"

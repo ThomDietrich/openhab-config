@@ -1,7 +1,7 @@
 rule "OpenHAB system started - rcswitch off"
 when
     System started
-then {
+then
     createTimer(now.plusSeconds(180)) [|
         logInfo("RULE", "--> rcswitch all to defined state OFF")
         sendCommand(WZ_rcswitch_Origami, OFF)
@@ -13,7 +13,6 @@ then {
         sendCommand(WZ_rcswitch_Expedit, OFF)
         sendCommand(rcswitch_K8, OFF)
     ]
-}
 end
 
 // vim: syntax=Xtend
