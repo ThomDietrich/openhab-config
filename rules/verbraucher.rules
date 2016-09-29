@@ -1,3 +1,7 @@
+import java.util.concurrent.locks.ReentrantLock
+
+var java.util.concurrent.locks.ReentrantLock finishLock  = new java.util.concurrent.locks.ReentrantLock()
+
 val MODE_OFF = 0
 val MODE_STANDBY = 1
 val MODE_ACTIVE = 2
@@ -28,7 +32,16 @@ then
     else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(MODE_ACTIVE)
 	else if (BD_Waschmaschine_Power.state < 4.5) {
 		if (BD_Waschmaschine_OpState.state == MODE_OFF) BD_Waschmaschine_OpState.postUpdate(MODE_STANDBY)
-		else if (BD_Waschmaschine_OpState.state == MODE_ACTIVE) BD_Waschmaschine_OpState.postUpdate(MODE_FINISHED)
+		else if (BD_Waschmaschine_OpState.state == MODE_ACTIVE) {
+			finishLock.lock()
+			try {
+				// Debounce for 30 seconds
+				Thread::sleep(30000)
+				if (BD_Waschmaschine_Power.state < 4.5) BD_Waschmaschine_OpState.postUpdate(MODE_FINISHED)
+			} finally {
+				finishLock.unlock()
+			}
+		}
     }
 end
 
