@@ -1,0 +1,56 @@
+sitemap demo label="My home automation" {
+        Frame label="Date" {
+                Text item=Date label="Today [Monday, 01. Aug. 2016]"
+        }
+        Frame label="Demo" {
+                Switch item=Lights icon="light" mappings=[OFF="All Off"]
+                Text item=Temperature label="Livingroom [21.3 °C]" icon="temperature" valuecolor=[>25="orange",>15="green",<=15="blue"]
+        Group item=Heating
+                Text item=Multimedia_Summary label="Multimedia" icon="video" {
+                        Selection item=TV_Channel mappings=[0="off", 1="DasErste", 2="BBC One", 3="Cartoon Network"]
+                        Slider item=Volume
+                }
+        }
+
+        Text label="The following elements are for screenshots. The screen was at this width:"
+        Text label="---------------------------------------------------------------------------------------"
+    Frame {
+        Text item=Temperature label="Livingroom [21.3 °C]" icon="temperature"
+    }
+    Frame {
+        Switch item=Livingroom_Light_OnOff label="Ceiling Light" icon="light"
+    }
+    Frame {
+        Switch item=Demo_TV_Channel label="TV Channel" icon="television" mappings=[0="DasErste", 1="BBC One", 2="Cartoon Network"]
+    }
+    Frame {
+        Selection item=Demo_TV_Channel label="TV Channel" icon="television" mappings=[0="DasErste", 1="BBC One", 2="Cartoon Network"]
+    }
+    Frame {
+        Setpoint item=Demo_KitchenTemperature
+    }
+    Frame {
+        Slider item=Demo_KitchenTemperature switchSupport
+    }
+    Frame {
+        Colorpicker item=Demo_Color label="LED Light Color" icon="colorwheel"
+    }
+    //Frame {
+    //    Chart item=Demo_KitchenTemperature label="Test" period=h refresh=600
+    //}
+    Frame {
+        Group item=gHeatAct label="Room Temperatures [%.1f °C]"
+    }
+    Frame {
+        Image url="https://raw.githubusercontent.com/wiki/openhab/openhab/images/features.png"
+    }
+    Frame {
+        Video url="http://demo.openhab.org/Hue.m4v"
+    }
+    Frame {
+        Webview url="http://www.openhab.org" height=5
+    }
+    Frame {
+        Text item=Temperature label="Livingroom [22.0 °C]" icon="temperature" labelcolor=[!=1="blue"] valuecolor=[!=1="green"]
+    }
+}
