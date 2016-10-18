@@ -79,9 +79,9 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=SpeedtestRunning label="Speedtest [%s]" visibility=[SpeedtestRunning != "-"]
                 Switch item=SpeedtestRerun mappings=[ON="Start"]
             }
-            Frame label="Statistik" icon="speedtest_analytics8" { //TODO dokumentieren: icon wird nicht angezeigt
-                Text label="" icon="speedtest_analytics8"
-                Image label="Speedtest" icon="speedtest_analytics8" refresh=60000
+            Frame label="Statistik" { //TODO dokumentieren: icon wird nicht angezeigt
+                //Text label="" icon="speedtest_analytics8"
+                Image label="Speedtest" refresh=60000
                       url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
@@ -96,7 +96,8 @@ sitemap w66a label="W66a openHAB Installation" {
         Switch item=WZ_rcswitch_Expedit
         Switch item=WZ_rcswitch_Goldf
         Switch item=FK_rcswitch_Arbeit
-        Switch item=FK_rcswitch_Edison
+        Slider item=FK_Edison_Dimmer_Level 
+        Setpoint item=FK_Edison_Dimmer_Level minValue=0 maxValue=100 step=5 
         Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
         Switch item=Kueche_Deckenlicht
         Switch item=Flur_Deckenlicht
@@ -107,7 +108,6 @@ sitemap w66a label="W66a openHAB Installation" {
 
     Frame label="Temperaturen und Heizung" {
         Switch item=WhgHeatState label="" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
-        Text label="" icon="none"
 
         Text item=WZ_Heizung_Battery label="Wohnzimmer [%.1f V]" icon="battery" visibility=[WZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"] //TODO MAP for 0..100
         Text item=WZ_Heizung_Fault label="Wohnzimmer [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[WZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
