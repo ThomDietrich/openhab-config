@@ -2,7 +2,7 @@
 Group Astro <sun_clouds> (Whg)
 
 // Datum, Uhrzeit und Astro-Daten
-DateTime    CurrDateTime        "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                  <clock>     (Astro) { channel="ntp:ntp:de:dateTime" }
+DateTime    CurrDateTime        "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                  <clock>     (Astro) { channel="ntp:ntp:local:dateTime" }
 String      SeasonName          "Jahreszeit [MAP(astro.map):%s]"                                (Astro) { channel="astro:sun:home:season#name" }
 //
 DateTime    SunsetTime          "Sonnenuntergang [%1$tH:%1$tM Uhr]"                 <sun>       (Astro) { channel="astro:sun:home:set#start" }

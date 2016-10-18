@@ -13,8 +13,9 @@ VALVE_TIGHT=Ventil undicht
 ADJUSTING_RANGE_TOO_LARGE=Stellbereich zu groß
 ADJUSTING_RANGE_TOO_SMALL=Stellbereich zu klein
 COMMUNICATION_ERROR=Gerätekommunikation gestört
-LOWBAT=Batteriespannung zu gering
+LOWBAT=Batteriespannung gering
 VALVE_ERROR_POSITION=Ventil in Fehlerposition
 
 // UNSET
 NULL=unbekannt ⁉
+-=unbekannt ⁉
