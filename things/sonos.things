@@ -1,6 +1,6 @@
-Thing   sonos:CONNECT:Wohnzimmer    [ udn="RINCON_B8E93794664C01400", refresh=60 ]
-Thing   sonos:PLAY1:Bad             [ udn="RINCON_B8E937E0539601400", refresh=60 ]
-Thing   sonos:PLAY1:Schlafzimmer    [ udn="RINCON_B8E937ED0A1601400", refresh=60 ]
-Thing   sonos:PLAY3:Kueche          [ udn="RINCON_B8E93736496A01400", refresh=60 ]
+Thing   sonos:CONNECT:RINCON_B8E93794664C01400        [ udn="RINCON_B8E93794664C01400", refresh=60 ] //Wohnzimmer
+Thing   sonos:PLAY1:RINCON_B8E937E0539601400          [ udn="RINCON_B8E937E0539601400", refresh=60 ] //Bad
+Thing   sonos:PLAY1:RINCON_B8E937ED0A1601400          [ udn="RINCON_B8E937ED0A1601400", refresh=60 ] //Schlafzimmer
+Thing   sonos:PLAY3:RINCON_B8E93736496A01400          [ udn="RINCON_B8E93736496A01400", refresh=60 ] //Küche
 
 // vim: syntax=Xtend

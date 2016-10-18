@@ -7,12 +7,12 @@
 
 Group  gSonos            "Sonos Soundsystem"  <"speaker-black">  (Whg)
 
-Player SonosController   "Controller"                            (gSonos) {channel="sonos:PLAY3:Kueche:control"}
-Dimmer SonosVolume       "Volume [%.1f %%]"   <soundvolume>      (gSonos) {channel="sonos:PLAY3:Kueche:volume"}
-Switch SonosMute         "Mute"               <soundvolume_mute> (gSonos) {channel="sonos:PLAY3:Kueche:mute"}
-Switch SonosLED          "LED"                <switch>           (gSonos) {channel="sonos:PLAY3:Kueche:led"}
-String SonosCurrentTrack "Now playing [%s]"   <text>             (gSonos) {channel="sonos:PLAY3:Kueche:currenttrack"}
-String SonosState        "Status [%s]"        <text>             (gSonos) {channel="sonos:PLAY3:Kueche:state"}
+Player SonosController   "Controller"                            (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:control"}
+Dimmer SonosVolume       "Volume [%.1f %%]"   <soundvolume>      (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:volume"}
+Switch SonosMute         "Mute"               <soundvolume_mute> (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:mute"}
+Switch SonosLED          "LED"                <switch>           (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:led"}
+String SonosCurrentTrack "Now playing [%s]"   <text>             (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:currenttrack"}
+String SonosState        "Status [%s]"        <text>             (gSonos) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:state"}
 
 String SonosSummary      "Sonos Summary [%s]"                    (gSonos)
 
