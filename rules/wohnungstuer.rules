@@ -32,8 +32,8 @@ when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
     logInfo ("RULE", rulename + "Türsensor ausgelöst.")
-    if (NightState.state == ON && FK_rcswitch_Edison.state == OFF && PresenceThN5.state == OFF){
-        sendCommand(FK_rcswitch_Edison, ON)
+    if (NightState.state == ON && FK_Edison_Dimmer_Level.state == 0 && PresenceThN5.state == OFF){
+        sendCommand(FK_Edison_Dimmer_Level, 100)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
         Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
@@ -46,7 +46,7 @@ then
                 willkommen_timer = null
                 Wohnungstuer_TimerActive.postUpdate(OFF)
                 logInfo ("RULE", rulename + "Timer abgelaufen, Eddison aus.")
-                sendCommand(FK_rcswitch_Edison, OFF)
+                sendCommand(FK_Edison_Dimmer_Level, 0)
             }
         ]
     }

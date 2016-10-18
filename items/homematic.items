@@ -1,34 +1,37 @@
 
-/*
-         ID │ Name                      │  Address │ Serial Number │ Type │ Type String               │ Firmware │ Config Pending │ Unreach
-────────────┼───────────────────────────┼──────────┼───────────────┼──────┼───────────────────────────┼──────────┼────────────────┼────────
-          1 │ Heizkoerper Wohnzimmer    │   2F00A5 │    LEQ0785556 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No
-          2 │ Heizkoerper Schlafzimmer  │   2DB755 │    LEQ0778898 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No
-          3 │ Heizkoerper Kueche        │   2E9721 │    LEQ0857855 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No
-          4 │ Heizkoerper Bad           │   2E88C6 │    LEQ0851363 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No
-          5 │ Fenster Schlafzimmer      │   2ED29C │    LEQ0919429 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No
-          6 │ Fenster Kueche            │   383121 │    MEQ0029864 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No
-          7 │ Fenster Bad               │   383111 │    MEQ0029848 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No
-          8 │ Tuer Bad                  │   35E259 │    LEQ1466850 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No
-          9 │ Tuer Wohnung              │   2D94C7 │    LEQ0922808 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No
-         10 │ Deckenlicht Schlafzimmer  │   341DB9 │    LEQ1293514 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No
-         11 │ Deckenlicht Flur          │   341DCB │    LEQ1293495 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No
-         12 │ Deckenlicht Bad           │   2A7ECE │    LEQ0493737 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No
-         13 │ Deckenlicht Kueche        │   287E32 │    LEQ0425711 │ 0004 │              HM-LC-Sw1-FM │      1.C │             No │      No
-         14 │ Deckenlicht Wohnzimmer    │   329C11 │    LEQ0883550 │ 0009 │              HM-LC-Sw2-FM │      1.C │             No │      No
-         15 │ rc-switch                 │   353AD2 │    LEQ1522328 │ 00BE │               HM-MOD-Re-8 │      1.0 │             No │      No
-         16 │ Taster Wohnzimmer         │   336EFB │    LEQ1332306 │ 00BF │                HM-PB-2-FM │      1.0 │             No │      No
-         17 │ Taster Flur rechts        │   28CFF0 │    LEQ0396742 │ 00BF │                HM-PB-2-FM │      1.0 │             No │      No
-         18 │ Taster Flur links         │   2B93CB │    LEQ0570990 │ 006B │              HM-PB-2-WM55 │      1.4 │             No │      No
-         19 │ Taster Küche Schrank      │   381699 │    MEQ0023751 │ 006B │              HM-PB-2-WM55 │      1.4 │             No │      No
-         20 │ Fernbedienung             │   2F6F8B │    LEQ0790268 │ 00DA │                   HM-RC-8 │      1.0 │             No │      No
-         21 │ Schluesselanhaenger       │   2AC14C │    LEQ0496553 │ 00A5 │              HM-RC-Sec4-2 │      1.2 │             No │      No
-         22 │ Kuehlschrank              │   342683 │    LEQ1275907 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No
-         23 │ Spuelmaschine             │   342659 │    LEQ1275865 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No
-         24 │ Waschmaschine             │   34265F │    LEQ1275872 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No
-         25 │ Medientechnik             │   370369 │    MEQ0272771 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No
-────────────┴───────────────────────────┴──────────┴───────────────┴──────┴───────────────────────────┴──────────┴────────────────┴────────
-*/
+//
+//         ID │ Name                      │  Address │ Serial Number │ Type │ Type String               │ Firmware │ Config Pending │ Unreach │ Low Bat
+//────────────┼───────────────────────────┼──────────┼───────────────┼──────┼───────────────────────────┼──────────┼────────────────┼─────────┼────────
+//            │                           │          │               │      │                           │          │                │         │
+//          1 │ Heizkoerper Wohnzimmer    │   2F00A5 │    LEQ0785556 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No │      No
+//          2 │ Heizkoerper Schlafzimmer  │   2DB755 │    LEQ0778898 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No │     Yes
+//          3 │ Heizkoerper Kueche        │   2E9721 │    LEQ0857855 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No │     Yes
+//          4 │ Heizkoerper Bad           │   2E88C6 │    LEQ0851363 │ 0095 │               HM-CC-RT-DN │      1.4 │             No │      No │      No
+//          5 │ Fenster Schlafzimmer      │   2ED29C │    LEQ0919429 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No │      No
+//          6 │ Fenster Kueche            │   383121 │    MEQ0029864 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No │      No
+//          7 │ Fenster Bad               │   383111 │    MEQ0029848 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No │      No
+//          8 │ Tuer Bad                  │   35E259 │    LEQ1466850 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No │      No
+//          9 │ Tuer Wohnung              │   2D94C7 │    LEQ0922808 │ 00C7 │                HM-Sec-SCo │      1.0 │             No │      No │      No
+//         10 │ Deckenlicht Schlafzimmer  │   341DB9 │    LEQ1293514 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No │      No
+//         11 │ Deckenlicht Flur          │   341DCB │    LEQ1293495 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No │      No
+//         12 │ Deckenlicht Bad           │   2A7ECE │    LEQ0493737 │ 0069 │           HM-LC-Sw1PBU-FM │      2.8 │             No │      No │      No
+//         13 │ Deckenlicht Kueche        │   287E32 │    LEQ0425711 │ 0004 │              HM-LC-Sw1-FM │      1.C │             No │      No │      No
+//         14 │ Deckenlicht Wohnzimmer    │   329C11 │    LEQ0883550 │ 0009 │              HM-LC-Sw2-FM │      1.C │             No │      No │      No
+//         15 │ rc-switch                 │   353AD2 │    LEQ1522328 │ 00BE │               HM-MOD-Re-8 │      2.9 │             No │      No │      No
+//         16 │ Taster Wohnzimmer         │   336EFB │    LEQ1332306 │ 00BF │                HM-PB-2-FM │      1.0 │             No │      No │      No
+//         20 │ Fernbedienung             │   2F6F8B │    LEQ0790268 │ 00DA │                   HM-RC-8 │      1.0 │             No │      No │      No
+//         21 │ Schluesselanhaenger       │   2AC14C │    LEQ0496553 │ 00A5 │              HM-RC-Sec4-2 │      1.2 │             No │      No │      No
+//         22 │ Kuehlschrank              │   342683 │    LEQ1275907 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No │      No
+//         23 │ Spuehlmaschine            │   342659 │    LEQ1275865 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No │      No
+//         24 │ Waschmaschine             │   34265F │    LEQ1275872 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No │      No
+//         25 │ Medientechnik             │   370369 │    MEQ0272771 │ 00AC │            HM-ES-PMSw1-Pl │      2.5 │             No │      No │      No
+//         26 │ Taster Küche Schrank      │   381699 │    MEQ0023751 │ 006B │              HM-PB-2-WM55 │      1.4 │             No │      No │      No
+//         27 │ Taster Flur Tokyo         │   28CFF0 │    LEQ0396742 │ 00BF │                HM-PB-2-FM │      1.0 │             No │      No │      No
+//         28 │ Taster Flur Sicherung     │   2B93CB │    LEQ0570990 │ 006B │              HM-PB-2-WM55 │      1.4 │             No │      No │      No
+//         29 │ Dimmer Edison Küche       │   240D44 │    KEQ0904112 │ 00A4 │          HM-LC-Dim1T-Pl-2 │      2.3 │             No │      No │      No
+//         30 │ Wandthermostat Wohnzimmer │   4E95CC │    NEQ0935446 │ 00AD │          HM-TC-IT-WM-W-EU │      1.3 │             No │      No │      No
+//────────────┴───────────────────────────┴──────────┴───────────────┴──────┴───────────────────────────┴──────────┴────────────────┴─────────┴────────
+//
 
 // http://www.eq-3.de/Downloads/PDFs/Dokumentation_und_Tutorials/HM_Script_Teil_4_Datenpunkte_1_503.pdf
 // http://www.eq-3.de/Downloads/eq3/download%20bereich/hm_web_ui_doku/hm_devices_Endkunden.pdf
@@ -73,7 +76,6 @@ Number WZ_Medientechnik_Frequency   "Medientechnik Frequenz [%.1f Hz]"          
 Number WZ_Medientechnik_RSSI        "Medientechnik RSSI [%d dBm]"               (WZ,W,gRSSI)                    {channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#RSSI_DEVICE"}
 Switch WZ_Medientechnik_Unreach     "Medientechnik unreachable"                 <siren> (WZ,W,gUnreach)         {channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#UNREACH"}
 Switch WZ_Medientechnik_Pending     "Medientechnik config pending"              <siren> (WZ,W,gPending)         {channel="homematic:HG-HM-ES-PMSw1-Pl:ccu:MEQ0272771:0#CONFIG_PENDING"}
-
 
 //HM-Sec-SCo Tür-/Fensterkontakt optisch
 Contact BD_Fenster_State            "Bad Fenster [MAP(window.map):%s]"          <contact>   (BD,gFenster)       {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:1#STATE"}
@@ -141,11 +143,17 @@ Switch WZ_Lacks_Pending             "Lacksleuchter config pending"              
 Number WZ_Lacks_LEDs_Power          "Lacksleuchter LEDs Leistung [%.0f W]"      <energy>    (WZ,gPower)
 Number WZ_Lacks_Lampe_Power         "Lacksleuchter Lampe Leistung [%.0f W]"     <energy>    (WZ,gPower)
 
+//HM-LC-Dim1T-Pl-2 Funk-Abschnitt-Dimmaktor ab V2.0
+Dimmer FK_Edison_Dimmer_Level       "Edison Dimmer Zustand"                                 (FK,gLights)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
+Number FK_Edison_Dimmer_RSSI        "Edison Dimmer RSSI [%d dBm]"                           (FK,W,gRSSI)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#RSSI_DEVICE"}
+Switch FK_Edison_Dimmer_Unreach     "Edison Dimmer unreachable"                 <siren>     (FK,W,gUnreach)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#UNREACH"}
+Switch FK_Edison_Dimmer_Pending     "Edison Dimmer config pending"              <siren>     (FK,W,gPending)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#CONFIG_PENDING"}
+
 //HM-MOD-Re-8 8-Kanal-Empfangsmodul
 Switch WZ_rcswitch_Origami          "Origami"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:1#STATE" }
 Switch rcswitch_K2                  "rcswitch Kanal2 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:2#STATE" }
 Switch WZ_rcswitch_Goldf            "Goldfruchtpalme"                           <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:3#STATE" }
-Switch FK_rcswitch_Edison           "Edison"                                    <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
+Switch rcswitch_K4                  "rcswitch Kanal4 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
 Switch FK_rcswitch_Arbeit           "Arbeitsbeleuchtung"                        <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:5#STATE" }
 Switch BK_rcswitch_Balkonmagic      "Balkonmagic"                               <switch>    (BK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:6#STATE" }
 Switch WZ_rcswitch_Expedit          "Expedit"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }

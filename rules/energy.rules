@@ -58,8 +58,8 @@ then if (WZ_rcswitch_Goldf.state == ON) WZ_rcswitch_Goldf_Power.postUpdate(40.0)
 
 
 
-rule "FK_rcswitch_Edison_Power" when Item FK_rcswitch_Edison received update	//ON										//OFF
-then if (FK_rcswitch_Edison.state == ON) FK_rcswitch_Edison_Power.postUpdate(118.0) else FK_rcswitch_Edison_Power.postUpdate(0) end
+//rule "FK_rcswitch_Edison_Power" when Item FK_rcswitch_Edison received update	//ON										//OFF
+//then if (FK_rcswitch_Edison.state == ON) FK_rcswitch_Edison_Power.postUpdate(118.0) else FK_rcswitch_Edison_Power.postUpdate(0) end
 
 
 
