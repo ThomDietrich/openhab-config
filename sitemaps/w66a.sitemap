@@ -9,6 +9,7 @@ sitemap w66a label="W66a openHAB Installation" {
      *   - BasicUI: Pfeil zur Unteransicht außerhalb von Text-Bereich?
      *   - BasicUI: Sicht wird ohne Transformations aktualisiert 
      *   - Switch mit zusätzlichem Parameter locked
+     *   - Slider mit Parametern minValue und maxValue
      */
     
     Frame {

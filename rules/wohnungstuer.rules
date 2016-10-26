@@ -31,15 +31,15 @@ rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    logInfo ("RULE", rulename + "Türsensor ausgelöst.")
+    logInfo("RULE", rulename + "Türsensor ausgelöst.")
     if (NightState.state == ON && FK_Edison_Dimmer_Level.state == 0 && PresenceThN5.state == OFF){
-        sendCommand(FK_Edison_Dimmer_Level, 100)
+        sendCommand(FK_Edison_Dimmer_Level, 70)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
         Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
         Wohnungstuer_TimerActive.postUpdate(ON)
 
-        logInfo ("RULE", rulename + "Eddison ein. Timer wird gesetzt")
+        logInfo("RULE", rulename + "Eddison ein. Timer wird gesetzt")
         willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
             if (willkommen_timer != null) {
                 willkommen_timer.cancel
