@@ -19,7 +19,7 @@ then if (BD_Deckenlicht.state == ON) BD_Deckenlicht_Power.postUpdate(7.5) else B
 
 
 rule "Flur_Deckenlicht_Power" when Item Flur_Deckenlicht received update
-then if (Flur_Deckenlicht.state == ON) Flur_Deckenlicht_Power.postUpdate(0.0) else Flur_Deckenlicht_Power.postUpdate(0) end
+then if (Flur_Deckenlicht.state == ON) Flur_Deckenlicht_Power.postUpdate(21.6) else Flur_Deckenlicht_Power.postUpdate(0) end
 
 
 
