@@ -21,9 +21,9 @@ Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%
 Group W "Wartung" (Whg)
 Group gInitNone "Initialisierung mit (-1)" (Whg)
 
-Switch      PresenceThN5                    "Anwesenheit ThN5"                          <like>          (Whg)   { channel="network:device:ThN5:online" }
-Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg)   { channel="network:device:ThN9:online" }
 Switch      PresencePC                      "Zustand PC"                                <present>       (Whg)   { channel="network:device:BirkePC:online" }
+Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg)   { channel="network:device:ThOP3:online" }
+Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg)   { channel="network:device:ThN9:online" }
 
 Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl"        <switch>        (Whg)
 

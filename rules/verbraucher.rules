@@ -67,4 +67,13 @@ then
     }
 end
 
+rule "Spuelmaschine Überwachung: Benachrichtigung"
+when
+    Item FK_Spuelmaschine_OpState changed
+then
+    if (FK_Spuelmaschine_OpState.state == MODE_FINISHED) {
+      pushover("Spühlmaschine fertig!")
+    }
+end
+
 // vim: syntax=Xtend

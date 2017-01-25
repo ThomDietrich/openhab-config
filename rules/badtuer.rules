@@ -34,7 +34,7 @@ when
   	Item BD_Tuer_State changed from CLOSED to OPEN
 then
 	logInfo ("RULE", rulename + "Türsensor ausgelöst.")
-	if (NightState.state == ON) {
+	if (Night_State.state == ON) {
 		if (BD_Deckenlicht.state == OFF) {
 			sendCommand(BD_Deckenlicht, ON)
 			logInfo("RULE", rulename + "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")

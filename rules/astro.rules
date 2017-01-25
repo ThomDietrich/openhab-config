@@ -5,31 +5,31 @@ when
 then
 	createTimer(now.plusSeconds(180)) [|
 		logInfo("RULE", "--> astro init")
-		if (now.isAfter((SunsetTime.state as DateTimeType).calendar.timeInMillis) ||
-			now.isBefore((SunriseTime.state as DateTimeType).calendar.timeInMillis)
+		if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
+			now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
 		) {
 			logInfo("RULE", "--> Night_State ON")
-			postUpdate(NightState, ON)
+			postUpdate(Night_State, ON)
 		} else {
 			logInfo("RULE", "--> Night_State OFF")
-			postUpdate(NightState, OFF)
+			postUpdate(Night_State, OFF)
 		}
 	]
 end
 
-rule "Update NightState"
+rule "Update Night_State"
 when
-	Item SunElevation changed
+	Item Sun_Elevation changed
 then
-	if(SunElevation.state >  0){
-		if(NightState.state != OFF){
+	if(Sun_Elevation.state >  0){
+		if(Night_State.state != OFF){
 			logInfo("RULE", "--> Sun is crossing the horizon, switching to daylight mode")
-			postUpdate(NightState, OFF)
+			postUpdate(Night_State, OFF)
 		}
 	} else {
-		if(NightState.state != ON) {
+		if(Night_State.state != ON) {
 			logInfo("RULE", "--> Sun is crossing the horizon, switching to night mode")
-			postUpdate(NightState, ON)
+			postUpdate(Night_State, ON)
 		}
 	}
 end

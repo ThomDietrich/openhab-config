@@ -1,5 +1,5 @@
 sitemap w66a label="W66a openHAB Installation" {
-    
+
     /**
      * Notes:
      *   - valuecolor=[="maroon"] sollte erlaubt sein (Designer)
@@ -7,38 +7,38 @@ sitemap w66a label="W66a openHAB Installation" {
      *   - icon "battery-20" nicht direkt wählbar?
      *   - Label und Icon für Image?
      *   - BasicUI: Pfeil zur Unteransicht außerhalb von Text-Bereich?
-     *   - BasicUI: Sicht wird ohne Transformations aktualisiert 
+     *   - BasicUI: Sicht wird ohne Transformations aktualisiert
      *   - Switch mit zusätzlichem Parameter locked
      *   - Slider mit Parametern minValue und maxValue
      */
-    
+
     Frame {
-        Text item=CurrDateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="sun_clouds" {
+        Text item=Current_DateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="sun_clouds" {
             Frame label="Jetzt" {
-                Switch item=NightState label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
-                Text item=SunriseTime icon="sunrise" visibility=[NightState == ON]
-                Text item=SunsetTime icon="sunset" visibility=[NightState == OFF]
-                Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
-                Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
-                Text item=MoonPhase
-                Text item=Zodiac icon="zodiac"
-                Text item=MoonFull icon="fullmoon"
-                     visibility=[MoonPhase == WAXING_CRESCENT,
-                                 MoonPhase == FIRST_QUARTER,
-                                 MoonPhase == WAXING_GIBBOUS,
-                                 MoonPhase == FULL]
-                Text item=MoonNew icon="fullmoon"
-                     visibility=[MoonPhase == WANING_GIBBOUS,
-                                 MoonPhase == THIRD_QUARTER,
-                                 MoonPhase == WANING_CRESCENT,
-                                 MoonPhase == NEW]
+                Switch item=Night_State label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+                Text item=Sunrise_Time icon="sunrise" visibility=[Night_State == ON]
+                Text item=Sunset_Time icon="sunset" visibility=[Night_State == OFF]
+                Text item=Sun_Elevation icon="sunmoon" visibility=[Sun_Elevation > 0]
+                Text item=Moon_Elevation icon="sunmoon" visibility=[Moon_Elevation > 0]
+                Text item=Moon_Phase
+                Text item=Zodiac_Sign icon="Zodiac_Sign"
+                Text item=Moon_Next_Full icon="fullmoon"
+                     visibility=[Moon_Phase == WAXING_CRESCENT,
+                                 Moon_Phase == FIRST_QUARTER,
+                                 Moon_Phase == WAXING_GIBBOUS,
+                                 Moon_Phase == FULL]
+                Text item=Moon_Next_New icon="fullmoon"
+                     visibility=[Moon_Phase == WANING_GIBBOUS,
+                                 Moon_Phase == THIRD_QUARTER,
+                                 Moon_Phase == WANING_CRESCENT,
+                                 Moon_Phase == NEW]
             }
             Frame label="Wettervorhersage"{
                 Text label="kommt später..." icon="sun_clouds"
             }
         }
         Text item=PresencePC label="PC [MAP(active.map):%s]" icon="like"
-        Text item=PresenceThN5 icon="nexus5" label="Handy ThN5 [MAP(presence.map):%s]"
+        Text item=PresenceThPhone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
         Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
         Text item=SonosSummary label="Sonos [%s]" icon="sonos" {
             Frame {
@@ -59,7 +59,7 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=KodiTitle label="Titel [%s]" visibility=[KodiTitleShow == ""]
             }
             Frame label="Steuerung" visibility=[KodiPlayerState != "Stop"] {
-                Switch item=KodiPlayPause mappings=[ON="Play/Pause"] 
+                Switch item=KodiPlayPause mappings=[ON="Play/Pause"]
                 Switch item=KodiStop label="Stop" mappings=[ON="Stop"]
             }
             Frame label="Einblendung" visibility=[KodiPlayerState != "Stop"]{
@@ -97,8 +97,8 @@ sitemap w66a label="W66a openHAB Installation" {
         Switch item=WZ_rcswitch_Expedit
         Switch item=WZ_rcswitch_Goldf
         Switch item=FK_rcswitch_Arbeit
-        Slider item=FK_Edison_Dimmer_Level 
-        Setpoint item=FK_Edison_Dimmer_Level minValue=0 maxValue=100 step=5 
+        Slider item=FK_Edison_Dimmer_Level
+        Setpoint item=FK_Edison_Dimmer_Level minValue=0 maxValue=100 step=5
         Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
         Switch item=Kueche_Deckenlicht
         Switch item=Flur_Deckenlicht
@@ -125,7 +125,7 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=WZ_Heizung_Valve label="Ventilstellung [%d %%]"
             }
         }
-        
+
         Text item=SZ_Heizung_Battery label="Schlafzimmer [%.1f V]" icon="battery" visibility=[SZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
         Text item=SZ_Heizung_Fault label="Schlafzimmer [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[SZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
         Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
