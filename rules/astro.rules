@@ -1,37 +1,37 @@
 
 rule "OpenHAB system started - astro"
 when
-	System started
+  System started
 then
-	createTimer(now.plusSeconds(180)) [|
-		logInfo("RULE", "--> astro init")
-		if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
-			now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
-		) {
-			logInfo("RULE", "--> Night_State ON")
-			postUpdate(Night_State, ON)
-		} else {
-			logInfo("RULE", "--> Night_State OFF")
-			postUpdate(Night_State, OFF)
-		}
-	]
+  createTimer(now.plusSeconds(180)) [|
+    logInfo("RULE", "--> astro init")
+    if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
+      now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
+    ) {
+      logInfo("RULE", "--> Night_State ON")
+      postUpdate(Night_State, ON)
+    } else {
+      logInfo("RULE", "--> Night_State OFF")
+      postUpdate(Night_State, OFF)
+    }
+  ]
 end
 
 rule "Update Night_State"
 when
-	Item Sun_Elevation changed
+  Item Sun_Elevation changed
 then
-	if(Sun_Elevation.state >  0){
-		if(Night_State.state != OFF){
-			logInfo("RULE", "--> Sun is crossing the horizon, switching to daylight mode")
-			postUpdate(Night_State, OFF)
-		}
-	} else {
-		if(Night_State.state != ON) {
-			logInfo("RULE", "--> Sun is crossing the horizon, switching to night mode")
-			postUpdate(Night_State, ON)
-		}
-	}
+  if(Sun_Elevation.state >  0){
+    if(Night_State.state != OFF){
+      logInfo("RULE", "--> Sun is crossing the horizon, switching to daylight mode")
+      postUpdate(Night_State, OFF)
+    }
+  } else {
+    if(Night_State.state != ON) {
+      logInfo("RULE", "--> Sun is crossing the horizon, switching to night mode")
+      postUpdate(Night_State, ON)
+    }
+  }
 end
 
-// vim: syntax=Xtend
+// vim: set filetype=Xtend syntax=Xtend

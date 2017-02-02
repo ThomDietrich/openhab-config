@@ -109,34 +109,34 @@ Switch  SZ_Fenster_Pending          "Schlafzimmer Fenster config pending"       
 Switch  SZ_Fenster_LowBat           "Schlafzimmer Fenster Batterie"             <battery>   (SZ,W,gBatterie)    {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#LOWBAT"}
 
 //HM-LC-Sw1PBU-FM Unterputz-Schaltaktor 1-fach
-Switch BD_Deckenlicht               "Bad Deckenlicht"                           <switch>    (BD,gLights)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:1#STATE"}
+Switch BD_Deckenlicht               "Bad Deckenlicht"                           <light>     (BD,gLight)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:1#STATE"}
 Number BD_Deckenlicht_RSSI          "Bad Deckenlicht RSSI [%d dBm]"                         (BD,W,gRSSI)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#RSSI_DEVICE"}
 Switch BD_Deckenlicht_Unreach       "Bad Deckenlicht unreachable"               <siren>     (BD,W,gUnreach)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#UNREACH"}
 Switch BD_Deckenlicht_Pending       "Bad Deckenlicht config pending"            <siren>     (BD,W,gPending)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:0#CONFIG_PENDING"}
 Number BD_Deckenlicht_Power         "Bad Deckenlicht Leistung [%.0f W]"         <energy>    (BD,gPower)
 
-Switch SZ_Deckenlicht               "Schlafzimmer Deckenlicht"                  <switch>    (SZ,gLights)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:1#STATE"}
+Switch SZ_Deckenlicht               "Schlafzimmer Deckenlicht"                  <light>     (SZ,gLight)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:1#STATE"}
 Number SZ_Deckenlicht_RSSI          "Schlafzimmer Deckenlicht RSSI [%d dBm]"                (SZ,W,gRSSI)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#RSSI_DEVICE"}
 Switch SZ_Deckenlicht_Unreach       "Schlafzimmer Deckenlicht unreachable"      <siren>     (SZ,W,gUnreach)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#UNREACH"}
 Switch SZ_Deckenlicht_Pending       "Schlafzimmer Deckenlicht config pending"   <siren>     (SZ,W,gPending)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:0#CONFIG_PENDING"}
 Number SZ_Deckenlicht_Power         "Schlafzimmer Deckenlicht Leistung [%.0f W]" <energy>   (SZ,gPower)
 
-Switch Flur_Deckenlicht             "Flur Deckenlicht"                          <switch>    (FK,gLights)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:1#STATE"}
+Switch Flur_Deckenlicht             "Flur Deckenlicht"                          <light>     (FK,gLight)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:1#STATE"}
 Number Flur_Deckenlicht_RSSI        "Flur Deckenlicht RSSI [%d dBm]"                        (FK,W,gRSSI)        {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#RSSI_DEVICE"}
 Switch Flur_Deckenlicht_Unreach     "Flur Deckenlicht unreachable"              <siren>     (FK,W,gUnreach)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#UNREACH"}
 Switch Flur_Deckenlicht_Pending     "Flur Deckenlicht config pending"           <siren>     (FK,W,gPending)     {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:0#CONFIG_PENDING"}
 Number Flur_Deckenlicht_Power       "Flur Deckenlicht Leistung [%.0f W]"        <energy>    (FK,gPower)
 
 //HM-LC-Sw1-FM Unterputzschalter 1-fach
-Switch Kueche_Deckenlicht           "Küche Deckenlicht"                         <switch>    (FK,gLights)        {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:1#STATE"}
+Switch Kueche_Deckenlicht           "Küche Deckenlicht"                         <light>     (FK,gLight)        {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:1#STATE"}
 Number Kueche_Deckenlicht_RSSI      "Küche Deckenlicht RSSI [%d dBm]"                       (FK,W,gRSSI)        {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#RSSI_DEVICE"}
 Switch Kueche_Deckenlicht_Unreach   "Küche Deckenlicht unreachable"             <siren>     (FK,W,gUnreach)     {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#UNREACH"}
 Switch Kueche_Deckenlicht_Pending   "Küche Deckenlicht config pending"          <siren>     (FK,W,gPending)     {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:0#CONFIG_PENDING"}
 Number Kueche_Deckenlicht_Power     "Küche Deckenlicht Leistung [%.0f W]"       <energy>    (FK,gPower)
 
 //HM-LC-Sw2-FM
-Switch WZ_Lacks_LEDs                "Lacksleuchter LEDs"                        <switch>    (WZ,gLights)        {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:1#STATE"}
-Switch WZ_Lacks_Lampe               "Lacksleuchter Lampe"                       <switch>    (WZ,gLights)        {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:2#STATE"}
+Switch WZ_Lacks_LEDs                "Lacksleuchter LEDs"                        <light>     (WZ,gLight)        {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:1#STATE"}
+Switch WZ_Lacks_Lampe               "Lacksleuchter Lampe"                       <light>     (WZ,gLight)        {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:2#STATE"}
 Number WZ_Lacks_RSSI                "Lacksleuchter RSSI [%d dBm]"                           (WZ,W,gRSSI)        {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#RSSI_DEVICE"}
 Switch WZ_Lacks_Unreach             "Lacksleuchter unreachable"                 <siren>     (WZ,W,gUnreach)     {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#UNREACH"}
 Switch WZ_Lacks_Pending             "Lacksleuchter config pending"              <siren>     (WZ,W,gPending)     {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:0#CONFIG_PENDING"}
@@ -144,24 +144,11 @@ Number WZ_Lacks_LEDs_Power          "Lacksleuchter LEDs Leistung [%.0f W]"      
 Number WZ_Lacks_Lampe_Power         "Lacksleuchter Lampe Leistung [%.0f W]"     <energy>    (WZ,gPower)
 
 //HM-LC-Dim1T-Pl-2 Funk-Abschnitt-Dimmaktor ab V2.0
-Dimmer FK_Edison_Dimmer_Level       "Edison Dimmer Zustand"                                 (FK,gLights)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
+Dimmer FK_Edison_Dimmer_Level       "Edison Dimmer Zustand"                                 (FK,gLight)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
 Number FK_Edison_Dimmer_RSSI        "Edison Dimmer RSSI [%d dBm]"                           (FK,W,gRSSI)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#RSSI_DEVICE"}
 Switch FK_Edison_Dimmer_Unreach     "Edison Dimmer unreachable"                 <siren>     (FK,W,gUnreach)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#UNREACH"}
 Switch FK_Edison_Dimmer_Pending     "Edison Dimmer config pending"              <siren>     (FK,W,gPending)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#CONFIG_PENDING"}
 Number FK_Edison_Dimmer_Power       "Edison Dimmer Leistung [%.0f W]"           <energy>    (FK,gPower)
-
-//HM-MOD-Re-8 8-Kanal-Empfangsmodul
-Switch WZ_rcswitch_Origami          "Origami"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:1#STATE" }
-Switch rcswitch_K2                  "rcswitch Kanal2 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:2#STATE" }
-Switch WZ_rcswitch_Goldf            "Goldfruchtpalme"                           <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:3#STATE" }
-Switch rcswitch_K4                  "rcswitch Kanal4 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:4#STATE" }
-Switch FK_rcswitch_Arbeit           "Arbeitsbeleuchtung"                        <switch>    (FK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:5#STATE" }
-Switch BK_rcswitch_Balkonmagic      "Balkonmagic"                               <switch>    (BK,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:6#STATE" }
-Switch WZ_rcswitch_Expedit          "Expedit"                                   <switch>    (WZ,gLights)        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:7#STATE" }
-Switch rcswitch_K8                  "rcswitch Kanal8 - nicht belegt"            <switch>                        { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:8#STATE" }
-Number rcswitch_RSSI                "rcswitch RSSI [%d dBm]"                                (Whg,W,gRSSI)       { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#RSSI_DEVICE" }
-Switch rcswitch_Unreach             "rcswitch unreachable"                      <siren>     (Whg,W,gUnreach)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#UNREACH" }
-Switch rcswitch_Pending             "rcswitch config pending"                   <siren>     (Whg,W,gPending)    { channel="homematic:HG-HM-MOD-Re-8:ccu:LEQ1522328:0#CONFIG_PENDING" }
 
 //HM-PB-2-WM55
 // PRESS_SHORT:         ON,OFF          nach kurzem Druck

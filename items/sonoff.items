@@ -1,0 +1,50 @@
+// Sonoff Basic
+Switch WZ_Goldfruchtpalme "Goldfruchtpalme" <light> (WZ,gLight)
+    { mqtt=">[broker:cmnd/sonoff-CBF6BE/power:command:*:default],
+            <[broker:stat/sonoff-CBF6BE/POWER:state:default]" }
+Number WZ_Goldfruchtpalme_RSSI "Goldfruchtpalme RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/sonoff-CBF6BE/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch WZ_Goldfruchtpalme_Unreach "Goldfruchtpalme unreachable" (gUnreach)
+    { mqtt="<[broker:tele/sonoff-CBF6BE/LWT:state:MAP(unreach.map)]" }
+Number WZ_Goldfruchtpalme_Power "Goldfruchtpalme Leistung [%.0f W]" <energy> (gPower)
+
+Switch FK_Arbeit "Arbeitsbeleuchtung" <light> (FK,gLight)
+    { mqtt=">[broker:cmnd/sonoff-96504C/power:command:*:default],
+            <[broker:stat/sonoff-96504C/POWER:state:default]" }
+Number FK_Arbeit_RSSI "Arbeitsbeleuchtung RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/sonoff-96504C/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch FK_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" (gUnreach)
+    { mqtt="<[broker:tele/sonoff-96504C/LWT:state:MAP(unreach.map)]" }
+Number FK_Arbeit_Power "Arbeitsbeleuchtung Leistung [%.0f W]" <energy> (gPower)
+
+// Sonoff S20 Smart Socket
+Switch BK_Balkonmagic "Balkonmagic" <light> (BK,gLight)
+    { mqtt=">[broker:cmnd/sonoff-A00F9D/power:command:*:default],
+            <[broker:stat/sonoff-A00F9D/POWER:state:default]" }
+Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/sonoff-A00F9D/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch BK_Balkonmagic_Unreach "Balkonmagic unreachable" (gUnreach)
+    { mqtt="<[broker:tele/sonoff-A00F9D/LWT:state:MAP(unreach.map)]" }
+Number BK_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" <energy> (gPower)
+
+Switch WZ_Origami "Origami" <light> (WZ,gLight)
+    { mqtt=">[broker:cmnd/sonoff-9F3BD8/power:command:*:default],
+            <[broker:stat/sonoff-9F3BD8/POWER:state:default]" }
+Number WZ_Origami_RSSI "Origami RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/sonoff-9F3BD8/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch WZ_Origami_Unreach "Origami unreachable" (gUnreach)
+    { mqtt="<[broker:tele/sonoff-9F3BD8/LWT:state:MAP(unreach.map)]" }
+Number WZ_Origami_Power "Origami Leistung [%.0f W]" <energy> (gPower)
+
+// Sonoff Pow
+Switch WZ_Expedit "Expedit" <light> (WZ,gLight)
+    { mqtt=">[broker:cmnd/sonoff-E8A6E4/power:command:*:default],
+            <[broker:stat/sonoff-E8A6E4/POWER:state:default]" }
+Number WZ_Expedit_Power "Expedit Leistung [%.1f W]" <energy> (gPower)
+    { mqtt="<[broker:tele/sonoff-E8A6E4/TELEMETRY:state:JSONPATH($.Energy.Power)]" }
+Number WZ_Expedit_RSSI "Expedit RSSI [%d %%]" (gRSSI)
+    { mqtt="<[broker:tele/sonoff-E8A6E4/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch WZ_Expedit_Unreach "Expedit unreachable" (gUnreach)
+    { mqtt="<[broker:tele/sonoff-E8A6E4/LWT:state:MAP(unreach.map)]" }
+
+// vim: syntax=Xtend

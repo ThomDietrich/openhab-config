@@ -10,7 +10,7 @@ when
   	Item Night_Start_Event received update ON
 then
 	if (PresenceThPhone.state == ON) {	
-		sendCommand(BK_rcswitch_Balkonmagic, ON)
+		sendCommand(BK_Balkonmagic, ON)
 	}
 	logInfo ("RULE", rulename + "eingeschaltet.")
 end
@@ -19,8 +19,8 @@ rule "Balkonmagic aus um 1:30 Uhr"
 when
   	Time cron "0 30 1 * * ?"
 then
-	if (BK_rcswitch_Balkonmagic.state == ON) {
-		sendCommand(BK_rcswitch_Balkonmagic, OFF)
+	if (BK_Balkonmagic.state == ON) {
+		sendCommand(BK_Balkonmagic, OFF)
 		logInfo ("RULE", rulename + "ausgeschaltet.")
 	}
 end

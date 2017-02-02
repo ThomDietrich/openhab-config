@@ -43,28 +43,28 @@ then if (WZ_Lacks_Lampe.state == ON) WZ_Lacks_Lampe_Power.postUpdate(60.0) else 
 
 
 
-rule "WZ_rcswitch_Origami_Power" when Item WZ_rcswitch_Origami received update
-then if (WZ_rcswitch_Origami.state == ON) WZ_rcswitch_Origami_Power.postUpdate(19.0) else WZ_rcswitch_Origami_Power.postUpdate(0) end
+rule "WZ_Origami_Power" when Item WZ_Origami received update
+then if (WZ_Origami.state == ON) WZ_Origami_Power.postUpdate(19.0) else WZ_Origami_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Expedit_Power" when Item WZ_rcswitch_Expedit received update
-then if (WZ_rcswitch_Expedit.state == ON) WZ_rcswitch_Expedit_Power.postUpdate(2.8) else WZ_rcswitch_Expedit_Power.postUpdate(0) end
+rule "WZ_Expedit_Power" when Item WZ_Expedit received update
+then if (WZ_Expedit.state == ON) WZ_Expedit_Power.postUpdate(2.8) else WZ_Expedit_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Goldf_Power" when Item WZ_rcswitch_Goldf received update
-then if (WZ_rcswitch_Goldf.state == ON) WZ_rcswitch_Goldf_Power.postUpdate(40.0) else WZ_rcswitch_Goldf_Power.postUpdate(0) end
+rule "WZ_Goldfruchtpalme_Power" when Item WZ_Goldfruchtpalme received update
+then if (WZ_Goldfruchtpalme.state == ON) WZ_Goldfruchtpalme_Power.postUpdate(40.0) else WZ_Goldfruchtpalme_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Arbeit_Power" when Item FK_rcswitch_Arbeit received update
-then if (FK_rcswitch_Arbeit.state == ON) FK_rcswitch_Arbeit_Power.postUpdate(8.5) else FK_rcswitch_Arbeit_Power.postUpdate(0) end
+rule "FK_Arbeit_Power" when Item FK_Arbeit received update
+then if (FK_Arbeit.state == ON) FK_Arbeit_Power.postUpdate(8.5) else FK_Arbeit_Power.postUpdate(0) end
 
 
 
-rule "WZ_rcswitch_Balkonmagic_Power" when Item BK_rcswitch_Balkonmagic received update
-then if (BK_rcswitch_Balkonmagic.state == ON) BK_rcswitch_Balkonmagic_Power.postUpdate(42.0) else BK_rcswitch_Balkonmagic_Power.postUpdate(0) end
+rule "BK_Balkonmagic_Power" when Item BK_Balkonmagic received update
+then if (BK_Balkonmagic.state == ON) BK_Balkonmagic_Power.postUpdate(42.0) else BK_Balkonmagic_Power.postUpdate(0) end
 
 
 

@@ -19,7 +19,6 @@ Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
     Thing   HG-HM-LC-Sw1PBU-FM  LEQ1293495
     Thing   HG-HM-LC-Sw1-FM     LEQ0425711
     Thing   HG-HM-LC-Sw2-FM     LEQ0883550
-    Thing   HG-HM-MOD-Re-8      LEQ1522328
     Thing   HG-HM-PB-2-WM55     MEQ0023751
     Thing   HG-HM-PB-2-WM55     LEQ0570990
     Thing   HG-HM-PB-2-FM       LEQ1332306

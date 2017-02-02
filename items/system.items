@@ -9,7 +9,7 @@ Group   WZ  "Wohnzimmer"        <video>     (Whg)
 Group   BK  "Balkon"            <garden>    (Whg)
 
 // Sondergruppen
-Group:Switch:OR(ON, OFF)        gLights     "Komplette Beleuchtung [%d ]"               <light>         (Whg)
+Group:Switch:OR(ON, OFF)        gLight     "Komplette Beleuchtung [%d ]"               <light>         (Whg)
 Group:Switch:OR(ON, OFF)        gBatterie   "Batteriestände [%d ]"                      <battery>       (Whg)
 Group:Contact:OR(OPEN, CLOSED)  gFenster    "Offene Fenster [%d ]"                      <contact>       (Whg)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)

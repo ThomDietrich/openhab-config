@@ -7,14 +7,14 @@ rule "Schranktaster Arbeitsbeleuchtung ON"
 when
     Item FK_Taster_Schrank_2Short changed to ON
 then
-    FK_rcswitch_Arbeit.sendCommand(ON)
+    FK_Arbeit.sendCommand(ON)
 end
 
 rule "Schranktaster Arbeitsbeleuchtung OFF"
 when
     Item FK_Taster_Schrank_1Short changed to ON
 then
-    FK_rcswitch_Arbeit.sendCommand(OFF)
+    FK_Arbeit.sendCommand(OFF)
 end
 
 
@@ -74,20 +74,20 @@ when
     Item Fernbedienung_Taste1 received update ON
 then
     logInfo ("RULE", "Fernbedienung 1")
-    sendCommand(WZ_rcswitch_Origami, ON)
+    sendCommand(WZ_Origami, ON)
     sendCommand(WZ_Lacks_LEDs, ON)
-    sendCommand(WZ_rcswitch_Expedit, ON)
-    sendCommand(BK_rcswitch_Balkonmagic, ON)
+    sendCommand(WZ_Expedit, ON)
+    sendCommand(BK_Balkonmagic, ON)
 end
 rule "Wohnzimmer Taster Licht aus"
 when
     Item Fernbedienung_Taste2 received update ON
 then
     logInfo ("RULE", "Fernbedienung 2")
-    sendCommand(WZ_rcswitch_Origami, OFF)
+    sendCommand(WZ_Origami, OFF)
     sendCommand(WZ_Lacks_LEDs, OFF)
-    sendCommand(WZ_rcswitch_Expedit, OFF)
-    sendCommand(BK_rcswitch_Balkonmagic, OFF)
+    sendCommand(WZ_Expedit, OFF)
+    sendCommand(BK_Balkonmagic, OFF)
 end
 
 
@@ -95,66 +95,51 @@ rule "Whg_Light_Preset (Sitemap -> Homematic)"
 when
   Item Whg_Light_Preset received command
 then
-    logInfo("RULE", rulename + "Whg_Light_Preset (Sitemap -> Homematic).")
+    //logInfo("RULE", rulename + "Whg_Light_Preset (Sitemap -> Homematic).")
     switch (receivedCommand){
         case 0: {
             logInfo("RULE", rulename + "Lichtprogramm 0 - Aus")
-            gLights.members.forEach(item |
+            gLight.members.forEach(item |
+                if (item.state != OFF) item.sendCommand(OFF)
+            )
+            gLight.members.forEach(item |
                 item.sendCommand(OFF)
-                Thread::sleep(100)
             )
         }
         case 1: {
             logInfo("RULE", rulename + "Lichtprogramm 1 - Normal")
-            BK_rcswitch_Balkonmagic.sendCommand(ON)
-            Thread::sleep(100)
+            BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
-            Thread::sleep(100)
-            WZ_rcswitch_Origami.sendCommand(ON)
-            Thread::sleep(100)
-            WZ_rcswitch_Expedit.sendCommand(ON)
-            Thread::sleep(100)
-            FK_rcswitch_Arbeit.sendCommand(ON)
-            Thread::sleep(100)
+            WZ_Origami.sendCommand(ON)
+            WZ_Expedit.sendCommand(ON)
+            FK_Arbeit.sendCommand(ON)
             FK_Edison_Dimmer_Level.sendCommand(100)
-            Thread::sleep(100)
-            WZ_rcswitch_Goldf.sendCommand(OFF)
-            Thread::sleep(100)
+            WZ_Goldfruchtpalme.sendCommand(OFF)
             WZ_Lacks_Lampe.sendCommand(OFF)
-            Thread::sleep(100)
             Flur_Deckenlicht.sendCommand(OFF)
-            Thread::sleep(100)
             Kueche_Deckenlicht.sendCommand(OFF)
         }
         case 2: {
             logInfo("RULE", rulename + "Lichtprogramm 2 - Relax")
-            BK_rcswitch_Balkonmagic.sendCommand(ON)
-            Thread::sleep(100)
+            BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
-            Thread::sleep(100)
-            WZ_rcswitch_Origami.sendCommand(ON)
-            Thread::sleep(100)
-            WZ_rcswitch_Expedit.sendCommand(ON)
-            Thread::sleep(100)
-            FK_rcswitch_Arbeit.sendCommand(ON)
-            Thread::sleep(100)
+            WZ_Origami.sendCommand(ON)
+            WZ_Expedit.sendCommand(ON)
+            FK_Arbeit.sendCommand(ON)
             FK_Edison_Dimmer_Level.sendCommand(30)
-            Thread::sleep(100)
-            WZ_rcswitch_Goldf.sendCommand(OFF)
-            Thread::sleep(100)
+            WZ_Goldfruchtpalme.sendCommand(OFF)
             WZ_Lacks_Lampe.sendCommand(OFF)
-            Thread::sleep(100)
             Flur_Deckenlicht.sendCommand(OFF)
-            Thread::sleep(100)
             Kueche_Deckenlicht.sendCommand(OFF)
-            Thread::sleep(100)
             SZ_Deckenlicht.sendCommand(OFF)
         }
         case 3: {
             logInfo("RULE", rulename + "Lichtprogramm 3 - Voll")
-            gLights.members.forEach(item |
+            gLight.members.forEach(item |
+                if (item.state != ON) item.sendCommand(ON)
+            )
+            gLight.members.forEach(item |
                 item.sendCommand(ON)
-                Thread::sleep(100)
             )
         }
     }

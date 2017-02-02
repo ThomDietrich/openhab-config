@@ -89,16 +89,15 @@ sitemap w66a label="W66a openHAB Installation" {
     }
     Frame label="Beleuchtung" {
         Switch item=Whg_Light_Preset icon="light" label="" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
-        Text item=gLights
-        Switch item=BK_rcswitch_Balkonmagic
+        Text item=gLight
+        Switch item=BK_Balkonmagic
+        Switch item=WZ_Goldfruchtpalme
+        Switch item=WZ_Origami
+        Switch item=WZ_Expedit
         Switch item=WZ_Lacks_LEDs
         Switch item=WZ_Lacks_Lampe
-        Switch item=WZ_rcswitch_Origami
-        Switch item=WZ_rcswitch_Expedit
-        Switch item=WZ_rcswitch_Goldf
-        Switch item=FK_rcswitch_Arbeit
+        Switch item=FK_Arbeit
         Slider item=FK_Edison_Dimmer_Level
-        Setpoint item=FK_Edison_Dimmer_Level minValue=0 maxValue=100 step=5
         Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
         Switch item=Kueche_Deckenlicht
         Switch item=Flur_Deckenlicht
@@ -199,7 +198,7 @@ sitemap w66a label="W66a openHAB Installation" {
             Group item=gHeatValve valuecolor=[0="green"]
             Group item=gFenster valuecolor=[0="green"]
             Group item=gBatterie valuecolor=[0="green"]
-            Group item=gLights
+            Group item=gLight
             Group item=gUnreach
             Group item=gPending
         }
