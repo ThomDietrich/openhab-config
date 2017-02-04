@@ -10,6 +10,7 @@ Items {
     gRSSI*                                                          : strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing     : strategy = everyChange
     Presence_ThN5                                                   : strategy = everyChange
+    FK_Senseo_BrewedSize                                            : strategy = everyChange
 }
 
 // vim: syntax=Xtend
