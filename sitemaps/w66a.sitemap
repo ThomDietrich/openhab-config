@@ -37,9 +37,24 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text label="kommt später..." icon="sun_clouds"
             }
         }
-        Text item=PresencePC label="PC [MAP(active.map):%s]" icon="like"
+        Text item=PresencePC label="PC [MAP(active.map):%s]" icon="pc_silverstone_gd06"
         Text item=PresenceThPhone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
         Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
+        
+        Text item=FK_Senseo_OpState icon="senseo_machine" label="SenseoWifi" {
+        	Frame label="Status" {
+				Text item=FK_Senseo_Unreach label="Fehler [Maschine nicht verfügbar!]" visibility=[FK_Senseo_Unreach == ON] valuecolor=[ON="red"]
+				Text item=FK_Senseo_OpState label="Aktueller Zustand"
+				Text item=FK_Senseo_OutOfWater label="Wassertank [Leer]" visibility=[FK_Senseo_OutOfWater == ON] valuecolor=[ON="maroon"]
+				Switch item=FK_Senseo_CupAvailable label="Tasse vorhanden"
+				Switch item=FK_Senseo_CupFull label="Tasse voll" visibility=[FK_Senseo_CupFull == ON]
+            }
+            Frame label="Steuerung" {
+				Switch item=FK_Senseo_OnOff label="Ein-/Ausschalten"
+				Switch item=FK_Senseo_Brew label="Kaffee Kochen" mappings=[1cup="☕", 2cup="☕☕"]
+            }
+        }
+        
         Text item=SonosSummary label="Sonos [%s]" icon="sonos" {
             Frame {
                 Default item=SonosController
@@ -50,6 +65,7 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text item=SonosState
             }
         }
+        
         Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
             Frame label="Status" {
                 Text item=KodiSystemState label="Kodi [MAP(active.map):%s]"
@@ -68,6 +84,7 @@ sitemap w66a label="W66a openHAB Installation" {
                                     4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
             }
         }
+        
         Text item=SpeedtestSummary {
             Frame label="Ergebnisse" {
                 Text item=SpeedtestResultDown
