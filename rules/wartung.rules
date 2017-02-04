@@ -1,0 +1,61 @@
+
+val String filename = "wartung.rules"
+
+rule "Wartung: Fehler-Items"
+when
+	Time cron "0 45 9,17 * * ?" or
+	Item gError changed
+then
+	logInfo(filename, "Wartung - Fehler-Items")
+	gError.members.forEach(item | {
+			logInfo(filename, "Wartung - Fehler-Items " + item.label + " Type(" + item.type + "): " + item.state)
+			if (item.state != "NO_FAULT" && item.state != "NO_ERROR") {
+				logWarn(filename, "  --> Fehler")
+				pushover("Warnung. Item: " + item.label + " (Status " + item.state + ")")
+			}
+		}
+	)
+end
+
+rule "Wartung: Unreach"
+when
+	Time cron "5 45 9,17 * * ?"
+then
+	logInfo(filename, "Wartung - Unreach")
+	gUnreach.members.forEach(item | {
+	    	if (item.state == OFF) {
+				logInfo(filename, "Wartung - Unreach OK:     " + item.label)
+	    	} else {
+	    		logWarn(filename, "Wartung - Unreach FEHLER: " + item.label)
+	    		pushover("Warnung. Nicht erreichbares Gerät: " + item.label)
+			}
+		}
+	)
+end
+
+rule "Wartung: Batterien"
+when
+	Time cron "10 45 9,17 * * ?"
+then
+	logInfo(filename, "Wartung - Batterien")
+	gBattery.members.forEach(item | {
+			logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
+			if (item.type == "Number") {
+				if (item.state <= 2.5) {
+					logWarn(filename, "  --> Batterie schwach")
+					pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
+				}
+			}
+			else if (item.type == "Switch") {
+				if (item.state == ON) logWarn(filename, "  --> Batterie schwach")
+				if (item.state == NULL) logWarn(filename, "  --> Batterie unbekannt (NULL)")
+				if (item.state != ON) pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
+				if (item.state != NULL) pushover("Warnung. Gerät mit leerer Batterie: " + item.label)
+			}
+			else {
+				logError(filename, "Fehler: Unbekannter Batterietyp!")
+				pushover("Warnung. Batterietest unbekannter Fehler: " + item.label)
+			}
+		}
+	)
+end

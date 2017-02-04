@@ -1,2 +1,7 @@
+//Sonoff
 Online=OFF
 Offline=ON
+
+//SenseoWifi
+true=OFF
+false=ON

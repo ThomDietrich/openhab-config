@@ -1,4 +1,5 @@
 
+val String filename = "energy.rules"
 
 rule "Energieverbrauch init"
 when

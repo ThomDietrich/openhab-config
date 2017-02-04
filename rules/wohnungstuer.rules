@@ -1,8 +1,9 @@
 import org.joda.time.*
 
+val String filename = "wohnungstuer.rules"
+
 var Timer willkommen_timer = null
 var Integer willkommen_timer_minutes = 15
-var String rulename = "--> Willkommenslicht: "
 
 rule "Wohnungstür-Automatik: Init"
 when
@@ -18,11 +19,11 @@ when
     Time cron "0 * * * * ?"
 then
     if (Wohnungstuer_TimerActive.state == ON) {
-        //logInfo("RULE", rulename + "updating timer duration")
+        //logInfo(filename, "updating timer duration")
         var DateTime timeEnd = new DateTime((Wohnungstuer_TimerEnd.state as DateTimeType).calendar.timeInMillis)
-        //logInfo("RULE", rulename + "Deadline: " + timeEnd)
+        //logInfo(filename, "Deadline: " + timeEnd)
         var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
-        //logInfo("RULE", rulename + "Duration: " + timeDuration)
+        //logInfo(filename, "Duration: " + timeDuration)
         Wohnungstuer_TimerDuration.postUpdate(timeDuration)
     }
 end
@@ -31,7 +32,7 @@ rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    logInfo("RULE", rulename + "Türsensor ausgelöst.")
+    logInfo(filename, "Türsensor ausgelöst.")
     if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && PresenceThPhone.state == OFF){
         sendCommand(FK_Edison_Dimmer_Level, 70)
 
@@ -39,13 +40,13 @@ then
         Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
         Wohnungstuer_TimerActive.postUpdate(ON)
 
-        logInfo("RULE", rulename + "Eddison ein. Timer wird gesetzt")
+        logInfo(filename, "Eddison ein. Timer wird gesetzt")
         willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
             if (willkommen_timer != null) {
                 willkommen_timer.cancel
                 willkommen_timer = null
                 Wohnungstuer_TimerActive.postUpdate(OFF)
-                logInfo ("RULE", rulename + "Timer abgelaufen, Eddison aus.")
+                logInfo (filename, "Timer abgelaufen, Eddison aus.")
                 sendCommand(FK_Edison_Dimmer_Level, 0)
             }
         ]
@@ -63,7 +64,7 @@ then
         willkommen_timer.cancel
         willkommen_timer = null
         Wohnungstuer_TimerActive.postUpdate(OFF)
-        logInfo ("RULE", rulename + "Timer nach Aktivität (Bad) gelöscht.")
+        logInfo (filename, "Timer nach Aktivität (Bad) gelöscht.")
     }
 end
 

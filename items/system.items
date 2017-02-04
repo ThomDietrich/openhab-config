@@ -9,23 +9,24 @@ Group   WZ  "Wohnzimmer"        <video>     (Whg)
 Group   BK  "Balkon"            <garden>    (Whg)
 
 // Sondergruppen
-Group:Switch:OR(ON, OFF)        gLight     "Komplette Beleuchtung [%d ]"               <light>         (Whg)
-Group:Switch:OR(ON, OFF)        gBatterie   "Batteriestände [%d ]"                      <battery>       (Whg)
-Group:Contact:OR(OPEN, CLOSED)  gFenster    "Offene Fenster [%d ]"                      <contact>       (Whg)
+Group:Switch:OR(ON, OFF)        gLight      "Komplette Beleuchtung [%d ]"               <light>         (Whg)
+Group:Switch:OR(ON, OFF)        gBattery    "Batteriestände [%d ]"                      <battery>       (Whg)
+Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d ]"                      <contact>       (Whg)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)
 Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (Whg)
 Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <radio>         (Whg)
-Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"                             (Whg)
-Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"                      (Whg)
+Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"             <siren>         (Whg)
+Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"      <siren>         (Whg)
+Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"             <error2>        (Whg)
 
-Group W "Wartung" (Whg)
+Group gW "Wartung" (Whg)
 Group gInitNone "Initialisierung mit (-1)" (Whg)
 
 Switch      PresencePC                      "Zustand PC"                                <present>       (Whg)   { channel="network:device:BirkePC:online" }
 Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg)   { channel="network:device:ThOP3:online" }
 Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg)   { channel="network:device:ThN9:online" }
 
-Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl"        <switch>        (Whg)
+Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (Whg)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)

@@ -1,7 +1,5 @@
 
-
-var String rulename = "--> Lichtprogramm: "
-
+val String filename = "lichtprogramm.rules"
 
 rule "Schranktaster Arbeitsbeleuchtung ON"
 when
@@ -73,7 +71,7 @@ rule "Wohnzimmer Taster Licht an"
 when
     Item Fernbedienung_Taste1 received update ON
 then
-    logInfo ("RULE", "Fernbedienung 1")
+    logInfo (filename, "Fernbedienung 1")
     sendCommand(WZ_Origami, ON)
     sendCommand(WZ_Lacks_LEDs, ON)
     sendCommand(WZ_Expedit, ON)
@@ -83,7 +81,7 @@ rule "Wohnzimmer Taster Licht aus"
 when
     Item Fernbedienung_Taste2 received update ON
 then
-    logInfo ("RULE", "Fernbedienung 2")
+    logInfo (filename, "Fernbedienung 2")
     sendCommand(WZ_Origami, OFF)
     sendCommand(WZ_Lacks_LEDs, OFF)
     sendCommand(WZ_Expedit, OFF)
@@ -95,10 +93,10 @@ rule "Whg_Light_Preset (Sitemap -> Homematic)"
 when
   Item Whg_Light_Preset received command
 then
-    //logInfo("RULE", rulename + "Whg_Light_Preset (Sitemap -> Homematic).")
+    //logInfo(filename, "Whg_Light_Preset (Sitemap -> Homematic).")
     switch (receivedCommand){
         case 0: {
-            logInfo("RULE", rulename + "Lichtprogramm 0 - Aus")
+            logInfo(filename, "Lichtprogramm 0 - Aus")
             gLight.members.forEach(item |
                 if (item.state != OFF) item.sendCommand(OFF)
             )
@@ -107,7 +105,7 @@ then
             )
         }
         case 1: {
-            logInfo("RULE", rulename + "Lichtprogramm 1 - Normal")
+            logInfo(filename, "Lichtprogramm 1 - Normal")
             BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
             WZ_Origami.sendCommand(ON)
@@ -120,7 +118,7 @@ then
             Kueche_Deckenlicht.sendCommand(OFF)
         }
         case 2: {
-            logInfo("RULE", rulename + "Lichtprogramm 2 - Relax")
+            logInfo(filename, "Lichtprogramm 2 - Relax")
             BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
             WZ_Origami.sendCommand(ON)
@@ -134,7 +132,7 @@ then
             SZ_Deckenlicht.sendCommand(OFF)
         }
         case 3: {
-            logInfo("RULE", rulename + "Lichtprogramm 3 - Voll")
+            logInfo(filename, "Lichtprogramm 3 - Voll")
             gLight.members.forEach(item |
                 if (item.state != ON) item.sendCommand(ON)
             )

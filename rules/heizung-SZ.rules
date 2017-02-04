@@ -1,7 +1,7 @@
 import java.math.BigDecimal
 import java.util.Locale
 
-var String rulename = "--> Heizungssteuerung SZ_Heizung: "
+val String filename = "heizung-SZ.rules"
 
 // How to Duplicate:
 // Search and replace "SZ_" --> "WZ_" 
@@ -10,7 +10,7 @@ rule "SZ_Heizung set heating from sitemap preset element"
 when
   Item SZ_Heizung_Preset received command
 then {
-	logInfo("RULE", rulename + "Schnellauswahl (Sitemap -> Homematic)")
+	logInfo(filename, "Schnellauswahl (Sitemap -> Homematic)")
 	switch (receivedCommand){
 		case 0: SZ_Heizung_Lowering.sendCommand(ON)
 		case 1: SZ_Heizung_Comfort.sendCommand(ON)
@@ -25,7 +25,7 @@ rule "SZ_Heizung set mode from sitemap select element"
 when
   Item SZ_Heizung_SetMode received command
 then {
-	logInfo("RULE", rulename + "Modus (Sitemap -> Homematic)")
+	logInfo(filename, "Modus (Sitemap -> Homematic)")
 	switch (receivedCommand){
 		case 0: SZ_Heizung_Auto.sendCommand(ON)
 		case 1: SZ_Heizung_Manu.sendCommand(SZ_Heizung_SetTemp.state as DecimalType)
@@ -40,15 +40,15 @@ when
   Item SZ_Fenster_State received update
 then {
 	createTimer(now.plusSeconds(15)) [|
-		//logInfo("RULE", rulename + "Fenster-Modus <" + SZ_Fenster_State.state + "><" + SZ_Heizung_SetTemp.state + ">")
+		//logInfo(filename, "Fenster-Modus <" + SZ_Fenster_State.state + "><" + SZ_Heizung_SetTemp.state + ">")
 		if (SZ_Fenster_State.state == OPEN && SZ_Heizung_SetTemp.state == 12.0) {
-			//logInfo("RULE", rulename + "Fenster-Modus aktiviert")
+			//logInfo(filename, "Fenster-Modus aktiviert")
 			SZ_Heizung_SetMode.postUpdate(4)
 		} else if (SZ_Fenster_State.state == CLOSED && SZ_Heizung_SetTemp.state != 12.0) {
-			//logInfo("RULE", rulename + "Fenster-Modus deaktiviert")
+			//logInfo(filename, "Fenster-Modus deaktiviert")
 			SZ_Heizung_SetMode.postUpdate(SZ_Heizung_Mode.state)
 		} else {
-			logError("RULE", rulename + "Fenster-Modus nicht eindeutig")
+			logError(filename, "Fenster-Modus nicht eindeutig")
 			SZ_Heizung_SetMode.postUpdate(SZ_Heizung_Mode.state)
 		}
 	]	
@@ -59,10 +59,10 @@ rule "SZ_Heizung update sitemap with heating mode"
 when
   Item SZ_Heizung_Mode received update
 then {
-	//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap)")
+	//logInfo(filename, "Modus (Homematic -> Sitemap)")
 	// Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
 	if (SZ_Heizung_SetMode.state == 4 && SZ_Heizung_Mode.state == 0) {
-		//logInfo("RULE", rulename + "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
+		//logInfo(filename, "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
 	} else {
 		SZ_Heizung_SetMode.postUpdate(SZ_Heizung_Mode.state)
 	}

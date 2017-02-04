@@ -88,7 +88,7 @@ sitemap w66a label="W66a openHAB Installation" {
         }
     }
     Frame label="Beleuchtung" {
-        Switch item=Whg_Light_Preset icon="light" label="" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
+        Switch item=Whg_Light_Preset icon="light" label="[]" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
         Text item=gLight
         Switch item=BK_Balkonmagic
         Switch item=WZ_Goldfruchtpalme
@@ -107,10 +107,10 @@ sitemap w66a label="W66a openHAB Installation" {
     }
 
     Frame label="Temperaturen und Heizung" {
-        Switch item=WhgHeatState label="" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
+        Switch item=WhgHeatState label="[]" mappings=[0="Automatik", 1="Abwesenheit", 2="Dauerfeuer"]
 
-        Text item=WZ_Heizung_Battery label="Wohnzimmer [%.1f V]" icon="battery" visibility=[WZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"] //TODO MAP for 0..100
-        Text item=WZ_Heizung_Fault label="Wohnzimmer [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[WZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
+        Text item=WZ_Heizung_Battery label="Wohnzimmer [%.1f V]" visibility=[WZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"] //TODO MAP for 0..100
+        Text item=WZ_Heizung_Fault label="Wohnzimmer [MAP(HM-CC-RT-DN.map):%s]" visibility=[WZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
         Text item=WZ_Heizung_Summary label="Wohnzimmer [%s]" {
             Frame label="Temperatur" {
                 Text item=WZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
@@ -125,8 +125,8 @@ sitemap w66a label="W66a openHAB Installation" {
             }
         }
 
-        Text item=SZ_Heizung_Battery label="Schlafzimmer [%.1f V]" icon="battery" visibility=[SZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
-        Text item=SZ_Heizung_Fault label="Schlafzimmer [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[SZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
+        Text item=SZ_Heizung_Battery label="Schlafzimmer [%.1f V]" visibility=[SZ_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
+        Text item=SZ_Heizung_Fault label="Schlafzimmer [MAP(HM-CC-RT-DN.map):%s]" visibility=[SZ_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
         Text item=SZ_Heizung_Summary label="Schlafzimmer [%s]" {
             Frame label="Temperatur" {
                 Text item=SZ_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
@@ -141,8 +141,8 @@ sitemap w66a label="W66a openHAB Installation" {
             }
         }
 
-		Text item=FK_Heizung_Battery label="Flur/Küche [%.1f V]" icon="battery" visibility=[FK_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
-		Text item=FK_Heizung_Fault label="Flur/Küche [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[FK_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
+		Text item=FK_Heizung_Battery label="Flur/Küche [%.1f V]" visibility=[FK_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
+		Text item=FK_Heizung_Fault label="Flur/Küche [MAP(HM-CC-RT-DN.map):%s]" visibility=[FK_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
         Text item=FK_Heizung_Summary label="Flur/Küche [%s]" {
             Frame label="Temperatur" {
                 Text item=FK_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
@@ -157,8 +157,8 @@ sitemap w66a label="W66a openHAB Installation" {
             }
         }
 
-		Text item=BD_Heizung_Battery label="Bad [%.1f V]" icon="battery" visibility=[BD_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
-		Text item=BD_Heizung_Fault label="Bad [MAP(HM-CC-RT-DN.map):%s]" icon="error" visibility=[BD_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
+		Text item=BD_Heizung_Battery label="Bad [%.1f V]" visibility=[BD_Heizung_Battery < 2.2] valuecolor=[<2.2="maroon"]
+		Text item=BD_Heizung_Fault label="Bad [MAP(HM-CC-RT-DN.map):%s]" visibility=[BD_Heizung_Fault != NO_FAULT] valuecolor=[!=NO_FAULT="maroon"]
         Text item=BD_Heizung_Summary label="Bad [%s]" {
             Frame label="Temperatur" {
                 Text item=BD_Heizung_ActTemp label="Aktuelle Temperatur [%.1f °C]"
@@ -194,13 +194,15 @@ sitemap w66a label="W66a openHAB Installation" {
         Text label="Status" icon="chart" {
             Group item=gRSSI
             Group item=gPower
+            Group item=gHeat
             Group item=gHeatAct
             Group item=gHeatValve valuecolor=[0="green"]
-            Group item=gFenster valuecolor=[0="green"]
-            Group item=gBatterie valuecolor=[0="green"]
+            Group item=gWindow valuecolor=[0="green"]
+            Group item=gBattery valuecolor=[0="green"]
             Group item=gLight
             Group item=gUnreach
             Group item=gPending
+            Group item=gError
         }
         Text label="Räume" icon="corridor" {
             Group item=BD label="Bad"

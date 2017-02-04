@@ -1,6 +1,6 @@
 
+val String filename = "heizung.rules"
 
-val String rulename = "--> Heizungssteuerung: "
 val Number AUTOMATIK = 0
 val Number ABWESEND = 1
 val Number DAUERFEUER = 2
@@ -11,7 +11,7 @@ when
     Time is midnight
 then
     createTimer(now.plusSeconds(190)) [|
-        logInfo("RULE", rulename + "openHAB system started +15s rule")
+        logInfo(filename, "openHAB system started +15s rule")
         //
         if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
         if (BD_Heizung_ComfTemp.state == NULL) BD_Heizung_ComfTemp.postUpdate(21.0)
@@ -29,7 +29,7 @@ then
         //
         WhgHeatState.postUpdate(-1)
         //
-        logInfo("RULE", rulename + "Schnellwahlwerte bei Systemstart initialisiert")
+        logInfo(filename, "Schnellwahlwerte bei Systemstart initialisiert")
     ]
 end
 
@@ -38,27 +38,27 @@ rule "Heizmodus umschalten"
 when
     Item WhgHeatState received command
 then
-    logInfo("RULE", rulename + "Wohnung Heizmodus")
+    logInfo(filename, "Wohnung Heizmodus")
     if (receivedCommand == AUTOMATIK) {
-        logInfo("RULE", rulename + "Wohnung Heizmodus: Automatik")
+        logInfo(filename, "Wohnung Heizmodus: Automatik")
         BD_Heizung_Auto.sendCommand(ON)
         FK_Heizung_Auto.sendCommand(ON)
         SZ_Heizung_Auto.sendCommand(ON)
         WZ_Heizung_Auto.sendCommand(ON)
     } else if (receivedCommand == ABWESEND) {
-        logInfo("RULE", rulename + "Wohnung Heizmodus: Abwesend")
+        logInfo(filename, "Wohnung Heizmodus: Abwesend")
         BD_Heizung_Manu.sendCommand(15.0)
         FK_Heizung_Manu.sendCommand(15.0)
         SZ_Heizung_Manu.sendCommand(15.0)
         WZ_Heizung_Manu.sendCommand(15.0)
     } else if (receivedCommand == DAUERFEUER) {
-        logInfo("RULE", rulename + "Wohnung Heizmodus: Dauerfeuer")
+        logInfo(filename, "Wohnung Heizmodus: Dauerfeuer")
         BD_Heizung_Manu.sendCommand(21.0)
         FK_Heizung_Manu.sendCommand(21.0)
         SZ_Heizung_Manu.sendCommand(21.0)
         WZ_Heizung_Manu.sendCommand(21.0)
     } else {
-        logError("RULE", rulename + "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
+        logError(filename, "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
     }
     WhgHeatState.postUpdate(-1)
 end

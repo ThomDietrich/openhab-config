@@ -1,0 +1,18 @@
+//SenseoWifi LedState
+LED_unknown=Unbestimmt
+LED_OFF=Aus
+LED_SLOW=Langsam Blinkend
+LED_FAST=Schnell Blinkend
+LED_ON=Ein
+
+//SenseoWifi OpState
+SENSEO_unknown=Unbestimmt
+SENSEO_OFF=Aus
+SENSEO_HEATING=Heizt auf...
+SENSEO_READY=Bereit
+SENSEO_BREWING=Kaffee wird gekocht
+SENSEO_NOWATER=Kein Wasser verfügbar
+
+//SenseoWifi boolean
+true=ON
+false=OFF

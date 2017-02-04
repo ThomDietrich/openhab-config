@@ -1,17 +1,19 @@
 
+val String filename = "astro.rules"
+
 rule "OpenHAB system started - astro"
 when
   System started
 then
   createTimer(now.plusSeconds(180)) [|
-    logInfo("RULE", "--> astro init")
+    logInfo(filename, "--> astro init")
     if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
       now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
     ) {
-      logInfo("RULE", "--> Night_State ON")
+      logInfo(filename, "--> Night_State ON")
       postUpdate(Night_State, ON)
     } else {
-      logInfo("RULE", "--> Night_State OFF")
+      logInfo(filename, "--> Night_State OFF")
       postUpdate(Night_State, OFF)
     }
   ]
@@ -23,15 +25,15 @@ when
 then
   if(Sun_Elevation.state >  0){
     if(Night_State.state != OFF){
-      logInfo("RULE", "--> Sun is crossing the horizon, switching to daylight mode")
+      logInfo(filename, "--> Sun is crossing the horizon, switching to daylight mode")
       postUpdate(Night_State, OFF)
     }
   } else {
     if(Night_State.state != ON) {
-      logInfo("RULE", "--> Sun is crossing the horizon, switching to night mode")
+      logInfo(filename, "--> Sun is crossing the horizon, switching to night mode")
       postUpdate(Night_State, ON)
     }
   }
 end
 
-// vim: set filetype=Xtend syntax=Xtend
+// vim: set filetype=Xtend expandtab:

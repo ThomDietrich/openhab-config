@@ -1,9 +1,7 @@
-// persistence strategies have a name and a definition and are referred to in the "Items" section
 Strategies {
-    // for rrd charts, we need a cron strategy
     everyMinute : "0 * * * * ?"
-    everyHour : "0 0 * * * ?"
-    everyDay  : "0 0 0 * * ?"
+    everyHour   : "0 0 * * * ?"
+    everyDay    : "0 0 0 * * ?"
 }
 
 Items {
@@ -12,7 +10,6 @@ Items {
     gRSSI*                                                          : strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing     : strategy = everyChange
     Presence_ThN5                                                   : strategy = everyChange
-
 }
 
 // vim: syntax=Xtend

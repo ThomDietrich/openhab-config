@@ -3,26 +3,26 @@ import org.openhab.core.library.types.*
 import org.openhab.model.script.actions.*
 //import org.joda.time.*
 
-var String rulename = "--> Balkonmagic: "
+val String filename = "balkonmagic.rules"
 
 rule "Balkonmagic an bei Sonnenuntergang und wenn Anwesend"
 when
-  	Item Night_Start_Event received update ON
+  Item Night_Start_Event received update ON
 then
-	if (PresenceThPhone.state == ON) {	
-		sendCommand(BK_Balkonmagic, ON)
-	}
-	logInfo ("RULE", rulename + "eingeschaltet.")
+  if (PresenceThPhone.state == ON) {
+    sendCommand(BK_Balkonmagic, ON)
+  }
+  logInfo (filename, "eingeschaltet.")
 end
 
 rule "Balkonmagic aus um 1:30 Uhr"
 when
-  	Time cron "0 30 1 * * ?"
+  Time cron "0 30 1 * * ?"
 then
-	if (BK_Balkonmagic.state == ON) {
-		sendCommand(BK_Balkonmagic, OFF)
-		logInfo ("RULE", rulename + "ausgeschaltet.")
-	}
+  if (BK_Balkonmagic.state == ON) {
+    sendCommand(BK_Balkonmagic, OFF)
+    logInfo (filename, "ausgeschaltet.")
+  }
 end
 
 // vim: syntax=Xtend

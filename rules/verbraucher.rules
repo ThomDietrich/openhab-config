@@ -1,5 +1,7 @@
 import java.util.concurrent.locks.ReentrantLock
 
+val String filename = "verbraucher.rules"
+
 var java.util.concurrent.locks.ReentrantLock finishLock  = new java.util.concurrent.locks.ReentrantLock()
 
 val Number MODE_OFF = 0
@@ -27,7 +29,7 @@ rule "Waschmaschine Überwachung: Verbrauchszuordnung"
 when
     Item BD_Waschmaschine_Power changed
 then
-    //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
+    //logInfo(filename, "Waschmaschine Überwachung: Verbrauchszuordnung")
     if (BD_Waschmaschine_Power.state < 0.2) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
     else if (BD_Waschmaschine_Power.state > 10) BD_Waschmaschine_OpState.postUpdate(MODE_ACTIVE)
     else if (BD_Waschmaschine_Power.state < 4.5) {
@@ -58,7 +60,7 @@ rule "Spuelmaschine Überwachung: Verbrauchszuordnung"
 when
     Item FK_Spuelmaschine_Power changed
 then
-    //logInfo("RULE", "Waschmaschine Überwachung: Verbrauchszuordnung")
+    //logInfo(filename, "Waschmaschine Überwachung: Verbrauchszuordnung")
     if (FK_Spuelmaschine_Power.state < 0.03) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
   else if (FK_Spuelmaschine_Power.state < 0.75) {

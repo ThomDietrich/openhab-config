@@ -1,17 +1,14 @@
 
+val String filename = "system.rules"
 
 rule "OpenHAB system started"
 when
     System started
 then
     createTimer(now.plusSeconds(165)) [|
-        logInfo("RULE", "--> openHAB system started rule")
-        // Zeitraum für die rrd-Charts
-        //rrd_Chart_Period.postUpdate(1)
-        //rrd_Weather_Period.postUpdate(1)
+        logInfo(filename, "--> openHAB system started rule")
 
-        // Globaler Zustand (An-/Abwesenheit) für die Steuerung und Anzeige der zuletzt gemachten Aktion
-        logInfo("RULE", "--> Globale Zustände und Presets rücksetzen")
+        logInfo(filename, "--> Globale Zustände und Presets rücksetzen")
         gInitNone.members.forEach(item |
             item.postUpdate(-1)
         )
@@ -26,7 +23,7 @@ rule "OpenHAB system shutting down"
 when
     System shuts down
 then
-    logInfo("RULE", "--> openHAB shutting down rule")
+    logInfo(filename, "--> openHAB shutting down rule")
 end
 
 // vim: syntax=Xtend
