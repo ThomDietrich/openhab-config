@@ -65,4 +65,4 @@ then
     ]
 end
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

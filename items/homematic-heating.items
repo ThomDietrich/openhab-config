@@ -107,4 +107,4 @@ Number WZ_Heizung_EcoTemp           "WZ_Heizung Spar-Temperatur [%.1f °C]"     
 Number WZ_Heizung_ComfTemp          "WZ_Heizung Komfort-Temperatur [%.1f °C]"                                   (gHeat,value_persist)
 String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <heating>       (gHeat)
 
-// vim: syntax=Xtend syntax=openhab
+// vim: syntax=Xtend

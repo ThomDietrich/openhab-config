@@ -36,4 +36,4 @@ then
   }
 end
 
-// vim: set filetype=Xtend expandtab:
+// vim: syntax=Xtend
