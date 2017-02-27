@@ -1,4 +1,5 @@
-astro:sun:home  [ geolocation="50.68900,10.92571", interval=300]
-astro:moon:home [ geolocation="50.68900,10.92571", interval=300]
+astro:moon:home   [ geolocation="50.68900,10.92571", interval=300]
+astro:sun:home    [ geolocation="50.68900,10.92571", interval=300]
+astro:sun:minus90 [ geolocation="50.68900,10.92571", interval=60 ] // +15 degrees == -60 minutes
 
 // vim: syntax=Xtend

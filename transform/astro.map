@@ -19,6 +19,27 @@ AUTUMN=Herbst
 WINTER=Winter
 
 //
+SUN_RISE=Sonnenaufgang
+ASTRO_DAWN=astronomische Morgendämmerung
+NAUTIC_DAWN=nautische Morgendämmerung
+CIVIL_DAWN=zivile Morgendämmerung
+CIVIL_DUSK=zivile Abenddämmerung
+NAUTIC_DUSK=nautische Abenddämmerung
+ASTRO_DUSK=astronomische Abenddämmerung
+SUN_SET=Sonnenuntergang
+DAYLIGHT=Tag
+NOON=Abend
+NIGHT=Nacht
+
+//
+MORNING=Morgen
+DAY=Vormittag
+AFTERNOON=Nachmittag
+EVENING=Abend
+NIGHT=Nacht
+BED=Bettzeit
+
+//
 NEW=🌑 Neumond
 WAXING_CRESCENT=🌑→🌓 zunehmender Halbmond
 FIRST_QUARTER=🌓 erstes Viertel
