@@ -2,10 +2,10 @@
 
 // 4#CONTROL_MODE
 -1=-Unbestimmt-
-0=Automatik
-1=Manuell
-2=(-Urlaub-)
-3=Boost
+AUTO-MODE=Automatik
+MANU-MODE=Manuell
+PARTY-MODE=Party
+BOOST-MODE=Boost
 
 // 4#FAULT_REPORTING
 NO_FAULT=Kein Fehler

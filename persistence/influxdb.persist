@@ -5,12 +5,13 @@ Strategies {
 }
 
 Items {
-    gHeatAct*, gHeatSet*, gHeatValve*, gHeatMode*                   : strategy = everyChange, everyHour
+    gHeatAct*, gHeatPreset*, gHeatSet*, gHeatValve*                 : strategy = everyChange, everyHour
     gPower*                                                         : strategy = everyChange, everyHour
     gRSSI*                                                          : strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing     : strategy = everyChange
     Presence_ThN5                                                   : strategy = everyChange
     FK_Senseo_BrewedSize                                            : strategy = everyChange
+    FK_Senseo_OnOff                                                 : strategy = everyChange, everyDay
 }
 
 // vim: syntax=Xtend

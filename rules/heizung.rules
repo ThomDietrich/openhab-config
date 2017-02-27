@@ -1,66 +1,171 @@
 
 val String filename = "heizung.rules"
 
-val Number AUTOMATIK = 0
-val Number ABWESEND = 1
-val Number DAUERFEUER = 2
+val Number tempHigher = 23.0
+val Number tempComfort = 21.0
+val Number tempMid = 19.0
+val Number tempLower = 17.0
+val Number tempChill = 15.0
+val Number tempAway = 15.0
+val Number tempAwayLonger = 13.0
+val Number tempOff = 4.5
+
+// Heating mode for the whole apartment:
+//  NORMAL: Betriebsmodus für die normale Arbeitswoche
+//  PARTY: Konstante Beheizung, automatischer Wechsel zu NORMAL in der Nacht (nach der Party oder dem besonderen Tag)
+//  WEEKEND_TRIP: leicht abgesenkte Temperaturen über den ganzen Tag, automatischer Wechsel zu NORMAL am nächsten Montag morgen
+//  AWAY: Unterwegs/längere Zeit abwesend, abgesenkte Temperatur für einen undefinierten Zeitraum
+//  OFF_SUMMER: alle Heizkörper sind aus (Sommerbetrieb)
+//  AUTO_DEVICE: Wechselt Gerät in automatik Modus, keine automatische Beeinflussung 
+//  MANU_DEVICE: Wechselt Gerät in manuellen Modus, keine automatische Beeinflussung
 
 rule "OpenHAB system started"
 when
-    System started or
-    Time is midnight
+    System started
 then
-    createTimer(now.plusSeconds(190)) [|
-        logInfo(filename, "openHAB system started +15s rule")
-        //
-        if (BD_Heizung_EcoTemp.state == NULL) BD_Heizung_EcoTemp.postUpdate(17.0)
-        if (BD_Heizung_ComfTemp.state == NULL) BD_Heizung_ComfTemp.postUpdate(21.0)
-        //
-        if (FK_Heizung_EcoTemp.state == NULL) FK_Heizung_EcoTemp.postUpdate(17.0)
-        if (FK_Heizung_ComfTemp.state == NULL) FK_Heizung_ComfTemp.postUpdate(21.0)
-        //
-        if (SZ_Heizung_EcoTemp.state == NULL) SZ_Heizung_EcoTemp.postUpdate(17.0)
-        if (SZ_Heizung_ComfTemp.state == NULL) SZ_Heizung_ComfTemp.postUpdate(21.0)
-        //
-        if (WZ_Heizung_EcoTemp.state == NULL) WZ_Heizung_EcoTemp.postUpdate(17.0)
-        if (WZ_Heizung_ComfTemp.state == NULL) WZ_Heizung_ComfTemp.postUpdate(21.0)
-        //
-        gInitNone.members.forEach(item | item.postUpdate(-1))
-        //
-        WhgHeatState.postUpdate(-1)
-        //
-        logInfo(filename, "Schnellwahlwerte bei Systemstart initialisiert")
+    createTimer(now.plusSeconds(1)) [ |
+        logInfo(filename, "openHAB system started rule heating")
+        if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
+        gHeatPreset.members.forEach(item | { if (item.state == NULL) item.postUpdate(14.5) })
     ]
 end
 
-
-rule "Heizmodus umschalten"
+rule "Heizmodus umschalten und Stellglieder setzen"
 when
-    Item WhgHeatState received command
+    Item Whg_Heating_Mode received update or
+    Item Whg_Heating_UpdateHeater received command ON
 then
-    logInfo(filename, "Wohnung Heizmodus")
-    if (receivedCommand == AUTOMATIK) {
-        logInfo(filename, "Wohnung Heizmodus: Automatik")
-        BD_Heizung_Auto.sendCommand(ON)
-        FK_Heizung_Auto.sendCommand(ON)
-        SZ_Heizung_Auto.sendCommand(ON)
-        WZ_Heizung_Auto.sendCommand(ON)
-    } else if (receivedCommand == ABWESEND) {
-        logInfo(filename, "Wohnung Heizmodus: Abwesend")
-        BD_Heizung_Manu.sendCommand(15.0)
-        FK_Heizung_Manu.sendCommand(15.0)
-        SZ_Heizung_Manu.sendCommand(15.0)
-        WZ_Heizung_Manu.sendCommand(15.0)
-    } else if (receivedCommand == DAUERFEUER) {
-        logInfo(filename, "Wohnung Heizmodus: Dauerfeuer")
-        BD_Heizung_Manu.sendCommand(21.0)
-        FK_Heizung_Manu.sendCommand(21.0)
-        SZ_Heizung_Manu.sendCommand(21.0)
-        WZ_Heizung_Manu.sendCommand(21.0)
-    } else {
-        logError(filename, "Wohnung Heizmodus: unerwarteter Zustand" + receivedCommand)
-    }
-    WhgHeatState.postUpdate(-1)
+    Whg_Heating_UpdateHeater.postUpdate(OFF)
+    switch Whg_Heating_Mode.state {
+		case "NORMAL" : {
+			logInfo(filename, "Wohnung Heizmodus: NORMAL")
+			WZ_Heizung_Manu.sendCommand(WZ_Heizung_PresetTemp.state as Number)
+			FK_Heizung_Manu.sendCommand(FK_Heizung_PresetTemp.state as Number)
+			SZ_Heizung_Manu.sendCommand(SZ_Heizung_PresetTemp.state as Number)
+			BD_Heizung_Manu.sendCommand(BD_Heizung_PresetTemp.state as Number)
+		}
+		case "PARTY" : {
+			logInfo(filename, "Wohnung Heizmodus: PARTY")
+			WZ_Heizung_Manu.sendCommand(tempComfort)
+			FK_Heizung_Manu.sendCommand(tempComfort)
+			SZ_Heizung_Manu.sendCommand(tempChill)
+			BD_Heizung_Manu.sendCommand(tempMid)
+		}
+		case "WEEKEND_TRIP" : {
+			logInfo(filename, "Wohnung Heizmodus: WEEKEND_TRIP")
+			WZ_Heizung_Manu.sendCommand(tempAway)
+			FK_Heizung_Manu.sendCommand(tempAway)
+			SZ_Heizung_Manu.sendCommand(tempAway)
+			BD_Heizung_Manu.sendCommand(tempAway)
+		}
+		case "AWAY" : {
+			logInfo(filename, "Wohnung Heizmodus: AWAY")
+			WZ_Heizung_Manu.sendCommand(tempAwayLonger)
+			FK_Heizung_Manu.sendCommand(tempAwayLonger)
+			SZ_Heizung_Manu.sendCommand(tempAwayLonger)
+			BD_Heizung_Manu.sendCommand(tempAwayLonger)
+		}
+		case "OFF_SUMMER" : {
+			logInfo(filename, "Wohnung Heizmodus: OFF_SUMMER")
+			WZ_Heizung_Manu.sendCommand(tempOff)
+			FK_Heizung_Manu.sendCommand(tempOff)
+			SZ_Heizung_Manu.sendCommand(tempOff)
+			BD_Heizung_Manu.sendCommand(tempOff)
+		}
+		case "AUTO_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: AUTO_DEVICE (nicht implementiert)") }
+		case "MANU_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: MANU_DEVICE (nicht implementiert)") }
+		default            : { logError(filename, "Wohnung Heizmodus ungültig: " + Whg_Heating_Mode.state) }
+	}
+end
+
+// Whg_Heating_Mode Ende PARTY
+rule "Party Modus Ende 2:00 Uhr"
+when
+	Time cron "0 0 2 ? * * *"
+then
+	if (Whg_Heating_Mode.state == "PARTY") {
+		logInfo(filename, "Wohnung Heizmodus: PARTY wird verlassen")
+		Whg_Heating_Mode.postUpdate("NORMAL")
+	}
+end
+
+// Whg_Heating_Mode Ende WEEKEND_TRIP
+rule "Wochenendtrip Ende Montag 13:00 Uhr"
+when
+	Time cron "0 0 13 ? * MON *"
+then
+	if (Whg_Heating_Mode.state == "WEEKEND_TRIP") {
+		logInfo(filename, "Wohnung Heizmodus: WEEKEND TRIP wird verlassen")
+		Whg_Heating_Mode.postUpdate("NORMAL")
+	}
+end
+
+// Whg_Heating_Mode NORMAL Zeitprogramm
+
+rule "1:30 Uhr"
+when
+	Time cron "0 30 1 ? * * *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	WZ_Heizung_PresetTemp.postUpdate(17.0)
+	FK_Heizung_PresetTemp.postUpdate(17.0)
+	SZ_Heizung_PresetTemp.postUpdate(15.0)
+	BD_Heizung_PresetTemp.postUpdate(17.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "8:30 Uhr (Wochentag Bad)"
+when
+	Time cron "0 30 8 ? * MON-FRI *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	BD_Heizung_PresetTemp.postUpdate(23.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "9:30 Uhr (Wochentag Bad)"
+when
+	Time cron "0 30 9 ? * MON-FRI *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	BD_Heizung_PresetTemp.postUpdate(17.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "9:00 Uhr (Wochenende)"
+when
+	Time cron "0 0 9 ? * SAT-SUN *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	WZ_Heizung_PresetTemp.postUpdate(21.0)
+	FK_Heizung_PresetTemp.postUpdate(19.0)
+	SZ_Heizung_PresetTemp.postUpdate(17.0)
+	BD_Heizung_PresetTemp.postUpdate(21.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "18:00 Uhr"
+when
+	Time cron "0 0 18 ? * * *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	WZ_Heizung_PresetTemp.postUpdate(21.0)
+	FK_Heizung_PresetTemp.postUpdate(19.0)
+	SZ_Heizung_PresetTemp.postUpdate(17.0)
+	BD_Heizung_PresetTemp.postUpdate(20.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "20:30 Uhr"
+when
+	Time cron "0 30 20 ? * * *"
+then
+	logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+	WZ_Heizung_PresetTemp.postUpdate(22.0)
+	FK_Heizung_PresetTemp.postUpdate(19.0)
+	SZ_Heizung_PresetTemp.postUpdate(16.0)
+	BD_Heizung_PresetTemp.postUpdate(20.0)
+	Whg_Heating_UpdateHeater.sendCommand(ON)
 end
 
 // vim: syntax=Xtend

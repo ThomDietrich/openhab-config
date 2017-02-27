@@ -8,9 +8,10 @@ when
 then
 	logInfo(filename, "Wartung - Fehler-Items")
 	gError.members.forEach(item | {
-			logInfo(filename, "Wartung - Fehler-Items " + item.label + " Type(" + item.type + "): " + item.state)
-			if (item.state != "NO_FAULT" && item.state != "NO_ERROR") {
-				logWarn(filename, "  --> Fehler")
+			if (item.state == "NO_FAULT" || item.state == "NO_ERROR") {
+				logInfo(filename, "Wartung - Fehler-Item OK:     " + item.label + ": " + item.state)
+			} else {
+				logWarn(filename, "Wartung - Fehler-Item FEHLER: " + item.label + ": " + item.state)
 				pushover("Warnung. Item: " + item.label + " (Status " + item.state + ")")
 			}
 		}
@@ -42,18 +43,22 @@ then
 			logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
 			if (item.type == "Number") {
 				if (item.state <= 2.5) {
-					logWarn(filename, "  --> Batterie schwach")
+					logWarn(filename, "Wartung - Batterie schwach: " + item.label)
 					pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
 				}
 			}
 			else if (item.type == "Switch") {
-				if (item.state == ON) logWarn(filename, "  --> Batterie schwach")
-				if (item.state == NULL) logWarn(filename, "  --> Batterie unbekannt (NULL)")
-				if (item.state != ON) pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
-				if (item.state != NULL) pushover("Warnung. Gerät mit leerer Batterie: " + item.label)
+				if (item.state == ON) {
+					logWarn(filename, "Wartung - Batterie schwach: " + item.label)
+					pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
+				}
+				if (item.state == NULL) {
+					logWarn(filename, "Wartung - Batterie unbekannt (NULL): " + item.label)
+					pushover("Warnung. Gerät mit leerer Batterie: " + item.label)
+				}
 			}
 			else {
-				logError(filename, "Fehler: Unbekannter Batterietyp!")
+				logError(filename, "Wartung - Batterietyp unbekannt: " + item.label)
 				pushover("Warnung. Batterietest unbekannter Fehler: " + item.label)
 			}
 		}

@@ -149,7 +149,7 @@ Number WZ_Lacks_LEDs_Power          "Lacksleuchter LEDs Leistung [%.0f W]"      
 Number WZ_Lacks_Lampe_Power         "Lacksleuchter Lampe Leistung [%.0f W]"     <energy>    (WZ,gPower)
 
 //HM-LC-Dim1T-Pl-2 Funk-Abschnitt-Dimmaktor ab V2.0
-Dimmer FK_Edison_Dimmer_Level       "Edison Dimmer Zustand"                                 (FK,gLight)       {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
+Dimmer FK_Edison_Dimmer_Level       "Edison Dimmer"                                         (FK,gLight)       {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
 Number FK_Edison_Dimmer_RSSI        "Edison Dimmer RSSI [%d dBm]"                           (gW,gRSSI)        {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#RSSI_DEVICE"}
 Switch FK_Edison_Dimmer_Unreach     "Edison Dimmer unreachable"                 <siren>     (gW,gUnreach)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#UNREACH"}
 Switch FK_Edison_Dimmer_Pending     "Edison Dimmer config pending"              <siren>     (gW,gPending)     {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:0#CONFIG_PENDING"}

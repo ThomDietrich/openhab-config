@@ -26,10 +26,10 @@ then
     val show = (KodiTitleShow.state as StringType).toString
 
     var summary = ""
-    if (KodiSystemState.state == OFF) summary = "nicht aktiv ✘"
-    else if (KodiPlayerState.state == "Stop") summary = "inaktiv ⏹"
-    else if (KodiTitleShow.state == "") summary = String::format("%s %s", title, status)
-    else summary = String::format("%s: %s %s", show, title, status)
+    if (KodiSystemState.state == OFF) summary = "nicht aktiv\u2000✘"
+    else if (KodiPlayerState.state == "Stop") summary = "inaktiv\u2000⏹"
+    else if (KodiTitleShow.state == "") summary = String::format("%s\u2000%s", title, status)
+    else summary = String::format("%s: %s\u2000%s", show, title, status)
 
     KodiSummary.postUpdate(summary)
 end

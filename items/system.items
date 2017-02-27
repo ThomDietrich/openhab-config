@@ -14,7 +14,7 @@ Group:Switch:OR(ON, OFF)        gBattery    "Batteriestände [%d ]"             
 Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d ]"                      <contact>       (Whg)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)
 Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (Whg)
-Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <radio>         (Whg)
+Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <line>          (Whg)
 Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"             <siren>         (Whg)
 Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"      <siren>         (Whg)
 Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"             <error2>        (Whg)
@@ -22,11 +22,17 @@ Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"    
 Group gW "Wartung" (Whg)
 Group gInitNone "Initialisierung mit (-1)" (Whg)
 
-Switch      PresencePC                      "Zustand PC"                                <present>       (Whg)   { channel="network:device:BirkePC:online" }
-Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg)   { channel="network:device:ThOP3:online" }
-Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg)   { channel="network:device:ThN9:online" }
+Switch      PresencePC                      "Zustand PC"                                <present>       (WZ)  { channel="network:device:BirkePC:online" }
+Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg) { channel="network:device:ThOP3:online" }
+Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg) { channel="network:device:ThN9:online" }
+
+Switch      WZ_BirkePC_Online               "BirkePC WinThing Online"                   <light>         (WZ)  { mqtt="<[broker:winthing-birke/system/system/online:state:MAP(truefalse.map)]" }
+String      WZ_BirkePC_Command              "BirkePC Command"                           <switch>        (WZ)
 
 Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (Whg)
+
+String      Whg_Heating_Mode                "Wohnung Heizmodus [%d]"                    <heating>       (Whg)
+Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (Whg)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)

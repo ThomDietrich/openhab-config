@@ -41,10 +41,13 @@ Switch WZ_Expedit "Expedit" <light> (WZ,gLight)
     { mqtt=">[broker:cmnd/sonoff-E8A6E4/power:command:*:default],
             <[broker:stat/sonoff-E8A6E4/POWER:state:default]" }
 Number WZ_Expedit_Power "Expedit Leistung [%.1f W]" <energy> (gPower)
-    { mqtt="<[broker:tele/sonoff-E8A6E4/TELEMETRY:state:JSONPATH($.Energy.Power)]" }
+    { mqtt="<[broker:tele/sonoff-E8A6E4/ENERGY:state:JSONPATH($.Power)]" }
 Number WZ_Expedit_RSSI "Expedit RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-E8A6E4/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+    { mqtt="<[broker:tele/sonoff-E8A6E4/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 Switch WZ_Expedit_Unreach "Expedit unreachable" <siren> (gUnreach)
     { mqtt="<[broker:tele/sonoff-E8A6E4/LWT:state:MAP(unreach.map)]" }
+
+//Maintenance
+String	Sonoff_Action "Sonoff Action" <sonoff_basic>
 
 // vim: syntax=Xtend
