@@ -1,0 +1,289 @@
+
+val String filename = "sonos.rules"
+
+var Timer CheckSinglePlayerTimer = null
+var Timer SonosGroupVisibility = null
+
+val Functions$Function6 updateSingleGroups = [
+	NumberItem group1_num,
+	NumberItem group2_num,
+	NumberItem group3_num,
+	StringItem player_a_groupID,
+	StringItem player_b_groupID,
+	StringItem player_a_name | 
+
+	// If the updated player has been grouped to is in the "NONE"-group (or is NULL),
+	// find a group with zero players and update status of both players.
+	if (player_b_groupID.state=="0" || player_b_groupID.state==NULL) {
+		if (group1_num.state==0) {
+			postUpdate(player_a_groupID,"1")
+			postUpdate(player_b_groupID,"1")
+			logInfo(filename, player_a_name + " player + 1 updated to group 1")
+		} else if (group2_num.state==0) {
+			postUpdate(player_a_groupID,"2")
+			postUpdate(player_b_groupID,"2")
+			logInfo(filename, player_a_name + " player + 1 updated to group 2")
+
+		} else if (group3_num.state==0) {
+			postUpdate(player_a_groupID,"3")
+			postUpdate(player_b_groupID,"3")
+			logInfo(filename, player_a_name + " player + 1 updated to group 3")
+		}
+	// Else set the updated player to the group id of the matched player
+	} else if (player_a_groupID.state!=player_b_groupID.state) {
+		postUpdate(player_a_groupID,player_b_groupID.state)
+		logInfo(filename, player_a_name + " player updated to group " + player_b_groupID.state.toString)
+	}
+	return NULL
+]
+
+val Functions$Function6 checkSinglePlayers = [
+	StringItem CheckZonegroupID,
+	StringItem ZonegroupID_a,
+	StringItem ZonegroupID_b,
+	StringItem ZonegroupID_c,
+	StringItem UpdatePlayer,
+	StringItem UpdatePlayerName |
+
+	if (CheckZonegroupID.state!=ZonegroupID_a.state && CheckZonegroupID.state!=ZonegroupID_b.state && CheckZonegroupID.state!=ZonegroupID_c.state) {
+		postUpdate(UpdatePlayer,"0")
+		logInfo(filename, UpdatePlayerName + "player updated to group 0")
+	}
+	return NULL
+]
+
+///// NUMBER OF PLAYERS IN GROUP
+//
+//	A simple count of the number of players
+//	in each group is made. This is used in
+//	various rules, e.g. to determine
+//	if a group should be visible in the UI or not.
+//
+/////////////////////////////////
+
+rule "Sonos number of players in group"
+when
+	Item SonosGroupID_Kitc received update or
+	Item SonosGroupID_Bedr received update or
+	Item SonosGroupID_Livi received update or
+	Item SonosGroupID_Bath received update
+then
+	var Number Group_1 = 0
+	var Number Group_2 = 0
+	var Number Group_3 = 0
+
+	if (SonosGroupID_Kitc.state=="1"){
+		Group_1 = Group_1 + 1
+	} else if (SonosGroupID_Kitc.state=="2"){
+		Group_2 = Group_2 + 1
+	} else if (SonosGroupID_Kitc.state=="3"){
+		Group_3 = Group_3 + 1
+	}
+
+	if (SonosGroupID_Bedr.state=="1"){
+		Group_1 = Group_1 + 1
+	} else if (SonosGroupID_Bedr.state=="2"){
+		Group_2 = Group_2 + 1
+	} else if (SonosGroupID_Bedr.state=="3"){
+		Group_3 = Group_3 + 1
+	}
+
+	if (SonosGroupID_Bath.state=="1"){
+		Group_1 = Group_1 + 1
+	} else if (SonosGroupID_Bath.state=="2"){
+		Group_2 = Group_2 + 1
+	} else if (SonosGroupID_Bath.state=="3"){
+		Group_3 = Group_3 + 1
+	}
+
+	if (SonosGroupID_Livi.state=="1"){
+		Group_1 = Group_1 + 1
+	} else if (SonosGroupID_Livi.state=="2"){
+		Group_2 = Group_2 + 1
+	} else if (SonosGroupID_Livi.state=="3"){
+		Group_3 = Group_3 + 1
+	}
+
+	postUpdate(Sonos_Group1_Number,Group_1)
+	postUpdate(Sonos_Group2_Number,Group_2)
+	postUpdate(Sonos_Group3_Number,Group_3)
+end
+
+///// GROUPING RULES
+//
+//	The rule will check every other player that the
+//	  (1) Group number of the player beeing added corresponds to the player it is beeing added to
+//	  (2) Zone-ids are not equal (not already grouped)
+//	  (3) That the player beeing checked has a state (not NULL)
+//
+//	Additional nested logic is required to determine in what direction the player shall be grouped (A to B or B to A).
+//	This is a special case that kicks in when both players are single before grouping: It is not possible
+//	to add a player that is the local coordinator to a player which is not.
+//
+/////////////////////////////////
+
+
+rule "Sonos group kitchen"
+when 
+	Item SonosGroupID_Kitc received command
+then
+
+	// Short sleep to make shure the rule to calculate the number of players in a group has executed before the logic is applied.
+	Thread::sleep(300)
+
+	if (SonosGroupID_Kitc.state==SonosGroupID_Bedr.state && SonosGroupID_Kitc.state!="0" && FK_Sonos_ZoneGroupID.state!=SZ_Sonos_ZoneGroupID.state && SZ_Sonos_ZoneGroupID.state!=NULL && ((SZ_Sonos_LocalCoordinator.state==ON) || (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))))){ 
+		
+		logInfo(filename, "Entered sonos kitchen grouping rule number 1")
+		
+		if (SZ_Sonos_LocalCoordinator.state==ON){
+			SZ_Sonos_Add.sendCommand("RINCON_kitchenplayer")
+			logInfo(filename, "Kitchen player added to bedroom")
+		} else if (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))) {
+			FK_Sonos_Add.sendCommand("RINCON_bedroomplayer")
+			logInfo(filename, "bedroom player added to kitchen")
+		}
+
+	} else if (SonosGroupID_Kitc.state==SonosGroupID_Bath.state && SonosGroupID_Kitc.state!="0" && FK_Sonos_ZoneGroupID.state!=BD_Sonos_ZoneGroupID.state && BD_Sonos_ZoneGroupID.state!=NULL && ((BD_Sonos_LocalCoordinator.state==ON) || (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))))){ 
+		
+		logInfo(filename, "Entered sonos kitchen grouping rule number 2")
+		
+		if (BD_Sonos_LocalCoordinator.state==ON){
+			BD_Sonos_Add.sendCommand("RINCON_kitchenplayer")
+			logInfo(filename, "Kitchen player added to bathroom")
+		} else if (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))) {
+			FK_Sonos_Add.sendCommand("RINCON_bathroomplayer")
+			logInfo(filename, "Bathroom player added to kitchen")
+		}
+
+	} else if (SonosGroupID_Kitc.state==SonosGroupID_Livi.state && SonosGroupID_Kitc.state!="0" && FK_Sonos_ZoneGroupID.state!=WZ_Sonos_ZoneGroupID.state && WZ_Sonos_ZoneGroupID.state!=NULL && ((WZ_Sonos_LocalCoordinator.state==ON) || (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))))){ 
+		
+		logInfo(filename, "Entered sonos kitchen grouping rule number 3")
+		
+		if (WZ_Sonos_LocalCoordinator.state==ON){
+			WZ_Sonos_Add.sendCommand("RINCON_kitchenplayer")
+			logInfo(filename, "Kitchen player added to living room")
+		} else if (FK_Sonos_LocalCoordinator.state==ON && ((SonosGroupID_Kitc.state=="1" && Sonos_Group1_Number.state=="2") || (SonosGroupID_Kitc.state=="2" && Sonos_Group2_Number.state=="2") || (SonosGroupID_Kitc.state=="3" && Sonos_Group3_Number.state=="2"))) {
+			FK_Sonos_Add.sendCommand("RINCON_livingroomplayer")
+			logInfo(filename, "Living room player added to Kitchen")
+		}
+
+	} else {
+		FK_Sonos_StandAlone.sendCommand("ON")
+		logInfo(filename, "Kitchen player set to stand alone")
+	}
+end
+
+//// UPDATE GROUPING RULES
+//
+//	The rules will update the appropiate group
+//	when a sonos player is grouped, either
+//  in the OH2 UI or within the Sonos app.
+//	
+/////////////////////////////////
+
+rule "Sonos update group membership bathroom"
+when
+	Item BD_Sonos_ZoneGroupID changed
+then
+	if (BD_Sonos_ZoneGroupID.state==FK_Sonos_ZoneGroupID.state && FK_Sonos_ZoneGroupID.state!=NULL) {
+		updateSingleGroups.apply(Sonos_Group1_Number, Sonos_Group2_Number, Sonos_Group3_Number, SonosGroupID_Bath, SonosGroupID_Kitc, "Bathroom")
+
+	} else if (BD_Sonos_ZoneGroupID.state==SZ_Sonos_ZoneGroupID.state && SZ_Sonos_ZoneGroupID.state!=NULL) {
+		updateSingleGroups.apply(Sonos_Group1_Number, Sonos_Group2_Number, Sonos_Group3_Number, SonosGroupID_Bath, SonosGroupID_Bedr, "Bathroom")
+
+	} else if (BD_Sonos_ZoneGroupID.state==WZ_Sonos_ZoneGroupID.state && WZ_Sonos_ZoneGroupID.state!=NULL) {
+		updateSingleGroups.apply(Sonos_Group1_Number, Sonos_Group2_Number, Sonos_Group3_Number, SonosGroupID_Bath, SonosGroupID_Livi, "Bathroom")
+
+	// The zone-id changed, but is not grouped with any other players (removed from group).
+	// To allow grouping in the UI without the state being reset to single, a timer is applied.
+	// This works since grouping in both the OH UI and the Sonos app usually is not performed simultaneously.
+	} else {
+		if (CheckSinglePlayerTimer==null) {
+			CheckSinglePlayerTimer = createTimer(now.plusSeconds(20), [|
+				checkSinglePlayers.apply(BD_Sonos_ZoneGroupID, FK_Sonos_ZoneGroupID, SZ_Sonos_ZoneGroupID, WZ_Sonos_ZoneGroupID, SonosGroupID_Bath,"Bathroom")
+				checkSinglePlayers.apply(FK_Sonos_ZoneGroupID, BD_Sonos_ZoneGroupID, SZ_Sonos_ZoneGroupID, WZ_Sonos_ZoneGroupID, SonosGroupID_Kitc,"Kitchen")
+				checkSinglePlayers.apply(SZ_Sonos_ZoneGroupID, BD_Sonos_ZoneGroupID, FK_Sonos_ZoneGroupID, WZ_Sonos_ZoneGroupID, SonosGroupID_Bedr,"Bedroom")
+				checkSinglePlayers.apply(WZ_Sonos_ZoneGroupID, BD_Sonos_ZoneGroupID, FK_Sonos_ZoneGroupID, SZ_Sonos_ZoneGroupID, SonosGroupID_Livi,"Living room")
+				CheckSinglePlayerTimer = null
+			])
+			logInfo(filename, "CheckSinglePlayerTimer scheduled")
+		} else {
+			CheckSinglePlayerTimer.reschedule(now.plusSeconds(20))
+			logInfo(filename, "CheckSinglePlayerTimer rescheduled")
+		}
+	}
+end
+
+///// GROUP VISIBILITY
+//
+//	The rule is used to control the UI.
+//  Specifically, it used to determin
+//  if a group should be hidden and if
+//  no, which player is to be shown within
+//  the group. This has to be the local
+//	coordinator in the group.
+// 
+/////////////////////////////////
+
+rule "Sonos group visibility"
+when
+	Item SonosGroupID_Kitc received update or
+	Item SonosGroupID_Bedr received update or
+	Item SonosGroupID_Bath received update or
+	Item SonosGroupID_Livi received update 
+then
+	if (SonosGroupVisibility==null) {
+		SonosGroupVisibility = createTimer(now.plusSeconds(5), [ |
+
+			if (Sonos_Group1_Number.state<=1){
+				postUpdate(Sonos_Group1_Visibility,"Hide")
+
+			} else if (Sonos_Group1_Number.state>=2){
+				if (SonosGroupID_Kitc.state=="1" && FK_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group1_Visibility,"Kitchen")
+				} else if (SonosGroupID_Bedr.state=="1" && SZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group1_Visibility,"Bedroom")
+				} else if (SonosGroupID_Bath.state=="1" && BD_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group1_Visibility,"Bathroom")
+				} else if (SonosGroupID_Livi.state=="1" && WZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group1_Visibility,"Living room")
+				}
+			}
+
+			if (Sonos_Group2_Number.state<=1){
+				postUpdate(Sonos_Group2_Visibility,"Hide")
+			} else if (Sonos_Group2_Number.state>=2){
+				if (SonosGroupID_Kitc.state=="2" && FK_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group2_Visibility,"Kitchen")
+				} else if (SonosGroupID_Bedr.state=="2" && SZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group2_Visibility,"Bedroom")
+				} else if (SonosGroupID_Bath.state=="2" && BD_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group2_Visibility,"Bathroom")
+				} else if (SonosGroupID_Livi.state=="2" && WZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group2_Visibility,"Living room")
+				}
+			}
+
+			if (Sonos_Group3_Number.state<=1){
+				postUpdate(Sonos_Group3_Visibility,"Hide")
+			} else if (Sonos_Group3_Number.state>=2){
+				if (SonosGroupID_Kitc.state=="3" && FK_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group3_Visibility,"Kitchen")
+				} else if (SonosGroupID_Bedr.state=="3" && SZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group3_Visibility,"Bedroom")
+				} else if (SonosGroupID_Bath.state=="3" && BD_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group3_Visibility,"Bathroom")
+				} else if (SonosGroupID_Livi.state=="3" && WZ_Sonos_LocalCoordinator.state==ON){
+					postUpdate(Sonos_Group3_Visibility,"Living room")
+				}
+			}
+
+		])
+		logInfo(filename, "SonosGroupVisibility scheduled")
+		SonosGroupVisibility = null
+
+	} else {
+		SonosGroupVisibility.reschedule(now.plusSeconds(5))
+		logInfo(filename, "SonosGroupVisibility rescheduled")
+	}
+end
