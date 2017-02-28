@@ -1,87 +1,80 @@
-import java.math.BigDecimal
-import java.util.Locale
 
 val String filename = "heizung-WZ.rules"
+
+val Number tempHigher = 23.0
+val Number tempComfort = 21.0
+val Number tempMid = 19.0
+val Number tempLower = 17.0
+val Number tempChill = 15.0
+val Number tempAway = 15.0
+val Number tempAwayLonger = 13.0
+val Number tempOff = 4.5
 
 // How to Duplicate:
 // Search and replace "WZ_" --> "WZ_" 
 
-rule "WZ_Heizung set heating from sitemap preset element"
+rule "WZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
   Item WZ_Heizung_Preset received command
 then {
-	logInfo(filename, "Schnellauswahl (Sitemap -> Homematic)")
+	logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
 	switch (receivedCommand){
-		case 0: WZ_Heizung_Lowering.sendCommand(ON)
-		case 1: WZ_Heizung_Comfort.sendCommand(ON)
+		case 0: WZ_Heizung_Manu.sendCommand(tempLower)
+		case 1: WZ_Heizung_Manu.sendCommand(tempComfort)
+		case 2: WZ_Heizung_Manu.sendCommand(tempHigher)
 	}
-	createTimer(now.plusSeconds(1)) [|
-		WZ_Heizung_Preset.postUpdate(-1)
-	]
+	WZ_Heizung_Preset.postUpdate(-1)
 }
 end
 
-rule "WZ_Heizung set mode from sitemap select element"
+/*
+rule "WZ_Heizung switch heater mode (Auto, Manu, Boost)"
 when
   Item WZ_Heizung_SetMode received command
 then {
 	logInfo(filename, "Modus (Sitemap -> Homematic)")
 	switch (receivedCommand){
-		case 0: WZ_Heizung_Auto.sendCommand(ON)
-		case 1: WZ_Heizung_Manu.sendCommand(WZ_Heizung_SetTemp.state as DecimalType)
-		case 3: WZ_Heizung_BoostMode.sendCommand(ON)
-		case 4: WZ_Heizung_SetMode.postUpdate(-1)
+		case "AUTO-MODE": WZ_Heizung_Auto.sendCommand(ON)
+		case "MANU-MODE": WZ_Heizung_Manu.sendCommand(WZ_Heizung_SetTemp.state as Number)
+		case "BOOST-MODE": WZ_Heizung_BoostMode.sendCommand(ON)
 	}
 }
 end
-
+*/
 /*
-rule "WZ_Heizung update sitemap with window mode"
+rule "WZ_Heizung Fensterabsenkung erkennen"
 when
   Item WZ_Fenster_State received update
 then {
 	createTimer(now.plusSeconds(15)) [|
-		//logInfo(filename, "Fenster-Modus <" + WZ_Fenster_State.state + "><" + WZ_Heizung_SetTemp.state + ">")
+		logInfo(filename, "Fenster-Modus <" + WZ_Fenster_State.state + "><" + WZ_Heizung_SetTemp.state + ">")
 		if (WZ_Fenster_State.state == OPEN && WZ_Heizung_SetTemp.state == 12.0) {
-			//logInfo(filename, "Fenster-Modus aktiviert")
-			WZ_Heizung_SetMode.postUpdate(4)
+			logInfo(filename, "Fenster-Modus aktiviert")
+			WZ_Heizung_WindowMode.postUpdate(ON)
 		} else if (WZ_Fenster_State.state == CLOSED && WZ_Heizung_SetTemp.state != 12.0) {
-			//logInfo(filename, "Fenster-Modus deaktiviert")
-			WZ_Heizung_SetMode.postUpdate(WZ_Heizung_Mode.state)
+			logInfo(filename, "Fenster-Modus deaktiviert")
+			WZ_Heizung_WindowMode.postUpdate(OFF)
 		} else {
 			logError(filename, "Fenster-Modus nicht eindeutig")
-			WZ_Heizung_SetMode.postUpdate(WZ_Heizung_Mode.state)
+			WZ_Heizung_WindowMode.postUpdate(OFF)
 		}
 	]	
 }	
 end
 */
 
-rule "WZ_Heizung update sitemap with heating mode"
-when
-  Item WZ_Heizung_Mode received update
-then {
-	//logInfo(filename, "Modus (Homematic -> Sitemap)")
-	// Fenster-Modus pruefen: Wenn Auswahl auf "F" und update auf "A", nichts tun
-	if (WZ_Heizung_SetMode.state == 4 && WZ_Heizung_Mode.state == 0) {
-		//logInfo(filename, "Modus (Homematic -> Sitemap) kein Update da Fenster-Modus")
-	} else {
-		WZ_Heizung_SetMode.postUpdate(WZ_Heizung_Mode.state)
-	}
-}	
-end
-
 rule "WZ_Heizung create summary"
 when
 	Item WZ_Heizung_SetTemp changed or
 	Item WZ_Heizung_ActTemp changed or
 	Item WZ_Heizung_Valve changed or
-	Item WZ_Heizung_SetMode changed
+	Item WZ_Heizung_Mode changed or
+	Item WZ_Heizung_WindowMode changed
 then {
-	if ((WZ_Heizung_SetTemp.state instanceof DecimalType) && (WZ_Heizung_ActTemp.state instanceof DecimalType)) {	
-		val BigDecimal setTemp = (WZ_Heizung_SetTemp.state as DecimalType).toBigDecimal
-		val BigDecimal actTemp = (WZ_Heizung_ActTemp.state as DecimalType).toBigDecimal
-		val mode = if (WZ_Heizung_SetMode.state == 1) "⚙" else if (WZ_Heizung_SetMode.state == 2) "🔥" else ""
+	if ((WZ_Heizung_SetTemp.state instanceof Number) && (WZ_Heizung_ActTemp.state instanceof Number)) {
+		val setTemp = (WZ_Heizung_SetTemp.state as DecimalType).floatValue
+		val actTemp = (WZ_Heizung_ActTemp.state as DecimalType).floatValue
+		val mode = if (WZ_Heizung_Mode.state == "AUTO-MODE") "⚙" else if (WZ_Heizung_Mode.state == "BOOST-MODE") "🔥" else ""
 		
 		if (WZ_Heizung_Valve.state > 60) {
 			WZ_Heizung_Summary.postUpdate(String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
@@ -92,12 +85,12 @@ then {
 		} else if (WZ_Heizung_Valve.state > 0) {
 			WZ_Heizung_Summary.postUpdate(String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp))
 		} else {
-			if (WZ_Heizung_SetMode.state == 1) {
-				WZ_Heizung_Summary.postUpdate(String::format("%s %.1f °C", mode, actTemp))
-			} else if (WZ_Heizung_SetMode.state == 4) {
+			if (WZ_Heizung_Mode.state == "MANU-MODE") {
+				WZ_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+			} else if (WZ_Heizung_WindowMode.state == ON) {
 				WZ_Heizung_Summary.postUpdate(String::format("( ↻ Fenster offen)  %.1f °C", actTemp))
 			} else {
-				WZ_Heizung_Summary.postUpdate(String::format("%.1f °C", actTemp))
+				WZ_Heizung_Summary.postUpdate(String::format("%s %.1f °C", mode, actTemp))
 			}
 		}
 	} else {

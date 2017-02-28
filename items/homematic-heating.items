@@ -20,6 +20,8 @@ Number WZ_Heizung_Manu              "WZ_Heizung Manu-Mode [%.1f °C]"           
 Switch WZ_Heizung_BoostMode         "WZ_Heizung Boost-Mode"                                     <temperature>   (gHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BOOST_MODE" }
 Number WZ_Heizung_BoostTime         "WZ_Heizung Boost-Restdauer [%d min]"                       <"clock-on">    (gHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BOOST_STATE" }
 String WZ_Heizung_Mode              "WZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <temperature>   (WZ,gHeat,gHeatMode)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#CONTROL_MODE" }
+//String WZ_Heizung_SetMode           "WZ_Heizung Soll-Betriebsart [MAP(HM-CC-RT-DN.map):%s]"     <temperature>   (WZ,gHeat)
+Switch WZ_Heizung_WindowMode        "WZ_Heizung Fensterabsenkung"                                               (gHeat)
 Number WZ_Heizung_Preset            "WZ_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-40">  (gHeat,gInitNone)
 String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <heating>       (gHeat)
 Number WZ_Heizung_PresetTemp        "WZ_Heizung Auto-Soll-Temperatur [%.1f °C]"                                 (gHeat,gHeatPreset)

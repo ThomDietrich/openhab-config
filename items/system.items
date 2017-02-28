@@ -33,6 +33,7 @@ Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl 
 
 String      Whg_Heating_Mode                "Wohnung Heizmodus [%d]"                    <heating>       (Whg)
 Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (Whg)
+//Switch    Whg_Heating_UpdateOverride      "Verhindere Soll-Temperatur Änderungen"     <heating>       (Whg)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)
