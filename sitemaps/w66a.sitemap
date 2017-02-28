@@ -39,12 +39,10 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text label="kommt später..." icon="sun_clouds"
             }
         }
-        Switch item=PresencePC icon="pc_silverstone_gd06"
         Text item=PresencePC label="PC [MAP(active.map):%s]" icon="pc_silverstone_gd06" {
         	Switch item=WZ_BirkePC_Command icon="pc_silverstone_gd06" mappings=[shutdown="Shutdown", kodi="Start Kodi", notepad="Notepad"]
         }
         Text item=PresenceThPhone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
-        Switch item=PresenceThN9
         Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
         
         Text item=FK_Senseo_OpState icon="senseo_machine" label="SenseoWifi" {

@@ -8,19 +8,18 @@ Group   SZ  "Schlafzimmer"      <bedroom>   (Whg)
 Group   WZ  "Wohnzimmer"        <video>     (Whg)
 Group   BK  "Balkon"            <garden>    (Whg)
 
-// Sondergruppen
+// horizontale Gruppen
 Group:Switch:OR(ON, OFF)        gLight      "Komplette Beleuchtung [%d ]"               <light>         (Whg)
 Group:Switch:OR(ON, OFF)        gBattery    "Batteriestände [%d ]"                      <battery>       (Whg)
 Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d ]"                      <contact>       (Whg)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)
 Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (Whg)
-Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <line>          (Whg)
-Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"             <siren>         (Whg)
-Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"      <siren>         (Whg)
-Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"             <error2>        (Whg)
-
-Group gW "Wartung" (Whg)
-Group gInitNone "Initialisierung mit (-1)" (Whg)
+// Wartung / Maintenance
+Group                           gMaint      "Wartung (Maintenance)"                     <error>         (Whg)
+Group:Number:MIN                gRSSI       "RSSI aller Geräte [%d dBm]"                <line>          (gMaint)
+Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"             <siren>         (gMaint)
+Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"      <siren>         (gMaint)
+Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"             <error2>        (gMaint)
 
 Switch      PresencePC                      "Zustand PC"                                <present>       (WZ)  { channel="network:device:BirkePC:online" }
 Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg) { channel="network:device:ThOP3:online" }

@@ -1,6 +1,7 @@
 
-val String filename = "heizung.rules"
+val String filename = "heizung-modus.rules"
 
+// vordefinierte Temperaturen
 val Number tempHigher = 23.0
 val Number tempComfort = 21.0
 val Number tempMid = 19.0
@@ -10,33 +11,34 @@ val Number tempAway = 15.0
 val Number tempAwayLonger = 13.0
 val Number tempOff = 4.5
 
-// Heating mode for the whole apartment:
+// Heizmodi für die ganze Wohnung:
 //  NORMAL: Betriebsmodus für die normale Arbeitswoche
 //  PARTY: Konstante Beheizung, automatischer Wechsel zu NORMAL in der Nacht (nach der Party oder dem besonderen Tag)
-//  WEEKEND_TRIP: leicht abgesenkte Temperaturen über den ganzen Tag, automatischer Wechsel zu NORMAL am nächsten Montag morgen
+//  WEEKEND_TRIP: leicht abgesenkte Temperatur über das Wochenende, automatischer Wechsel zu NORMAL am nächsten Montag morgen
 //  AWAY: Unterwegs/längere Zeit abwesend, abgesenkte Temperatur für einen undefinierten Zeitraum
 //  OFF_SUMMER: alle Heizkörper sind aus (Sommerbetrieb)
-//  AUTO_DEVICE: Wechselt Gerät in automatik Modus, keine automatische Beeinflussung 
+//  CALENDAR: einzelne Kalender Termine überschreiben das aktuelle Zeitprogramm
+//  AUTO_DEVICE: Wechselt Gerät in automatik Modus, keine automatische Beeinflussung
 //  MANU_DEVICE: Wechselt Gerät in manuellen Modus, keine automatische Beeinflussung
 
-rule "OpenHAB system started"
+rule "System started"
 when
-    System started
+	System started
 then
-    createTimer(now.plusSeconds(1)) [ |
-        logInfo(filename, "openHAB system started rule heating")
-        if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
-        gHeatPreset.members.forEach(item | { if (item.state == NULL) item.postUpdate(14.5) })
-    ]
+	createTimer(now.plusSeconds(180)) [ |
+		logInfo(filename, "Whg_Heating system started")
+		if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
+		//gHeatPreset.members.forEach(item | { if (item.state == NULL) item.postUpdate(tempMid) })
+	]
 end
 
 rule "Heizmodus umschalten und Stellglieder setzen"
 when
-    Item Whg_Heating_Mode received update or
-    Item Whg_Heating_UpdateHeater received command ON
+	Item Whg_Heating_Mode received update or
+	Item Whg_Heating_UpdateHeater received command ON
 then
-    Whg_Heating_UpdateHeater.postUpdate(OFF)
-    switch Whg_Heating_Mode.state {
+	Whg_Heating_UpdateHeater.postUpdate(OFF)
+	switch Whg_Heating_Mode.state {
 		case "NORMAL" : {
 			logInfo(filename, "Wohnung Heizmodus: NORMAL")
 			WZ_Heizung_Manu.sendCommand(WZ_Heizung_PresetTemp.state as Number)
@@ -72,6 +74,7 @@ then
 			SZ_Heizung_Manu.sendCommand(tempOff)
 			BD_Heizung_Manu.sendCommand(tempOff)
 		}
+		case "CALENDAR" : { logInfo(filename, "Wohnung Heizmodus: CALENDAR (nicht implementiert)") }
 		case "AUTO_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: AUTO_DEVICE (nicht implementiert)") }
 		case "MANU_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: MANU_DEVICE (nicht implementiert)") }
 		default            : { logError(filename, "Wohnung Heizmodus ungültig: " + Whg_Heating_Mode.state) }

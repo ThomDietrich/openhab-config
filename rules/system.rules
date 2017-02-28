@@ -6,12 +6,7 @@ when
     System started
 then
     createTimer(now.plusSeconds(165)) [|
-        logInfo(filename, "--> openHAB system started rule")
-
-        logInfo(filename, "--> Globale Zustände und Presets rücksetzen")
-        gInitNone.members.forEach(item |
-            item.postUpdate(-1)
-        )
+        logInfo(filename, "System started - Globale Zustände und Presets rücksetzen")
         gPower.members.forEach(item |
             if (item.state == NULL) item.postUpdate(0)
         )
