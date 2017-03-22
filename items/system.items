@@ -28,11 +28,12 @@ Switch      PresenceThN9                    "Anwesenheit ThN9"                  
 Switch      WZ_BirkePC_Online               "BirkePC WinThing Online"                   <light>         (WZ)  { mqtt="<[broker:winthing-birke/system/system/online:state:MAP(truefalse.map)]" }
 String      WZ_BirkePC_Command              "BirkePC Command"                           <switch>        (WZ)
 
-Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (Whg)
+Switch      WZ_SoundSystem_Active           "Logitech System Aktiv"                     <speaker>       (WZ)
+
+Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (Whg) { expire="1s" }
 
 String      Whg_Heating_Mode                "Wohnung Heizmodus [%d]"                    <heating>       (Whg)
 Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (Whg)
-//Switch    Whg_Heating_UpdateOverride      "Verhindere Soll-Temperatur Änderungen"     <heating>       (Whg)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)

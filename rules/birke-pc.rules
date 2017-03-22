@@ -20,3 +20,18 @@ then
 	}
 	WZ_BirkePC_Command.postUpdate(NULL)
 end
+
+
+rule "PC Sound System Control"
+when
+    Item PresencePC changed
+then
+    //logInfo(filename, "PC Speaker switch power")
+    if (PresencePC.state == OFF && WZ_SoundSystem_Active.state == ON) {
+	    zmote_sendkey.sendCommand("KEY_POWER")
+    }
+    else if (PresencePC.state == ON && WZ_SoundSystem_Active.state == OFF) {
+	    zmote_sendkey.sendCommand("KEY_POWER")
+    }
+    
+end

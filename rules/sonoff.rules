@@ -6,7 +6,8 @@ val sonoff_device_ids = newArrayList(
 	"sonoff-96504C",
 	"sonoff-A00F9D",
 	"sonoff-9F3BD8",
-	"sonoff-E8A6E4"
+	"sonoff-E8A6E4",
+	"sonoff-20DCAE"
 )
 
 rule "Sonoff Maintenance"
