@@ -164,9 +164,11 @@ Number FK_Edison_Dimmer_Power       "Edison Dimmer Leistung [%.0f W]"           
 Switch FK_Taster_Schrank_1Short     "Küchenschrank Taster 1Kurz"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_SHORT"}
 Switch FK_Taster_Schrank_1Long      "Küchenschrank Taster 1Lang"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_LONG"}
 Switch FK_Taster_Schrank_1LongRel   "Küchenschrank Taster 1LangEnde"                        (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Schrank_1Cont      "Küchenschrank Taster 1Cont"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:1#PRESS_CONT"}
 Switch FK_Taster_Schrank_2Short     "Küchenschrank Taster 2Kurz"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_SHORT"}
 Switch FK_Taster_Schrank_2Long      "Küchenschrank Taster 2Lang"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_LONG"}
 Switch FK_Taster_Schrank_2LongRel   "Küchenschrank Taster 2LangEnde"                        (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Schrank_2Cont      "Küchenschrank Taster 2Cont"                            (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:2#PRESS_CONT"}
 Number FK_Taster_Schrank_RSSI       "Küchenschrank Taster RSSI [%d dBm]"                    (gW,gRSSI)        {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#RSSI_DEVICE"}
 Switch FK_Taster_Schrank_Unreach    "Küchenschrank Taster unreachable"          <siren>     (gW,gUnreach)     {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#UNREACH"}
 Switch FK_Taster_Schrank_Pending    "Küchenschrank Taster config pending"       <siren>     (gW,gPending)     {channel="homematic:HG-HM-PB-2-WM55:ccu:MEQ0023751:0#CONFIG_PENDING"}
@@ -174,9 +176,11 @@ Switch FK_Taster_Schrank_Pending    "Küchenschrank Taster config pending"      
 Switch FK_Taster_Fuse_1Short        "Sicherungskasten Taster 1Kurz"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_SHORT"}
 Switch FK_Taster_Fuse_1Long         "Sicherungskasten Taster 1Lang"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_LONG"}
 Switch FK_Taster_Fuse_1LongRel      "Sicherungskasten Taster 1LangEnde"                     (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Fuse_1Cont         "Sicherungskasten Taster 1Cont"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:1#PRESS_CONT"}
 Switch FK_Taster_Fuse_2Short        "Sicherungskasten Taster 2Kurz"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_SHORT"}
 Switch FK_Taster_Fuse_2Long         "Sicherungskasten Taster 2Lang"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_LONG"}
 Switch FK_Taster_Fuse_2LongRel      "Sicherungskasten Taster 2LangEnde"                     (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Fuse_2Cont         "Sicherungskasten Taster 2Cont"                         (FK)              {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:2#PRESS_CONT"}
 Number FK_Taster_Fuse_RSSI          "Sicherungskasten Taster RSSI [%d dBm]"                 (gW,gRSSI)        {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#RSSI_DEVICE"}
 Switch FK_Taster_Fuse_Unreach       "Sicherungskasten Taster unreachable"       <siren>     (gW,gUnreach)     {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#UNREACH"}
 Switch FK_Taster_Fuse_Pending       "Sicherungskasten Taster config pending"    <siren>     (gW,gPending)     {channel="homematic:HG-HM-PB-2-WM55:ccu:LEQ0570990:0#CONFIG_PENDING"}
@@ -185,9 +189,11 @@ Switch FK_Taster_Fuse_Pending       "Sicherungskasten Taster config pending"    
 Switch WZ_Taster_1Short             "Wohnzimmer Taster 1Kurz"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_SHORT"}
 Switch WZ_Taster_1Long              "Wohnzimmer Taster 1Lang"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_LONG"}
 Switch WZ_Taster_1LongRel           "Wohnzimmer Taster 1LangEnde"                           (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_LONG_RELEASE"}
+Switch WZ_Taster_1Cont              "Wohnzimmer Taster 1Cont"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:1#PRESS_CONT"}
 Switch WZ_Taster_2Short             "Wohnzimmer Taster 2Kurz"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_SHORT"}
 Switch WZ_Taster_2Long              "Wohnzimmer Taster 2Lang"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_LONG"}
 Switch WZ_Taster_2LongRel           "Wohnzimmer Taster 2LangEnde"                           (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_LONG_RELEASE"}
+Switch WZ_Taster_2Cont              "Wohnzimmer Taster 2Cont"                               (WZ)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:2#PRESS_CONT"}
 Number WZ_Taster_RSSI               "Wohnzimmer Taster RSSI [%d dBm]"                       (gW,gRSSI)        {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#RSSI_DEVICE"}
 Switch WZ_Taster_Unreach            "Wohnzimmer Taster unreachable"             <siren>     (gW,gUnreach)     {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#UNREACH"}
 Switch WZ_Taster_Pending            "Wohnzimmer Taster config pending"          <siren>     (gW,gPending)     {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ1332306:0#CONFIG_PENDING"}
@@ -195,9 +201,11 @@ Switch WZ_Taster_Pending            "Wohnzimmer Taster config pending"          
 Switch FK_Taster_Tokyo_1Short       "Flur Taster Tokyo 1Kurz"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_SHORT"}
 Switch FK_Taster_Tokyo_1Long        "Flur Taster Tokyo 1Lang"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_LONG"}
 Switch FK_Taster_Tokyo_1LongRel     "Flur Taster Tokyo 1LangEnde"                           (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Tokyo_1Cont        "Flur Taster Tokyo 1Cont"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:1#PRESS_CONT"}
 Switch FK_Taster_Tokyo_2Short       "Flur Taster Tokyo 2Kurz"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_SHORT"}
 Switch FK_Taster_Tokyo_2Long        "Flur Taster Tokyo 2Lang"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_LONG"}
 Switch FK_Taster_Tokyo_2LongRel     "Flur Taster Tokyo 2LangEnde"                           (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_LONG_RELEASE"}
+Switch FK_Taster_Tokyo_2Cont        "Flur Taster Tokyo 2Cont"                               (FK)              {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:2#PRESS_CONT"}
 Number FK_Taster_Tokyo_RSSI         "Flur Taster Tokyo RSSI [%d dBm]"                       (gW,gRSSI)        {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#RSSI_DEVICE"}
 Switch FK_Taster_Tokyo_Unreach      "Flur Taster Tokyo unreachable"             <siren>     (gW,gUnreach)     {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#UNREACH"}
 Switch FK_Taster_Tokyo_Pending      "Flur Taster Tokyo config pending"          <siren>     (gW,gPending)     {channel="homematic:HG-HM-PB-2-FM:ccu:LEQ0396742:0#CONFIG_PENDING"}
