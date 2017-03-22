@@ -14,6 +14,7 @@ val Number tempOff = 4.5
 // Heizmodi für die ganze Wohnung:
 //  NORMAL: Betriebsmodus für die normale Arbeitswoche
 //  PARTY: Konstante Beheizung, automatischer Wechsel zu NORMAL in der Nacht (nach der Party oder dem besonderen Tag)
+//  SICKDAY: Wärmere Beheizung für den laufenden Tag (Krank zuhause)
 //  WEEKEND_TRIP: leicht abgesenkte Temperatur über das Wochenende, automatischer Wechsel zu NORMAL am nächsten Montag morgen
 //  AWAY: Unterwegs/längere Zeit abwesend, abgesenkte Temperatur für einen undefinierten Zeitraum
 //  OFF_SUMMER: alle Heizkörper sind aus (Sommerbetrieb)
@@ -28,7 +29,7 @@ then
 	createTimer(now.plusSeconds(180)) [ |
 		logInfo(filename, "Whg_Heating system started")
 		if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
-		//gHeatPreset.members.forEach(item | { if (item.state == NULL) item.postUpdate(tempMid) })
+		gHeatPreset.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid) ]
 	]
 end
 
@@ -53,6 +54,13 @@ then
 			SZ_Heizung_Manu.sendCommand(tempChill)
 			BD_Heizung_Manu.sendCommand(tempMid)
 		}
+		case "SICKDAY" : {
+			logInfo(filename, "Wohnung Heizmodus: SICKDAY")
+			WZ_Heizung_Manu.sendCommand(tempHigher)
+			FK_Heizung_Manu.sendCommand(tempHigher)
+			SZ_Heizung_Manu.sendCommand(tempMid)
+			BD_Heizung_Manu.sendCommand(tempHigher)
+		}
 		case "WEEKEND_TRIP" : {
 			logInfo(filename, "Wohnung Heizmodus: WEEKEND_TRIP")
 			WZ_Heizung_Manu.sendCommand(tempAway)
@@ -74,20 +82,20 @@ then
 			SZ_Heizung_Manu.sendCommand(tempOff)
 			BD_Heizung_Manu.sendCommand(tempOff)
 		}
-		case "CALENDAR" : { logInfo(filename, "Wohnung Heizmodus: CALENDAR (nicht implementiert)") }
+		case "CALENDAR"    : { logInfo(filename, "Wohnung Heizmodus: CALENDAR (nicht implementiert)") }
 		case "AUTO_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: AUTO_DEVICE (nicht implementiert)") }
 		case "MANU_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: MANU_DEVICE (nicht implementiert)") }
 		default            : { logError(filename, "Wohnung Heizmodus ungültig: " + Whg_Heating_Mode.state) }
 	}
 end
 
-// Whg_Heating_Mode Ende PARTY
+// Whg_Heating_Mode Ende PARTY/SICKDAY
 rule "Party Modus Ende 2:00 Uhr"
 when
 	Time cron "0 0 2 ? * * *"
 then
-	if (Whg_Heating_Mode.state == "PARTY") {
-		logInfo(filename, "Wohnung Heizmodus: PARTY wird verlassen")
+	if (Whg_Heating_Mode.state == "PARTY" || Whg_Heating_Mode.state == "SICKDAY") {
+		logInfo(filename, "Wohnung Heizmodus: PARTY/SICKDAY wird verlassen")
 		Whg_Heating_Mode.postUpdate("NORMAL")
 	}
 end
