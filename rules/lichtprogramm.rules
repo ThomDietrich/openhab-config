@@ -1,70 +1,43 @@
 
 val String filename = "lichtprogramm.rules"
 
-rule "Schranktaster Arbeitsbeleuchtung ON"
-when
-    Item FK_Taster_Schrank_2Short changed to ON
-then
-    FK_Arbeit.sendCommand(ON)
-end
+rule "Schranktaster Arbeitsbeleuchtung ON"  when Item FK_Taster_Schrank_2Short changed to ON then FK_Arbeit.sendCommand(ON) end
+rule "Schranktaster Arbeitsbeleuchtung OFF" when Item FK_Taster_Schrank_1Short changed to ON then FK_Arbeit.sendCommand(OFF) end
 
-rule "Schranktaster Arbeitsbeleuchtung OFF"
-when
-    Item FK_Taster_Schrank_1Short changed to ON
-then
-    FK_Arbeit.sendCommand(OFF)
-end
-
-
+rule "Schranktaster Hauptleuchte ON"  when Item FK_Taster_Schrank_2Long changed to ON then Kueche_Deckenlicht.sendCommand(ON) end
+rule "Schranktaster Hauptleuchte OFF" when Item FK_Taster_Schrank_1Long changed to ON then Kueche_Deckenlicht.sendCommand(OFF) end
 
 
 rule "Flur Taster oben kurz"
-when
-    Item FK_Taster_Tokyo_2Short changed to ON or
-    Item FK_Taster_Fuse_2Short changed to ON
-then
-    Whg_Light_Preset.sendCommand(2)
+  when Item FK_Taster_Tokyo_2Short changed to ON or Item FK_Taster_Fuse_2Short changed to ON
+  then Whg_Light_Preset.sendCommand(2)
 end
+
 rule "Flur Taster oben lang"
-when
-    Item FK_Taster_Tokyo_2Long changed to ON or
-    Item FK_Taster_Fuse_2Long changed to ON
-then
-    Whg_Light_Preset.sendCommand(1)
+  when Item FK_Taster_Tokyo_2Long changed to ON or Item FK_Taster_Fuse_2Long changed to ON
+  then Whg_Light_Preset.sendCommand(1)
 end
 
 rule "Flur Taster unten kurz"
-when
-    Item FK_Taster_Tokyo_1Short changed to ON or
-    Item FK_Taster_Fuse_1Short changed to ON
-then
-    Whg_Light_Preset.sendCommand(0)
+  when Item FK_Taster_Tokyo_1Short changed to ON or Item FK_Taster_Fuse_1Short changed to ON
+  then Whg_Light_Preset.sendCommand(0)
 end
 
 rule "Flur Taster unten lang"
-when
-    Item FK_Taster_Tokyo_1Long changed to ON or
-    Item FK_Taster_Fuse_1Long changed to ON
-then
-    Whg_Light_Preset.sendCommand(0)
+  when Item FK_Taster_Tokyo_1Long changed to ON or Item FK_Taster_Fuse_1Long changed to ON
+  then Whg_Light_Preset.sendCommand(0)
 end
-
 
 
 rule "Wohnzimmer Taster oben kurz"
-when
-    Item WZ_Taster_2Short changed to ON
-then
-    Whg_Light_Preset.sendCommand(2)
+  when Item WZ_Taster_2Short changed to ON
+  then Whg_Light_Preset.sendCommand(2)
 end
 
 rule "Wohnzimmer Taster unten kurz"
-when
-    Item WZ_Taster_1Short changed to ON
-then
-    Whg_Light_Preset.sendCommand(0)
+  when Item WZ_Taster_1Short changed to ON
+  then Whg_Light_Preset.sendCommand(0)
 end
-
 
 
 rule "Wohnzimmer Taster Licht an"
@@ -96,13 +69,8 @@ then
     //logInfo(filename, "Whg_Light_Preset (Sitemap -> Homematic).")
     switch (receivedCommand){
         case 0: {
+            gLight.members.filter[item | item.state != OFF].forEach[item | item.sendCommand(OFF)]
             logInfo(filename, "Lichtprogramm 0 - Aus")
-            gLight.members.forEach(item |
-                if (item.state != OFF) item.sendCommand(OFF)
-            )
-            gLight.members.forEach(item |
-                item.sendCommand(OFF)
-            )
         }
         case 1: {
             logInfo(filename, "Lichtprogramm 1 - Normal")
@@ -111,7 +79,7 @@ then
             WZ_Origami.sendCommand(ON)
             WZ_Expedit.sendCommand(ON)
             FK_Arbeit.sendCommand(ON)
-            FK_Edison_Dimmer_Level.sendCommand(100)
+            FK_Edison_Dimmer_Level.sendCommand(70)
             WZ_Goldfruchtpalme.sendCommand(OFF)
             WZ_Lacks_Lampe.sendCommand(OFF)
             Flur_Deckenlicht.sendCommand(OFF)
@@ -132,18 +100,10 @@ then
             SZ_Deckenlicht.sendCommand(OFF)
         }
         case 3: {
+            gLight.members.filter[item | item.state != ON].forEach[item | item.sendCommand(ON)]
             logInfo(filename, "Lichtprogramm 3 - Voll")
-            gLight.members.forEach(item |
-                if (item.state != ON) item.sendCommand(ON)
-            )
-            gLight.members.forEach(item |
-                item.sendCommand(ON)
-            )
         }
     }
-    createTimer(now.plusSeconds(3)) [|
-        Whg_Light_Preset.postUpdate(-1)
-    ]
 end
 
 // vim: syntax=Xtend
