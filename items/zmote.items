@@ -1,0 +1,12 @@
+Switch zmote_reachable "zMote Online"  { channel="zmote:zmt2:CI00070700:online" }
+String zmote_sendkey   "Send Button"   { channel="zmote:zmt2:CI00070700:sendkey", expire="1s" }
+String zmote_sendcode  "Send IR Code"  { channel="zmote:zmt2:CI00070700:sendcode", expire="1s" }
+
+// http://www.hifi-remote.com/forums/viewtopic.php?t=14120
+// http://irdb.tk/convert
+// http://www.zmote.io/apis#convertingirsignalsfromotherformats
+//
+// Input (NEC1 2 160 8) 38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730
+// Input 1 (NEC1 2 160 4) 38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730
+// Input 2 (NEC1 2 160 130) 38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730
+// (Attention: second number needed to replaced 1->2)

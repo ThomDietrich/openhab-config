@@ -1,0 +1,259 @@
+{
+ "_id": "58c58cef5107a80100adbc62",
+ "brand": "Logitech",
+ "model": "Z906",
+ "name": "logitech_z906",
+ "__v": 0,
+ "comments": [],
+ "layout": [
+  "KEY_POWER",
+  "rowbreak",
+  "KEY_VOLUMEDOWN",
+  "KEY_MUTE",
+  "KEY_VOLUMEUP",
+  "rowbreak",
+  "effect",
+  "rowbreak",
+  "pagebreak"
+ ],
+ "keys": [
+  {
+   "key": "KEY_POWER",
+   "name": "POWER",
+   "icon": "settings_power",
+   "code": "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBBBBBCCCCCCCCB21,1672,343,86,21,3730",
+   "_id": "58c58bc15107a80100adbc58",
+   "spec": {
+    "protocol": "NEC1",
+    "device": 2,
+    "subdevice": 160,
+    "obc": 128,
+    "misc": "+ 1 ditto"
+   },
+   "confidence": 96,
+   "trigger": []
+  },
+  {
+   "key": "test",
+   "name": "TEST",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCCBCBBBBBBCBCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc57",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 5,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "direct",
+   "name": "DIRECT",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBCBCBBBBCBCBCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc56",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 10,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "optical",
+   "name": "OPTICAL",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCCCBCBBBBBBCBCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc55",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 11,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "coax",
+   "name": "COAX",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBBCCBBBBCCBBCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc54",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 12,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "effect",
+   "name": "Input",
+   "code": "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730",
+   "_id": "58c58bc15107a80100adbc53",
+   "icon": "call_merge",
+   "spec": {
+    "protocol": "NEC1",
+    "device": 2,
+    "subdevice": 160,
+    "obc": 8,
+    "misc": "+ 1 ditto"
+   },
+   "confidence": 96,
+   "trigger": []
+  },
+  {
+   "key": "KEY_SETUP",
+   "name": "SETUP",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCCCCCCBBBBBBBBCCC21,1672",
+   "_id": "58c58bc15107a80100adbc52",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 31,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "KEY_SUBTITLE",
+   "name": "SUBTITLE",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCCCBBBBBBBBCCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc51",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 3,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "center+",
+   "name": "CENTER",
+   "icon": "add",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBCBBBBBBCBCCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc50",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 2,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "center-",
+   "name": "CENTER",
+   "icon": "remove",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBCCBBBBBCBBCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc4f",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 6,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "surround+",
+   "name": "SURROUND",
+   "icon": "add",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBBBBBBBBCCCCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc4e",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 0,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "surround-",
+   "name": "SURROUND",
+   "icon": "remove",
+   "code": "38000,2,1,343,171,21,22BB21,65BBBBCCCBCCCCBBCBBBBBCCBCCCCC21,1672",
+   "_id": "58c58bc15107a80100adbc4d",
+   "spec": {
+    "protocol": "NEC",
+    "device": 8,
+    "subdevice": -1,
+    "obc": 4,
+    "misc": "no repeat"
+   },
+   "confidence": 32,
+   "trigger": []
+  },
+  {
+   "key": "KEY_VOLUMEUP",
+   "name": "VOL",
+   "icon": "add",
+   "code": "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBCBCBCCBCBCBCB21,1672,343,86,21,3730",
+   "_id": "58c58bc15107a80100adbc4c",
+   "spec": {
+    "protocol": "NEC1",
+    "device": 2,
+    "subdevice": 160,
+    "obc": 170,
+    "misc": "+ 1 ditto"
+   },
+   "confidence": 96,
+   "trigger": []
+  },
+  {
+   "key": "KEY_VOLUMEDOWN",
+   "name": "VOL",
+   "icon": "remove",
+   "code": "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBCBCCBCBCBCBBC21,1672,343,86,21,3730",
+   "_id": "58c58bc15107a80100adbc4b",
+   "spec": {
+    "protocol": "NEC1",
+    "device": 2,
+    "subdevice": 160,
+    "obc": 106,
+    "misc": "+ 1 ditto"
+   },
+   "confidence": 96,
+   "trigger": []
+  },
+  {
+   "key": "KEY_MUTE",
+   "name": "MUTE",
+   "icon": "volume_off",
+   "code": "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBCBCCCCBCBCBBB21,1672,343,86,21,3730",
+   "_id": "58c58bc15107a80100adbc4a",
+   "spec": {
+    "protocol": "NEC1",
+    "device": 2,
+    "subdevice": 160,
+    "obc": 234,
+    "misc": "+ 1 ditto"
+   },
+   "confidence": 96,
+   "trigger": []
+  }
+ ],
+ "type": "5.1 Sound System",
+ "score": 0,
+ "confidence": 43,
+ "created": "2017-03-12T17:55:33.227Z"
+}
