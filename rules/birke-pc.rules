@@ -11,6 +11,9 @@ then
 		case "shutdown" : {
 			publish("broker", "winthing-birke/system/commands/shutdown", "now") 
   		}
+  		case "sleep" : {
+  			publish("broker", "winthing-birke/system/commands/run", '["rundll32.exe", "powrprof.dll,SetSuspendState 0,1,0"]')
+  		}
 		case "kodi" : {
 			publish("broker", "winthing-birke/system/commands/run", '["C:/Program Files (x86)/Kodi/Kodi.exe"]')
 		}
@@ -27,11 +30,11 @@ when
     Item PresencePC changed
 then
     //logInfo(filename, "PC Speaker switch power")
-    if (PresencePC.state == OFF && WZ_SoundSystem_Active.state == ON) {
-	    zmote_sendkey.sendCommand("KEY_POWER")
+    if (PresencePC.state == OFF && WZ_SoundSystem_PowerHigh.state == ON) {
+	    WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
-    else if (PresencePC.state == ON && WZ_SoundSystem_Active.state == OFF) {
-	    zmote_sendkey.sendCommand("KEY_POWER")
+    else if (PresencePC.state == ON && WZ_SoundSystem_PowerHigh.state == OFF) {
+	    WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
     
 end

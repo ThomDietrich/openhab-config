@@ -65,13 +65,13 @@ then
     ]
 end
 
-rule "Kodi reset PlayPause controls"
+rule "Sound System: Switch between PC input and Sonos input channel"
 when
     Item KodiPlayerState changed
 then
-    //logInfo(filename, "Kodi Speaker switch input")
-    if (KodiPlayerState.state == "Play") zmote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
-    else if (KodiPlayerState.state == "Stop") zmote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
+    //logInfo(filename, "Sound System: Switch between PC input and Sonos input channel")
+    if (KodiPlayerState.state == "Play") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
+    else if (KodiPlayerState.state == "Stop") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
 end
 
 // vim: syntax=Xtend

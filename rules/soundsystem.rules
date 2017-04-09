@@ -1,9 +1,0 @@
-
-val String filename = "soundsystem.rules"
-
-rule "Soundsystem: Aus/Aktiv"
-when
-    Item WZ_SoundSystem_Power received update
-then
-    if (WZ_SoundSystem_Power.state > 10) WZ_SoundSystem_Active.postUpdate(ON) else WZ_SoundSystem_Active.postUpdate(OFF)
-end

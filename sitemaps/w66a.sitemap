@@ -40,7 +40,9 @@ sitemap w66a label="W66a openHAB Installation" {
 			}
 		}
 		Text item=PresencePC label="PC [MAP(active.map):%s]" icon="pc_silverstone_gd06" {
-			Switch item=WZ_BirkePC_Command icon="pc_silverstone_gd06" mappings=[shutdown="Shutdown", kodi="Start Kodi", notepad="Notepad"]
+			Switch item=WZ_BirkePC_WakeOnLAN label="Command" icon="pc_silverstone_gd06" mappings=[ON="Wake Up"]
+			Switch item=WZ_BirkePC_Command label="Command" icon="pc_silverstone_gd06" mappings=[sleep="Sleep", shutdown="Shutdown"]
+			Switch item=WZ_BirkePC_Command label="Command" icon="pc_silverstone_gd06" mappings=[kodi="Start Kodi", notepad="Notepad"]
 		}
 		Text item=PresenceThPhone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
 		Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
@@ -109,8 +111,8 @@ sitemap w66a label="W66a openHAB Installation" {
 					url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
 			}
 		}
-		Switch item=zmote_sendkey label="Logitech Laut/Leise" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEUP"="Vol+", "KEY_VOLUMEDOWN"="Vol-" ]
-		Switch item=zmote_sendcode label="Logitech Input" mappings=[
+		Switch item=WZ_zMote_sendkey label="Logitech Laut/Leise" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEUP"="Vol+", "KEY_VOLUMEDOWN"="Vol-" ]
+		Switch item=WZ_zMote_sendcode label="Logitech Input" mappings=[
 			"38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Switch",
 			"38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="1",
 			"38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="2"

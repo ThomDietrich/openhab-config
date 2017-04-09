@@ -25,10 +25,10 @@ Switch      PresencePC                      "Zustand PC"                        
 Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (Whg) { channel="network:device:ThOP3:online" }
 Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (Whg) { channel="network:device:ThN9:online" }
 
+//Switch      WZ_BirkePC_WakeOnLAN            "BirkePC WakeOnLAN"                                         (WZ)  { wol="192.168.0.255#‎90:2b:34:33:04:02" }
+Switch      WZ_BirkePC_WakeOnLAN            "BirkePC WakeOnLAN"                                         (WZ)  { wol="192.168.0.255#90:2b:34:33:04:02" }
 Switch      WZ_BirkePC_Online               "BirkePC WinThing Online"                   <light>         (WZ)  { mqtt="<[broker:winthing-birke/system/system/online:state:MAP(truefalse.map)]" }
 String      WZ_BirkePC_Command              "BirkePC Command"                           <switch>        (WZ)
-
-Switch      WZ_SoundSystem_Active           "Logitech System Aktiv"                     <speaker>       (WZ)
 
 Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (Whg) { expire="1s" }
 

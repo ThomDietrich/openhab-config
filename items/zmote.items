@@ -1,6 +1,6 @@
-Switch zmote_reachable "zMote Online"  { channel="zmote:zmt2:CI00070700:online" }
-String zmote_sendkey   "Send Button"   { channel="zmote:zmt2:CI00070700:sendkey", expire="1s" }
-String zmote_sendcode  "Send IR Code"  { channel="zmote:zmt2:CI00070700:sendcode", expire="1s" }
+Switch WZ_zMote_reachable "zMote Online"  { channel="zmote:zmt2:CI00070700:online" }
+String WZ_zMote_sendkey   "Send Button"   { channel="zmote:zmt2:CI00070700:sendkey", expire="1s" }
+String WZ_zMote_sendcode  "Send IR Code"  { channel="zmote:zmt2:CI00070700:sendcode", expire="1s" }
 
 // http://www.hifi-remote.com/forums/viewtopic.php?t=14120
 // http://irdb.tk/convert

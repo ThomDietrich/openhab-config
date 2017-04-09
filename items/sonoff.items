@@ -47,11 +47,13 @@ Number WZ_Expedit_RSSI "Expedit RSSI [%d %%]" (gRSSI)
 Switch WZ_Expedit_Unreach "Expedit unreachable" <siren> (gUnreach)
     { mqtt="<[broker:tele/sonoff-E8A6E4/LWT:state:MAP(unreach.map)]" }
 
-Switch WZ_SoundSystem "Logitech System" <speaker> (WZ,gLight)
+Switch WZ_SoundSystem "Logitech System" <speaker> (WZ)
     { mqtt=">[broker:cmnd/sonoff-20DCAE/power:command:*:default],
             <[broker:stat/sonoff-20DCAE/POWER:state:default]" }
 Number WZ_SoundSystem_Power "Logitech System Leistung [%.1f W]" <energy> (gPower)
     { mqtt="<[broker:tele/sonoff-20DCAE/ENERGY:state:JSONPATH($.Power)]" }
+Switch WZ_SoundSystem_PowerHigh "Logitech System Active/Standby" <speaker> (WZ)
+    { mqtt="<[broker:tele/sonoff-20DCAE/MARGINS:state:JSONPATH($.PowerHigh)]" }
 Number WZ_SoundSystem_RSSI "Logitech System RSSI [%d %%]" (gRSSI)
     { mqtt="<[broker:tele/sonoff-20DCAE/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 Switch WZ_SoundSystem_Unreach "Logitech System unreachable" <siren> (gUnreach)
