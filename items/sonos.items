@@ -63,7 +63,7 @@ Number FK_Sonos_Snooze                  "Snooze"                    <sonos_snooz
 Switch FK_Sonos_StandAlone              "Stand Alone"               <sonos_stand_alone>  (gSonosKitc)            {channel="sonos:PLAY3:RINCON_B8E93736496A01400:standalone"}
 String FK_Sonos_State                   "State [%s]"                <sonos_state>        (gSonosKitc)            {channel="sonos:PLAY3:RINCON_B8E93736496A01400:state"}
 Switch FK_Sonos_Stop                    "Stop"                      <sonos_stop>         (gSonosKitc,gSonosStop) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:stop", autoupdate="false"}
-Dimmer FK_Sonos_Volume                  "Kitchen"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:volume"}
+Dimmer FK_Sonos_Volume                  "Volume"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY3:RINCON_B8E93736496A01400:volume"}
 String FK_Sonos_ZoneGroupID             "Zone Group ID [%s]"        <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY3:RINCON_B8E93736496A01400:zonegroupid"}
 String FK_Sonos_ZoneName                "Zone Name [%s]"            <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY3:RINCON_B8E93736496A01400:zonename"}
 String FK_Sonos_Coordinator             "Coordinator [%s]"          <sonos_coordinator>  (gSonosKitc)            {channel="sonos:PLAY3:RINCON_B8E93736496A01400:coordinator"}
@@ -105,7 +105,7 @@ Number SZ_Sonos_Snooze                  "Snooze"                    <sonos_snooz
 Switch SZ_Sonos_StandAlone              "Stand Alone"               <sonos_stand_alone>  (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937E0539601400:standalone"}
 String SZ_Sonos_State                   "State [%s]"                <sonos_state>        (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937E0539601400:state"}
 Switch SZ_Sonos_Stop                    "Stop"                      <sonos_stop>         (gSonosKitc,gSonosStop) {channel="sonos:PLAY1:RINCON_B8E937E0539601400:stop", autoupdate="false"}
-Dimmer SZ_Sonos_Volume                  "Kitchen"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY1:RINCON_B8E937E0539601400:volume"}
+Dimmer SZ_Sonos_Volume                  "Volume"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY1:RINCON_B8E937E0539601400:volume"}
 String SZ_Sonos_ZoneGroupID             "Zone Group ID [%s]"        <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937E0539601400:zonegroupid"}
 String SZ_Sonos_ZoneName                "Zone Name [%s]"            <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937E0539601400:zonename"}
 String SZ_Sonos_Coordinator             "Coordinator [%s]"          <sonos_coordinator>  (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937E0539601400:coordinator"}
@@ -147,7 +147,7 @@ Number BD_Sonos_Snooze                  "Snooze"                    <sonos_snooz
 Switch BD_Sonos_StandAlone              "Stand Alone"               <sonos_stand_alone>  (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:standalone"}
 String BD_Sonos_State                   "State [%s]"                <sonos_state>        (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:state"}
 Switch BD_Sonos_Stop                    "Stop"                      <sonos_stop>         (gSonosKitc,gSonosStop) {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:stop", autoupdate="false"}
-Dimmer BD_Sonos_Volume                  "Kitchen"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:volume"}
+Dimmer BD_Sonos_Volume                  "Volume"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:volume"}
 String BD_Sonos_ZoneGroupID             "Zone Group ID [%s]"        <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:zonegroupid"}
 String BD_Sonos_ZoneName                "Zone Name [%s]"            <sonos_zone>         (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:zonename"}
 String BD_Sonos_Coordinator             "Coordinator [%s]"          <sonos_coordinator>  (gSonosKitc)            {channel="sonos:PLAY1:RINCON_B8E937ED0A1601400:coordinator"}
@@ -189,7 +189,7 @@ Number WZ_Sonos_Snooze                  "Snooze"                    <sonos_snooz
 Switch WZ_Sonos_StandAlone              "Stand Alone"               <sonos_stand_alone>  (gSonosKitc)            {channel="sonos:CONNECT:RINCON_B8E93794664C01400:standalone"}
 String WZ_Sonos_State                   "State [%s]"                <sonos_state>        (gSonosKitc)            {channel="sonos:CONNECT:RINCON_B8E93794664C01400:state"}
 Switch WZ_Sonos_Stop                    "Stop"                      <sonos_stop>         (gSonosKitc,gSonosStop) {channel="sonos:CONNECT:RINCON_B8E93794664C01400:stop", autoupdate="false"}
-Dimmer WZ_Sonos_Volume                  "Kitchen"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:CONNECT:RINCON_B8E93794664C01400:volume"}
+Dimmer WZ_Sonos_Volume                  "Volume"                   <soundvolume>        (gSonosKitc,gSonosVolu) {channel="sonos:CONNECT:RINCON_B8E93794664C01400:volume"}
 String WZ_Sonos_ZoneGroupID             "Zone Group ID [%s]"        <sonos_zone>         (gSonosKitc)            {channel="sonos:CONNECT:RINCON_B8E93794664C01400:zonegroupid"}
 String WZ_Sonos_ZoneName                "Zone Name [%s]"            <sonos_zone>         (gSonosKitc)            {channel="sonos:CONNECT:RINCON_B8E93794664C01400:zonename"}
 String WZ_Sonos_Coordinator             "Coordinator [%s]"          <sonos_coordinator>  (gSonosKitc)            {channel="sonos:CONNECT:RINCON_B8E93794664C01400:coordinator"}
