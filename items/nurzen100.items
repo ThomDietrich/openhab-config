@@ -1,0 +1,41 @@
+//Sonoff Touch
+Switch N100_Hoflicht_Vorbau "Hoflicht Vorbau" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-80897D/cmnd/power:command:*:default],
+            <[broker:tasmota/sonoff-80897D/stat/POWER:state:default]" }
+Number N100_Hoflicht_Vorbau_RSSI "Hoflicht Vorbau RSSI [%d %%]" (N100)
+    { mqtt="<[broker:tasmota/sonoff-80897D/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch N100_Hoflicht_Vorbau_Unreach "Hoflicht Vorbau unreachable" <siren> (N100)
+    { mqtt="<[broker:tasmota/sonoff-80897D/tele/LWT:state:MAP(unreach.map)]" }
+
+//Sonoff Basic
+Switch N100_Hoflicht_Scheune "Hoflicht Scheune" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-977CFA/cmnd/power:command:*:default],
+            <[broker:tasmota/sonoff-977CFA/stat/POWER:state:default]" }
+Number N100_Hoflicht_Scheune_RSSI "Hoflicht Scheune RSSI [%d %%]" (N100)
+    { mqtt="<[broker:tasmota/sonoff-977CFA/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch N100_Hoflicht_Scheune_Unreach "Hoflicht Scheune unreachable" <siren> (N100)
+    { mqtt="<[broker:tasmota/sonoff-977CFA/tele/LWT:state:MAP(unreach.map)]" }
+
+//Sonoff 4CH
+Switch N100_Hoflicht_Pferdestall "Hoflicht Pferdestall" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-83AF57/cmnd/Power1:command:*:default],
+            <[broker:tasmota/sonoff-83AF57/stat/POWER1:state:default]" }
+Switch N100_Hoflicht_Pferdestall2 "Hoflicht Pferdestall 2" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-83AF57/cmnd/Power2:command:*:default],
+            <[broker:tasmota/sonoff-83AF57/stat/POWER2:state:default]" }
+Switch N100_Hoflicht_Pferdestall3 "Hoflicht Pferdestall 3" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-83AF57/cmnd/Power3:command:*:default],
+            <[broker:tasmota/sonoff-83AF57/stat/POWER3:state:default]" }
+Switch N100_Hoflicht_Pferdestall4 "Hoflicht Pferdestall 4" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-83AF57/cmnd/Power4:command:*:default],
+            <[broker:tasmota/sonoff-83AF57/stat/POWER4:state:default]" }
+Number N100_Hoflicht_Pferdestall_RSSI "Hoflicht Pferdestall RSSI [%d %%]" (N100)
+    { mqtt="<[broker:tasmota/sonoff-83AF57/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch N100_Hoflicht_Pferdestall_Unreach "Hoflicht Pferdestall unreachable" <siren> (N100)
+    { mqtt="<[broker:tasmota/sonoff-83AF57/tele/LWT:state:MAP(unreach.map)]" }
+Number N100_Pferdestall_Temperatur "Pferdestall Außen Temperatur [%.1f °C]" <temperature> (N100)
+    { mqtt="<[broker:tasmota/sonoff-83AF57/tele/SENSOR:state:JSONPATH($.BME280.Temperature)]" }
+Number N100_Pferdestall_Luftfeuchte "Pferdestall Außen Luftfeuchte [%.0f %%]" <humidity> (N100)
+    { mqtt="<[broker:tasmota/sonoff-83AF57/tele/SENSOR:state:JSONPATH($.BME280.Humidity)]" }
+Number N100_Pferdestall_Luftdruck "Pferdestall Außen Luftdruck [%.0f hPa]" <pressure> (N100)
+    { mqtt="<[broker:tasmota/sonoff-83AF57/tele/SENSOR:state:JSONPATH($.BME280.Pressure)]" }
