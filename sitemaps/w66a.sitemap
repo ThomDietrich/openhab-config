@@ -204,6 +204,9 @@ sitemap w66a label="W66a openHAB Installation" {
 				Text item=BD_Heizung_Valve label="Ventilstellung [%d %%]" visibility=[BD_Heizung_OnOff == ON]
 			}
 		}
+		Text item=BK_Balkonlicht_Aussentemp icon="temperature"
+        Text item=KU_KuehlschrankTemp_Kuehl label="Kühlschrank Kühlbereich" icon="catfridge"
+        Text item=KU_KuehlschrankTemp_Gefrier label="Kühlschrank Gefrierbereich" icon="catfridge"
 		Image label="Temperaturen" refresh=60000
 			url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=4&width=700&height=350&from=now-48h&to=now"
 	}
@@ -235,6 +238,7 @@ sitemap w66a label="W66a openHAB Installation" {
 			Group item=gPending
 			Group item=gError
 			Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgradeFW="Upgrade FW"]
+			Switch item=Whg_Wartung_Trigger
 		}
 		Text label="Räume" icon="corridor" {
 			Group item=BD label="Bad"

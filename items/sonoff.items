@@ -1,63 +1,46 @@
 // Sonoff Basic
-Switch WZ_Goldfruchtpalme "Goldfruchtpalme" <light> (WZ,gLight)
-    { mqtt=">[broker:cmnd/sonoff-CBF6BE/power:command:*:default],
-            <[broker:stat/sonoff-CBF6BE/POWER:state:default]" }
-Number WZ_Goldfruchtpalme_RSSI "Goldfruchtpalme RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-CBF6BE/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
-Switch WZ_Goldfruchtpalme_Unreach "Goldfruchtpalme unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-CBF6BE/LWT:state:MAP(unreach.map)]" }
+Switch WZ_Goldfruchtpalme "Goldfruchtpalme" <light> (WZ,gLight)                       {mqtt=">[broker:tasmota/sonoff-CBF6BE/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-CBF6BE/stat/POWER:state:default]"}
+Number WZ_Goldfruchtpalme_RSSI "Goldfruchtpalme RSSI [%d %%]" (gRSSI)                 {mqtt="<[broker:tasmota/sonoff-CBF6BE/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
+Switch WZ_Goldfruchtpalme_Unreach "Goldfruchtpalme unreachable" <siren> (gUnreach)    {mqtt="<[broker:tasmota/sonoff-CBF6BE/tele/LWT:state:MAP(unreach.map)]"}
 Number WZ_Goldfruchtpalme_Power "Goldfruchtpalme Leistung [%.0f W]" <energy> (gPower)
 
-Switch FK_Arbeit "Arbeitsbeleuchtung" <light> (FK,gLight)
-    { mqtt=">[broker:cmnd/sonoff-96504C/power:command:*:default],
-            <[broker:stat/sonoff-96504C/POWER:state:default]" }
-Number FK_Arbeit_RSSI "Arbeitsbeleuchtung RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-96504C/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
-Switch FK_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-96504C/LWT:state:MAP(unreach.map)]" }
+Switch FK_Arbeit "Arbeitsbeleuchtung" <light> (FK,gLight)                             {mqtt=">[broker:tasmota/sonoff-96504C/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96504C/stat/POWER:state:default]"}
+Number FK_Arbeit_RSSI "Arbeitsbeleuchtung RSSI [%d %%]" (gRSSI)                       {mqtt="<[broker:tasmota/sonoff-96504C/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
+Switch FK_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" <siren> (gUnreach)          {mqtt="<[broker:tasmota/sonoff-96504C/tele/LWT:state:MAP(unreach.map)]"}
 Number FK_Arbeit_Power "Arbeitsbeleuchtung Leistung [%.0f W]" <energy> (gPower)
 
-// Sonoff S20 Smart Socket
-Switch BK_Balkonmagic "Balkonmagic" <light> (BK,gLight)
-    { mqtt=">[broker:cmnd/sonoff-A00F9D/power:command:*:default],
-            <[broker:stat/sonoff-A00F9D/POWER:state:default]" }
-Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-A00F9D/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
-Switch BK_Balkonmagic_Unreach "Balkonmagic unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-A00F9D/LWT:state:MAP(unreach.map)]" }
-Number BK_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" <energy> (gPower)
+// Sonoff Basic + 2x DS18B20 (spezielle Firmware)
+//Switch KU_KuehlschrankTemp "Kühlschrank Temperatur" <light> (KU,gLight) ["Lighting"]        { mqtt=">[broker:tasmota/sonoff-96E5F6/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96E5F6/stat/POWER:state:default]" }
+Number KU_KuehlschrankTemp_RSSI "Kühlschrank Temperatur RSSI [%d %%]" (gRSSI)                 { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+Switch KU_KuehlschrankTemp_Unreach "Kühlschrank Temperatur unreachable" <siren> (gUnreach)    { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/LWT:state:MAP(unreach.map)]" }
+Number KU_KuehlschrankTemp_Power "Kühlschrank Temperatur Leistung [%.0f W]" <energy> (gPower)
+Number KU_KuehlschrankTemp_Gefrier "Kühlschrank Temperatur Gefrierbereich [%.1f °C]" (KU)     { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS2.Temperature)]" }
+Number KU_KuehlschrankTemp_Kuehl "Kühlschrank Temperatur Kühlbereich [%.1f °C]" (KU)          { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS1.Temperature)]" }
 
-Switch WZ_Origami "Origami" <light> (WZ,gLight)
-    { mqtt=">[broker:cmnd/sonoff-9F3BD8/power:command:*:default],
-            <[broker:stat/sonoff-9F3BD8/POWER:state:default]" }
-Number WZ_Origami_RSSI "Origami RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-9F3BD8/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
-Switch WZ_Origami_Unreach "Origami unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-9F3BD8/LWT:state:MAP(unreach.map)]" }
+// Sonoff S20 Smart Socket
+Switch WZ_Origami "Origami" <light> (WZ,gLight)                                       {mqtt=">[broker:tasmota/sonoff-9F3BD8/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
+Number WZ_Origami_RSSI "Origami RSSI [%d %%]" (gRSSI)                                 {mqtt="<[broker:tasmota/sonoff-9F3BD8/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
+Switch WZ_Origami_Unreach "Origami unreachable" <siren> (gUnreach)                    {mqtt="<[broker:tasmota/sonoff-9F3BD8/tele/LWT:state:MAP(unreach.map)]"}
 Number WZ_Origami_Power "Origami Leistung [%.0f W]" <energy> (gPower)
 
-// Sonoff Pow
-Switch WZ_Expedit "Expedit" <light> (WZ,gLight)
-    { mqtt=">[broker:cmnd/sonoff-E8A6E4/power:command:*:default],
-            <[broker:stat/sonoff-E8A6E4/POWER:state:default]" }
-Number WZ_Expedit_Power "Expedit Leistung [%.1f W]" <energy> (gPower)
-    { mqtt="<[broker:tele/sonoff-E8A6E4/ENERGY:state:JSONPATH($.Power)]" }
-Number WZ_Expedit_RSSI "Expedit RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-E8A6E4/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-Switch WZ_Expedit_Unreach "Expedit unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-E8A6E4/LWT:state:MAP(unreach.map)]" }
+// Sonoff S20 Smart Socket + DS18B20
+Switch BK_Balkonmagic "Balkonmagic" <light> (BK,gLight)                               {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
+Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (gRSSI)                         {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
+Switch BK_Balkonmagic_Unreach "Balkonmagic unreachable" <siren> (gUnreach)            {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/LWT:state:MAP(unreach.map)]"}
+Number BK_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" <energy> (gPower)
+Number BK_Balkonlicht_Aussentemp "Balkonlicht Außentemperatur [%.1f °C]" (BK)         {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/SENSOR:state:JSONPATH($.DS18B20.Temperature)]" }
 
-Switch WZ_SoundSystem "Logitech System" <speaker> (WZ)
-    { mqtt=">[broker:cmnd/sonoff-20DCAE/power:command:*:default],
-            <[broker:stat/sonoff-20DCAE/POWER:state:default]" }
-Number WZ_SoundSystem_Power "Logitech System Leistung [%.1f W]" <energy> (gPower)
-    { mqtt="<[broker:tele/sonoff-20DCAE/ENERGY:state:JSONPATH($.Power)]" }
-Switch WZ_SoundSystem_PowerHigh "Logitech System Active/Standby" <speaker> (WZ)
-    { mqtt="<[broker:tele/sonoff-20DCAE/MARGINS:state:JSONPATH($.PowerHigh)]" }
-Number WZ_SoundSystem_RSSI "Logitech System RSSI [%d %%]" (gRSSI)
-    { mqtt="<[broker:tele/sonoff-20DCAE/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-Switch WZ_SoundSystem_Unreach "Logitech System unreachable" <siren> (gUnreach)
-    { mqtt="<[broker:tele/sonoff-20DCAE/LWT:state:MAP(unreach.map)]" }
+// Sonoff Pow
+Switch WZ_Expedit "Expedit" <light> (WZ,gLight)                                       {mqtt=">[broker:tasmota/sonoff-E8A6E4/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-E8A6E4/stat/POWER:state:default]"}
+Number WZ_Expedit_Power "Expedit Leistung [%.1f W]" <energy> (gPower)                 {mqtt="<[broker:tasmota/sonoff-E8A6E4/tele/ENERGY:state:JSONPATH($.Power)]"}
+Number WZ_Expedit_RSSI "Expedit RSSI [%d %%]" (gRSSI)                                 {mqtt="<[broker:tasmota/sonoff-E8A6E4/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch WZ_Expedit_Unreach "Expedit unreachable" <siren> (gUnreach)                    {mqtt="<[broker:tasmota/sonoff-E8A6E4/tele/LWT:state:MAP(unreach.map)]"}
+
+Switch WZ_SoundSystem "Logitech System" <speaker> (WZ)                                {mqtt=">[broker:tasmota/sonoff-20DCAE/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-20DCAE/stat/POWER:state:default]"}
+Number WZ_SoundSystem_Power "Logitech System Leistung [%.1f W]" <energy> (gPower)     {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/ENERGY:state:JSONPATH($.Power)]"}
+Switch WZ_SoundSystem_PowerHigh "Logitech System Active/Standby" <speaker> (WZ)       {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/MARGINS:state:JSONPATH($.PowerHigh)]"}
+Number WZ_SoundSystem_RSSI "Logitech System RSSI [%d %%]" (gRSSI)                     {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch WZ_SoundSystem_Unreach "Logitech System unreachable" <siren> (gUnreach)        {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/LWT:state:MAP(unreach.map)]"}
 
 //Maintenance
 String	Sonoff_Action "Sonoff Action" <sonoff_basic>
