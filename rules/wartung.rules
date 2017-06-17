@@ -4,12 +4,12 @@ val String filename = "wartung.rules"
 rule "Wartung: Fehler-Items"
 when
 	Time cron "0 45 9,17 * * ?" or
-	Item gError changed
+	Item Whg_Wartung_Trigger received command ON
 then
 	logInfo(filename, "Wartung - Fehler-Items")
 	gError.members.forEach(item | {
 			if (item.state == "NO_FAULT" || item.state == "NO_ERROR") {
-				logInfo(filename, "Wartung - Fehler-Item OK:     " + item.label + ": " + item.state)
+				//logInfo(filename, "Wartung - Fehler-Item OK:     " + item.label + ": " + item.state)
 			} else {
 				logWarn(filename, "Wartung - Fehler-Item FEHLER: " + item.label + ": " + item.state)
 				pushover("Warnung. Item: " + item.label + " (Status " + item.state + ")")
@@ -20,12 +20,13 @@ end
 
 rule "Wartung: Unreach"
 when
-	Time cron "5 45 9,17 * * ?"
+	Time cron "5 45 9,17 * * ?" or
+	Item Whg_Wartung_Trigger received command ON
 then
 	logInfo(filename, "Wartung - Unreach")
 	gUnreach.members.forEach(item | {
 	    	if (item.state == OFF) {
-				logInfo(filename, "Wartung - Unreach OK:     " + item.label)
+				//logInfo(filename, "Wartung - Unreach OK:     " + item.label)
 	    	} else {
 	    		logWarn(filename, "Wartung - Unreach FEHLER: " + item.label)
 	    		pushover("Warnung. Nicht erreichbares Gerät: " + item.label)
@@ -36,16 +37,15 @@ end
 
 rule "Wartung: Batterien"
 when
-	Time cron "10 45 9,17 * * ?"
+	Time cron "10 45 9,17 * * ?" or
+	Item Whg_Wartung_Trigger received command ON
 then
 	logInfo(filename, "Wartung - Batterien")
 	gBattery.members.forEach(item | {
-			logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
-			if (item.type == "Number") {
-				if (item.state <= 2.5) {
-					logWarn(filename, "Wartung - Batterie schwach: " + item.label)
-					pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
-				}
+			//logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
+			if (item.type == "Number" && item.state <= 2.5) {
+				logWarn(filename, "Wartung - Batterie schwach: " + item.label)
+				pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
 			}
 			else if (item.type == "Switch") {
 				if (item.state == ON) {
@@ -53,13 +53,13 @@ then
 					pushover("Warnung. Gerät mit schwacher Batterie: " + item.label)
 				}
 				if (item.state == NULL) {
-					logWarn(filename, "Wartung - Batterie unbekannt (NULL): " + item.label)
-					pushover("Warnung. Gerät mit leerer Batterie: " + item.label)
+					logWarn(filename, "Wartung - Batteriezstand unbekannt (NULL): " + item.label)
+					pushover("Warnung. Gerät mit leerer/unbekannter Batterie: " + item.label)
 				}
 			}
 			else {
 				logError(filename, "Wartung - Batterietyp unbekannt: " + item.label)
-				pushover("Warnung. Batterietest unbekannter Fehler: " + item.label)
+				pushover("Warnung. Batterietest, unbekannter Fehler: " + item.label)
 			}
 		}
 	)
