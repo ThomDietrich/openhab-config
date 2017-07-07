@@ -6,6 +6,10 @@ Number N100_Hoflicht_Vorbau_RSSI "Hoflicht Vorbau RSSI [%d %%]" (N100)
     { mqtt="<[broker:tasmota/sonoff-80897D/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
 Switch N100_Hoflicht_Vorbau_Unreach "Hoflicht Vorbau unreachable" <siren> (N100)
     { mqtt="<[broker:tasmota/sonoff-80897D/tele/LWT:state:MAP(unreach.map)]" }
+String N100_Hoflicht_Vorbau_Button "Hoflicht Vorbau unreachable" <siren> (N100)
+    { mqtt="<[broker:tasmota/sonoff-80897D/stat/POWER:state:default],
+            <[broker:tasmota/sonoff-80897D/ButtonTopic/cmnd/POWER:state:default]" }
+            
 
 //Sonoff Basic
 Switch N100_Hoflicht_Scheune "Hoflicht Scheune" <light> (N100)
@@ -15,6 +19,15 @@ Number N100_Hoflicht_Scheune_RSSI "Hoflicht Scheune RSSI [%d %%]" (N100)
     { mqtt="<[broker:tasmota/sonoff-977CFA/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
 Switch N100_Hoflicht_Scheune_Unreach "Hoflicht Scheune unreachable" <siren> (N100)
     { mqtt="<[broker:tasmota/sonoff-977CFA/tele/LWT:state:MAP(unreach.map)]" }
+
+Switch N100_Hoflicht_Irene "Hoflicht Irene (Sonoff Milchhaus)" <light> (N100)
+    { mqtt=">[broker:tasmota/sonoff-984C49/cmnd/power:command:*:default],
+            <[broker:tasmota/sonoff-984C49/stat/POWER:state:default]" }
+Number N100_Hoflicht_Irene_RSSI "Hoflicht Irene (Sonoff Milchhaus) RSSI [%d %%]" (N100)
+    { mqtt="<[broker:tasmota/sonoff-984C49/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]" }
+Switch N100_Hoflicht_Irene_Unreach "Hoflicht Irene (Sonoff Milchhaus) unreachable" <siren> (N100)
+    { mqtt="<[broker:tasmota/sonoff-984C49/tele/LWT:state:MAP(unreach.map)]" }
+
 
 //Sonoff 4CH
 Switch N100_Hoflicht_Pferdestall "Hoflicht Pferdestall" <light> (N100)

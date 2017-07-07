@@ -1,0 +1,48 @@
+
+val String filename = "nurzen100.rules"
+
+// Timer für das automatische Ausschalten
+var Timer hold_timer = null
+
+rule "Sonoff Touch Vorbau"
+when
+	Item N100_Hoflicht_Vorbau_Button received update
+then 
+	
+	switch (N100_Hoflicht_Vorbau_Button.state) {
+		case "OFF" : {
+			//N100_Hoflicht_Vorbau.sendCommand(OFF)
+			N100_Hoflicht_Scheune.sendCommand(OFF)
+			N100_Hoflicht_Pferdestall.sendCommand(OFF)
+			N100_Hoflicht_Irene.sendCommand(OFF)
+	 	}
+		case "ON" : {
+			//N100_Hoflicht_Vorbau.sendCommand(ON)
+		}
+		case "TOGGLE" : {
+			//N100_Hoflicht_Vorbau.sendCommand(ON)
+			N100_Hoflicht_Irene.sendCommand(ON)
+		}
+		case "HOLD" : {
+			logInfo(filename, "N100 Vorbau Touch Button: HOLD")
+			N100_Hoflicht_Vorbau.sendCommand(ON)
+			N100_Hoflicht_Scheune.sendCommand(ON)
+			N100_Hoflicht_Pferdestall.sendCommand(ON)
+			//N100_Hoflicht_Irene.sendCommand(ON)
+
+			/*hold_timer = createTimer(now.plusSeconds(3*60)) [|
+                                if (hold_timer != null) {
+                                        hold_timer.cancel
+                                        hold_timer = null
+                                        logInfo(filename, "N100 Vorbau Touch Hold Timer abgelaufen, Hoflicht aus.")
+					N100_Hoflicht_Vorbau.sendCommand(OFF)
+					N100_Hoflicht_Scheune.sendCommand(OFF)
+					N100_Hoflicht_Pferdestall.sendCommand(OFF)
+					N100_Hoflicht_Irene.sendCommand(OFF)
+
+                                }
+                        ]*/
+
+		}
+	}
+end
