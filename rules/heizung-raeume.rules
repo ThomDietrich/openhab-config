@@ -14,53 +14,71 @@ val Number tempOff = 4.5
 
 val Functions$Function5<StringItem, NumberItem, NumberItem, NumberItem, SwitchItem, String> //
 generateSummary = [Heater_Mode, Heater_Act_Temp, Heater_Set_Temp, Heater_Valve_Position, Window_Mode |
-	var String summary = "(unbekannt)"
-	if (Heater_Act_Temp.state instanceof Number && Heater_Set_Temp.state instanceof Number && Heater_Valve_Position.state instanceof Number) {
-		val actTemp = (Heater_Act_Temp.state as DecimalType).floatValue
-		val setTemp = (Heater_Set_Temp.state as DecimalType).floatValue
-		val mode = if (Heater_Mode.state == "AUTO-MODE") "⚙" else if (Heater_Mode.state == "BOOST-MODE") "🔥" else ""
+    var String summary = "(unbekannt)"
+    if (Heater_Act_Temp.state instanceof Number && Heater_Set_Temp.state instanceof Number && Heater_Valve_Position.state instanceof Number) {
+        val actTemp = (Heater_Act_Temp.state as DecimalType).floatValue
+        val setTemp = (Heater_Set_Temp.state as DecimalType).floatValue
+        val mode = if (Heater_Mode.state == "AUTO-MODE") "⚙" else if (Heater_Mode.state == "BOOST-MODE") "🔥" else ""
 
-		summary = //
-		if (Heater_Valve_Position.state > 60)      String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-		else if (Heater_Valve_Position.state > 40) String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-		else if (Heater_Valve_Position.state > 20) String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-		else if (Heater_Valve_Position.state > 0)  String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-		else {
-			if (Heater_Mode.state == "MANU-MODE")    String::format("%.1f °C", actTemp)
-			else if (Window_Mode.state == ON)        String::format("( ↻ Fenster offen)  %.1f °C", actTemp)
-			else                                     String::format("%s %.1f °C", mode, actTemp)
-		}
-	}
-	return summary
+        summary = //
+            if (Heater_Valve_Position.state > 60)      String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
+            else if (Heater_Valve_Position.state > 40) String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
+            else if (Heater_Valve_Position.state > 20) String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
+            else if (Heater_Valve_Position.state > 0)  String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
+            else {
+                if (Heater_Mode.state == "MANU-MODE")  String::format("%.1f °C", actTemp)
+                else if (Window_Mode.state == ON)      String::format("( ↻ Fenster offen)  %.1f °C", actTemp)
+                else                                   String::format("%s %.1f °C", mode, actTemp)
+            }
+    }
+    return summary
 ]
 
 val Functions$Function2<ContactItem, NumberItem, OnOffType> //
 heaterInWindowMode = [Window_State, Heater_Set_Temp |
-	if (Window_State.state == OPEN && Heater_Set_Temp.state == 12.0) {
-		return ON
-	} else if (Window_State.state == CLOSED && Heater_Set_Temp.state != 12.0) {
-		return OFF
-	} else {
-		return OFF
-	}
+    if (Window_State.state == OPEN && Heater_Set_Temp.state == 12.0) {
+        return ON
+    } else if (Window_State.state == CLOSED && Heater_Set_Temp.state != 12.0) {
+        return OFF
+    } else {
+        return OFF
+    }
 ]
+
+
+///////////////////////////////////////////////////////////////////////////////
+rule "System started - Heizung"
+when
+    System started
+then
+    createTimer(now.plusSeconds(150)) [|
+        logInfo(filename, "System started - Heizung")
+        if (WZ_Heizung_Fault.state == NULL) WZ_Heizung_Fault.postUpdate("NO_FAULT")
+        if (FK_Heizung_Fault.state == NULL) FK_Heizung_Fault.postUpdate("NO_FAULT")
+        if (SZ_Heizung_Fault.state == NULL) SZ_Heizung_Fault.postUpdate("NO_FAULT")
+        if (BD_Heizung_Fault.state == NULL) BD_Heizung_Fault.postUpdate("NO_FAULT")
+        gUnreach.members.forEach(item |
+            if (item.state == NULL) item.postUpdate(ON)
+        )
+    ]
+end
 
 ///////////////////////////////////////////////////////////////////////////////
 // Heizung Fensterabsenkung detektieren
 rule "Heizung Fensterabsenkung detektieren"
 when
-	//Item WZ_Fenster_State received update or
-	Item FK_Fenster_State received update or
-	Item SZ_Fenster_State received update or
-	Item BD_Fenster_State received update
+    //Item WZ_Fenster_State received update or
+    Item FK_Fenster_State received update or
+    Item SZ_Fenster_State received update or
+    Item BD_Fenster_State received update
 then {
-	createTimer(now.plusSeconds(15)) [|
-		logInfo(filename, "Heizung Fensterabsenkung detektieren")
-		//WZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(WZ_Fenster_State, WZ_Heizung_SetTemp))
-		FK_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(FK_Fenster_State, FK_Heizung_SetTemp))
-		SZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(SZ_Fenster_State, SZ_Heizung_SetTemp))
-		BD_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(BD_Fenster_State, BD_Heizung_SetTemp))
-	]
+    createTimer(now.plusSeconds(15)) [|
+        logInfo(filename, "Heizung Fensterabsenkung detektieren")
+        //WZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(WZ_Fenster_State, WZ_Heizung_SetTemp))
+        FK_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(FK_Fenster_State, FK_Heizung_SetTemp))
+        SZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(SZ_Fenster_State, SZ_Heizung_SetTemp))
+        BD_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(BD_Fenster_State, BD_Heizung_SetTemp))
+    ]
 }
 end
 
@@ -68,17 +86,17 @@ end
 // Heizung Erzeuge Heizkörper Temperatur Zusammenfassung
 rule "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung"
 when
-	Item gHeatAct changed or
-	Item gHeatSet changed or
-	Item gHeatValve changed or
-	Item gHeatMode changed or
-	Item gHeatWiMo changed
+    Item gHeatAct changed or
+    Item gHeatSet changed or
+    Item gHeatValve changed or
+    Item gHeatMode changed or
+    Item gHeatWiMo changed
 then {
-	logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung")
-	WZ_Heizung_Summary.postUpdate(generateSummary.apply(WZ_Heizung_Mode, WZ_Heizung_ActTemp, WZ_Heizung_SetTemp, WZ_Heizung_Valve, WZ_Heizung_WindowMode))
-	FK_Heizung_Summary.postUpdate(generateSummary.apply(FK_Heizung_Mode, FK_Heizung_ActTemp, FK_Heizung_SetTemp, FK_Heizung_Valve, FK_Heizung_WindowMode))
-	SZ_Heizung_Summary.postUpdate(generateSummary.apply(SZ_Heizung_Mode, SZ_Heizung_ActTemp, SZ_Heizung_SetTemp, SZ_Heizung_Valve, SZ_Heizung_WindowMode))
-	BD_Heizung_Summary.postUpdate(generateSummary.apply(BD_Heizung_Mode, BD_Heizung_ActTemp, BD_Heizung_SetTemp, BD_Heizung_Valve, BD_Heizung_WindowMode))
+    logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung")
+    WZ_Heizung_Summary.postUpdate(generateSummary.apply(WZ_Heizung_Mode, WZ_Heizung_ActTemp, WZ_Heizung_SetTemp, WZ_Heizung_Valve, WZ_Heizung_WindowMode))
+    FK_Heizung_Summary.postUpdate(generateSummary.apply(FK_Heizung_Mode, FK_Heizung_ActTemp, FK_Heizung_SetTemp, FK_Heizung_Valve, FK_Heizung_WindowMode))
+    SZ_Heizung_Summary.postUpdate(generateSummary.apply(SZ_Heizung_Mode, SZ_Heizung_ActTemp, SZ_Heizung_SetTemp, SZ_Heizung_Valve, SZ_Heizung_WindowMode))
+    BD_Heizung_Summary.postUpdate(generateSummary.apply(BD_Heizung_Mode, BD_Heizung_ActTemp, BD_Heizung_SetTemp, BD_Heizung_Valve, BD_Heizung_WindowMode))
 }
 end
 
@@ -86,54 +104,54 @@ end
 // Heizung Auswertung Schnellauswahl (Sitemap)
 rule "WZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
-	Item WZ_Heizung_Preset received command
+    Item WZ_Heizung_Preset received command
 then {
-	logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
-	switch (receivedCommand){
-		case 0: WZ_Heizung_Manu.sendCommand(tempLower)
-		case 1: WZ_Heizung_Manu.sendCommand(tempComfort)
-		case 2: WZ_Heizung_Manu.sendCommand(tempHigher)
-	}
-	WZ_Heizung_Preset.postUpdate(-1)
+    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    switch (receivedCommand){
+        case 0: WZ_Heizung_Manu.sendCommand(tempLower)
+        case 1: WZ_Heizung_Manu.sendCommand(tempComfort)
+        case 2: WZ_Heizung_Manu.sendCommand(tempHigher)
+    }
+    WZ_Heizung_Preset.postUpdate(-1)
 }
 end
 rule "FK_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
-	Item FK_Heizung_Preset received command
+    Item FK_Heizung_Preset received command
 then {
-	logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
-	switch (receivedCommand){
-		case 0: FK_Heizung_Manu.sendCommand(tempLower)
-		case 1: FK_Heizung_Manu.sendCommand(tempComfort)
-		case 2: FK_Heizung_Manu.sendCommand(tempHigher)
-	}
-	FK_Heizung_Preset.postUpdate(-1)
+    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    switch (receivedCommand){
+        case 0: FK_Heizung_Manu.sendCommand(tempLower)
+        case 1: FK_Heizung_Manu.sendCommand(tempComfort)
+        case 2: FK_Heizung_Manu.sendCommand(tempHigher)
+    }
+    FK_Heizung_Preset.postUpdate(-1)
 }
 end
 rule "SZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
-	Item SZ_Heizung_Preset received command
+    Item SZ_Heizung_Preset received command
 then {
-	logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
-	switch (receivedCommand){
-		case 0: SZ_Heizung_Manu.sendCommand(tempLower)
-		case 1: SZ_Heizung_Manu.sendCommand(tempComfort)
-		case 2: SZ_Heizung_Manu.sendCommand(tempHigher)
-	}
-	SZ_Heizung_Preset.postUpdate(-1)
+    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    switch (receivedCommand){
+        case 0: SZ_Heizung_Manu.sendCommand(tempLower)
+        case 1: SZ_Heizung_Manu.sendCommand(tempComfort)
+        case 2: SZ_Heizung_Manu.sendCommand(tempHigher)
+    }
+    SZ_Heizung_Preset.postUpdate(-1)
 }
 end
 rule "BD_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
-	Item BD_Heizung_Preset received command
+    Item BD_Heizung_Preset received command
 then {
-	logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
-	switch (receivedCommand){
-		case 0: BD_Heizung_Manu.sendCommand(tempLower)
-		case 1: BD_Heizung_Manu.sendCommand(tempComfort)
-		case 2: BD_Heizung_Manu.sendCommand(tempHigher)
-	}
-	BD_Heizung_Preset.postUpdate(-1)
+    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    switch (receivedCommand){
+        case 0: BD_Heizung_Manu.sendCommand(tempLower)
+        case 1: BD_Heizung_Manu.sendCommand(tempComfort)
+        case 2: BD_Heizung_Manu.sendCommand(tempHigher)
+    }
+    BD_Heizung_Preset.postUpdate(-1)
 }
 end
 

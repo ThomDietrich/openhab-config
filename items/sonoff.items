@@ -28,7 +28,7 @@ Switch BK_Balkonmagic "Balkonmagic" <light> (BK,gLight)                         
 Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (gRSSI)                         {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
 Switch BK_Balkonmagic_Unreach "Balkonmagic unreachable" <siren> (gUnreach)            {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/LWT:state:MAP(unreach.map)]"}
 Number BK_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" <energy> (gPower)
-Number BK_Balkonlicht_Aussentemp "Balkonlicht Außentemperatur [%.1f °C]" (BK)         {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/SENSOR:state:JSONPATH($.DS18B20.Temperature)]" }
+Number BK_Balkonmagic_Aussentemp "Balkon Außentemperatur [%.1f °C]" (BK)              {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/SENSOR:state:JSONPATH($.DS18B20.Temperature)]" }
 
 // Sonoff Pow
 Switch WZ_Expedit "Expedit" <light> (WZ,gLight)                                       {mqtt=">[broker:tasmota/sonoff-E8A6E4/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-E8A6E4/stat/POWER:state:default]"}
