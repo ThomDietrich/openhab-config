@@ -16,10 +16,10 @@ Group gSonosVolu "Volume"  <soundvolume>
 Group gSonosMute "Mute"    <sonos_mute>
 Group gSonosStop "Stop"    <sonos_stop> {autoupdate="false"}
 
-String SonosGroupID_Kitc	"Kitchen group [%s]"
-String SonosGroupID_Bedr	"Bedroom group [%s]"
-String SonosGroupID_Bath	"Bathroom group [%s]"
-String SonosGroupID_Livi	"Living room group [%s]"
+String SonosGroupID_Kitc    "Kitchen group [%s]"
+String SonosGroupID_Bedr    "Bedroom group [%s]"
+String SonosGroupID_Bath    "Bathroom group [%s]"
+String SonosGroupID_Livi    "Living room group [%s]"
 
 Number Sonos_Group1_Number "Players in group 1 [%.1f]"
 Number Sonos_Group2_Number "Players in group 2 [%.1f]"

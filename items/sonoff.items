@@ -43,6 +43,6 @@ Number WZ_SoundSystem_RSSI "Logitech System RSSI [%d %%]" (gRSSI)               
 Switch WZ_SoundSystem_Unreach "Logitech System unreachable" <siren> (gUnreach)        {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/LWT:state:MAP(unreach.map)]"}
 
 //Maintenance
-String	Sonoff_Action "Sonoff Action" <sonoff_basic>
+String    Sonoff_Action "Sonoff Action" <sonoff_basic>
 
 // vim: syntax=Xtend

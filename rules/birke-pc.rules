@@ -3,25 +3,25 @@ val String filename = "birke-pc.rules"
 
 rule "BirkePC Command"
 when
-	Item WZ_BirkePC_Command received command
+    Item WZ_BirkePC_Command received command
 then 
-	logInfo(filename, "BirkePC command: " + receivedCommand)
+    logInfo(filename, "BirkePC command: " + receivedCommand)
 
-	switch (receivedCommand) {
-		case "shutdown" : {
-			publish("broker", "winthing-birke/system/commands/shutdown", "now") 
-  		}
-  		case "sleep" : {
-  			publish("broker", "winthing-birke/system/commands/run", '["rundll32.exe", "powrprof.dll,SetSuspendState 0,1,0"]')
-  		}
-		case "kodi" : {
-			publish("broker", "winthing-birke/system/commands/run", '["C:/Program Files (x86)/Kodi/Kodi.exe"]')
-		}
-		case "notepad" : {
-			publish("broker", "winthing-birke/system/commands/run", '["notepad.exe"]')
-		}
-	}
-	WZ_BirkePC_Command.postUpdate(NULL)
+    switch (receivedCommand) {
+        case "shutdown" : {
+            publish("broker", "winthing-birke/system/commands/shutdown", "now") 
+          }
+          case "sleep" : {
+              publish("broker", "winthing-birke/system/commands/run", '["rundll32.exe", "powrprof.dll,SetSuspendState 0,1,0"]')
+          }
+        case "kodi" : {
+            publish("broker", "winthing-birke/system/commands/run", '["C:/Program Files (x86)/Kodi/Kodi.exe"]')
+        }
+        case "notepad" : {
+            publish("broker", "winthing-birke/system/commands/run", '["notepad.exe"]')
+        }
+    }
+    WZ_BirkePC_Command.postUpdate(NULL)
 end
 
 
@@ -31,10 +31,10 @@ when
 then
     //logInfo(filename, "PC Speaker switch power")
     if (PresencePC.state == OFF && WZ_SoundSystem_PowerHigh.state == ON) {
-	    WZ_zMote_sendkey.sendCommand("KEY_POWER")
+        WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
     else if (PresencePC.state == ON && WZ_SoundSystem_PowerHigh.state == OFF) {
-	    WZ_zMote_sendkey.sendCommand("KEY_POWER")
+        WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
     
 end

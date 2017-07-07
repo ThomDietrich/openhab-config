@@ -9,80 +9,80 @@ var Integer badlicht_timer_minutes = 30
 
 rule "Badtür-Automatik: Init"
 when
-	System started
+    System started
 then
-	createTimer(now.plusSeconds(180)) [|
-		if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
-	]
+    createTimer(now.plusSeconds(180)) [|
+        if (BD_Deckenlicht_TimerActive.state == NULL) BD_Deckenlicht_TimerActive.postUpdate(OFF)
+    ]
 end
 
 rule "Badtür-Automatik: Duration Update"
 when
-	Time cron "0 * * * * ?"
+    Time cron "0 * * * * ?"
 then
-	if (BD_Deckenlicht_TimerActive.state == ON) {
-		logInfo(filename, "updating timer duration")
-		var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
-		logInfo(filename, "Deadline: " + timeEnd)
-		var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
-		logInfo(filename, "Duration: " + timeDuration)
-		BD_Deckenlicht_TimerDuration.postUpdate(timeDuration)
-	}
+    if (BD_Deckenlicht_TimerActive.state == ON) {
+        logInfo(filename, "updating timer duration")
+        var DateTime timeEnd = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar.timeInMillis)
+        logInfo(filename, "Deadline: " + timeEnd)
+        var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
+        logInfo(filename, "Duration: " + timeDuration)
+        BD_Deckenlicht_TimerDuration.postUpdate(timeDuration)
+    }
 end
 
 rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
 when
-  	Item BD_Tuer_State changed from CLOSED to OPEN
+      Item BD_Tuer_State changed from CLOSED to OPEN
 then
-	logInfo (filename, "Türsensor ausgelöst.")
-	if (Night_State.state == ON) {
-		if (BD_Deckenlicht.state == OFF) {
-			sendCommand(BD_Deckenlicht, ON)
-			logInfo(filename, "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+    logInfo (filename, "Türsensor ausgelöst.")
+    if (Night_State.state == ON) {
+        if (BD_Deckenlicht.state == OFF) {
+            sendCommand(BD_Deckenlicht, ON)
+            logInfo(filename, "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
 
-			var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
-			BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
-			BD_Deckenlicht_TimerActive.postUpdate(ON)
+            var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+            BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
+            BD_Deckenlicht_TimerActive.postUpdate(ON)
 
-			badlicht_timer = createTimer(deadline) [|
-				if (badlicht_timer != null) {
-					badlicht_timer.cancel
-					badlicht_timer = null
-					BD_Deckenlicht_TimerActive.postUpdate(OFF)
-					logInfo(filename, "Deckenlicht Timer abgelaufen, Deckenlicht aus.")
-					sendCommand(BD_Deckenlicht, OFF)
-				}
-			]
-			logInfo(filename, "Deckenlicht Timer gesetzt.")
-		} else {
-			//door opened, light's already on, timer running
-			if (badlicht_timer != null) {
-				var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
-				postUpdate(BD_Deckenlicht_TimerEnd, new DateTimeType(deadline.toCalendar(null)))
-				BD_Deckenlicht_TimerActive.postUpdate(ON)
-				badlicht_timer.reschedule(deadline)
-				logInfo(filename, "Deckenlicht Timer verlängert.")
-			} else {
-				logInfo(filename, "Deckenlicht bereits an, keine Aktion.")
-			}
-		}
-	}
+            badlicht_timer = createTimer(deadline) [|
+                if (badlicht_timer != null) {
+                    badlicht_timer.cancel
+                    badlicht_timer = null
+                    BD_Deckenlicht_TimerActive.postUpdate(OFF)
+                    logInfo(filename, "Deckenlicht Timer abgelaufen, Deckenlicht aus.")
+                    sendCommand(BD_Deckenlicht, OFF)
+                }
+            ]
+            logInfo(filename, "Deckenlicht Timer gesetzt.")
+        } else {
+            //door opened, light's already on, timer running
+            if (badlicht_timer != null) {
+                var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+                postUpdate(BD_Deckenlicht_TimerEnd, new DateTimeType(deadline.toCalendar(null)))
+                BD_Deckenlicht_TimerActive.postUpdate(ON)
+                badlicht_timer.reschedule(deadline)
+                logInfo(filename, "Deckenlicht Timer verlängert.")
+            } else {
+                logInfo(filename, "Deckenlicht bereits an, keine Aktion.")
+            }
+        }
+    }
 end
 
 rule "Badtür-Automatik: Lichtschalter überschreibt"
 when
-	Item BD_Deckenlicht received update
+    Item BD_Deckenlicht received update
 then
-	logInfo (filename, "manueller Tastendruck löscht Timer?")
-	if (badlicht_timer != null) {
-		logInfo (filename, "manueller Tastendruck löscht Timer??")
-		badlicht_timer.cancel
-		badlicht_timer = null
-		logInfo (filename, "manueller Tastendruck löscht Timer???")
-		BD_Deckenlicht_TimerActive.postUpdate(OFF)
-		logInfo (filename, "manueller Tastendruck löscht Timer.")
-	}
-	// schalten des Lichts geschieht bei diesem Schaltelement automatisch
+    logInfo (filename, "manueller Tastendruck löscht Timer?")
+    if (badlicht_timer != null) {
+        logInfo (filename, "manueller Tastendruck löscht Timer??")
+        badlicht_timer.cancel
+        badlicht_timer = null
+        logInfo (filename, "manueller Tastendruck löscht Timer???")
+        BD_Deckenlicht_TimerActive.postUpdate(OFF)
+        logInfo (filename, "manueller Tastendruck löscht Timer.")
+    }
+    // schalten des Lichts geschieht bei diesem Schaltelement automatisch
 end
 
 // vim: syntax=Xtend

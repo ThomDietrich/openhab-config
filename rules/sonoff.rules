@@ -2,33 +2,33 @@
 val String filename = "sonoff.rules"
 
 val sonoff_device_ids = newArrayList(
-	"sonoff-CBF6BE",
-	"sonoff-96504C",
-	"sonoff-A00F9D",
-	"sonoff-9F3BD8",
-	"sonoff-E8A6E4",
-	"sonoff-20DCAE"
+    "sonoff-CBF6BE",
+    "sonoff-96504C",
+    "sonoff-A00F9D",
+    "sonoff-9F3BD8",
+    "sonoff-E8A6E4",
+    "sonoff-20DCAE"
 )
 
 rule "Sonoff Maintenance"
 when
-	Item Sonoff_Action received command
+    Item Sonoff_Action received command
 then 
-	logInfo(filename, "Sonoff Maintenance on all devices: " + receivedCommand)
-	
-	for (String device_id : sonoff_device_ids) {
-		switch (receivedCommand) {
-			case "restart" : {
-				publish("broker", "cmnd/" + device_id + "/restart", "1") 
-	  		}
-			case "queryFW" : {
-				publish("broker", "cmnd/" + device_id + "/status", "2")
-			}
-	  		case "upgradeFW" : {
-	  			publish("broker", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.ino.bin")
-				publish("broker", "cmnd/" + device_id + "/upgrade", "1")
-			}
-		}
-	}
-	Sonoff_Action.postUpdate(NULL)
+    logInfo(filename, "Sonoff Maintenance on all devices: " + receivedCommand)
+    
+    for (String device_id : sonoff_device_ids) {
+        switch (receivedCommand) {
+            case "restart" : {
+                publish("broker", "cmnd/" + device_id + "/restart", "1") 
+              }
+            case "queryFW" : {
+                publish("broker", "cmnd/" + device_id + "/status", "2")
+            }
+              case "upgradeFW" : {
+                  publish("broker", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.ino.bin")
+                publish("broker", "cmnd/" + device_id + "/upgrade", "1")
+            }
+        }
+    }
+    Sonoff_Action.postUpdate(NULL)
 end

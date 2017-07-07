@@ -50,7 +50,7 @@ then
             }
         ]
     } else {
-    	logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + PresenceThPhone.state)
+        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + PresenceThPhone.state)
     }
 end
 

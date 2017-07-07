@@ -3,25 +3,25 @@ val String filename = "lichtprogramm.rules"
 
 rule "Schranktaster Arbeitsbeleuchtung ON"
 when
-	Item FK_Taster_Schrank_2Short changed to ON
+    Item FK_Taster_Schrank_2Short changed to ON
 then
-	if (FK_Arbeit.state == OFF) {
-		FK_Arbeit.sendCommand(ON)
-	} else if (FK_Edison_Dimmer_Level.state != 70) {
-		FK_Edison_Dimmer_Level.sendCommand(70)
-	} else {
-		Kueche_Deckenlicht.sendCommand(ON)
-	}
+    if (FK_Arbeit.state == OFF) {
+        FK_Arbeit.sendCommand(ON)
+    } else if (FK_Edison_Dimmer_Level.state != 70) {
+        FK_Edison_Dimmer_Level.sendCommand(70)
+    } else {
+        Kueche_Deckenlicht.sendCommand(ON)
+    }
 end
 
 rule "Schranktaster Arbeitsbeleuchtung OFF"
 when
-	Item FK_Taster_Schrank_1Short changed to ON
+    Item FK_Taster_Schrank_1Short changed to ON
 then
-	FK_Arbeit.sendCommand(OFF)
-	Kueche_Deckenlicht.sendCommand(OFF)
-	if (FK_Edison_Dimmer_Level.state == 30) FK_Edison_Dimmer_Level.sendCommand(OFF)
-	if (FK_Edison_Dimmer_Level.state == 70) FK_Edison_Dimmer_Level.sendCommand(30)
+    FK_Arbeit.sendCommand(OFF)
+    Kueche_Deckenlicht.sendCommand(OFF)
+    if (FK_Edison_Dimmer_Level.state == 30) FK_Edison_Dimmer_Level.sendCommand(OFF)
+    if (FK_Edison_Dimmer_Level.state == 70) FK_Edison_Dimmer_Level.sendCommand(30)
 end
 
 rule "Schranktaster Hauptleuchte ON"  when Item FK_Taster_Schrank_2Long changed to ON then Kueche_Deckenlicht.sendCommand(ON) end
