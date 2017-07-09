@@ -51,14 +51,14 @@ rule "System started - Heizung"
 when
     System started
 then
-    createTimer(now.plusSeconds(150)) [|
+    createTimer(now.plusSeconds(200)) [|
         logInfo(filename, "System started - Heizung")
         if (WZ_Heizung_Fault.state == NULL) WZ_Heizung_Fault.postUpdate("NO_FAULT")
         if (FK_Heizung_Fault.state == NULL) FK_Heizung_Fault.postUpdate("NO_FAULT")
         if (SZ_Heizung_Fault.state == NULL) SZ_Heizung_Fault.postUpdate("NO_FAULT")
         if (BD_Heizung_Fault.state == NULL) BD_Heizung_Fault.postUpdate("NO_FAULT")
         gUnreach.members.forEach(item |
-            if (item.state == NULL) item.postUpdate(ON)
+            if (item.state == NULL) item.postUpdate(OFF)
         )
     ]
 end
@@ -73,7 +73,7 @@ when
     Item BD_Fenster_State received update
 then {
     createTimer(now.plusSeconds(15)) [|
-        logInfo(filename, "Heizung Fensterabsenkung detektieren")
+        //logInfo(filename, "Heizung Fensterabsenkung detektieren")
         //WZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(WZ_Fenster_State, WZ_Heizung_SetTemp))
         FK_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(FK_Fenster_State, FK_Heizung_SetTemp))
         SZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(SZ_Fenster_State, SZ_Heizung_SetTemp))
@@ -92,7 +92,7 @@ when
     Item gHeatMode changed or
     Item gHeatWiMo changed
 then {
-    logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung")
+    //logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung")
     WZ_Heizung_Summary.postUpdate(generateSummary.apply(WZ_Heizung_Mode, WZ_Heizung_ActTemp, WZ_Heizung_SetTemp, WZ_Heizung_Valve, WZ_Heizung_WindowMode))
     FK_Heizung_Summary.postUpdate(generateSummary.apply(FK_Heizung_Mode, FK_Heizung_ActTemp, FK_Heizung_SetTemp, FK_Heizung_Valve, FK_Heizung_WindowMode))
     SZ_Heizung_Summary.postUpdate(generateSummary.apply(SZ_Heizung_Mode, SZ_Heizung_ActTemp, SZ_Heizung_SetTemp, SZ_Heizung_Valve, SZ_Heizung_WindowMode))
@@ -106,7 +106,7 @@ rule "WZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item WZ_Heizung_Preset received command
 then {
-    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    //logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
     switch (receivedCommand){
         case 0: WZ_Heizung_Manu.sendCommand(tempLower)
         case 1: WZ_Heizung_Manu.sendCommand(tempComfort)
@@ -119,7 +119,7 @@ rule "FK_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item FK_Heizung_Preset received command
 then {
-    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    //logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
     switch (receivedCommand){
         case 0: FK_Heizung_Manu.sendCommand(tempLower)
         case 1: FK_Heizung_Manu.sendCommand(tempComfort)
@@ -132,7 +132,7 @@ rule "SZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item SZ_Heizung_Preset received command
 then {
-    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    //logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
     switch (receivedCommand){
         case 0: SZ_Heizung_Manu.sendCommand(tempLower)
         case 1: SZ_Heizung_Manu.sendCommand(tempComfort)
@@ -145,7 +145,7 @@ rule "BD_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item BD_Heizung_Preset received command
 then {
-    logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
+    //logInfo(filename, "Auswertung Schnellauswahl (Sitemap)")
     switch (receivedCommand){
         case 0: BD_Heizung_Manu.sendCommand(tempLower)
         case 1: BD_Heizung_Manu.sendCommand(tempComfort)

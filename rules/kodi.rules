@@ -20,7 +20,7 @@ when
     Item KodiPlayerState changed or
     Item KodiTitle changed
 then
-    logInfo(filename, "--> Kodi Summary update")
+    //logInfo(filename, "--> Kodi Summary update")
     val status = if (KodiPlayerState.state == "Play") "⏯" else if (KodiPlayerState.state == "Pause") "⏸" else "⏹"
     val title = (KodiTitle.state as StringType).toString
     val show = (KodiTitleShow.state as StringType).toString

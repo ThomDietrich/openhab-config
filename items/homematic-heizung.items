@@ -28,7 +28,7 @@ Number WZ_Heizung_BoostTime         "WZ_Heizung Boost-Restdauer [%d min]"       
 Switch WZ_Heizung_WindowMode        "WZ_Heizung Fensterabsenkung"                               <window>        (gWZHeat,WZ,gHeatWiMo)
 Number WZ_Heizung_Preset            "WZ_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gWZHeat)
 Number WZ_Heizung_PresetTemp        "WZ_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gWZHeat,gHeatPreset)
-String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <temperature>   (gWZHeat,WZ)
+String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gWZHeat,WZ)
 
 Number FK_Heizung_RSSI              "FK_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gFKHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:0#RSSI_DEVICE" }
 Switch FK_Heizung_Unreach           "FK_Heizung unreachable"                                    <siren>         (gFKHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:0#UNREACH" }
@@ -46,7 +46,7 @@ Number FK_Heizung_BoostTime         "FK_Heizung Boost-Restdauer [%d min]"       
 Switch FK_Heizung_WindowMode        "FK_Heizung Fensterabsenkung"                               <window>        (gFKHeat,FK,gHeatWiMo)
 Number FK_Heizung_Preset            "FK_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gFKHeat)
 Number FK_Heizung_PresetTemp        "FK_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gFKHeat,gHeatPreset)
-String FK_Heizung_Summary           "FK_Heizung Übersicht [%s]"                                 <temperature>   (gFKHeat,FK)
+String FK_Heizung_Summary           "FK_Heizung Übersicht [%s]"                                 <thermometer_red> (gFKHeat,FK)
 
 Number SZ_Heizung_RSSI              "SZ_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gSZHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:0#RSSI_DEVICE" }
 Switch SZ_Heizung_Unreach           "SZ_Heizung unreachable"                                    <siren>         (gSZHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:0#UNREACH" }
@@ -64,7 +64,7 @@ Number SZ_Heizung_BoostTime         "SZ_Heizung Boost-Restdauer [%d min]"       
 Switch SZ_Heizung_WindowMode        "SZ_Heizung Fensterabsenkung"                               <window>        (gSZHeat,SZ,gHeatWiMo)
 Number SZ_Heizung_Preset            "SZ_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gSZHeat)
 Number SZ_Heizung_PresetTemp        "SZ_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gSZHeat,gHeatPreset)
-String SZ_Heizung_Summary           "SZ_Heizung Übersicht [%s]"                                 <temperature>   (gSZHeat,SZ)
+String SZ_Heizung_Summary           "SZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gSZHeat,SZ)
 
 Number BD_Heizung_RSSI              "BD_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gBDHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:0#RSSI_DEVICE" }
 Switch BD_Heizung_Unreach           "BD_Heizung unreachable"                                    <siren>         (gBDHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:0#UNREACH" }
@@ -82,6 +82,6 @@ Number BD_Heizung_BoostTime         "BD_Heizung Boost-Restdauer [%d min]"       
 Switch BD_Heizung_WindowMode        "BD_Heizung Fensterabsenkung"                               <window>        (gBDHeat,BD,gHeatWiMo)
 Number BD_Heizung_Preset            "BD_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gBDHeat)
 Number BD_Heizung_PresetTemp        "BD_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gBDHeat,gHeatPreset)
-String BD_Heizung_Summary           "BD_Heizung Übersicht [%s]"                                 <temperature>   (gBDHeat,BD)
+String BD_Heizung_Summary           "BD_Heizung Übersicht [%s]"                                 <thermometer_red> (gBDHeat,BD)
 
 // vim: syntax=Xtend

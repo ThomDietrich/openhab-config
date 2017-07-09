@@ -10,6 +10,15 @@ val sonoff_device_ids = newArrayList(
     "sonoff-20DCAE"
 )
 
+rule "Sonoff init"
+when
+    System started
+then
+    createTimer(now.plusSeconds(195)) [|
+        if (FK_KuehlschrankTemp_Summary.state == NULL || FK_KuehlschrankTemp_Summary.state == "") FK_KuehlschrankTemp_Summary.postUpdate("(unbekannt) ⁉")
+    ]
+end
+
 rule "Sonoff Maintenance"
 when
     Item Sonoff_Action received command
@@ -31,4 +40,13 @@ then
         }
     }
     Sonoff_Action.postUpdate(NULL)
+end
+
+
+rule "Sonoff Kuehlschrank Summary"
+when
+    Item FK_KuehlschrankTemp_Kuehl changed or
+    Item FK_KuehlschrankTemp_Gefrier changed
+then
+    FK_KuehlschrankTemp_Summary.postUpdate(String::format("%s °C / %s °C", FK_KuehlschrankTemp_Kuehl.state, FK_KuehlschrankTemp_Gefrier.state))
 end

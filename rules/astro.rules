@@ -47,26 +47,24 @@ then
   Thread::sleep(1000) // make sure we are a tad past midnight to give Astro a chance to recalculate DateTimes for today
 
   val long morning_start = now.withTimeAtStartOfDay.plusHours(6).millis
-  val long day_start = (vSunrise_Time.state as DateTimeType).calendar.timeInMillis
-  val long afternoon_start = (vEvening_Time.state as DateTimeType).calendar.timeInMillis
-  val long evening_start = (vSunset_Time.state as DateTimeType).calendar.timeInMillis
+  val long day_start = (Sunrise_Time.state as DateTimeType).calendar.timeInMillis
+  val long afternoon_start = (Evening_Time.state as DateTimeType).calendar.timeInMillis
+  val long evening_start = (Sunset_Time.state as DateTimeType).calendar.timeInMillis
   val long night_start = now.withTimeAtStartOfDay.plusHours(23).millis
   val long bed_start = now.withTimeAtStartOfDay.millis
 
-  var curr = "UNKNOWN"
-
-  switch now {
-        case now.isAfter(morning_start) && now.isBefore(day_start):       curr = "MORNING"
-        case now.isAfter(day_start) && now.isBefore(afternoon_start):     curr = "DAY"
-        case now.isAfter(afternoon_start) && now.isBefore(evening_start): curr = "AFTERNOON"
-        case now.isAfter(evening_start) && now.isBefore(night_start):     curr = "EVENING"
-        case now.isAfter(night_start):                                    curr = "NIGHT"
-        case now.isAfter(bed_start) && now.isBefore(morning_start):       curr = "BED"
+  var curr = switch now {
+        case now.isAfter(morning_start) && now.isBefore(day_start):       "MORNING"
+        case now.isAfter(day_start) && now.isBefore(afternoon_start):     "DAY"
+        case now.isAfter(afternoon_start) && now.isBefore(evening_start): "AFTERNOON"
+        case now.isAfter(evening_start) && now.isBefore(night_start):     "EVENING"
+        case now.isAfter(night_start):                                    "NIGHT"
+        case now.isAfter(bed_start) && now.isBefore(morning_start):       "BED"
   }
 
-  if(vTimeOfDay.state.toString != curr) {
+  if(Time_Of_Day.state.toString != curr) {
     logInfo(filename, "Current time of day is now " + curr)
-    vTimeOfDay.sendCommand(curr)
+    Time_Of_Day.sendCommand(curr)
   }
 
 end

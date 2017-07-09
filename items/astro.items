@@ -6,8 +6,8 @@ DateTime    Current_DateTime     "Heute [%1$tA, %1$td.%1$tm.%1$tY]"             
 //
 DateTime    Sunset_Time          "Sonnenuntergang [%1$tH:%1$tM Uhr]"                      <sun>    (Astro) { channel="astro:sun:home:set#start" }
 DateTime    Sunrise_Time         "Sonnenaufgang [%1$tH:%1$tM Uhr]"                        <sun>    (Astro) { channel="astro:sun:home:rise#end" }
+DateTime    Evening_Time         "Abend [%1$tH:%1$tM Uhr]"                                         (Astro) { channel="astro:sun:minus90:set#start" }
 //
-String      Day_Phase_Sci        "Astronomische Tageszeit [MAP(astro.map):%s]"                     (Astro) { channel="astro:sun:home:phase#name" }
 String      Day_Phase            "Tageszeit [MAP(astro.map):%s]"                                   (Astro) { channel="astro:sun:home:phase#name" }
 Switch      Night_State          "Nacht"                                                           (Astro)
 //
@@ -20,12 +20,12 @@ DateTime    Moon_Next_Full       "Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%
 DateTime    Moon_Next_New        "Nächster Neumond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]"  <moon>   (Astro) { channel="astro:moon:home:phase#new" }
 
 //
-String vTimeOfDay "Current Time of Day [%s]"
+Number      Radiation_Direct     "Direct Radiation"                                                (Astro) { channel="astro:sun:home:radiation#direct" }
+Number      Radiation_Total      "Total Radiation"                                                 (Astro) { channel="astro:sun:home:radiation#total" }
+Number      Radiation_Diffuse    "Diffuse Radiation"                                               (Astro) { channel="astro:sun:home:radiation#diffuse" }
 
 //
-DateTime vSunrise_Time "Sunrise [%1$tH:%1$tM]" { channel="astro:sun:home:rise#start" }
-DateTime vSunset_Time "Sunset [%1$tH:%1$tM]"   { channel="astro:sun:home:set#start" }
-DateTime vEvening_Time "Evening [%1$tH:%1$tM]" { channel="astro:sun:minus90:set#start" }
+String      Time_Of_Day          "Current Time of Day [%s]"                                        (Astro)
 
 /* EXAMPLE
  * https://community.openhab.org/t/explanation-of-eveningnight-and-morningnight/2194

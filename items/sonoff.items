@@ -10,12 +10,13 @@ Switch FK_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" <siren> (gUnreach)    
 Number FK_Arbeit_Power "Arbeitsbeleuchtung Leistung [%.0f W]" <energy> (gPower)
 
 // Sonoff Basic + 2x DS18B20 (spezielle Firmware)
-//Switch KU_KuehlschrankTemp "Kühlschrank Temperatur" <light> (KU,gLight) ["Lighting"]        { mqtt=">[broker:tasmota/sonoff-96E5F6/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96E5F6/stat/POWER:state:default]" }
-Number KU_KuehlschrankTemp_RSSI "Kühlschrank Temperatur RSSI [%d %%]" (gRSSI)                 { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-Switch KU_KuehlschrankTemp_Unreach "Kühlschrank Temperatur unreachable" <siren> (gUnreach)    { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/LWT:state:MAP(unreach.map)]" }
-Number KU_KuehlschrankTemp_Power "Kühlschrank Temperatur Leistung [%.0f W]" <energy> (gPower)
-Number KU_KuehlschrankTemp_Gefrier "Kühlschrank Temperatur Gefrierbereich [%.1f °C]" (KU)     { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS2.Temperature)]" }
-Number KU_KuehlschrankTemp_Kuehl "Kühlschrank Temperatur Kühlbereich [%.1f °C]" (KU)          { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS1.Temperature)]" }
+//Switch FK_KuehlschrankTemp "Kühlschrank Temperatur" <light> (KU,gLight) ["Lighting"]        { mqtt=">[broker:tasmota/sonoff-96E5F6/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96E5F6/stat/POWER:state:default]" }
+Number FK_KuehlschrankTemp_RSSI "Kühlschrank Temperatur RSSI [%d %%]" (gRSSI)                 { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+Switch FK_KuehlschrankTemp_Unreach "Kühlschrank Temperatur unreachable" <siren> (gUnreach)    { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/LWT:state:MAP(unreach.map)]" }
+Number FK_KuehlschrankTemp_Power "Kühlschrank Temperatur Leistung [%.0f W]" <energy> (gPower)
+Number FK_KuehlschrankTemp_Gefrier "Kühlschrank Temperatur Gefrierbereich [%.1f °C]" (KU)     { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS2.Temperature)]" }
+Number FK_KuehlschrankTemp_Kuehl "Kühlschrank Temperatur Kühlbereich [%.1f °C]" (KU)          { mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS1.Temperature)]" }
+String FK_KuehlschrankTemp_Summary "Kühlschrank Temperaturen [%s]" (KU)
 
 // Sonoff S20 Smart Socket
 Switch WZ_Origami "Origami" <light> (WZ,gLight)                                       {mqtt=">[broker:tasmota/sonoff-9F3BD8/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
@@ -24,11 +25,11 @@ Switch WZ_Origami_Unreach "Origami unreachable" <siren> (gUnreach)              
 Number WZ_Origami_Power "Origami Leistung [%.0f W]" <energy> (gPower)
 
 // Sonoff S20 Smart Socket + DS18B20
-Switch BK_Balkonmagic "Balkonmagic" <light> (BK,gLight)                               {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
+Switch BK_Balkonmagic "Balkonmagic" <stars> (BK,gLight)                               {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
 Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (gRSSI)                         {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/TELEMETRY:state:JSONPATH($.Wifi.RSSI)]"}
 Switch BK_Balkonmagic_Unreach "Balkonmagic unreachable" <siren> (gUnreach)            {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/LWT:state:MAP(unreach.map)]"}
 Number BK_Balkonmagic_Power "Balkonmagic Leistung [%.0f W]" <energy> (gPower)
-Number BK_Balkonmagic_Aussentemp "Balkon Außentemperatur [%.1f °C]" (BK)              {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/SENSOR:state:JSONPATH($.DS18B20.Temperature)]" }
+Number BK_Balkonmagic_Aussentemp "Balkon Außentemperatur [%.1f °C]" <thermometer_red_earth> (BK) {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/SENSOR:state:JSONPATH($.DS18B20.Temperature)]" }
 
 // Sonoff Pow
 Switch WZ_Expedit "Expedit" <light> (WZ,gLight)                                       {mqtt=">[broker:tasmota/sonoff-E8A6E4/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-E8A6E4/stat/POWER:state:default]"}

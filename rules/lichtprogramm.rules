@@ -104,6 +104,7 @@ then
             WZ_Lacks_Lampe.sendCommand(OFF)
             Flur_Deckenlicht.sendCommand(OFF)
             Kueche_Deckenlicht.sendCommand(OFF)
+            gLight.members.filter[item | item.state == NULL].forEach[item | item.sendCommand(OFF)]
         }
         case 2: {
             logInfo(filename, "Lichtprogramm 2 - Relax")
@@ -118,6 +119,7 @@ then
             Flur_Deckenlicht.sendCommand(OFF)
             Kueche_Deckenlicht.sendCommand(OFF)
             SZ_Deckenlicht.sendCommand(OFF)
+            gLight.members.filter[item | item.state == NULL].forEach[item | item.sendCommand(OFF)]
         }
         case 3: {
             gLight.members.filter[item | item.state != ON].forEach[item | item.sendCommand(ON)]
