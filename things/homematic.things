@@ -1,4 +1,4 @@
-Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
+Bridge homematic:bridge:hg [ gatewayAddress="127.0.0.1", callbackHost="127.0.0.1" ]
 {
     Thing   HG-HM-CC-RT-DN      LEQ0785556
     Thing   HG-HM-CC-RT-DN      LEQ0778898
