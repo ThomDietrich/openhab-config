@@ -2,7 +2,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 val String filename = "verbraucher.rules"
 
-var java.util.concurrent.locks.ReentrantLock finishLock  = new java.util.concurrent.locks.ReentrantLock()
+var ReentrantLock finishLock  = new ReentrantLock()
 
 val Number MODE_OFF = 0
 val Number MODE_STANDBY = 1

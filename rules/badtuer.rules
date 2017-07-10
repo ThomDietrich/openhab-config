@@ -1,4 +1,4 @@
-import org.joda.time.*
+import org.joda.time.DateTime
 
 val String filename = "badtuer.rules"
 

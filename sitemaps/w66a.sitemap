@@ -110,11 +110,11 @@ sitemap w66a label="W66a openHAB Installation" {
                     url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
-        Switch item=WZ_zMote_sendkey label="Logitech Laut/Leise" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEUP"="Vol+", "KEY_VOLUMEDOWN"="Vol-" ]
-        Switch item=WZ_zMote_sendcode label="Logitech Input" mappings=[
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Switch",
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="1",
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="2"
+        Switch item=WZ_zMote_sendkey label="Logitech Sound System" icon="logitech" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+" ]
+        Switch item=WZ_zMote_sendcode label="Logitech Sound System Input" icon="logitech" mappings=[
+            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Wechseln ⤓",
+            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="PC",
+            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="Sonos"
         ]
     }
     Frame  item=gLight label="Beleuchtung [Aktiv: %d]" {
@@ -163,7 +163,7 @@ sitemap w66a label="W66a openHAB Installation" {
 
     Frame label="Temperaturen und Heizung" {
         //
-        Selection item=Whg_Heating_Mode label="Heizmodus (Wohnung)" mappings=[NORMAL="Normal",
+        Selection item=Whg_Heating_Mode label="Heizmodus (Wohnung) []" mappings=[NORMAL="Normal",
             PARTY="Party",
             SICKDAY="Krankheitstag",
             WEEKEND_TRIP="Wochenendtrip",

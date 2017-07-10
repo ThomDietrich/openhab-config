@@ -3,70 +3,61 @@ val String filename = "astro.rules"
 
 rule "OpenHAB system started - astro"
 when
-  System started
+    System started
 then
-  createTimer(now.plusSeconds(180)) [|
-    logInfo(filename, "--> astro init")
-    if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
-      now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
-    ) {
-      logInfo(filename, "--> Night_State ON")
-      postUpdate(Night_State, ON)
-    } else {
-      logInfo(filename, "--> Night_State OFF")
-      postUpdate(Night_State, OFF)
-    }
-  ]
+    createTimer(now.plusSeconds(180)) [|
+        logInfo(filename, "--> astro init")
+        if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
+            now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
+        ) {
+            postUpdate(Night_State, ON)
+        } else {
+            postUpdate(Night_State, OFF)
+        }
+    ]
 end
 
 rule "Update Night_State"
 when
-  Item Sun_Elevation changed
+    Item Sun_Elevation changed
 then
-  if(Sun_Elevation.state >  0){
-    if(Night_State.state != OFF){
-      logInfo(filename, "--> Sun is crossing the horizon, switching to daylight mode")
-      postUpdate(Night_State, OFF)
+    if (Sun_Elevation.state > 0) {
+        if (Night_State.state != OFF) postUpdate(Night_State, OFF)
+    } else {
+        if (Night_State.state != ON) postUpdate(Night_State, ON)
     }
-  } else {
-    if(Night_State.state != ON) {
-      logInfo(filename, "--> Sun is crossing the horizon, switching to night mode")
-      postUpdate(Night_State, ON)
-    }
-  }
 end
 
 rule "Calculate time of day state"
 when
-  System started or
-  Channel 'astro:sun:home:rise#event' triggered START or
-  Channel 'astro:sun:home:set#event' triggered START or
-  Channel 'astro:sun:minus90:set#event' triggered START or
-  Time cron "0 0 6,23,0 * * ? *"
+    System started or
+    Channel 'astro:sun:home:rise#event' triggered START or
+    Channel 'astro:sun:home:set#event' triggered START or
+    Channel 'astro:sun:minus90:set#event' triggered START or
+    Time cron "0 0 6,23,0 * * ? *"
 then
-  Thread::sleep(1000) // make sure we are a tad past midnight to give Astro a chance to recalculate DateTimes for today
+    //Thread::sleep(1000) // make sure we are a tad past midnight to give Astro a chance to recalculate DateTimes for today
 
-  val long morning_start = now.withTimeAtStartOfDay.plusHours(6).millis
-  val long day_start = (Sunrise_Time.state as DateTimeType).calendar.timeInMillis
-  val long afternoon_start = (Evening_Time.state as DateTimeType).calendar.timeInMillis
-  val long evening_start = (Sunset_Time.state as DateTimeType).calendar.timeInMillis
-  val long night_start = now.withTimeAtStartOfDay.plusHours(23).millis
-  val long bed_start = now.withTimeAtStartOfDay.millis
+    val long morning_start = now.withTimeAtStartOfDay.plusHours(6).millis
+    val long day_start = (Sunrise_Time.state as DateTimeType).calendar.timeInMillis
+    val long afternoon_start = (Evening_Time.state as DateTimeType).calendar.timeInMillis
+    val long evening_start = (Sunset_Time.state as DateTimeType).calendar.timeInMillis
+    val long night_start = now.withTimeAtStartOfDay.plusHours(23).millis
+    val long bed_start = now.withTimeAtStartOfDay.millis
 
-  var curr = switch now {
+    var curr = switch now {
         case now.isAfter(morning_start) && now.isBefore(day_start):       "MORNING"
         case now.isAfter(day_start) && now.isBefore(afternoon_start):     "DAY"
         case now.isAfter(afternoon_start) && now.isBefore(evening_start): "AFTERNOON"
         case now.isAfter(evening_start) && now.isBefore(night_start):     "EVENING"
         case now.isAfter(night_start):                                    "NIGHT"
         case now.isAfter(bed_start) && now.isBefore(morning_start):       "BED"
-  }
+    }
 
-  if(Time_Of_Day.state.toString != curr) {
-    logInfo(filename, "Current time of day is now " + curr)
-    Time_Of_Day.sendCommand(curr)
-  }
-
+    if (Time_Of_Day.state.toString != curr) {
+        logInfo(filename, "Current time of day is now " + curr)
+        Time_Of_Day.postUpdate(curr)
+    }
 end
 
 // vim: syntax=Xtend
