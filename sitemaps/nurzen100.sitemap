@@ -3,15 +3,14 @@ sitemap nurzen100 label="Nurzen100 openHAB Installation" {
     Frame {
         Text item=Current_DateTime label="Wetter und Astro [%1$tA, %1$td.%1$tm.%1$tY]" icon="sun_clouds" {
             Frame label="Jetzt" {
-                Switch item=Night_State label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+                //Switch item=Night_State label="Tageszeit" mappings=[OFF="Tag", ON="Nacht"]
+                Text item=Day_Phase icon="sunmoon"
                 Text item=Sunrise_Time icon="sunrise" visibility=[Night_State == ON]
                 Text item=Sunset_Time icon="sunset" visibility=[Night_State == OFF]
                 Text item=Sun_Elevation icon="sunmoon" visibility=[Sun_Elevation > 0]
                 Text item=Moon_Elevation icon="sunmoon" visibility=[Moon_Elevation > 0]
-                Text item=Moon_Phase
-                Text item=Day_Phase icon="sunmoon"
-                Text item=Day_Phase_Sci icon="sunmoon"
                 Text item=Zodiac_Sign icon="zodiac"
+                Text item=Moon_Phase
                 Text item=Moon_Next_Full icon="fullmoon"
                     visibility=[Moon_Phase == WAXING_CRESCENT,
                         Moon_Phase == FIRST_QUARTER,
@@ -32,7 +31,8 @@ sitemap nurzen100 label="Nurzen100 openHAB Installation" {
         Switch item=N100_Hoflicht_Vorbau visibility=[N100_Hoflicht_Vorbau_Unreach == OFF]
         Switch item=N100_Hoflicht_Pferdestall visibility=[N100_Hoflicht_Pferdestall_Unreach == OFF]
         Switch item=N100_Hoflicht_Scheune label="Hässliches Hoflicht (Scheune)" visibility=[N100_Hoflicht_Scheune_Unreach == OFF]
-        Switch item=N100_Hoflicht_Irene label="Hoflicht Irene" visibility=[N100_Hoflicht_Irene_Unreach == OFF]
+        Switch item=N100_Hoflicht_Irene_Relay label="Hoflicht Irene" mappings=[ON="Einschalten (6 min)"] visibility=[N100_Hoflicht_Irene_Unreach == OFF]
+        Text item=N100_Hoflicht_Irene_Status label="Hoflicht Irene [%s]" visibility=[N100_Hoflicht_Irene_Unreach == OFF]
     }
     Frame label="Außensensor" visibility=[N100_Hoflicht_Pferdestall_Unreach == OFF] {
         Text item=N100_Pferdestall_Temperatur label="Temperatur [%.1f °C]"
