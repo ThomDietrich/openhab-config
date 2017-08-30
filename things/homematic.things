@@ -1,35 +1,32 @@
-Bridge homematic:bridge:hg [ gatewayAddress="127.0.0.1", callbackHost="127.0.0.1" ]
+Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
 {
-    Thing   HG-HM-CC-RT-DN      LEQ0785556
-    Thing   HG-HM-CC-RT-DN      LEQ0778898
-    Thing   HG-HM-CC-RT-DN      LEQ0857855
-    Thing   HG-HM-CC-RT-DN      LEQ0851363
-
-    Thing   HG-HM-ES-PMSw1-Pl   LEQ1275872
-    Thing   HG-HM-ES-PMSw1-Pl   LEQ1275907
-    Thing   HG-HM-ES-PMSw1-Pl   LEQ1275865
-    Thing   HG-HM-ES-PMSw1-Pl   MEQ0272771
-    Thing   HG-HM-Sec-SCo       MEQ0029848
-    Thing   HG-HM-Sec-SCo       LEQ1466850
-    Thing   HG-HM-Sec-SCo       LEQ0922808
-    Thing   HG-HM-Sec-SCo       MEQ0029864
-    Thing   HG-HM-Sec-SCo       LEQ0919429
-    Thing   HG-HM-LC-Sw1PBU-FM  LEQ0493737
-    Thing   HG-HM-LC-Sw1PBU-FM  LEQ1293514
-    Thing   HG-HM-LC-Sw1PBU-FM  LEQ1293495
-    Thing   HG-HM-LC-Sw1-FM     LEQ0425711
-    Thing   HG-HM-LC-Sw2-FM     LEQ0883550
-    Thing   HG-HM-PB-2-WM55     MEQ0023751
-    Thing   HG-HM-PB-2-WM55     LEQ0570990
-    Thing   HG-HM-PB-2-FM       LEQ1332306
-    Thing   HG-HM-PB-2-FM       LEQ0396742
-    Thing   HG-HM-RC-8          LEQ0790268
-    Thing   HG-HM-RC-Sec4-2     LEQ0496553
-    Thing   HG-HM-LC-Dim1T-Pl-2 KEQ0904112
-    Thing   HG-HM-TC-IT-WM-W-EU NEQ0935446
-
-    Thing GATEWAY-EXTRAS-CCU GWE00000000
-    Thing GATEWAY-EXTRAS-HOMEGEAR GWE00000000
+    Thing HG-HM-CC-RT-DN            LEQ0785556   "Heizstellglied" @ "Wohnzimmer"
+    Thing HG-HM-CC-RT-DN            LEQ0778898   "Heizstellglied" @ "Schlafzimmer"
+    Thing HG-HM-CC-RT-DN            LEQ0857855   "Heizstellglied" @ "Küche"
+    Thing HG-HM-CC-RT-DN            LEQ0851363   "Heizstellglied" @ "Bad"
+    Thing HG-HM-ES-PMSw1-Pl         LEQ1275872   "Steckdose mit Leistungsmessung Waschmaschine" @ "Bad"
+    Thing HG-HM-ES-PMSw1-Pl         LEQ1275907   "Steckdose mit Leistungsmessung Kühlschrank" @ "Küche"
+    Thing HG-HM-ES-PMSw1-Pl         LEQ1275865   "Steckdose mit Leistungsmessung Spülmaschine" @ "Küche"
+    Thing HG-HM-ES-PMSw1-Pl         MEQ0272771   "Steckdose mit Leistungsmessung Medientechnik" @ "Wohnzimmer"
+    Thing HG-HM-Sec-SCo             MEQ0029848
+    Thing HG-HM-Sec-SCo             LEQ1466850
+    Thing HG-HM-Sec-SCo             LEQ0922808
+    Thing HG-HM-Sec-SCo             MEQ0029864
+    Thing HG-HM-Sec-SCo             LEQ0919429
+    Thing HG-HM-LC-Sw1PBU-FM        LEQ0493737
+    Thing HG-HM-LC-Sw1PBU-FM        LEQ1293514
+    Thing HG-HM-LC-Sw1PBU-FM        LEQ1293495
+    Thing HG-HM-LC-Sw1-FM           LEQ0425711
+    Thing HG-HM-LC-Sw2-FM           LEQ0883550
+    Thing HG-HM-PB-2-WM55           MEQ0023751
+    Thing HG-HM-PB-2-WM55           LEQ0570990
+    Thing HG-HM-PB-2-FM             LEQ1332306
+    Thing HG-HM-PB-2-FM             LEQ0396742
+    Thing HG-HM-RC-8                LEQ0790268
+    Thing HG-HM-RC-Sec4-2           LEQ0496553
+    Thing HG-HM-LC-Dim1T-Pl-2       KEQ0904112
+    Thing HG-HM-TC-IT-WM-W-EU       NEQ0935446
+    //Thing GATEWAY-EXTRAS-CCU        GWE00000000
 }
 
 // vim: syntax=Xtend
