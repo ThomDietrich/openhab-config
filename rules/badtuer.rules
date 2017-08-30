@@ -66,13 +66,13 @@ rule "Badtür-Automatik: Lichtschalter überschreibt"
 when
     Item BD_Deckenlicht changed
 then
-    logInfo (filename, "BD Tastendruck")
+    logInfo (filename, "gBD Tastendruck")
     if (badlicht_on_by_rule) {
-	    logInfo (filename, "BD Tastendruck durch Regel erzeugt, ignoriere...")
+	    logInfo (filename, "gBD Tastendruck durch Regel erzeugt, ignoriere...")
     	badlicht_on_by_rule = false
     } else if (BD_Deckenlicht_TimerActive.state == ON) {
         BD_Deckenlicht_TimerActive.postUpdate(OFF)
-        logInfo (filename, "BD Tastendruck löscht laufenden Timer.")
+        logInfo (filename, "gBD Tastendruck löscht laufenden Timer.")
     }
     // schalten des Lichts geschieht bei diesem Schaltelement automatisch
 end

@@ -1,4 +1,4 @@
-Group gSenseo "SenseoWifi Maschine" <senseo_machine> (FK,Whg)
+Group gSenseo "SenseoWifi Maschine" <senseo_machine> (gFK,gAll)
 
 String FK_Senseo_Debug         "SenseoWifi Debug [%s]"        <senseo_tamper>      (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/debug:state:default]" }
 String FK_Senseo_OpState       "SenseoWifi Zustand [%s]"      <senseo_coffeesign>  (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/opState:state:MAP(senseo-wifi.map)]" }
@@ -11,6 +11,6 @@ Switch FK_Senseo_CupAvailable  "SenseoWifi Tasse vorh."       <senseo_cup_avail>
 Switch FK_Senseo_CupFull       "SenseoWifi Tasse voll"        <senseo_cup_big>     (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/cupFull:state:MAP(senseo-wifi.map)]" }
 Switch FK_Senseo_Unreach       "SenseoWifi Unreach"           <siren>              (gSenseo,gUnreach) { mqtt="<[broker:homie/senseo-w66a/$online:state:MAP(unreach.map)]" }
 
-String FK_Senseo_Summary       "SenseoWifi [%s]"              <senseo_machine>     (FK,gSenseo)
+String FK_Senseo_Summary       "SenseoWifi [%s]"              <senseo_machine>     (gFK,gSenseo)
 
 // vim: syntax=Xtend

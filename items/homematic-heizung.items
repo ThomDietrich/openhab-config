@@ -1,5 +1,5 @@
 
-Group                           gHeat           "Heizung Gesamt"                                <heating>       (Whg)
+Group                           gHeat           "Heizung Gesamt"                                <heating>       (gAll)
 Group                           gWZHeat         "Heizung Wohnzimmer"                            <heating>       (gHeat)
 Group                           gFKHeat         "Heizung Flur/Küche"                            <heating>       (gHeat)
 Group                           gSZHeat         "Heizung Schlafzimmer"                          <heating>       (gHeat)
@@ -17,71 +17,71 @@ Switch WZ_Heizung_Unreach           "WZ_Heizung unreachable"                    
 Switch WZ_Heizung_Pending           "WZ_Heizung config pending"                                 <siren>         (gWZHeat,gPending)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:0#CONFIG_PENDING" }
 Number WZ_Heizung_Battery           "WZ_Heizung Batteriezustand [%.1f V]"                       <"battery-100"> (gWZHeat,gBattery)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BATTERY_STATE" }
 String WZ_Heizung_Fault             "WZ_Heizung Fehlerwert [MAP(HM-CC-RT-DN.map):%s]"           <error2>        (gWZHeat,gError)            { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#FAULT_REPORTING" }
-Number WZ_Heizung_ActTemp           "WZ_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gWZHeat,WZ,gHeatAct)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#ACTUAL_TEMPERATURE" }
-Number WZ_Heizung_SetTemp           "WZ_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gWZHeat,WZ,gHeatSet)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#SET_TEMPERATURE" }
-Number WZ_Heizung_Valve             "WZ_Heizung Ventilstellung [%d %%]"                         <heating>       (gWZHeat,WZ,gHeatValve)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#VALVE_STATE" }
-String WZ_Heizung_Mode              "WZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gWZHeat,WZ,gHeatMode)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#CONTROL_MODE" }
+Number WZ_Heizung_ActTemp           "WZ_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gWZHeat,gWZ,gHeatAct)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#ACTUAL_TEMPERATURE" }
+Number WZ_Heizung_SetTemp           "WZ_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gWZHeat,gWZ,gHeatSet)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#SET_TEMPERATURE" }
+Number WZ_Heizung_Valve             "WZ_Heizung Ventilstellung [%d %%]"                         <heating>       (gWZHeat,gWZ,gHeatValve)    { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#VALVE_STATE" }
+String WZ_Heizung_Mode              "WZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gWZHeat,gWZ,gHeatMode)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#CONTROL_MODE" }
 Switch WZ_Heizung_Auto              "WZ_Heizung Auto-Mode"                                      <temperature>   (gWZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#AUTO_MODE" }
 Number WZ_Heizung_Manu              "WZ_Heizung Manu-Mode [%.1f °C]"                            <"heating-40">  (gWZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#MANU_MODE" }
 Switch WZ_Heizung_BoostMode         "WZ_Heizung Boost-Mode"                                     <fire>          (gWZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BOOST_MODE" }
 Number WZ_Heizung_BoostTime         "WZ_Heizung Boost-Restdauer [%d min]"                       <"clock-on">    (gWZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BOOST_STATE" }
-Switch WZ_Heizung_WindowMode        "WZ_Heizung Fensterabsenkung"                               <window>        (gWZHeat,WZ,gHeatWiMo)
+Switch WZ_Heizung_WindowMode        "WZ_Heizung Fensterabsenkung"                               <window>        (gWZHeat,gWZ,gHeatWiMo)
 Number WZ_Heizung_Preset            "WZ_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gWZHeat)
 Number WZ_Heizung_PresetTemp        "WZ_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gWZHeat,gHeatPreset)
-String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gWZHeat,WZ)
+String WZ_Heizung_Summary           "WZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gWZHeat,gWZ)
 
 Number FK_Heizung_RSSI              "FK_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gFKHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:0#RSSI_DEVICE" }
 Switch FK_Heizung_Unreach           "FK_Heizung unreachable"                                    <siren>         (gFKHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:0#UNREACH" }
 Switch FK_Heizung_Pending           "FK_Heizung config pending"                                 <siren>         (gFKHeat,gPending)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:0#CONFIG_PENDING" }
 Number FK_Heizung_Battery           "FK_Heizung Batteriezustand [%.1f V]"                       <"battery-100"> (gFKHeat,gBattery)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#BATTERY_STATE" }
 String FK_Heizung_Fault             "FK_Heizung Fehlerwert [MAP(HM-CC-RT-DN.map):%s]"           <error2>        (gFKHeat,gError)            { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#FAULT_REPORTING" }
-Number FK_Heizung_ActTemp           "FK_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gFKHeat,FK,gHeatAct)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#ACTUAL_TEMPERATURE" }
-Number FK_Heizung_SetTemp           "FK_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gFKHeat,FK,gHeatSet)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#SET_TEMPERATURE" }
-Number FK_Heizung_Valve             "FK_Heizung Ventilstellung [%d %%]"                         <heating>       (gFKHeat,FK,gHeatValve)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#VALVE_STATE" }
-String FK_Heizung_Mode              "FK_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gFKHeat,FK,gHeatMode)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#CONTROL_MODE" }
+Number FK_Heizung_ActTemp           "FK_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gFKHeat,gFK,gHeatAct)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#ACTUAL_TEMPERATURE" }
+Number FK_Heizung_SetTemp           "FK_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gFKHeat,gFK,gHeatSet)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#SET_TEMPERATURE" }
+Number FK_Heizung_Valve             "FK_Heizung Ventilstellung [%d %%]"                         <heating>       (gFKHeat,gFK,gHeatValve)    { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#VALVE_STATE" }
+String FK_Heizung_Mode              "FK_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gFKHeat,gFK,gHeatMode)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#CONTROL_MODE" }
 Switch FK_Heizung_Auto              "FK_Heizung Auto-Mode"                                      <temperature>   (gFKHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#AUTO_MODE" }
 Number FK_Heizung_Manu              "FK_Heizung Manu-Mode [%.1f °C]"                            <"heating-40">  (gFKHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#MANU_MODE" }
 Switch FK_Heizung_BoostMode         "FK_Heizung Boost-Mode"                                     <fire>          (gFKHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#BOOST_MODE" }
 Number FK_Heizung_BoostTime         "FK_Heizung Boost-Restdauer [%d min]"                       <"clock-on">    (gFKHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0857855:4#BOOST_STATE" }
-Switch FK_Heizung_WindowMode        "FK_Heizung Fensterabsenkung"                               <window>        (gFKHeat,FK,gHeatWiMo)
+Switch FK_Heizung_WindowMode        "FK_Heizung Fensterabsenkung"                               <window>        (gFKHeat,gFK,gHeatWiMo)
 Number FK_Heizung_Preset            "FK_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gFKHeat)
 Number FK_Heizung_PresetTemp        "FK_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gFKHeat,gHeatPreset)
-String FK_Heizung_Summary           "FK_Heizung Übersicht [%s]"                                 <thermometer_red> (gFKHeat,FK)
+String FK_Heizung_Summary           "FK_Heizung Übersicht [%s]"                                 <thermometer_red> (gFKHeat,gFK)
 
 Number SZ_Heizung_RSSI              "SZ_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gSZHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:0#RSSI_DEVICE" }
 Switch SZ_Heizung_Unreach           "SZ_Heizung unreachable"                                    <siren>         (gSZHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:0#UNREACH" }
 Switch SZ_Heizung_Pending           "SZ_Heizung config pending"                                 <siren>         (gSZHeat,gPending)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:0#CONFIG_PENDING" }
 Number SZ_Heizung_Battery           "SZ_Heizung Batteriezustand [%.1f V]"                       <"battery-100"> (gSZHeat,gBattery)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#BATTERY_STATE" }
 String SZ_Heizung_Fault             "SZ_Heizung Fehlerwert [MAP(HM-CC-RT-DN.map):%s]"           <error2>        (gSZHeat,gError)            { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#FAULT_REPORTING" }
-Number SZ_Heizung_ActTemp           "SZ_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gSZHeat,SZ,gHeatAct)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#ACTUAL_TEMPERATURE" }
-Number SZ_Heizung_SetTemp           "SZ_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gSZHeat,SZ,gHeatSet)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#SET_TEMPERATURE" }
-Number SZ_Heizung_Valve             "SZ_Heizung Ventilstellung [%d %%]"                         <heating>       (gSZHeat,SZ,gHeatValve)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#VALVE_STATE" }
-String SZ_Heizung_Mode              "SZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gSZHeat,SZ,gHeatMode)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#CONTROL_MODE" }
+Number SZ_Heizung_ActTemp           "SZ_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gSZHeat,gSZ,gHeatAct)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#ACTUAL_TEMPERATURE" }
+Number SZ_Heizung_SetTemp           "SZ_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gSZHeat,gSZ,gHeatSet)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#SET_TEMPERATURE" }
+Number SZ_Heizung_Valve             "SZ_Heizung Ventilstellung [%d %%]"                         <heating>       (gSZHeat,gSZ,gHeatValve)    { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#VALVE_STATE" }
+String SZ_Heizung_Mode              "SZ_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gSZHeat,gSZ,gHeatMode)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#CONTROL_MODE" }
 Switch SZ_Heizung_Auto              "SZ_Heizung Auto-Mode"                                      <temperature>   (gSZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#AUTO_MODE" }
 Number SZ_Heizung_Manu              "SZ_Heizung Manu-Mode [%.1f °C]"                            <"heating-40">  (gSZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#MANU_MODE" }
 Switch SZ_Heizung_BoostMode         "SZ_Heizung Boost-Mode"                                     <fire>          (gSZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#BOOST_MODE" }
 Number SZ_Heizung_BoostTime         "SZ_Heizung Boost-Restdauer [%d min]"                       <"clock-on">    (gSZHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0778898:4#BOOST_STATE" }
-Switch SZ_Heizung_WindowMode        "SZ_Heizung Fensterabsenkung"                               <window>        (gSZHeat,SZ,gHeatWiMo)
+Switch SZ_Heizung_WindowMode        "SZ_Heizung Fensterabsenkung"                               <window>        (gSZHeat,gSZ,gHeatWiMo)
 Number SZ_Heizung_Preset            "SZ_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gSZHeat)
 Number SZ_Heizung_PresetTemp        "SZ_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gSZHeat,gHeatPreset)
-String SZ_Heizung_Summary           "SZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gSZHeat,SZ)
+String SZ_Heizung_Summary           "SZ_Heizung Übersicht [%s]"                                 <thermometer_red> (gSZHeat,gSZ)
 
 Number BD_Heizung_RSSI              "BD_Heizung RSSI [%d dBm]"                                  <"signal-3">    (gBDHeat,gRSSI)             { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:0#RSSI_DEVICE" }
 Switch BD_Heizung_Unreach           "BD_Heizung unreachable"                                    <siren>         (gBDHeat,gUnreach)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:0#UNREACH" }
 Switch BD_Heizung_Pending           "BD_Heizung config pending"                                 <siren>         (gBDHeat,gPending)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:0#CONFIG_PENDING" }
 Number BD_Heizung_Battery           "BD_Heizung Batteriezustand [%.1f V]"                       <"battery-100"> (gBDHeat,gBattery)          { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#BATTERY_STATE" }
 String BD_Heizung_Fault             "BD_Heizung Fehlerwert [MAP(HM-CC-RT-DN.map):%s]"           <error2>        (gBDHeat,gError)            { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#FAULT_REPORTING" }
-Number BD_Heizung_ActTemp           "BD_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gBDHeat,BD,gHeatAct)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#ACTUAL_TEMPERATURE" }
-Number BD_Heizung_SetTemp           "BD_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gBDHeat,BD,gHeatSet)       { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#SET_TEMPERATURE" }
-Number BD_Heizung_Valve             "BD_Heizung Ventilstellung [%d %%]"                         <heating>       (gBDHeat,BD,gHeatValve)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#VALVE_STATE" }
-String BD_Heizung_Mode              "BD_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gBDHeat,BD,gHeatMode)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#CONTROL_MODE" }
+Number BD_Heizung_ActTemp           "BD_Heizung Ist-Temperatur [%.1f °C]"                       <temperature>   (gBDHeat,gBD,gHeatAct)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#ACTUAL_TEMPERATURE" }
+Number BD_Heizung_SetTemp           "BD_Heizung Soll-Temperatur [%.1f °C]"                      <temperature>   (gBDHeat,gBD,gHeatSet)      { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#SET_TEMPERATURE" }
+Number BD_Heizung_Valve             "BD_Heizung Ventilstellung [%d %%]"                         <heating>       (gBDHeat,gBD,gHeatValve)    { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#VALVE_STATE" }
+String BD_Heizung_Mode              "BD_Heizung Betriebsart [MAP(HM-CC-RT-DN.map):%s]"          <"heating-off"> (gBDHeat,gBD,gHeatMode)     { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#CONTROL_MODE" }
 Switch BD_Heizung_Auto              "BD_Heizung Auto-Mode"                                      <temperature>   (gBDHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#AUTO_MODE" }
 Number BD_Heizung_Manu              "BD_Heizung Manu-Mode [%.1f °C]"                            <"heating-40">  (gBDHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#MANU_MODE" }
 Switch BD_Heizung_BoostMode         "BD_Heizung Boost-Mode"                                     <fire>          (gBDHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0851363:4#BOOST_MODE" }
 Number BD_Heizung_BoostTime         "BD_Heizung Boost-Restdauer [%d min]"                       <"clock-on">    (gBDHeat)                   { channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:4#BOOST_STATE" }
-Switch BD_Heizung_WindowMode        "BD_Heizung Fensterabsenkung"                               <window>        (gBDHeat,BD,gHeatWiMo)
+Switch BD_Heizung_WindowMode        "BD_Heizung Fensterabsenkung"                               <window>        (gBDHeat,gBD,gHeatWiMo)
 Number BD_Heizung_Preset            "BD_Heizung Soll-Temperatur Schnellauswahl"                 <"heating-60">  (gBDHeat)
 Number BD_Heizung_PresetTemp        "BD_Heizung Soll-Temperatur Zeitprogramm [%.1f °C]"         <line>          (gBDHeat,gHeatPreset)
-String BD_Heizung_Summary           "BD_Heizung Übersicht [%s]"                                 <thermometer_red> (gBDHeat,BD)
+String BD_Heizung_Summary           "BD_Heizung Übersicht [%s]"                                 <thermometer_red> (gBDHeat,gBD)
 
 // vim: syntax=Xtend

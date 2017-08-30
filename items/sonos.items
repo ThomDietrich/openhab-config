@@ -5,7 +5,7 @@
  *  (S1) UDN uuid:RINCON_B8E937E0539601400
  */
 
-Group  gSonos            "Sonos Soundsystem"  <"speaker-black">  (Whg)
+Group  gSonos            "Sonos Soundsystem"  <"speaker-black">  (gAll)
 
 Group gSonosKitc (gSonos)
 Group gSonosBedr (gSonos)

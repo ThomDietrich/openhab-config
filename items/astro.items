@@ -1,5 +1,5 @@
 
-Group Astro <sun_clouds> (Whg)
+Group Astro <sun_clouds> (gAll)
 
 //
 DateTime    Current_DateTime     "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                       <clock>  (Astro) { channel="ntp:ntp:local:dateTime" }

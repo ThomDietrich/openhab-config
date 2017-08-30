@@ -293,13 +293,13 @@ sitemap w66a label="W66a openHAB Installation" {
             Switch item=Whg_Wartung_Trigger label="Wartungsroutinen" icon="pantry" mappings=[ON="Starten"]
         }
         Text label="Räume" icon="corridor" {
-            Group item=BD label="Bad"
-            Group item=FK label="Flur/Küche"
-            Group item=SZ label="Schlafzimmer"
-            Group item=WZ label="Wohnzimmer"
-            Group item=BK label="Balkon"
+            Group item=gBD label="Bad"
+            Group item=gFK label="Flur/Küche"
+            Group item=gSZ label="Schlafzimmer"
+            Group item=gWZ label="Wohnzimmer"
+            Group item=gBK label="Balkon"
         }
-        Group item=Whg label="Alle Elemente" icon="house"
+        Group item=gAll label="Alle Elemente" icon="house"
     }
 }
 

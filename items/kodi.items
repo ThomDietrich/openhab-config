@@ -1,5 +1,5 @@
 
-Group   gKodi   "Kodi Mediacenter"  <kodi> (Whg)
+Group   gKodi   "Kodi Mediacenter"  <kodi> (gAll)
 
 Switch KodiSystemState      "Kodi State"                <kodi>  (gKodi) {xbmc="<[#livingRoom|System.State]"}
 String KodiPlayerState      "Player State [%s]"         <like>  (gKodi) {xbmc="<[#livingRoom|Player.State]"}
