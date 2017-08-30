@@ -10,7 +10,7 @@ Group   BK  "Balkon"            <garden>    (Whg)
 
 // horizontale Gruppen
 Group:Switch:OR(ON, OFF)        gLight      "Komplette Beleuchtung [%d ]"               <light>         (Whg)
-Group:Switch:OR(ON, OFF)        gBattery    "Batteriestände [%d ]"                      <battery>       (Whg)
+Group:NUMBER                    gBattery    "Batteriestände [%d ]"                      <battery>       (Whg)
 Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d ]"                      <contact>       (Whg)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (Whg)
 Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (Whg)
@@ -37,7 +37,7 @@ Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkör
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)
-Number      BD_Deckenlicht_TimerDuration    "Bad Deckenlicht Timer Restzeit [%d min]"                   (BD)
+Number      BD_Deckenlicht_TimerDuration    "Bad Deckenlicht Restzeit [%d min]"                         (BD)
 
 Switch      Wohnungstuer_TimerActive        "Wohnungstür Timer Active"                                  (Whg)
 DateTime    Wohnungstuer_TimerEnd           "Wohnungstür Timer [%1$tH:%1$tM Uhr]"                       (Whg)

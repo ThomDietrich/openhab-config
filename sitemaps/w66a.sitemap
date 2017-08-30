@@ -290,7 +290,7 @@ sitemap w66a label="W66a openHAB Installation" {
             Group item=gPending
             Group item=gError
             Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgradeFW="Upgrade FW"]
-            Switch item=Whg_Wartung_Trigger
+            Switch item=Whg_Wartung_Trigger label="Wartungsroutinen" icon="pantry" mappings=[ON="Starten"]
         }
         Text label="Räume" icon="corridor" {
             Group item=BD label="Bad"
