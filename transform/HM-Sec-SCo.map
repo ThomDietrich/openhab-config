@@ -4,6 +4,7 @@
 NO_ERROR=Kein Fehler
 SABOTAGE=Sabotage am Sensor
 
-// UNSET
+//
 NULL=unbekannt ⁉
+UNDEF=unbekannt ⁉
 -=unbekannt ⁉

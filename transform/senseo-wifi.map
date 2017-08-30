@@ -16,3 +16,8 @@ SENSEO_NOWATER=Kein Wasser verfügbar
 //SenseoWifi boolean
 true=ON
 false=OFF
+
+//
+NULL=unbekannt ⁉
+UNDEF=unbekannt ⁉
+-=unbekannt ⁉

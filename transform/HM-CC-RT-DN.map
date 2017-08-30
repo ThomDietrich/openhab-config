@@ -16,6 +16,7 @@ COMMUNICATION_ERROR=Gerätekommunikation gestört
 LOWBAT=Batteriespannung gering
 VALVE_ERROR_POSITION=Ventil in Fehlerposition
 
-// UNSET
+//
 NULL=unbekannt ⁉
+UNDEF=unbekannt ⁉
 -=unbekannt ⁉
