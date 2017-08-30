@@ -29,11 +29,11 @@ rule "PC Sound System Control"
 when
     Item PresencePC changed
 then
-    //logInfo(filename, "PC Speaker switch power")
-    if (PresencePC.state == OFF && WZ_SoundSystem_PowerHigh.state == ON) {
+    logInfo(filename, "PC Speaker switch power " + PresencePC.state + WZ_SoundSystem_PowerHigh.state + WZ_SoundSystem_Power.state)
+    if (PresencePC.state == OFF && (WZ_SoundSystem_PowerHigh.state == ON || WZ_SoundSystem_Power.state > 5)) {
         WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
-    else if (PresencePC.state == ON && WZ_SoundSystem_PowerHigh.state == OFF) {
+    else if (PresencePC.state == ON && (WZ_SoundSystem_PowerHigh.state == OFF || WZ_SoundSystem_Power.state < 5)) {
         WZ_zMote_sendkey.sendCommand("KEY_POWER")
     }
     
