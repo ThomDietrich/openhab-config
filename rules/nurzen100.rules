@@ -3,18 +3,18 @@ val String filename = "nurzen100.rules"
 
 // Timer für das automatische Ausschalten
 var Timer hold_timer = null
+var int irene_timer_seconds = 60
 
 rule "Sonoff Touch Vorbau"
 when
     Item N100_Hoflicht_Vorbau_Button received update
-then 
-    
+then
     switch (N100_Hoflicht_Vorbau_Button.state) {
         case "OFF" : {
             //N100_Hoflicht_Vorbau.sendCommand(OFF)
             N100_Hoflicht_Scheune.sendCommand(OFF)
             N100_Hoflicht_Pferdestall.sendCommand(OFF)
-            N100_Hoflicht_Irene_Status.postUpdate(OFF)
+            //N100_Hoflicht_Irene_Status.postUpdate(OFF)
          }
         case "ON" : {
             //N100_Hoflicht_Vorbau.sendCommand(ON)
@@ -22,28 +22,38 @@ then
         case "TOGGLE" : {
             //N100_Hoflicht_Vorbau.sendCommand(ON)
             N100_Hoflicht_Irene_Relay.sendCommand(ON)
-            createTimer(now.plusSeconds(6*60)) [ |
+            createTimer(now.plusSeconds(irene_timer_seconds)) [ |
                 N100_Hoflicht_Vorbau.sendCommand(OFF)
-                N100_Hoflicht_Irene_Status.postUpdate(OFF)
+                //N100_Hoflicht_Irene_Status.postUpdate(OFF)
             ]
         }
         case "HOLD" : {
-            //logInfo(filename, "N100 Vorbau Touch Button: HOLD")
             N100_Hoflicht_Vorbau.sendCommand(ON)
             N100_Hoflicht_Scheune.sendCommand(ON)
             N100_Hoflicht_Pferdestall.sendCommand(ON)
-
-            /*hold_timer = createTimer(now.plusSeconds(3*60)) [|
-                if (hold_timer != null) {
-                    hold_timer.cancel
-                    hold_timer = null
-                    logInfo(filename, "N100 Vorbau Touch Hold Timer abgelaufen, Hoflicht aus.")
-                    N100_Hoflicht_Vorbau.sendCommand(OFF)
-                    N100_Hoflicht_Scheune.sendCommand(OFF)
-                    N100_Hoflicht_Pferdestall.sendCommand(OFF)
-                }
-            ]*/
-
         }
     }
+end
+
+rule "Sonoff Touch Vorbau"
+when
+    Item N100_Hoflicht_Irene_Status changed
+then
+    if (N100_Hoflicht_Irene_Status.state == ON ) {
+        if (N100_Hoflicht_Vorbau.state == OFF) {
+            N100_Hoflicht_Vorbau.sendCommand(ON)
+            createTimer(now.plusSeconds(irene_timer_seconds)) [ |
+                N100_Hoflicht_Vorbau.sendCommand(OFF)
+                //N100_Hoflicht_Irene_Status.postUpdate(OFF)
+            ]
+        }
+    }
+    N100_Hoflicht_Irene.postUpdate(N100_Hoflicht_Irene_Status.state)
+end
+
+rule "Sonoff Touch Vorbau"
+when
+    Item N100_Hoflicht_Irene received command
+then
+    if (receivedCommand == ON ) N100_Hoflicht_Irene_Relay.sendCommand(ON)
 end
