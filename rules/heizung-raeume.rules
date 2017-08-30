@@ -57,9 +57,6 @@ then
         if (FK_Heizung_Fault.state == NULL) FK_Heizung_Fault.postUpdate("NO_FAULT")
         if (SZ_Heizung_Fault.state == NULL) SZ_Heizung_Fault.postUpdate("NO_FAULT")
         if (BD_Heizung_Fault.state == NULL) BD_Heizung_Fault.postUpdate("NO_FAULT")
-        gUnreach.members.forEach(item |
-            if (item.state == NULL) item.postUpdate(OFF)
-        )
     ]
 end
 
