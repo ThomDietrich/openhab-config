@@ -15,7 +15,7 @@ when
 then
     createTimer(now.plusSeconds(170)) [|
         if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
-    if (FK_Spuelmaschine_OpState == NULL) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+        if (FK_Spuelmaschine_OpState == NULL) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     ]
 end
 

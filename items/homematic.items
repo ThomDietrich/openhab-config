@@ -228,6 +228,6 @@ Switch Keychain_Unreach             "Schlüsselanhänger unreachable"           
 Switch Keychain_Pending             "Schlüsselanhänger config pending"          <siren>     (gW,gPending)     {channel="homematic:HG-HM-RC-Sec4-2:ccu:LEQ0496553:0#CONFIG_PENDING"}
 
 //GATEWAY-EXTRAS
-Switch Reload_Datapoints            "Reload Datapoints"                                     (gAll)            {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_ALL_FROM_GATEWAY"}
-Switch Reload_RSSI                  "Reload RSSI"                                           (gAll)            {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_RSSI"}
+Switch Homematic_Reload_Datapoints  "Reload Datapoints"                                     (gAll)            {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_ALL_FROM_GATEWAY"}
+Switch Homematic_Reload_RSSI        "Reload RSSI"                                           (gAll)            {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_RSSI"}
 

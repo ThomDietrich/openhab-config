@@ -1,6 +1,5 @@
-Thing   network:device:ThOP3    [ hostname="192.168.0.17", port="0", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="true" ]
-Thing   network:device:ThN9     [ hostname="192.168.0.20", port="0", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="true" ]
-//Thing network:device:BirkePC  [ hostname="192.168.0.2", port="554", retry="1", timeout="5000", refresh_interval="60000", use_system_ping="false", dhcplisten="true" ] 
-Thing   network:device:BirkePC  [ hostname="192.168.0.2", port="0", retry="1", timeout="5000", refresh_interval="10000", use_system_ping="true", dhcplisten="true" ] 
+Thing   network:pingdevice:ThOP3    [ hostname="192.168.0.17", retry=1, timeout=5000, refreshInterval=60000 ]
+Thing   network:pingdevice:ThN9     [ hostname="192.168.0.20", retry=1, timeout=5000, refreshInterval=60000 ]
+Thing   network:pingdevice:BirkePC  [ hostname="192.168.0.2",  retry=1, timeout=5000, refreshInterval=10000 ] 
 
 // vim: syntax=Xtend

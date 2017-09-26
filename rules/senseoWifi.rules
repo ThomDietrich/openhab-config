@@ -1,0 +1,21 @@
+
+val String filename = "senseo.rules"
+
+//rule "Senseo: Init"
+//when
+//    System started
+//then
+//    createTimer(now.plusSeconds(190)) [|
+//    ]
+//end
+
+rule "Senseo Fertig: Benachrichtigung"
+when
+    Item FK_Senseo_BrewedSize changed
+then
+    if (FK_Senseo_BrewedSize.state == 1 || FK_Senseo_BrewedSize.state == 2) {
+      pushover("Der Kaffee ist fertig!")
+    }
+end
+
+// vim: syntax=Xtend

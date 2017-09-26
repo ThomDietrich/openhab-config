@@ -3,10 +3,10 @@
 
 // Mi Flora specific groups
 Group gMiFlora "All Mi Flora sensors and elements" (gAll)
-Group gLightIntensity "Mi Flora Sunlight Intensity elements" (gAll, gMiFlora)
-Group gAirTemperature "Mi Flora Air Temperature elements" (gAll, gMiFlora)
-Group gSoilMoisture "Mi Flora Soil Moisture elements" (gAll, gMiFlora)
-Group gSoilConductivity "Mi Flora Soil Conductivity/Fertility elements" (gAll, gMiFlora)
+Group:Number:AVG gLightIntensity "Mi Flora Sunlight Intensity elements" (gAll, gMiFlora)
+Group:Number:AVG gAirTemperature "Mi Flora Air Temperature elements" (gAll, gMiFlora)
+Group:Number:MIN gSoilMoisture "Mi Flora Soil Moisture elements" (gAll, gMiFlora)
+Group:Number:AVG gSoilConductivity "Mi Flora Soil Conductivity/Fertility elements" (gAll, gMiFlora)
 
 // Mi Flora "Goldfruchtpalme" (C4:7C:8D:62:3F:CA)
 Group gWZGoldfruchtpalme "Mi Flora Sensor Goldfruchtpalme" (gMiFlora, gWZ)

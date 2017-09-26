@@ -1,0 +1,7 @@
+
+rule "Time to water plants"
+when
+    Item gSoilMoisture changed
+then
+    gSoilMoisture.members.filter[l | (l.state as Number).intValue < 40].forEach[l | logInfo("xxx", l.name + " sensor has critical moisture level")]
+end

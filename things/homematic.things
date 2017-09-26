@@ -1,4 +1,4 @@
-Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
+Bridge homematic:bridge:ccu "CCU Homegear Bridge" @ "Wohnzimmer" [ gatewayAddress="127.0.0.1" ]
 {
     Thing HG-HM-CC-RT-DN            LEQ0785556   "Heizstellglied" @ "Wohnzimmer"
     Thing HG-HM-CC-RT-DN            LEQ0778898   "Heizstellglied" @ "Schlafzimmer"
@@ -26,7 +26,7 @@ Bridge homematic:bridge:ccu [ gatewayAddress="127.0.0.1" ]
     Thing HG-HM-RC-Sec4-2           LEQ0496553
     Thing HG-HM-LC-Dim1T-Pl-2       KEQ0904112
     Thing HG-HM-TC-IT-WM-W-EU       NEQ0935446
-    //Thing GATEWAY-EXTRAS-CCU        GWE00000000
+    Thing GATEWAY-EXTRAS-CCU        GWE00000000
 }
 
 // vim: syntax=Xtend

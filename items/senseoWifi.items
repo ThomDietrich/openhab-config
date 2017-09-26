@@ -1,15 +1,15 @@
 Group gSenseo "SenseoWifi Maschine" <senseo_machine> (gFK,gAll)
 
-String FK_Senseo_Debug         "SenseoWifi Debug [%s]"        <senseo_tamper>      (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/debug:state:default]" }
-String FK_Senseo_OpState       "SenseoWifi Zustand [%s]"      <senseo_coffeesign>  (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/opState:state:MAP(senseo-wifi.map)]" }
-Switch FK_Senseo_OnOff         "SenseoWifi OnOff"             <onoff_monochrome>   (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/power:state:default], >[broker:homie/senseo-w66a/machine/power/set:command:*:default]" }
-String FK_Senseo_Brew          "SenseoWifi Brew"              <senseo_cup_content> (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/brew:state:default], >[broker:homie/senseo-w66a/machine/brew/set:command:*:default]" }
-Number FK_Senseo_BrewedSize    "SenseoWifi BrewedSize [%d]"   <senseo_brewed_size> (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/brewedSize:state:default]" }
-Switch FK_Senseo_OutOfWater    "SenseoWifi OutOfWater"        <senseo_milkjug>     (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/outOfWater:state:MAP(senseo-wifi.map)]" }
-String FK_Senseo_Recipe        "SenseoWifi Recipe"            <senseo_coffeesign>  (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/recipe:state:default], >[broker:homie/senseo-w66a/machine/recipe/set:command:*:default]" }
-Switch FK_Senseo_CupAvailable  "SenseoWifi Tasse vorh."       <senseo_cup_avail>   (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/cupAvailable:state:MAP(senseo-wifi.map)]" }
-Switch FK_Senseo_CupFull       "SenseoWifi Tasse voll"        <senseo_cup_big>     (gSenseo)          { mqtt="<[broker:homie/senseo-w66a/machine/cupFull:state:MAP(senseo-wifi.map)]" }
-Switch FK_Senseo_Unreach       "SenseoWifi Unreach"           <siren>              (gSenseo,gUnreach) { mqtt="<[broker:homie/senseo-w66a/$online:state:MAP(unreach.map)]" }
+String FK_Senseo_Debug         "SenseoWifi Debug [%s]"        <senseo_tamper>      (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/debug:state:default]", expire="10s"}
+String FK_Senseo_OpState       "SenseoWifi Zustand [%s]"      <senseo_coffeesign>  (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/opState:state:MAP(senseo-wifi.map)]"}
+Switch FK_Senseo_OnOff         "SenseoWifi OnOff"             <onoff_monochrome>   (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/power:state:default], >[broker:homie/senseo-w66a/machine/power/set:command:*:default]"}
+String FK_Senseo_Brew          "SenseoWifi Brew"              <senseo_cup_content> (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/brew:state:default], >[broker:homie/senseo-w66a/machine/brew/set:command:*:default]"}
+Number FK_Senseo_BrewedSize    "SenseoWifi BrewedSize [%d]"   <senseo_brewed_size> (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/brewedSize:state:default]", expire="1s"}
+Switch FK_Senseo_OutOfWater    "SenseoWifi OutOfWater"        <senseo_milkjug>     (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/outOfWater:state:MAP(senseo-wifi.map)]"}
+String FK_Senseo_Recipe        "SenseoWifi Recipe"            <senseo_coffeesign>  (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/recipe:state:default], >[broker:homie/senseo-w66a/machine/recipe/set:command:*:default]"}
+Switch FK_Senseo_CupAvailable  "SenseoWifi Tasse vorh."       <senseo_cup_avail>   (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/cupAvailable:state:MAP(senseo-wifi.map)]"}
+Switch FK_Senseo_CupFull       "SenseoWifi Tasse voll"        <senseo_cup_big>     (gSenseo)          {mqtt="<[broker:homie/senseo-w66a/machine/cupFull:state:MAP(senseo-wifi.map)]"}
+Switch FK_Senseo_Unreach       "SenseoWifi Unreach"           <siren>              (gSenseo,gUnreach) {mqtt="<[broker:homie/senseo-w66a/$online:state:MAP(unreach.map)]"}
 
 String FK_Senseo_Summary       "SenseoWifi [%s]"              <senseo_machine>     (gFK,gSenseo)
 

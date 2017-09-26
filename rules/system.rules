@@ -5,11 +5,12 @@ rule "System started - System"
 when
     System started
 then
-    createTimer(now.plusSeconds(120)) [|
+    createTimer(now.plusSeconds(180)) [|
         logInfo(filename, "System started - System")
         gPower.members.forEach(item |
             if (item.state == NULL) item.postUpdate(0)
         )
+        Homematic_Reload_Datapoints.sendCommand(ON)
     ]
 end
 

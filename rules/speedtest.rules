@@ -19,7 +19,7 @@ when
     Time cron "0 0 * * * ?" or
     Item SpeedtestRerun received command ON
 then
-    logInfo(filename, "--> speedtest executed...")
+    //logInfo(filename, "--> speedtest executed...")
     SpeedtestRunning.postUpdate("Messung läuft...")
 
     // update timestamp for last execution
@@ -45,7 +45,7 @@ then
         SpeedtestResultUp.postUpdate(up)
         SpeedtestSummary.postUpdate(String::format("ᐁ  %.1f Mbit/s  ᐃ %.1f Mbit/s (%.0f ms)", down, up, ping))
         SpeedtestRunning.postUpdate("-")
-        logInfo(filename, "--> speedtest finished.")
+        //logInfo(filename, "--> speedtest finished.")
     } else {
         SpeedtestResultPing.postUpdate(0)
         SpeedtestResultDown.postUpdate(0)

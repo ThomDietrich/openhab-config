@@ -105,9 +105,9 @@ sitemap w66a label="W66a openHAB Installation" {
                 Switch item=SpeedtestRerun mappings=[ON="Start"]
             }
             Frame label="Statistik" { //TODO dokumentieren: icon wird nicht angezeigt
-                //Text label="" icon="speedtest_analytics8"
-                Image label="Speedtest" refresh=60000
-                    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
+                Text label="" icon="speedtest_analytics8"
+                //Image label="Speedtest" refresh=60000
+                //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
         Switch item=WZ_zMote_sendkey label="Logitech Sound System" icon="logitech" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+" ]
@@ -256,8 +256,8 @@ sitemap w66a label="W66a openHAB Installation" {
         Text label="Kühlschrank Temperatur-Sonoff [N/A ✘]" icon="error2" visibility=[FK_KuehlschrankTemp_Unreach != OFF]
         
         //
-        Image label="Temperaturen"
-            url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=4&width=700&height=350&from=now-48h&to=now"
+        //Image label="Temperaturen"
+        //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=4&width=700&height=350&from=now-48h&to=now"
     }
 
     Frame label="Verbraucher" {
@@ -267,10 +267,10 @@ sitemap w66a label="W66a openHAB Installation" {
         Text item=BD_Waschmaschine_OpState label="Waschmaschine [MAP(operation.map):%s]" valuecolor=[1="olive", 2="green", 3="maroon"] visibility=[BD_Waschmaschine_Unreach == OFF]
         Text label="Waschmaschine Strommessmodul [N/A ✘]" icon="error2" visibility=[BD_Waschmaschine_Unreach != OFF]
 
-        Image label="Verbraucher"
-            url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=3&width=700&height=350&from=now-48h&to=now"
-        Image label="Beleuchtung"
-            url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=2&width=700&height=350&from=now-48h&to=now"
+        //Image label="Verbraucher"
+        //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=3&width=700&height=350&from=now-48h&to=now"
+        //Image label="Beleuchtung"
+        //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=2&width=700&height=350&from=now-48h&to=now"
     }
 
     Frame label="Admin" {

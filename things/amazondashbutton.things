@@ -1,0 +1,2 @@
+//Thing amazondashbutton:dashbutton:Despo4 [ macAddress="FC:A6:67:0C:A1:C7", pcapNetworkInterfaceName="eth0", packetInterval=5000 ]
+//Thing amazondashbutton:dashbutton:mayamate [ macAddress="FC:A6:67:96:F8:AE", pcapNetworkInterfaceName="eth0", packetInterval=5000 ]

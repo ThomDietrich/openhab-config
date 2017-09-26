@@ -41,7 +41,7 @@ then
 
         logInfo(filename, "Eddison ein. Timer wird gesetzt")
         willkommen_timer = createTimer(now.plusSeconds(willkommen_timer_minutes * 60)) [|
-            if (willkommen_timer != null) {
+            if (willkommen_timer !== null) {
                 willkommen_timer.cancel
                 willkommen_timer = null
                 Wohnungstuer_TimerActive.postUpdate(OFF)
@@ -68,7 +68,7 @@ rule "Willkommenslicht Timer mit Badlicht loeschen"
 when
     Item BD_Deckenlicht received update
 then
-    if (willkommen_timer != null) {
+    if (willkommen_timer !== null) {
         willkommen_timer.cancel
         willkommen_timer = null
         Wohnungstuer_TimerActive.postUpdate(OFF)

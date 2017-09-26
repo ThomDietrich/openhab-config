@@ -9,9 +9,9 @@ Group   gWZ  "Wohnzimmer"       <video>     (gAll)
 Group   gBK  "Balkon"           <garden>    (gAll)
 
 // horizontale Gruppen
-Group:Switch:OR(ON, OFF)        gLight      "Komplette Beleuchtung [%d ]"               <light>         (gAll)
-Group:NUMBER                    gBattery    "Batteriestände [%d ]"                      <battery>       (gAll)
-Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d ]"                      <contact>       (gAll)
+Group:Switch:OR(ON, OFF)        gLight      "Komplette Beleuchtung [%d]"                <light>         (gAll)
+Group                           gBattery    "Batteriezustände"                          <battery>       (gAll)
+Group:Contact:OR(OPEN, CLOSED)  gWindow     "Offene Fenster [%d]"                       <contact>       (gAll)
 Group:Number:SUM                gPower      "Aktueller Stromverbrauch [%.1f W]"         <energy>        (gAll)
 Group:Number:SUM                gEnergyCnt  "Energiezähler [%.1f Wh]"                   <energy>        (gAll)
 // Wartung / Maintenance
@@ -21,11 +21,10 @@ Group:Number:SUM                gUnreach    "Nicht erreichbare Geräte [%d]"    
 Group:Number:SUM                gPending    "Geräte mit ausstehender Konfig. [%d]"      <siren>         (gMaint)
 Group:Number:SUM                gError      "Geräte mit Fehlerzustand [%d]"             <error2>        (gMaint)
 
-Switch      PresencePC                      "Zustand PC"                                <present>       (gWZ)  { channel="network:device:BirkePC:online" }
-Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (gAll) { channel="network:device:ThOP3:online" }
-Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (gAll) { channel="network:device:ThN9:online" }
+Switch      PresencePC                      "Zustand PC"                                <present>       (gWZ)  { channel="network:pingdevice:BirkePC:online" }
+Switch      PresenceThPhone                 "Anwesenheit ThOP3"                         <present>       (gAll) { channel="network:pingdevice:ThOP3:online" }
+Switch      PresenceThN9                    "Anwesenheit ThN9"                          <present>       (gAll) { channel="network:pingdevice:ThN9:online" }
 
-//Switch    WZ_BirkePC_WakeOnLAN            "BirkePC WakeOnLAN"                                         (gWZ)  { wol="192.168.0.255#‎90:2b:34:33:04:02" }
 Switch      WZ_BirkePC_WakeOnLAN            "BirkePC WakeOnLAN"                                         (gWZ)  { wol="192.168.0.255#90:2b:34:33:04:02" }
 Switch      WZ_BirkePC_Online               "BirkePC WinThing Online"                   <light>         (gWZ)  { mqtt="<[broker:winthing-birke/system/system/online:state:MAP(truefalse.map)]" }
 String      WZ_BirkePC_Command              "BirkePC Command"                           <switch>        (gWZ)

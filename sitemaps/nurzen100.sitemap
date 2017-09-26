@@ -39,5 +39,6 @@ sitemap nurzen100 label="Nurzen100 openHAB Installation" {
         Text item=N100_Pferdestall_Luftdruck label="Luftdruck [%.0f hPa]"
     }
     Frame {
-    Group item=N100 label="(alle Nurzen100 Items)" icon="pantry"
-}}
+        Group item=N100 label="(alle Nurzen100 Items)" icon="pantry"
+    }
+}
