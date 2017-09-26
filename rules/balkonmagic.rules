@@ -5,7 +5,7 @@ rule "Balkonmagic an bei Sonnenuntergang und wenn Anwesend"
 when
   Item Night_Start_Event received update ON
 then
-  if (PresenceThPhone.state == ON) {
+  if (Presence_Th_Phone.state == ON) {
     sendCommand(BK_Balkonmagic, ON)
   }
   logInfo (filename, "eingeschaltet.")

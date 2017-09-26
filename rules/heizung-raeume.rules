@@ -83,11 +83,11 @@ end
 // Heizung Erzeuge Heizkörper Temperatur Zusammenfassung
 rule "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung"
 when
-    Item gHeatAct changed or
-    Item gHeatSet changed or
-    Item gHeatValve changed or
-    Item gHeatMode changed or
-    Item gHeatWiMo changed
+    Item Temperatures changed or
+    Item Heating_TargetTemps changed or
+    Item Heating_ValveSettings changed or
+    Item Heating_OpModes changed or
+    Item Heating_WindowModes changed
 then {
     //logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung")
     WZ_Heizung_Summary.postUpdate(generateSummary.apply(WZ_Heizung_Mode, WZ_Heizung_ActTemp, WZ_Heizung_SetTemp, WZ_Heizung_Valve, WZ_Heizung_WindowMode))

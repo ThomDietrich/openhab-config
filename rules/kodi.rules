@@ -6,48 +6,48 @@ when
     System started
 then
     createTimer(now.plusSeconds(175)) [|
-        //if (KodiTitleShow.state == NULL) KodiTitleShow.postUpdate("")
-        //if (KodiTitle.state == NULL) KodiTitle.postUpdate("")
-        //if (KodiPlayerState.state == NULL) KodiPlayerState.postUpdate("Stop")
-        if (KodiSystemState.state == NULL) KodiSystemState.postUpdate(OFF)
-        if (KodiSummary.state == NULL || KodiSummary.state == "") KodiSummary.postUpdate("(unbekannt) ⁉")
+        //if (Kodi_Title_Show.state == NULL) Kodi_Title_Show.postUpdate("")
+        //if (Kodi_Title.state == NULL) Kodi_Title.postUpdate("")
+        //if (Kodi_Player_State.state == NULL) Kodi_Player_State.postUpdate("Stop")
+        if (Kodi_System_State.state == NULL) Kodi_System_State.postUpdate(OFF)
+        if (Kodi_Summary.state == NULL || Kodi_Summary.state == "") Kodi_Summary.postUpdate("(unbekannt) ⁉")
     ]
 end
 
 rule "Kodi Summary update"
 when
-    Item KodiSystemState changed or
-    Item KodiPlayerState changed or
-    Item KodiTitle changed
+    Item Kodi_System_State changed or
+    Item Kodi_Player_State changed or
+    Item Kodi_Title changed
 then
     //logInfo(filename, "--> Kodi Summary update")
-    if (KodiSystemState.state == NULL || KodiPlayerState.state == NULL || KodiTitle.state == NULL) return
+    if (Kodi_System_State.state == NULL || Kodi_Player_State.state == NULL || Kodi_Title.state == NULL) return
 
-    val String status = if (KodiPlayerState.state == "Play") "⏯" else if (KodiPlayerState.state == "Pause") "⏸" else "⏹"
-    val String title = (KodiTitle.state as StringType).toString
-    val String show = (KodiTitleShow.state as StringType).toString
+    val String status = if (Kodi_Player_State.state == "Play") "⏯" else if (Kodi_Player_State.state == "Pause") "⏸" else "⏹"
+    val String title = (Kodi_Title.state as StringType).toString
+    val String show = (Kodi_Title_Show.state as StringType).toString
 
     var String summary = //
-        if (KodiSystemState.state == OFF)           "nicht aktiv\u2000✘"
-        else if (KodiPlayerState.state == "Stop")   "inaktiv\u2000⏹"
-        else if (KodiTitleShow.state == "")         String::format("%s\u2000%s", title, status)
+        if (Kodi_System_State.state == OFF)           "nicht aktiv\u2000✘"
+        else if (Kodi_Player_State.state == "Stop")   "inaktiv\u2000⏹"
+        else if (Kodi_Title_Show.state == "")         String::format("%s\u2000%s", title, status)
         else                                        String::format("%s: %s\u2000%s", show, title, status)
 
-    KodiSummary.postUpdate(summary)
+    Kodi_Summary.postUpdate(summary)
 end
 
 
 rule "Kodi reset PlayPause controls"
 when
-    Item KodiPlayPause received command
+    Item Kodi_PlayPause received command
 then
     //logInfo(filename, "Kodi reset PlayPause controls")
-    KodiPlayPause.postUpdate(OFF)
+    Kodi_PlayPause.postUpdate(OFF)
 end
 
 rule "Kodi Notification triggered"
 when
-    Item KodiNotificationId received command
+    Item Kodi_NotificationId received command
 then
     //logInfo(filename, "Kodi Notification triggered")
     var String msg = "((empty...))"
@@ -60,20 +60,20 @@ then
         case 6: msg = "Garbage! :O"
     }
 
-    KodiNotificationText.sendCommand(msg)
+    Kodi_NotificationText.sendCommand(msg)
     createTimer(now.plusSeconds(3)) [|
-        //KodiNotificationText.sendCommand("")
-        KodiNotificationId.postUpdate(-1)
+        //Kodi_NotificationText.sendCommand("")
+        Kodi_NotificationId.postUpdate(-1)
     ]
 end
 
 rule "Sound System: Switch between PC input and Sonos input channel"
 when
-    Item KodiPlayerState changed
+    Item Kodi_Player_State changed
 then
     //logInfo(filename, "Sound System: Switch between PC input and Sonos input channel")
-    if (KodiPlayerState.state == "Play") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
-    else if (KodiPlayerState.state == "Stop") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
+    if (Kodi_Player_State.state == "Play") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
+    else if (Kodi_Player_State.state == "Stop") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
 end
 
 // vim: syntax=Xtend

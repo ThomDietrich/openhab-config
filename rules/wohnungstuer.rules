@@ -32,7 +32,7 @@ rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && PresenceThPhone.state == OFF) {
+    if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && Presence_Th_Phone.state == OFF) {
         FK_Edison_Dimmer_Level.sendCommand(70)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
@@ -50,7 +50,7 @@ then
             }
         ]
     } else {
-        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + PresenceThPhone.state)
+        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + Presence_Th_Phone.state)
     }
 end
 
@@ -59,7 +59,7 @@ rule "Wohnungstuer Benachrichtigung"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    if (RuleWhgDoorNotif.state == ON && PresenceThPhone.state == OFF) {
+    if (Rule_WhgDoor_Notification.state == ON && Presence_Th_Phone.state == OFF) {
         pushover("Wohnungstür wurde geöffnet!")
     }
 end

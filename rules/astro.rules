@@ -10,9 +10,9 @@ then
         if (now.isAfter((Sunset_Time.state as DateTimeType).calendar.timeInMillis) ||
             now.isBefore((Sunrise_Time.state as DateTimeType).calendar.timeInMillis)
         ) {
-            postUpdate(Night_State, ON)
+            Night_State.postUpdate(ON)
         } else {
-            postUpdate(Night_State, OFF)
+            Night_State.postUpdate(OFF)
         }
     ]
 end
@@ -22,9 +22,9 @@ when
     Item Sun_Elevation changed
 then
     if (Sun_Elevation.state > 0) {
-        if (Night_State.state != OFF) postUpdate(Night_State, OFF)
+        if (Night_State.state != OFF) Night_State.postUpdate(OFF)
     } else {
-        if (Night_State.state != ON) postUpdate(Night_State, ON)
+        if (Night_State.state != ON) Night_State.postUpdate(ON)
     }
 end
 

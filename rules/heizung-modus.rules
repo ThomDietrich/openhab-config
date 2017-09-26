@@ -29,7 +29,7 @@ then
     createTimer(now.plusSeconds(180)) [ |
         logInfo(filename, "Whg_Heating system started")
         if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("OFF_SUMMER")
-        gHeatPreset.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid) ]
+        Heating_TargetPresets.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid) ]
     ]
 end
 

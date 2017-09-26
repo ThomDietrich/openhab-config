@@ -1,28 +1,28 @@
 
-Group Astro <sun_clouds> (gAll)
+Group Astro <sun_clouds> (W66a)
 
 //
-DateTime    Current_DateTime     "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                       <clock>  (Astro) { channel="ntp:ntp:local:dateTime" }
+DateTime    Current_DateTime     "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                       <clock>  (Astro) {channel="ntp:ntp:local:dateTime"}
 //
-DateTime    Sunset_Time          "Sonnenuntergang [%1$tH:%1$tM Uhr]"                      <sun>    (Astro) { channel="astro:sun:home:set#start" }
-DateTime    Sunrise_Time         "Sonnenaufgang [%1$tH:%1$tM Uhr]"                        <sun>    (Astro) { channel="astro:sun:home:rise#end" }
-DateTime    Evening_Time         "Abend [%1$tH:%1$tM Uhr]"                                         (Astro) { channel="astro:sun:minus90:set#start" }
+DateTime    Sunset_Time          "Sonnenuntergang [%1$tH:%1$tM Uhr]"                      <sun>    (Astro) {channel="astro:sun:home:set#start"}
+DateTime    Sunrise_Time         "Sonnenaufgang [%1$tH:%1$tM Uhr]"                        <sun>    (Astro) {channel="astro:sun:home:rise#end"}
+DateTime    Evening_Time         "Abend [%1$tH:%1$tM Uhr]"                                         (Astro) {channel="astro:sun:minus90:set#start"}
 //
-String      Day_Phase            "Tageszeit [MAP(astro.map):%s]"                                   (Astro) { channel="astro:sun:home:phase#name" }
+String      Day_Phase            "Tageszeit [MAP(astro.map):%s]"                                   (Astro) {channel="astro:sun:home:phase#name"}
 Switch      Night_State          "Nacht"                                                           (Astro)
 //
-String      Season_Name          "Jahreszeit [MAP(astro.map):%s]"                                  (Astro) { channel="astro:sun:home:season#name" }
-String      Zodiac_Sign          "Tierkreiszeichen [MAP(astro.map):%s]"                   <zodiac> (Astro) { channel="astro:sun:home:zodiac#sign" }
-Number      Sun_Elevation        "Sonnenhöhe [%.1f °]"                                    <sun>    (Astro) { channel="astro:sun:home:position#elevation" }
-Number      Moon_Elevation       "Mondhöhe [%.1f °]"                                      <moon>   (Astro) { channel="astro:moon:home:position#elevation" }
-String      Moon_Phase           "Mondphase [MAP(astro.map):%s]"                          <moon>   (Astro) { channel="astro:moon:home:phase#name" }
-DateTime    Moon_Next_Full       "Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon>   (Astro) { channel="astro:moon:home:phase#full" }
-DateTime    Moon_Next_New        "Nächster Neumond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]"  <moon>   (Astro) { channel="astro:moon:home:phase#new" }
+String      Season_Name          "Jahreszeit [MAP(astro.map):%s]"                                  (Astro) {channel="astro:sun:home:season#name"}
+String      Zodiac_Sign          "Tierkreiszeichen [MAP(astro.map):%s]"                   <zodiac> (Astro) {channel="astro:sun:home:zodiac#sign"}
+Number      Sun_Elevation        "Sonnenhöhe [%.1f °]"                                    <sun>    (Astro) {channel="astro:sun:home:position#elevation"}
+Number      Moon_Elevation       "Mondhöhe [%.1f °]"                                      <moon>   (Astro) {channel="astro:moon:home:position#elevation"}
+String      Moon_Phase           "Mondphase [MAP(astro.map):%s]"                          <moon>   (Astro) {channel="astro:moon:home:phase#name"}
+DateTime    Moon_Next_Full       "Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon>   (Astro) {channel="astro:moon:home:phase#full"}
+DateTime    Moon_Next_New        "Nächster Neumond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]"  <moon>   (Astro) {channel="astro:moon:home:phase#new"}
 
 //
-Number      Radiation_Direct     "Direct Radiation"                                                (Astro) { channel="astro:sun:home:radiation#direct" }
-Number      Radiation_Total      "Total Radiation"                                                 (Astro) { channel="astro:sun:home:radiation#total" }
-Number      Radiation_Diffuse    "Diffuse Radiation"                                               (Astro) { channel="astro:sun:home:radiation#diffuse" }
+Number      Radiation_Direct     "Direct Radiation"                                                (Astro) {channel="astro:sun:home:radiation#direct"}
+Number      Radiation_Total      "Total Radiation"                                                 (Astro) {channel="astro:sun:home:radiation#total"}
+Number      Radiation_Diffuse    "Diffuse Radiation"                                               (Astro) {channel="astro:sun:home:radiation#diffuse"}
 
 //
 String      Time_Of_Day          "Current Time of Day [%s]"                                        (Astro)

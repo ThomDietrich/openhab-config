@@ -7,7 +7,7 @@ when
     Item Whg_Wartung_Trigger received command ON
 then
     logInfo(filename, "Wartung - Unreach läuft...")
-    gUnreach.members.forEach(item | {
+    Unreach_Group.members.forEach(item | {
             if (item.state == ON) {
                 logWarn(filename, "Wartung - Unreach FEHLER: " + item.label)
                 pushover(item.label + " Warnung")
@@ -22,10 +22,10 @@ when
     Item Whg_Wartung_Trigger received command ON
 then
     logInfo(filename, "Wartung - Fehler-Items läuft...")
-    gError.members.forEach(item | {
+    Error_Group.members.forEach(item | {
             if (item.state != "NO_FAULT" && item.state != "NO_ERROR") {
                 logWarn(filename, "Wartung - Fehler-Item FEHLER: " + item.label + ": " + item.state)
-                pushover(+ item.label + " (Status " + item.state + ")")
+                pushover(item.label + " (Status " + item.state + ")")
             }
         }
     )
@@ -37,7 +37,7 @@ when
     Item Whg_Wartung_Trigger received command ON
 then
     logInfo(filename, "Wartung - Batterien läuft...")
-    gBattery.members.forEach(item | {
+    Batteries.members.forEach(item | {
             //logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
             if (item.type == "Number") {
 		if (item.state <= 2.6) {

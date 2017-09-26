@@ -1,10 +1,10 @@
 
-Group:Number:AVG Temperatures <heating>
-Number Demo_LivingroomTemperature "Livingroom [21.0 °C]" <temperature> (Temperatures)
-Number Demo_BedroomTemperature "Bedroom [19.5 °C]" <temperature> (Temperatures)
-Number Demo_KitchenTemperature "Kitchen [20.3 °C]" <temperature> (Temperatures)
+Group:Number:AVG Temperatures_Test <heating>
+Number Demo_LivingroomTemperature "Livingroom [21.0 °C]" <temperature> (Temperatures_Test)
+Number Demo_BedroomTemperature "Bedroom [19.5 °C]" <temperature> (Temperatures_Test)
+Number Demo_KitchenTemperature "Kitchen [20.3 °C]" <temperature> (Temperatures_Test)
 
-Number Demo_TV_Channel
-Color Demo_Color
+Number Demo_TV_Channel (Temperatures_Test)
+Color Demo_Color (Temperatures_Test)
 
 // vim: syntax=Xtend

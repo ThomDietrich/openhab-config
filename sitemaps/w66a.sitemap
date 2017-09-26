@@ -38,13 +38,13 @@ sitemap w66a label="W66a openHAB Installation" {
                 Text label="kommt später..." icon="sun_clouds"
             }
         }
-        Text item=PresencePC label="PC [MAP(active.map):%s]" icon="pc_silverstone_gd06" {
+        Text item=Presence_PC label="PC [MAP(active.map):%s]" icon="pc_silverstone_gd06" {
             Switch item=WZ_BirkePC_WakeOnLAN label="Command" icon="pc_silverstone_gd06" mappings=[ON="Wake Up"]
             Switch item=WZ_BirkePC_Command label="Command" icon="pc_silverstone_gd06" mappings=[sleep="Sleep", shutdown="Shutdown"]
             Switch item=WZ_BirkePC_Command label="Command" icon="pc_silverstone_gd06" mappings=[kodi="Start Kodi", notepad="Notepad"]
         }
-        Text item=PresenceThPhone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
-        Text item=PresenceThN9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
+        Text item=Presence_Th_Phone icon="oneplus3" label="Handy ThOP3 [MAP(presence.map):%s]"
+        Text item=Presence_Th_N9 icon="nexus9" label="Tablet ThN9 [MAP(presence.map):%s]"
 
         Text item=FK_Senseo_OpState icon="senseo_machine" label="SenseoWifi" {
             Frame label="Status" {
@@ -73,20 +73,20 @@ sitemap w66a label="W66a openHAB Installation" {
             }
         }
 
-        Text item=KodiSummary label="Kodi [%s]" icon="kodi" {
+        Text item=Kodi_Summary label="Kodi [%s]" icon="kodi" {
             Frame label="Status" {
-                Text item=KodiSystemState label="Kodi [MAP(active.map):%s]"
-                Text item=KodiPlayerState label="Player [%s]"
-                Text item=KodiTitleShow label="Serientitel [%s]" visibility=[KodiTitleShow != ""]
-                Text item=KodiTitle label="Episodentitel [%s]" visibility=[KodiTitleShow != ""]
-                Text item=KodiTitle label="Titel [%s]" visibility=[KodiTitleShow == ""]
+                Text item=Kodi_System_State label="Kodi [MAP(active.map):%s]"
+                Text item=Kodi_Player_State label="Player [%s]"
+                Text item=Kodi_Title_Show label="Serientitel [%s]" visibility=[Kodi_Title_Show != ""]
+                Text item=Kodi_Title label="Episodentitel [%s]" visibility=[Kodi_Title_Show != ""]
+                Text item=Kodi_Title label="Titel [%s]" visibility=[Kodi_Title_Show == ""]
             }
-            Frame label="Steuerung" visibility=[KodiPlayerState != "Stop"] {
-                Switch item=KodiPlayPause mappings=[ON="Play/Pause"]
-                Switch item=KodiStop label="Stop" mappings=[ON="Stop"]
+            Frame label="Steuerung" visibility=[Kodi_Player_State != "Stop"] {
+                Switch item=Kodi_PlayPause mappings=[ON="Play/Pause"]
+                Switch item=Kodi_Stop label="Stop" mappings=[ON="Stop"]
             }
-            Frame label="Einblendung" visibility=[KodiPlayerState != "Stop"]{
-                Selection item=KodiNotificationId icon="" label="Nachricht einblenden..."
+            Frame label="Einblendung" visibility=[Kodi_Player_State != "Stop"]{
+                Selection item=Kodi_NotificationId icon="" label="Nachricht einblenden..."
                     mappings=[0="Klick mich!", 1="Hello! :)", 2="Stop being lazy!", 3="Go to bed! :P",
                         4="I love this show!!!", 5="Meh.", 6="Garbage! :O"]
             }
@@ -117,9 +117,9 @@ sitemap w66a label="W66a openHAB Installation" {
             "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="Sonos"
         ]
     }
-    Frame  item=gLight label="Beleuchtung [Aktiv: %d]" {
+    Frame  item=Lights label="Beleuchtung [Aktiv: %d]" {
         Switch item=Whg_Light_Preset icon="light" label="[]" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
-        //Text item=gLight
+        //Text item=Lights
         //
         Switch item=BK_Balkonmagic visibility=[BK_Balkonmagic_Unreach == OFF]
         Text   item=BK_Balkonmagic visibility=[BK_Balkonmagic_Unreach != OFF] icon="error2" label="Balkonmagic [N/A ✘]"
@@ -275,31 +275,31 @@ sitemap w66a label="W66a openHAB Installation" {
 
     Frame label="Admin" {
         Text label="Optionen" icon="settings" {
-            Switch item=RuleWhgDoorNotif
+            Switch item=Rule_WhgDoor_Notification
         }
         Text label="Status" icon="chart" {
-            Group item=gRSSI
-            Group item=gPower
-            Group item=gHeat
-            Group item=gHeatAct
-            Group item=gHeatValve valuecolor=[0="green"]
-            Group item=gWindow valuecolor=[0="green"]
-            Group item=gBattery valuecolor=[0="green"]
-            Group item=gLight
-            Group item=gUnreach
-            Group item=gPending
-            Group item=gError
+            Group item=RSSI_Group
+            Group item=Wattages
+            Group item=Heating_Group
+            Group item=Temperatures
+            Group item=Heating_ValveSettings valuecolor=[0="green"]
+            Group item=Windows valuecolor=[0="green"]
+            Group item=Batteries valuecolor=[0="green"]
+            Group item=Lights
+            Group item=Unreach_Group
+            Group item=Pending_Group
+            Group item=Error_Group
             Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgradeFW="Upgrade FW"]
             Switch item=Whg_Wartung_Trigger label="Wartungsroutinen" icon="pantry" mappings=[ON="Starten"]
         }
         Text label="Räume" icon="corridor" {
-            Group item=gBD label="Bad"
-            Group item=gFK label="Flur/Küche"
-            Group item=gSZ label="Schlafzimmer"
-            Group item=gWZ label="Wohnzimmer"
-            Group item=gBK label="Balkon"
+            Group item=BD label="Bad"
+            Group item=FK label="Flur/Küche"
+            Group item=SZ label="Schlafzimmer"
+            Group item=WZ label="Wohnzimmer"
+            Group item=BK label="Balkon"
         }
-        Group item=gAll label="Alle Elemente" icon="house"
+        Group item=W66a label="Alle Elemente" icon="house"
     }
 }
 

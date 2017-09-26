@@ -5,13 +5,13 @@ Strategies {
 }
 
 Items {
-    gHeatAct*, gHeatSet*, gHeatValve*, gHeatPreset*                        : strategy = everyChange, everyHour
+    Temperatures*, Heating_TargetTemps*, Heating_ValveSettings*, Heating_TargetPresets* : strategy = everyChange, everyHour
     gLightIntensity*, gSoilConductivity*, gSoilMoisture*, gAirTemperature* : strategy = everyChange, everyHour
     BK_Balkonmagic_Aussentemp                                              : strategy = everyChange, everyHour
     KU_KuehlschrankTemp_Gefrier, KU_KuehlschrankTemp_Kuehl                 : strategy = everyChange, everyHour
-    gPower*                                                                : strategy = everyChange, everyHour
-    gBattery*                                                              : strategy = everyChange, everyDay
-    gRSSI*                                                                 : strategy = everyChange
+    Wattages*                                                              : strategy = everyChange, everyHour
+    Batteries*                                                             : strategy = everyChange, everyDay
+    RSSI_Group*                                                            : strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing            : strategy = everyChange
     Presence_ThN5                                                          : strategy = everyChange
     FK_Senseo_BrewedSize                                                   : strategy = everyChange

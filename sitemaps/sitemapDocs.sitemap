@@ -39,7 +39,7 @@ sitemap demo label="My home automation" {
     //    Chart item=Demo_KitchenTemperature label="Test" period=h refresh=600
     //}
     Frame {
-        Group item=gHeatAct label="Room Temperatures [%.1f °C]"
+        Group item=Temperatures label="Room Temperatures [%.1f °C]"
     }
     Frame {
         Image url="https://raw.githubusercontent.com/wiki/openhab/openhab/images/features.png"

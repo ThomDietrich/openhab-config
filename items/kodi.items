@@ -1,18 +1,18 @@
 
-Group   gKodi   "Kodi Mediacenter"  <kodi> (gAll)
+Group  Kodi_Group "Kodi Mediacenter" <kodi> (W66a)
 
-Switch KodiSystemState      "Kodi State"                <kodi>  (gKodi) {xbmc="<[#livingRoom|System.State]"}
-String KodiPlayerState      "Player State [%s]"         <like>  (gKodi) {xbmc="<[#livingRoom|Player.State]"}
-Switch KodiPlayPause        "Play/Pause"                        (gKodi) {xbmc=">[#livingRoom|Player.PlayPause]", autoupdate="false"}
-Switch KodiStop             "Stop"                              (gKodi) {xbmc=">[#livingRoom|Player.Stop]", autoupdate="false"}
-String KodiTitle            "Episode/Movie Title [%s]"          (gKodi) {xbmc="<[#livingRoom|Player.Title]"}
-String KodiTitleShow        "Show Title [%s]"                   (gKodi) {xbmc="<[#livingRoom|Player.ShowTitle]"}
-//String KodiPlayerType     "Type [%s]"                         (gKodi) {xbmc="<[#livingRoom|Player.Type]"}
-//String KodiPlayerArtist   "Artist [%s]"                       (gKodi) {xbmc="<[#livingRoom|Player.Artist]"}
-//String KodiPlayerAlbum    "Album [%s]"                        (gKodi) {xbmc="<[#livingRoom|Player.Album]"}
-//String KodiPlayerLabel    "Label [%s]"                        (gKodi) {xbmc="<[#livingRoom|Player.Label]"}
-String KodiNotificationText "Notification [%s]"                 (gKodi) {xbmc=">[#livingRoom|GUI.ShowNotification]", autoupdate="false"}
-Number KodiNotificationId   "Trigger Notification"              (gKodi)
-String KodiSummary          "Summary [%s]"                      (gKodi)
+Switch Kodi_System_State      "Kodi State"                <kodi>  (Kodi_Group) {xbmc="<[#livingRoom|System.State]"}
+String Kodi_Player_State      "Player State [%s]"         <like>  (Kodi_Group) {xbmc="<[#livingRoom|Player.State]"}
+Switch Kodi_PlayPause         "Play/Pause"                        (Kodi_Group) {xbmc=">[#livingRoom|Player.PlayPause]", autoupdate="false"}
+Switch Kodi_Stop              "Stop"                              (Kodi_Group) {xbmc=">[#livingRoom|Player.Stop]", autoupdate="false"}
+String Kodi_Title             "Episode/Movie Title [%s]"          (Kodi_Group) {xbmc="<[#livingRoom|Player.Title]"}
+String Kodi_Title_Show        "Show Title [%s]"                   (Kodi_Group) {xbmc="<[#livingRoom|Player.ShowTitle]"}
+//String Kodi_Player_Type     "Type [%s]"                         (Kodi_Group) {xbmc="<[#livingRoom|Player.Type]"}
+//String Kodi_Player_Artist   "Artist [%s]"                       (Kodi_Group) {xbmc="<[#livingRoom|Player.Artist]"}
+//String Kodi_Player_Album    "Album [%s]"                        (Kodi_Group) {xbmc="<[#livingRoom|Player.Album]"}
+//String Kodi_Player_Label    "Label [%s]"                        (Kodi_Group) {xbmc="<[#livingRoom|Player.Label]"}
+String Kodi_NotificationText  "Notification [%s]"                 (Kodi_Group) {xbmc=">[#livingRoom|GUI.ShowNotification]", autoupdate="false"}
+Number Kodi_NotificationId    "Trigger Notification"              (Kodi_Group)
+String Kodi_Summary           "Summary [%s]"                      (Kodi_Group)
 
 // vim: syntax=Xtend
