@@ -19,11 +19,9 @@ when
     Time cron "0 * * * * ?"
 then
     if (Wohnungstuer_TimerActive.state == ON) {
-        //logInfo(filename, "updating timer duration")
         var DateTime timeEnd = new DateTime((Wohnungstuer_TimerEnd.state as DateTimeType).calendar.timeInMillis)
-        //logInfo(filename, "Deadline: " + timeEnd)
         var Number timeDuration = ((((timeEnd.millis - now.millis) / 1000) + 30) / 60).intValue()
-        //logInfo(filename, "Duration: " + timeDuration)
+        logInfo(filename, "Duration: " + timeDuration)
         Wohnungstuer_TimerDuration.postUpdate(timeDuration)
     }
 end
@@ -32,8 +30,11 @@ rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && Presence_Th_Phone.state == OFF) {
+    if (Night_State.state == OFF || FK_Edison_Dimmer_Level.state !== 0 || Presence_Th_Phone.state == ON) {
+        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + Presence_Th_Phone.state)
+    } else {
         FK_Edison_Dimmer_Level.sendCommand(70)
+        FK_Sonos_Control.sendCommand(PLAY)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
         Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
@@ -47,10 +48,9 @@ then
                 Wohnungstuer_TimerActive.postUpdate(OFF)
                 logInfo (filename, "Timer abgelaufen, Eddison aus.")
                 sendCommand(FK_Edison_Dimmer_Level, 0)
+                FK_Sonos_Control.sendCommand(PAUSE)
             }
         ]
-    } else {
-        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + Presence_Th_Phone.state)
     }
 end
 
