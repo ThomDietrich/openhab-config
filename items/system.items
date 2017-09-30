@@ -11,10 +11,13 @@ Group   BK  "Balkon"           <garden>    (W66a)
 // horizontale Gruppen
 Group:Switch:OR(ON, OFF)        Lights           "Komplette Beleuchtung [%d]"           <light>         (W66a)
 Group:Number:AVG                Temperatures     "Raumtemperaturen [%.1f °C]"           <temperature>   (W66a)
-Group                           Batteries        "Batteriezustände"                     <battery>       (W66a)
 Group:Contact:OR(OPEN, CLOSED)  Windows          "Offene Fenster [%d]"                  <contact>       (W66a)
 Group:Number:SUM                Wattages         "Aktueller Stromverbrauch [%.1f W]"    <energy>        (W66a)
 Group:Number:SUM                EnergyCons       "Energiezähler [%.1f Wh]"              <energy>        (W66a)
+Group                           Batteries        "Batteriezustände"                     <battery>       (W66a)
+Group:Number:SUM                Bat_Binary       "Batteriezustände (Binary) [%d]"       <battery>       (Batteries)
+Group:Number:MIN                Bat_Percent      "Batteriezustände (%) [%d %%]"         <battery>       (Batteries)
+Group:Number:MIN                Bat_Volts        "Batteriezustände (Volt) [%.1f V]"     <battery>       (Batteries)
 
 // Wartung / Maintenance
 Group:Number:MIN                RSSI_Group       "RSSI aller Geräte [%d dBm]"           <line>          (W66a)
@@ -43,10 +46,11 @@ Switch      Wohnungstuer_TimerActive        "Wohnungstür Timer Active"         
 DateTime    Wohnungstuer_TimerEnd           "Wohnungstür Timer [%1$tH:%1$tM Uhr]"                       (W66a)
 Number      Wohnungstuer_TimerDuration      "Wohnungstür Timer Restzeit [%d min]"                       (W66a)
 
+Switch      Rule_BD_Door_Light              "Automatisches Bad Licht"                                   (W66a)
 Switch      Rule_WhgDoor_Notification       "Wohnungstür Benachr."                                      (W66a)
 
-Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d ]"       <washingmach>   (W66a)
-Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d ]"        <dishwasher>    (W66a)
+Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d]"       <washingmach>   (W66a)
+Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d]"        <dishwasher>    (W66a)
 
 Switch      Whg_Wartung_Trigger             "Wartungsroutinen auslösen"                                 (W66a) {expire="5s"}
 

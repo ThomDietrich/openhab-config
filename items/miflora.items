@@ -9,57 +9,57 @@ Group:Number:MIN gSoilMoisture "Mi Flora Soil Moisture elements" (gMiFlora)
 Group:Number:AVG gSoilConductivity "Mi Flora Soil Conductivity/Fertility elements" (gMiFlora)
 
 // Mi Flora "Goldfruchtpalme" (C4:7C:8D:62:3F:CA)
-Group gWZGoldfruchtpalme "Mi Flora Sensor Goldfruchtpalme" (gMiFlora, WZ)
-Number WZ_Goldfruchtpalme_LightIntensity "WZ Goldfruchtpalme Sunlight Intensity [%d lux]" <text> (gWZGoldfruchtpalme, gLightIntensity) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.light)]"}
-Number WZ_Goldfruchtpalme_AirTemperature "WZ Goldfruchtpalme Air Temperature [%.1f °C]" <text> (gWZGoldfruchtpalme, gAirTemperature) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.temperature)]"}
-Number WZ_Goldfruchtpalme_SoilMoisture "WZ Goldfruchtpalme Soil Moisture [%d %%]" <text> (gWZGoldfruchtpalme, gSoilMoisture) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.moisture)]"}
-Number WZ_Goldfruchtpalme_SoilConductivity "WZ Goldfruchtpalme Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZGoldfruchtpalme, gSoilConductivity) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.conductivity)]"}
-Number WZ_Goldfruchtpalme_Battery "WZ Goldfruchtpalme Sensor Battery Level [%d %%]" <text> (gWZGoldfruchtpalme, Batteries) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.battery)]"}
+Group gWZGoldfruchtpalme "Mi Flora Sensor Goldfruchtpalme" (gMiFlora,WZ)
+Number WZ_Goldfruchtpalme_LightIntensity "WZ Goldfruchtpalme Sunlight Intensity [%d lux]" <text> (gWZGoldfruchtpalme,gLightIntensity) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.light)]"}
+Number WZ_Goldfruchtpalme_AirTemperature "WZ Goldfruchtpalme Air Temperature [%.1f °C]" <text> (gWZGoldfruchtpalme,gAirTemperature) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.temperature)]"}
+Number WZ_Goldfruchtpalme_SoilMoisture "WZ Goldfruchtpalme Soil Moisture [%d %%]" <text> (gWZGoldfruchtpalme,gSoilMoisture) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.moisture)]"}
+Number WZ_Goldfruchtpalme_SoilConductivity "WZ Goldfruchtpalme Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZGoldfruchtpalme,gSoilConductivity) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.conductivity)]"}
+Number WZ_Goldfruchtpalme_Battery "WZ Goldfruchtpalme Sensor Battery Level [%d %%]" <text> (gWZGoldfruchtpalme,Bat_Percent) {mqtt="<[broker:miflora/Goldfruchtpalme:state:JSONPATH($.battery)]"}
 
 // Mi Flora "Tomatenkübel" (C4:7C:8D:62:40:39)
-Group gBKTomatenkuebel "Mi Flora Sensor Tomatenkübel" (gMiFlora, BK)
-Number BK_Tomatenkuebel_LightIntensity "BK Tomatenkübel Sunlight Intensity [%d lux]" <text> (gBKTomatenkuebel, gLightIntensity) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.light)]"}
-Number BK_Tomatenkuebel_AirTemperature "BK Tomatenkübel Air Temperature [%.1f °C]" <text> (gBKTomatenkuebel, gAirTemperature) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.temperature)]"}
-Number BK_Tomatenkuebel_SoilMoisture "BK Tomatenkübel Soil Moisture [%d %%]" <text> (gBKTomatenkuebel, gSoilMoisture) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.moisture)]"}
-Number BK_Tomatenkuebel_SoilConductivity "BK Tomatenkübel Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKTomatenkuebel, gSoilConductivity) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.conductivity)]"}
-Number BK_Tomatenkuebel_Battery "BK Tomatenkübel Sensor Battery Level [%d %%]" <text> (gBKTomatenkuebel, Batteries) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.battery)]"}
+Group gBKTomatenkuebel "Mi Flora Sensor Tomatenkübel" (gMiFlora,BK)
+Number BK_Tomatenkuebel_LightIntensity "BK Tomatenkübel Sunlight Intensity [%d lux]" <text> (gBKTomatenkuebel,gLightIntensity) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.light)]"}
+Number BK_Tomatenkuebel_AirTemperature "BK Tomatenkübel Air Temperature [%.1f °C]" <text> (gBKTomatenkuebel,gAirTemperature) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.temperature)]"}
+Number BK_Tomatenkuebel_SoilMoisture "BK Tomatenkübel Soil Moisture [%d %%]" <text> (gBKTomatenkuebel,gSoilMoisture) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.moisture)]"}
+Number BK_Tomatenkuebel_SoilConductivity "BK Tomatenkübel Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKTomatenkuebel,gSoilConductivity) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.conductivity)]"}
+Number BK_Tomatenkuebel_Battery "BK Tomatenkübel Sensor Battery Level [%d %%]" <text> (gBKTomatenkuebel,Bat_Percent) {mqtt="<[broker:miflora/Tomatenkuebel:state:JSONPATH($.battery)]"}
 
 // Mi Flora "Prunkwinde" (C4:7C:8D:60:DB:A4)
-Group gBKPrunkwinde "Mi Flora Sensor Prunkwinde" (gMiFlora, BK)
-Number BK_Prunkwinde_LightIntensity "BK Prunkwinde Sunlight Intensity [%d lux]" <text> (gBKPrunkwinde, gLightIntensity) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.light)]"}
-Number BK_Prunkwinde_AirTemperature "BK Prunkwinde Air Temperature [%.1f °C]" <text> (gBKPrunkwinde, gAirTemperature) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.temperature)]"}
-Number BK_Prunkwinde_SoilMoisture "BK Prunkwinde Soil Moisture [%d %%]" <text> (gBKPrunkwinde, gSoilMoisture) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.moisture)]"}
-Number BK_Prunkwinde_SoilConductivity "BK Prunkwinde Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKPrunkwinde, gSoilConductivity) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.conductivity)]"}
-Number BK_Prunkwinde_Battery "BK Prunkwinde Sensor Battery Level [%d %%]" <text> (gBKPrunkwinde, Batteries) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.battery)]"}
+Group gBKPrunkwinde "Mi Flora Sensor Prunkwinde" (gMiFlora,BK)
+Number BK_Prunkwinde_LightIntensity "BK Prunkwinde Sunlight Intensity [%d lux]" <text> (gBKPrunkwinde,gLightIntensity) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.light)]"}
+Number BK_Prunkwinde_AirTemperature "BK Prunkwinde Air Temperature [%.1f °C]" <text> (gBKPrunkwinde,gAirTemperature) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.temperature)]"}
+Number BK_Prunkwinde_SoilMoisture "BK Prunkwinde Soil Moisture [%d %%]" <text> (gBKPrunkwinde,gSoilMoisture) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.moisture)]"}
+Number BK_Prunkwinde_SoilConductivity "BK Prunkwinde Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKPrunkwinde,gSoilConductivity) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.conductivity)]"}
+Number BK_Prunkwinde_Battery "BK Prunkwinde Sensor Battery Level [%d %%]" <text> (gBKPrunkwinde,Bat_Percent) {mqtt="<[broker:miflora/Prunkwinde:state:JSONPATH($.battery)]"}
 
 // Mi Flora "Balkonkasten" (C4:7C:8D:62:3A:87)
-Group gBKBalkonkasten "Mi Flora Sensor Balkonkasten" (gMiFlora, BK)
-Number BK_Balkonkasten_LightIntensity "BK Balkonkasten Sunlight Intensity [%d lux]" <text> (gBKBalkonkasten, gLightIntensity) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.light)]"}
-Number BK_Balkonkasten_AirTemperature "BK Balkonkasten Air Temperature [%.1f °C]" <text> (gBKBalkonkasten, gAirTemperature) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.temperature)]"}
-Number BK_Balkonkasten_SoilMoisture "BK Balkonkasten Soil Moisture [%d %%]" <text> (gBKBalkonkasten, gSoilMoisture) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.moisture)]"}
-Number BK_Balkonkasten_SoilConductivity "BK Balkonkasten Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKBalkonkasten, gSoilConductivity) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.conductivity)]"}
-Number BK_Balkonkasten_Battery "BK Balkonkasten Sensor Battery Level [%d %%]" <text> (gBKBalkonkasten, Batteries) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.battery)]"}
+Group gBKBalkonkasten "Mi Flora Sensor Balkonkasten" (gMiFlora,BK)
+Number BK_Balkonkasten_LightIntensity "BK Balkonkasten Sunlight Intensity [%d lux]" <text> (gBKBalkonkasten,gLightIntensity) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.light)]"}
+Number BK_Balkonkasten_AirTemperature "BK Balkonkasten Air Temperature [%.1f °C]" <text> (gBKBalkonkasten,gAirTemperature) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.temperature)]"}
+Number BK_Balkonkasten_SoilMoisture "BK Balkonkasten Soil Moisture [%d %%]" <text> (gBKBalkonkasten,gSoilMoisture) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.moisture)]"}
+Number BK_Balkonkasten_SoilConductivity "BK Balkonkasten Soil Conductivity/Fertility [%d µS/cm]" <text> (gBKBalkonkasten,gSoilConductivity) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.conductivity)]"}
+Number BK_Balkonkasten_Battery "BK Balkonkasten Sensor Battery Level [%d %%]" <text> (gBKBalkonkasten,Bat_Percent) {mqtt="<[broker:miflora/Balkonkasten:state:JSONPATH($.battery)]"}
 
 // Mi Flora "Schefflera" (C4:7C:8D:62:72:48)
-Group gWZSchefflera "Mi Flora Sensor Schefflera" (gMiFlora, WZ)
-Number WZ_Schefflera_LightIntensity "WZ Schefflera Sunlight Intensity [%d lux]" <text> (gWZSchefflera, gLightIntensity) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.light)]"}
-Number WZ_Schefflera_AirTemperature "WZ Schefflera Air Temperature [%.1f °C]" <text> (gWZSchefflera, gAirTemperature) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.temperature)]"}
-Number WZ_Schefflera_SoilMoisture "WZ Schefflera Soil Moisture [%d %%]" <text> (gWZSchefflera, gSoilMoisture) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.moisture)]"}
-Number WZ_Schefflera_SoilConductivity "WZ Schefflera Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZSchefflera, gSoilConductivity) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.conductivity)]"}
-Number WZ_Schefflera_Battery "WZ Schefflera Sensor Battery Level [%d %%]" <text> (gWZSchefflera, Batteries) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.battery)]"}
+Group gWZSchefflera "Mi Flora Sensor Schefflera" (gMiFlora,WZ)
+Number WZ_Schefflera_LightIntensity "WZ Schefflera Sunlight Intensity [%d lux]" <text> (gWZSchefflera,gLightIntensity) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.light)]"}
+Number WZ_Schefflera_AirTemperature "WZ Schefflera Air Temperature [%.1f °C]" <text> (gWZSchefflera,gAirTemperature) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.temperature)]"}
+Number WZ_Schefflera_SoilMoisture "WZ Schefflera Soil Moisture [%d %%]" <text> (gWZSchefflera,gSoilMoisture) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.moisture)]"}
+Number WZ_Schefflera_SoilConductivity "WZ Schefflera Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZSchefflera,gSoilConductivity) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.conductivity)]"}
+Number WZ_Schefflera_Battery "WZ Schefflera Sensor Battery Level [%d %%]" <text> (gWZSchefflera,Bat_Percent) {mqtt="<[broker:miflora/Schefflera:state:JSONPATH($.battery)]"}
 
 // Mi Flora "Palme" (C4:7C:8D:60:DC:E6)
-Group gWZPalme "Mi Flora Sensor Palme" (gMiFlora, WZ)
-Number WZ_Palme_LightIntensity "WZ Palme Sunlight Intensity [%d lux]" <text> (gWZPalme, gLightIntensity) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.light)]"}
-Number WZ_Palme_AirTemperature "WZ Palme Air Temperature [%.1f °C]" <text> (gWZPalme, gAirTemperature) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.temperature)]"}
-Number WZ_Palme_SoilMoisture "WZ Palme Soil Moisture [%d %%]" <text> (gWZPalme, gSoilMoisture) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.moisture)]"}
-Number WZ_Palme_SoilConductivity "WZ Palme Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZPalme, gSoilConductivity) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.conductivity)]"}
-Number WZ_Palme_Battery "WZ Palme Sensor Battery Level [%d %%]" <text> (gWZPalme, Batteries) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.battery)]"}
+Group gWZPalme "Mi Flora Sensor Palme" (gMiFlora,WZ)
+Number WZ_Palme_LightIntensity "WZ Palme Sunlight Intensity [%d lux]" <text> (gWZPalme,gLightIntensity) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.light)]"}
+Number WZ_Palme_AirTemperature "WZ Palme Air Temperature [%.1f °C]" <text> (gWZPalme,gAirTemperature) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.temperature)]"}
+Number WZ_Palme_SoilMoisture "WZ Palme Soil Moisture [%d %%]" <text> (gWZPalme,gSoilMoisture) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.moisture)]"}
+Number WZ_Palme_SoilConductivity "WZ Palme Soil Conductivity/Fertility [%d µS/cm]" <text> (gWZPalme,gSoilConductivity) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.conductivity)]"}
+Number WZ_Palme_Battery "WZ Palme Sensor Battery Level [%d %%]" <text> (gWZPalme,Bat_Percent) {mqtt="<[broker:miflora/Palme:state:JSONPATH($.battery)]"}
 
 // Mi Flora "AloeVera" (C4:7C:8D:60:DD:2D)
-Group gFKAloeVera "Mi Flora Sensor AloeVera" (gMiFlora, FK)
-Number FK_AloeVera_LightIntensity "FK AloeVera Sunlight Intensity [%d lux]" <text> (gFKAloeVera, gLightIntensity) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.light)]"}
-Number FK_AloeVera_AirTemperature "FK AloeVera Air Temperature [%.1f °C]" <text> (gFKAloeVera, gAirTemperature) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.temperature)]"}
-Number FK_AloeVera_SoilMoisture "FK AloeVera Soil Moisture [%d %%]" <text> (gFKAloeVera, gSoilMoisture) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.moisture)]"}
-Number FK_AloeVera_SoilConductivity "FK AloeVera Soil Conductivity/Fertility [%d µS/cm]" <text> (gFKAloeVera, gSoilConductivity) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.conductivity)]"}
-Number FK_AloeVera_Battery "FK AloeVera Sensor Battery Level [%d %%]" <text> (gFKAloeVera, Batteries) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.battery)]"}
+Group gFKAloeVera "Mi Flora Sensor AloeVera" (gMiFlora,FK)
+Number FK_AloeVera_LightIntensity "FK AloeVera Sunlight Intensity [%d lux]" <text> (gFKAloeVera,gLightIntensity) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.light)]"}
+Number FK_AloeVera_AirTemperature "FK AloeVera Air Temperature [%.1f °C]" <text> (gFKAloeVera,gAirTemperature) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.temperature)]"}
+Number FK_AloeVera_SoilMoisture "FK AloeVera Soil Moisture [%d %%]" <text> (gFKAloeVera,gSoilMoisture) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.moisture)]"}
+Number FK_AloeVera_SoilConductivity "FK AloeVera Soil Conductivity/Fertility [%d µS/cm]" <text> (gFKAloeVera,gSoilConductivity) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.conductivity)]"}
+Number FK_AloeVera_Battery "FK AloeVera Sensor Battery Level [%d %%]" <text> (gFKAloeVera,Bat_Percent) {mqtt="<[broker:miflora/AloeVera:state:JSONPATH($.battery)]"}

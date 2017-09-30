@@ -63,9 +63,9 @@ then
     //logInfo(filename, "Waschmaschine Überwachung: Verbrauchszuordnung")
     if (FK_Spuelmaschine_Power.state < 0.03) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
-  else if (FK_Spuelmaschine_Power.state < 0.75) {
-    if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
-    else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
+    else if (FK_Spuelmaschine_Power.state < 0.75) {
+        if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
+        else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
     }
 end
 

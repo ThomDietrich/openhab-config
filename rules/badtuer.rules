@@ -38,26 +38,27 @@ rule "Badtür-Automatik: Tuersensor schaltet Deckenlicht"
 when
     Item BD_Tuer_State changed from CLOSED to OPEN
 then
-    logInfo (filename, "Türsensor ausgelöst.")
-    if (Night_State.state == ON) {
-        if (BD_Deckenlicht.state == OFF) {
-            BD_Deckenlicht.sendCommand(ON)
-            badlicht_on_by_rule = true
-            logInfo(filename, "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+    //logInfo (filename, "Türsensor ausgelöst.")
+    if (Rule_BD_Door_Light.state == OFF) return
+    if (Night_State.state == OFF) return
 
+    if (BD_Deckenlicht.state == OFF) {
+        BD_Deckenlicht.sendCommand(ON)
+        badlicht_on_by_rule = true
+        logInfo(filename, "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+
+        var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
+        BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
+        BD_Deckenlicht_TimerActive.postUpdate(ON)
+    } else {
+        if (BD_Deckenlicht_TimerActive.state != ON) {
+            // light not turned on by door sensor -> no timer
+            logInfo(filename, "Deckenlicht bereits an, keine Aktion.")
+        } else {
+            // extend deadline
             var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
             BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
-            BD_Deckenlicht_TimerActive.postUpdate(ON)
-        } else {
-            if (BD_Deckenlicht_TimerActive.state != ON) {
-                // light not turned on by door sensor -> no timer
-                logInfo(filename, "Deckenlicht bereits an, keine Aktion.")
-            } else {
-                // extend deadline
-                var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
-                BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
-                logInfo(filename, "Deckenlicht Timer verlängert.")
-            }
+            logInfo(filename, "Deckenlicht Timer verlängert.")
         }
     }
 end

@@ -8,12 +8,11 @@ when
 then
     logInfo(filename, "Wartung - Unreach läuft...")
     Unreach_Group.members.forEach(item | {
-            if (item.state == ON) {
-                logWarn(filename, "Wartung - Unreach FEHLER: " + item.label)
-                pushover(item.label + " Warnung")
-            }
+        if (item.state == ON) {
+            logWarn(filename, "Wartung - Unreach FEHLER: " + item.label)
+            pushover(item.label + " Warnung")
         }
-    )
+    })
 end
 
 rule "Wartung: Fehler-Items"
@@ -23,12 +22,11 @@ when
 then
     logInfo(filename, "Wartung - Fehler-Items läuft...")
     Error_Group.members.forEach(item | {
-            if (item.state != "NO_FAULT" && item.state != "NO_ERROR") {
-                logWarn(filename, "Wartung - Fehler-Item FEHLER: " + item.label + ": " + item.state)
-                pushover(item.label + " (Status " + item.state + ")")
-            }
+        if (item.state != "NO_FAULT" && item.state != "NO_ERROR") {
+            logWarn(filename, "Wartung - Fehler-Item FEHLER: " + item.label + ": " + item.state)
+            pushover(item.label + " (Status " + item.state + ")")
         }
-    )
+    })
 end
 
 rule "Wartung: Batterien"
@@ -37,20 +35,25 @@ when
     Item Whg_Wartung_Trigger received command ON
 then
     logInfo(filename, "Wartung - Batterien läuft...")
-    Batteries.members.forEach(item | {
-            //logInfo(filename, "Wartung - Batterie " + item.label + " Type(" + item.type + "): " + item.state)
-            if (item.type == "Number") {
-		if (item.state <= 2.6) {
-                    logWarn(filename, "Wartung - Batterie schwach: " + item.label)
-                    pushover(item.label + " schwach (" + item.state + "V)")
-                }
-            }
-            else if (item.type == "Switch") {
-                if (item.state == ON) {
-                    logWarn(filename, "Wartung - Batterie schwach: " + item.label)
-                    pushover(item.label + " schwach")
-                }
-            }
+    Bat_Binary.members.forEach(item | {
+        //logInfo(filename, "Wartung - Batterie (Binary) '" + item.label + "' Type (" + item.type + "): " + item.state)
+        if (item.state == ON) {
+            logWarn(filename, "Wartung - Batterie schwach: " + item.label)
+            pushover(item.label + " schwach")
         }
-    )
+    })
+    Bat_Volts.members.forEach(item | {
+        //logInfo(filename, "Wartung - Batterie (Volts) '" + item.label + "' Type (" + item.type + "): " + item.state)
+        if (item.state <= 2.6) {
+            logWarn(filename, "Wartung - Batterie schwach: " + item.label)
+            pushover(item.label + " schwach (" + item.state + "V)")
+        }
+    })
+    Bat_Percent.members.forEach(item | {
+        //logInfo(filename, "Wartung - Batterie (Percent) '" + item.label + "' Type (" + item.type + "): " + item.state)
+        if (item.state <= 20) {
+            logWarn(filename, "Wartung - Batterie schwach: " + item.label)
+            pushover(item.label + " schwach (" + item.state + "%)")
+        }
+    })
 end

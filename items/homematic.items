@@ -83,35 +83,35 @@ String  BD_Fenster_Error            "Bad Fenster Fehler [MAP(HM-Sec-SCo.map):%s]
 Number  BD_Fenster_RSSI             "Bad Fenster RSSI [%d dBm]"                                         (RSSI_Group)     {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#RSSI_DEVICE"}
 Switch  BD_Fenster_Unreach          "Bad Fenster unreachable"                               <siren>     (Unreach_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#UNREACH"}
 Switch  BD_Fenster_Pending          "Bad Fenster config pending"                            <siren>     (Pending_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:0#CONFIG_PENDING"}
-Switch  BD_Fenster_LowBat           "Bad Fenster Batterie"                                  <battery>   (Batteries)      {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:1#LOWBAT"}
+Switch  BD_Fenster_LowBat           "Bad Fenster Batterie"                                  <battery>   (Bat_Binary)     {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029848:1#LOWBAT"}
 
 Contact BD_Tuer_State               "Bad Tür [MAP(window.map):%s]"                          <contact>   (BD,Windows)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#STATE"}
 String  BD_Tuer_Error               "Bad Tür Fehler [MAP(HM-Sec-SCo.map):%s]"               <error2>    (BD,Error_Group) {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#ERROR"}
 Number  BD_Tuer_RSSI                "Bad Tür RSSI [%d dBm]"                                             (RSSI_Group)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#RSSI_DEVICE"}
 Switch  BD_Tuer_Unreach             "Bad Tür unreachable"                                   <siren>     (Unreach_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#UNREACH"}
 Switch  BD_Tuer_Pending             "Bad Tür config pending"                                <siren>     (Pending_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:0#CONFIG_PENDING"}
-Switch  BD_Tuer_LowBat              "Bad Tür Batterie"                                      <battery>   (Batteries)      {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#LOWBAT"}
+Switch  BD_Tuer_LowBat              "Bad Tür Batterie"                                      <battery>   (Bat_Binary)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ1466850:1#LOWBAT"}
 
 Contact Wohnungstuer_State          "Wohnungstür [MAP(window.map):%s]"                      <contact>   (Windows)        {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#STATE"}
 String  Wohnungstuer_Error          "Wohnungstür Fehler [MAP(HM-Sec-SCo.map):%s]"           <error2>    (Error_Group)    {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#ERROR"}
 Number  Wohnungstuer_RSSI           "Wohnungstür RSSI [%d dBm]"                                         (RSSI_Group)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#RSSI_DEVICE"}
 Switch  Wohnungstuer_Unreach        "Wohnungstür unreachable"                               <siren>     (Unreach_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#UNREACH"}
 Switch  Wohnungstuer_Pending        "Wohnungstür config pending"                            <siren>     (Pending_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:0#CONFIG_PENDING"}
-Switch  Wohnungstuer_LowBat         "Wohnungstür Batterie"                                  <battery>   (Batteries)      {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#LOWBAT"}
+Switch  Wohnungstuer_LowBat         "Wohnungstür Batterie"                                  <battery>   (Bat_Binary)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0922808:1#LOWBAT"}
 
 Contact FK_Fenster_State            "Küche Fenster [MAP(window.map):%s]"                    <contact>   (FK,Windows)     {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#STATE"}
 String  FK_Fenster_Error            "Küche Fenster Fehler [MAP(HM-Sec-SCo.map):%s]"         <error2>    (FK,Error_Group) {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#ERROR"}
 Number  FK_Fenster_RSSI             "Küche Fenster RSSI [%d dBm]"                                       (RSSI_Group)     {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#RSSI_DEVICE"}
 Switch  FK_Fenster_Unreach          "Küche Fenster unreachable"                             <siren>     (Unreach_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#UNREACH"}
 Switch  FK_Fenster_Pending          "Küche Fenster config pending"                          <siren>     (Pending_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:0#CONFIG_PENDING"}
-Switch  FK_Fenster_LowBat           "Küche Fenster Batterie"                                <battery>   (Batteries)      {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#LOWBAT"}
+Switch  FK_Fenster_LowBat           "Küche Fenster Batterie"                                <battery>   (Bat_Binary)     {channel="homematic:HG-HM-Sec-SCo:ccu:MEQ0029864:1#LOWBAT"}
 
 Contact SZ_Fenster_State            "Schlafzimmer Fenster [MAP(window.map):%s]"             <contact>   (SZ,Windows)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#STATE"}
 String  SZ_Fenster_Error            "Schlafzimmer Fenster Fehler [MAP(HM-Sec-SCo.map):%s]"  <error2>    (SZ,Error_Group) {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#ERROR"}
 Number  SZ_Fenster_RSSI             "Schlafzimmer Fenster RSSI [%d dBm]"                                (RSSI_Group)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#RSSI_DEVICE"}
 Switch  SZ_Fenster_Unreach          "Schlafzimmer Fenster unreachable"                      <siren>     (Unreach_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#UNREACH"}
 Switch  SZ_Fenster_Pending          "Schlafzimmer Fenster config pending"                   <siren>     (Pending_Group)  {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:0#CONFIG_PENDING"}
-Switch  SZ_Fenster_LowBat           "Schlafzimmer Fenster Batterie"                         <battery>   (Batteries)      {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#LOWBAT"}
+Switch  SZ_Fenster_LowBat           "Schlafzimmer Fenster Batterie"                         <battery>   (Bat_Binary)     {channel="homematic:HG-HM-Sec-SCo:ccu:LEQ0919429:1#LOWBAT"}
 
 //HM-LC-Sw1PBU-FM Unterputz-Schaltaktor 1-fach
 Switch BD_Deckenlicht               "Bad Deckenlicht"                           <light>     (BD,Lights)      {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:1#STATE"}
@@ -230,4 +230,3 @@ Switch Keychain_Pending             "Schlüsselanhänger config pending"        
 //GATEWAY-EXTRAS
 Switch Homematic_Reload_Datapoints  "Reload Datapoints"                                     (W66a)           {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_ALL_FROM_GATEWAY"}
 Switch Homematic_Reload_RSSI        "Reload RSSI"                                           (W66a)           {channel="homematic:GATEWAY-EXTRAS-CCU:ccu:GWE00000000:0#RELOAD_RSSI"}
-
