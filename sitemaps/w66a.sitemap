@@ -60,16 +60,21 @@ sitemap w66a label="W66a openHAB Installation" {
             }
         }
 
-        Text label="Sonos" icon="sonos" {
+        Text item=Sonos_Summary label="Sonos" icon="sonos" {
             Frame {
-                Default item=FK_Sonos_Control
-                Slider item=FK_Sonos_Volume
-                Switch item=FK_Sonos_Mute
-                Switch item=FK_Sonos_Stop
-                Switch item=FK_Sonos_Led
-                Text item=FK_Sonos_CurrentTitle
-                Text item=FK_Sonos_CurrentTrack
-                Text item=FK_Sonos_State
+                Default item=FK_Sonos_Control label="Steuerung" icon="controls_round"
+            }
+            Frame label="Aktuell" {
+                Text item=FK_Sonos_CurrentArtist label="Künstler [%s]" icon="singer_round"
+                Text item=FK_Sonos_CurrentTitle label="Titel [%s]" icon="musicnotes_round"
+                Text item=FK_Sonos_CurrentAlbum label="Album [%s]" icon="compactdisc" visibility=[FK_Sonos_CurrentAlbum != ""]
+            }
+            Frame label="Lautstärke" {
+                Slider item=WZ_Sonos_Volume label="Wohnzimmer" icon="volume_round_red"
+                Slider item=FK_Sonos_Volume label="Küche" icon="volume_round_red"
+                Slider item=SZ_Sonos_Volume label="Schlafzimmer" icon="volume_round_red"
+                Slider item=BD_Sonos_Volume label="Bad" icon="volume_round_red"
+                Slider item=Sonos_Volumes label="Wohnung (Mittelwert)" icon="volume_round_reddim"
             }
         }
 
@@ -110,8 +115,8 @@ sitemap w66a label="W66a openHAB Installation" {
                 //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
-        Switch item=WZ_zMote_sendkey label="Logitech Sound System" icon="logitech" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+" ]
-        Switch item=WZ_zMote_sendcode label="Logitech Sound System Input" icon="logitech" mappings=[
+        Switch item=WZ_zMote_sendkey label="Logitech Sound System []" icon="logitech" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+" ]
+        Switch item=WZ_zMote_sendcode label="Logitech Sound System Input []" icon="logitech" mappings=[
             "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Wechseln ⤓",
             "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="PC",
             "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="Sonos"
@@ -276,6 +281,7 @@ sitemap w66a label="W66a openHAB Installation" {
     Frame label="Admin" {
         Text label="Optionen" icon="settings" {
             Switch item=Rule_WhgDoor_Notification
+            Switch item=Rule_BD_Door_Light
         }
         Text label="Status" icon="chart" {
             Group item=RSSI_Group
@@ -284,7 +290,9 @@ sitemap w66a label="W66a openHAB Installation" {
             Group item=Temperatures
             Group item=Heating_ValveSettings valuecolor=[0="green"]
             Group item=Windows valuecolor=[0="green"]
-            Group item=Batteries valuecolor=[0="green"]
+            Group item=Bat_Binary valuecolor=[0="green"]
+            Group item=Bat_Volts valuecolor=[0="green"]
+            Group item=Bat_Percent valuecolor=[0="green"]
             Group item=Lights
             Group item=Unreach_Group
             Group item=Pending_Group
