@@ -1,0 +1,17 @@
+Group Alexa (W66a)
+
+Switch Alexa_BD_Deckenlicht         "Bad Deckenlicht"            (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ0493737:1#STATE"}
+Switch Alexa_SZ_Deckenlicht         "Schlafzimmer Deckenlicht"   (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293514:1#STATE"}
+Switch Alexa_Flur_Deckenlicht       "Flur Deckenlicht"           (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw1PBU-FM:ccu:LEQ1293495:1#STATE"}
+Switch Alexa_Kueche_Deckenlicht     "Küche Deckenlicht"          (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw1-FM:ccu:LEQ0425711:1#STATE"}
+Switch Alexa_WZ_Lacks_LEDs          "Lacksleuchter LEDs"         (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:1#STATE"}
+Switch Alexa_WZ_Lacks_Lampe         "Lacksleuchter Lampe"        (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Sw2-FM:ccu:LEQ0883550:2#STATE"}
+Dimmer Alexa_FK_Edison_Dimmer_Level "Edison Glühbirnen"          (Alexa) ["Lighting"] {channel="homematic:HG-HM-LC-Dim1T-Pl-2:ccu:KEQ0904112:1#LEVEL"}
+Switch Alexa_Kodi_PlayPause         "Kodi Playback"              (Alexa) ["Switchable"] {xbmc=">[#livingRoom|Player.PlayPause]", autoupdate="false"}
+Switch Alexa_Kodi_Stop              "Kodi Stop"                  (Alexa) ["Switchable"] {xbmc=">[#livingRoom|Player.Stop]", autoupdate="false"}
+Switch Alexa_FK_Senseo_OnOff        "Senseo Maschine"            (Alexa) ["Switchable"] {mqtt="<[broker:homie/senseo-w66a/machine/power:state:default], >[broker:homie/senseo-w66a/machine/power/set:command:*:default]"}
+Switch Alexa_WZ_Goldfruchtpalme     "Goldfruchtpalme"            (Alexa) ["Lighting"] {mqtt=">[broker:tasmota/sonoff-CBF6BE/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-CBF6BE/stat/POWER:state:default]"}
+Switch Alexa_FK_Arbeit              "Arbeitsbeleuchtung"         (Alexa) ["Lighting"] {mqtt=">[broker:tasmota/sonoff-96504C/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96504C/stat/POWER:state:default]"}
+Switch Alexa_WZ_Origami             "Origami"                    (Alexa) ["Lighting"] {mqtt=">[broker:tasmota/sonoff-9F3BD8/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
+Switch Alexa_BK_Balkonmagic         "Balkonmagic"                (Alexa) ["Lighting"] {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
+Switch Alexa_WZ_Expedit             "Expedit LEDs"               (Alexa) ["Lighting"] {mqtt=">[broker:tasmota/sonoff-E8A6E4/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-E8A6E4/stat/POWER:state:default]"}
