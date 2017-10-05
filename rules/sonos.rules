@@ -20,18 +20,20 @@ when
     Item FK_Sonos_Volume changed
 then
     //logInfo(filename, "--> Sonos Summary update")
-    if (FK_Sonos_CurrentArtist.state == NULL || FK_Sonos_CurrentTitle.state == NULL || FK_Sonos_State.state == NULL) return
+    //if (FK_Sonos_CurrentArtist.state == NULL || FK_Sonos_CurrentTitle.state == NULL || FK_Sonos_State.state == NULL) return
 
-    val String artist = (FK_Sonos_CurrentArtist.state as StringType).toString
-    val String title = (FK_Sonos_CurrentTitle.state as StringType).toString
-    val String status = if (FK_Sonos_State.state == "PLAYING") "⏯" else if (FK_Sonos_State.state == "PAUSED_PLAYBACK") "⏸" else " "
-    val String volume = ((Sonos_Volumes.state as Number).intValue).toString
-    var String summary = artist + ": " + title
-    if (summary.length > shorten_length) {
-        summary = summary.substring(0, shorten_length).trim + "…"
+    if (FK_Sonos_State.state == "PLAYING") {
+        val String artist = (FK_Sonos_CurrentArtist.state as StringType).toString
+        val String title = (FK_Sonos_CurrentTitle.state as StringType).toString
+        val String status = if (FK_Sonos_State.state == "PLAYING") "⏯" else if (FK_Sonos_State.state == "PAUSED_PLAYBACK") "⏸" else " "
+        val String volume = ((Sonos_Volumes.state as Number).intValue).toString
+        var String summary = artist + ": " + title
+        if (summary.length > shorten_length) {
+            summary = summary.substring(0, shorten_length).trim + "…"
+        }
+        summary = String::format("%s - 🔊 %s%% - %s", summary, volume, status)
+        Sonos_Summary.postUpdate(summary)
+    } else {
+        Sonos_Summary.postUpdate("Pausiert ⏸")
     }
-    summary = String::format("%s - 🔊 %s%% - %s", summary, volume, status)
-    //logInfo(filename, "--> Sonos Summary: " + summary)
-    
-    Sonos_Summary.postUpdate(summary)
 end

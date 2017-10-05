@@ -257,6 +257,9 @@ sitemap w66a label="W66a openHAB Installation" {
         Text label="Bad Heizstellglied [N/A ✘]" icon="error2" visibility=[BD_Heizung_Unreach != OFF]
 
         //
+        Text item=WZ_Wandtherm_ActHumidity label="Wohnzimmer Luftfeuchte [%d %%]"
+
+        //
         Text item=FK_KuehlschrankTemp_Summary label="Kühlschrank [%s]" icon="catfridge" visibility=[FK_KuehlschrankTemp_Unreach == OFF]
         Text label="Kühlschrank Temperatur-Sonoff [N/A ✘]" icon="error2" visibility=[FK_KuehlschrankTemp_Unreach != OFF]
         
