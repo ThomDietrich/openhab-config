@@ -1,14 +1,27 @@
 
-Group                     Heating_Group          "Heizung Gesamt"                                <heating>         (W66a)
-Group                     Heating_WZ             "Heizung Wohnzimmer"                            <heating>         (Heating_Group)
-Group                     Heating_FK             "Heizung Flur/Küche"                            <heating>         (Heating_Group)
-Group                     Heating_SZ             "Heizung Schlafzimmer"                          <heating>         (Heating_Group)
-Group                     Heating_BD             "Heizung Bad"                                   <heating>         (Heating_Group)
-Group:Number:AVG          Heating_TargetTemps    "Raumtemperaturen Soll [%.1f °C]"               <temperature>     (Heating_Group)
-Group:Switch:OR(ON, OFF)  Heating_ValveSettings  "Aktive Heizkörper [%d]"                        <heating>         (Heating_Group)
-Group                     Heating_OpModes        "Raumtemperaturen Mode [%.1f °C]"               <"heating-off">   (Heating_Group)
-Group:Number:AVG          Heating_TargetPresets  "Raumtemperaturen Soll Zeitprogramm [%.1f °C]"  <line>            (Heating_Group)
-Group:NUMBER:SUM          Heating_WindowModes    "Fensterabsenkung"                              <window>          (Heating_Group)
+Group                     Heating_Group          "Heizung Gesamt"                               <heating>         (W66a)
+Group                     Heating_WZ             "Heizung Wohnzimmer"                           <heating>         (Heating_Group)
+Group                     Heating_FK             "Heizung Flur/Küche"                           <heating>         (Heating_Group)
+Group                     Heating_SZ             "Heizung Schlafzimmer"                         <heating>         (Heating_Group)
+Group                     Heating_BD             "Heizung Bad"                                  <heating>         (Heating_Group)
+Group:Number:AVG          Heating_TargetTemps    "Raumtemperaturen Soll [%.1f °C]"              <temperature>     (Heating_Group)
+Group:Switch:OR(ON, OFF)  Heating_ValveSettings  "Aktive Heizkörper [%d]"                       <heating>         (Heating_Group)
+Group                     Heating_OpModes        "Raumtemperaturen Mode [%.1f °C]"              <"heating-off">   (Heating_Group)
+Group:Number:AVG          Heating_TargetPresets  "Raumtemperaturen Soll Zeitprogramm [%.1f °C]" <line>            (Heating_Group)
+Group:NUMBER:SUM          Heating_WindowModes    "Fensterabsenkung"                             <window>          (Heating_Group)
+
+// HM-TC-IT-WM-W-EU Funk-Wandthermostat
+Number WZ_Wandtherm_RSSI            "WZ_Wandtherm RSSI [%d dBm]"                                <"signal-3">      (Heating_WZ,RSSI_Group)               {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:0#RSSI_DEVICE"}
+Switch WZ_Wandtherm_Unreach         "WZ_Wandtherm unreachable"                                  <siren>           (Heating_WZ,Unreach_Group)            {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:0#UNREACH"}
+Switch WZ_Wandtherm_Pending         "WZ_Wandtherm config pending"                               <siren>           (Heating_WZ,Pending_Group)            {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:0#CONFIG_PENDING"}
+Number WZ_Wandtherm_BatteryState    "WZ_Wandtherm Batteriezustand [%.1f V]"                     <"battery-100">   (Heating_WZ,Bat_Volts)                {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#BATTERY_STATE"}
+String WZ_Wandtherm_Fault           "WZ_Wandtherm Fehlerwert [MAP(HM-CC-RT-DN.map):%s]"         <error2>          (Heating_WZ,Error_Group)              {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:4#FAULT_REPORTING"}
+Number WZ_Wandtherm_ActTemp         "WZ_Wandtherm Ist-Temperatur [%.1f °C]"                     <temperature>     (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#ACTUAL_TEMPERATURE"}
+Number WZ_Wandtherm_SetTemp         "WZ_Wandtherm Soll-Temperatur [%.1f °C]"                    <temperature>     (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#SET_TEMPERATURE"}
+String WZ_Wandtherm_Mode            "WZ_Wandtherm Betriebsart [MAP(HM-CC-RT-DN.map):%s]"        <"heating-off">   (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#CONTROL_MODE"}
+Number WZ_Wandtherm_ActHumidity     "WZ_Wandtherm Luftfeuchtigkeit [%.1f %%]"                   <humidity>        (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#ACTUAL_HUMIDITY"}
+Number WZ_Wandtherm_Manu            "WZ_Wandtherm Manu-Mode [%.1f °C]"                          <"heating-40">    (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:2#MANU_MODE"}
+Switch WZ_Wandtherm_WindowState     "WZ_Wandtherm Fenster Channel"                              <"heating-off">   (Heating_WZ)                          {channel="homematic:HG-HM-TC-IT-WM-W-EU:ccu:NEQ0935446:3#WINDOW_STATE"}
 
 // HM-CC-RT-DN Heizkörperthermostat
 Number WZ_Heizung_RSSI              "WZ_Heizung RSSI [%d dBm]"                                  <"signal-3">      (Heating_WZ,RSSI_Group)               {channel="homematic:HG-HM-CC-RT-DN:ccu:LEQ0785556:0#RSSI_DEVICE"}

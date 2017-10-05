@@ -25,7 +25,7 @@ Bridge homematic:bridge:ccu "CCU Homegear Bridge" @ "Wohnzimmer" [ gatewayAddres
     Thing HG-HM-RC-8                LEQ0790268
     Thing HG-HM-RC-Sec4-2           LEQ0496553
     Thing HG-HM-LC-Dim1T-Pl-2       KEQ0904112
-    Thing HG-HM-TC-IT-WM-W-EU       NEQ0935446
+    Thing HG-HM-TC-IT-WM-W-EU       NEQ0935446   "Funk-Wandthermostat" @ "Wohnzimmer"
     Thing GATEWAY-EXTRAS-CCU        GWE00000000
 }
 

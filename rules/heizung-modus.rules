@@ -39,54 +39,57 @@ when
     Item Whg_Heating_UpdateHeater received command ON
 then
     Whg_Heating_UpdateHeater.postUpdate(OFF)
+    logInfo(filename, "Wohnung Heizmodus: " + Whg_Heating_Mode.state)
     switch Whg_Heating_Mode.state {
         case "NORMAL" : {
-            logInfo(filename, "Wohnung Heizmodus: NORMAL")
             WZ_Heizung_Manu.sendCommand(WZ_Heizung_PresetTemp.state as Number)
             FK_Heizung_Manu.sendCommand(FK_Heizung_PresetTemp.state as Number)
             SZ_Heizung_Manu.sendCommand(SZ_Heizung_PresetTemp.state as Number)
             BD_Heizung_Manu.sendCommand(BD_Heizung_PresetTemp.state as Number)
         }
         case "PARTY" : {
-            logInfo(filename, "Wohnung Heizmodus: PARTY")
             WZ_Heizung_Manu.sendCommand(tempComfort)
             FK_Heizung_Manu.sendCommand(tempComfort)
             SZ_Heizung_Manu.sendCommand(tempChill)
             BD_Heizung_Manu.sendCommand(tempMid)
         }
         case "SICKDAY" : {
-            logInfo(filename, "Wohnung Heizmodus: SICKDAY")
             WZ_Heizung_Manu.sendCommand(tempHigher)
             FK_Heizung_Manu.sendCommand(tempHigher)
             SZ_Heizung_Manu.sendCommand(tempMid)
             BD_Heizung_Manu.sendCommand(tempHigher)
         }
         case "WEEKEND_TRIP" : {
-            logInfo(filename, "Wohnung Heizmodus: WEEKEND_TRIP")
             WZ_Heizung_Manu.sendCommand(tempAway)
             FK_Heizung_Manu.sendCommand(tempAway)
             SZ_Heizung_Manu.sendCommand(tempAway)
             BD_Heizung_Manu.sendCommand(tempAway)
         }
         case "AWAY" : {
-            logInfo(filename, "Wohnung Heizmodus: AWAY")
             WZ_Heizung_Manu.sendCommand(tempAwayLonger)
             FK_Heizung_Manu.sendCommand(tempAwayLonger)
             SZ_Heizung_Manu.sendCommand(tempAwayLonger)
             BD_Heizung_Manu.sendCommand(tempAwayLonger)
         }
         case "OFF_SUMMER" : {
-            logInfo(filename, "Wohnung Heizmodus: OFF_SUMMER")
             WZ_Heizung_Manu.sendCommand(tempOff)
             FK_Heizung_Manu.sendCommand(tempOff)
             SZ_Heizung_Manu.sendCommand(tempOff)
             BD_Heizung_Manu.sendCommand(tempOff)
         }
-        case "CALENDAR"    : { logInfo(filename, "Wohnung Heizmodus: CALENDAR (nicht implementiert)") }
-        case "AUTO_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: AUTO_DEVICE (nicht implementiert)") }
-        case "MANU_DEVICE" : { logInfo(filename, "Wohnung Heizmodus: MANU_DEVICE (nicht implementiert)") }
+        case "CALENDAR"    : { logWarn(filename, "Wohnung Heizmodus: CALENDAR (nicht implementiert)") }
+        case "AUTO_DEVICE" : { logWarn(filename, "Wohnung Heizmodus: AUTO_DEVICE (nicht implementiert)") }
+        case "MANU_DEVICE" : { logWarn(filename, "Wohnung Heizmodus: MANU_DEVICE (nicht implementiert)") }
         default            : { logError(filename, "Wohnung Heizmodus ungültig: " + Whg_Heating_Mode.state) }
     }
+end
+
+// specific to my home
+rule "Wohnzimmer: Wandthermostat folgt Stellglied"
+when
+    Item WZ_Heizung_Manu received command
+then
+    WZ_Wandtherm_Manu.sendCommand(receivedCommand)
 end
 
 // Whg_Heating_Mode Ende PARTY/SICKDAY
