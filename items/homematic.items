@@ -214,6 +214,11 @@ Switch FK_Taster_Tokyo_Pending      "Flur Taster Tokyo config pending"          
 Switch Fernbedienung_Taste1         "Fernbedienung_Taste1"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:1#PRESS_SHORT"}
 Switch Fernbedienung_Taste2         "Fernbedienung_Taste2"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:2#PRESS_SHORT"}
 Switch Fernbedienung_Taste3         "Fernbedienung_Taste3"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:3#PRESS_SHORT"}
+Switch Fernbedienung_Taste4         "Fernbedienung_Taste4"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:4#PRESS_SHORT"}
+Switch Fernbedienung_Taste5         "Fernbedienung_Taste5"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:5#PRESS_SHORT"}
+Switch Fernbedienung_Taste6         "Fernbedienung_Taste6"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:6#PRESS_SHORT"}
+Switch Fernbedienung_Taste7         "Fernbedienung_Taste7"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:7#PRESS_SHORT"}
+Switch Fernbedienung_Taste8         "Fernbedienung_Taste8"                                  (W66a)           {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:8#PRESS_SHORT"}
 Number Fernbedienung_RSSI           "Fernbedienung RSSI [%d dBm]"                           (RSSI_Group)     {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#RSSI_DEVICE"}
 Switch Fernbedienung_Unreach        "Fernbedienung unreachable"                 <siren>     (Unreach_Group)  {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#UNREACH"}
 Switch Fernbedienung_Pending        "Fernbedienung config pending"              <siren>     (Pending_Group)  {channel="homematic:HG-HM-RC-8:ccu:LEQ0790268:0#CONFIG_PENDING"}

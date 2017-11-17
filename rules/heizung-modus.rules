@@ -2,7 +2,7 @@
 val String filename = "heizung-modus.rules"
 
 // vordefinierte Temperaturen
-val Number tempHigher = 23.0
+val Number tempHigh = 23.0
 val Number tempComfort = 21.0
 val Number tempMid = 19.0
 val Number tempLower = 17.0
@@ -29,7 +29,7 @@ then
     createTimer(now.plusSeconds(180)) [ |
         logInfo(filename, "Whg_Heating system started")
         if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
-        Heating_TargetPresets.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid) ]
+        Heating_TargetPresets.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid)]
     ]
 end
 
@@ -54,10 +54,10 @@ then
             BD_Heizung_Manu.sendCommand(tempMid)
         }
         case "SICKDAY" : {
-            WZ_Heizung_Manu.sendCommand(tempHigher)
-            FK_Heizung_Manu.sendCommand(tempHigher)
+            WZ_Heizung_Manu.sendCommand(tempHigh)
+            FK_Heizung_Manu.sendCommand(tempHigh)
             SZ_Heizung_Manu.sendCommand(tempMid)
-            BD_Heizung_Manu.sendCommand(tempHigher)
+            BD_Heizung_Manu.sendCommand(tempHigh)
         }
         case "WEEKEND_TRIP" : {
             WZ_Heizung_Manu.sendCommand(tempAway)

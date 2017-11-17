@@ -21,7 +21,7 @@ when
     Item Kodi_Title changed
 then
     //logInfo(filename, "--> Kodi Summary update")
-    if (Kodi_System_State.state == NULL || Kodi_Player_State.state == NULL || Kodi_Title.state == NULL) return
+    if (Kodi_System_State.state == NULL || Kodi_Player_State.state == NULL || Kodi_Title.state == NULL) { return }
 
     val String status = if (Kodi_Player_State.state == "Play") "⏯" else if (Kodi_Player_State.state == "Pause") "⏸" else "⏹"
     val String title = (Kodi_Title.state as StringType).toString

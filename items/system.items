@@ -35,7 +35,7 @@ String      WZ_BirkePC_Command              "BirkePC Command"                   
 
 Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (W66a) {expire="1s"}
 
-String      Whg_Heating_Mode                "Wohnung Heizmodus [%d]"                    <heating>       (W66a)
+String      Whg_Heating_Mode                "Wohnung Heizmodus [%s]"                    <heating>       (W66a)
 Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (W66a)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
