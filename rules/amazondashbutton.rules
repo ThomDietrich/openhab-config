@@ -1,0 +1,13 @@
+
+val String filename = "amazondashbutton.rules"
+
+rule "Dash button pressed"
+when
+    Channel "amazondashbutton:dashbutton:fc-a6-67-0c-a1-c7:press" triggered
+then
+    if (BK_Balkonmagic.state == OFF) {
+        BK_Balkonmagic.sendCommand(ON)
+    } else {
+        BK_Balkonmagic.sendCommand(OFF)
+    }
+end
