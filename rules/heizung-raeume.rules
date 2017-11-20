@@ -14,22 +14,23 @@ val Number tempOff = 4.5
 
 val Functions$Function5<StringItem, NumberItem, NumberItem, NumberItem, SwitchItem, String> //
 generateSummary = [Heater_Mode, Heater_Act_Temp, Heater_Set_Temp, Heater_Valve_Position, Window_Mode |
-    var String summary = "(unbekannt)"
+    var String summary = "(fehlende Daten)"
     if (Heater_Act_Temp.state instanceof Number && Heater_Set_Temp.state instanceof Number && Heater_Valve_Position.state instanceof Number) {
         val actTemp = (Heater_Act_Temp.state as DecimalType).floatValue
         val setTemp = (Heater_Set_Temp.state as DecimalType).floatValue
-        val mode = if (Heater_Mode.state == "AUTO-MODE") "⚙" else if (Heater_Mode.state == "BOOST-MODE") "🔥" else ""
-
+        val valvePos = (Heater_Valve_Position.state as DecimalType).floatValue
+        val mode = Heater_Mode.state as StringType
+        
         summary = //
-            if (Heater_Valve_Position.state > 60)      String::format("( ⟰ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-            else if (Heater_Valve_Position.state > 40) String::format("( ⤊ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-            else if (Heater_Valve_Position.state > 20) String::format("( ⇈ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-            else if (Heater_Valve_Position.state > 0)  String::format("( ↑ %.1f °C) %s %.1f °C", setTemp, mode, actTemp)
-            else {
-                if (Heater_Mode.state == "MANU-MODE")  String::format("%.1f °C", actTemp)
-                else if (Window_Mode.state == ON)      String::format("( ↻ Fenster offen)  %.1f °C", actTemp)
-                else                                   String::format("%s %.1f °C", mode, actTemp)
-            }
+            if (Window_Mode.state == ON)   String::format("( ↻ Fenster offen) %.1f °C", actTemp)
+            else if (mode == "BOOST-MODE") String::format("( 🔥 Boost) %.1f °C", actTemp)
+            else if (mode == "AUTO-MODE")  String::format("( ⚙ %.1f °C) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 60)        String::format("( ⟰ %.1f °C) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 40)        String::format("( ⤊ %.1f °C) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 20)        String::format("( ⇈ %.1f °C) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 0)         String::format("( ↑ %.1f °C) %.1f °C", setTemp, actTemp)
+            else if (setTemp > actTemp)    String::format("( • %.1f °C) %.1f °C", setTemp, actTemp)
+            else "(unbekannter Zustand)"
     }
     return summary
 ]
@@ -70,7 +71,7 @@ when
     Item BD_Fenster_State received update
 then {
     createTimer(now.plusSeconds(15)) [|
-        //logInfo(filename, "Heizung Fensterabsenkung detektieren")
+        logInfo(filename, "Heizung Fensterabsenkung detektieren")
         //WZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(WZ_Fenster_State, WZ_Heizung_SetTemp))
         FK_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(FK_Fenster_State, FK_Heizung_SetTemp))
         SZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(SZ_Fenster_State, SZ_Heizung_SetTemp))
@@ -83,7 +84,7 @@ end
 // Heizung Erzeuge Heizkörper Temperatur Zusammenfassung
 rule "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung"
 when
-    Item Temperatures changed or
+    Item Whg_Heating_Mode received command or
     Item Heating_TargetTemps changed or
     Item Heating_ValveSettings changed or
     Item Heating_OpModes changed or
@@ -94,6 +95,7 @@ then {
     FK_Heizung_Summary.postUpdate(generateSummary.apply(FK_Heizung_Mode, FK_Heizung_ActTemp, FK_Heizung_SetTemp, FK_Heizung_Valve, FK_Heizung_WindowMode))
     SZ_Heizung_Summary.postUpdate(generateSummary.apply(SZ_Heizung_Mode, SZ_Heizung_ActTemp, SZ_Heizung_SetTemp, SZ_Heizung_Valve, SZ_Heizung_WindowMode))
     BD_Heizung_Summary.postUpdate(generateSummary.apply(BD_Heizung_Mode, BD_Heizung_ActTemp, BD_Heizung_SetTemp, BD_Heizung_Valve, BD_Heizung_WindowMode))
+    //logInfo(filename, "Heizung Erzeuge Heizkörper Temperatur Zusammenfassung - abgeschlossen")
 }
 end
 
@@ -112,6 +114,7 @@ then {
     WZ_Heizung_Preset.postUpdate(-1)
 }
 end
+
 rule "FK_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item FK_Heizung_Preset received command
@@ -125,6 +128,7 @@ then {
     FK_Heizung_Preset.postUpdate(-1)
 }
 end
+
 rule "SZ_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item SZ_Heizung_Preset received command
@@ -138,6 +142,7 @@ then {
     SZ_Heizung_Preset.postUpdate(-1)
 }
 end
+
 rule "BD_Heizung Auswertung Schnellauswahl (Sitemap)"
 when
     Item BD_Heizung_Preset received command
