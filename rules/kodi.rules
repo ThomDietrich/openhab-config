@@ -67,13 +67,4 @@ then
     ]
 end
 
-rule "Sound System: Switch between PC input and Sonos input channel"
-when
-    Item Kodi_Player_State changed
-then
-    //logInfo(filename, "Sound System: Switch between PC input and Sonos input channel")
-    if (Kodi_Player_State.state == "Play") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
-    else if (Kodi_Player_State.state == "Stop") WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
-end
-
 // vim: syntax=Xtend

@@ -24,6 +24,10 @@ Number WZ_Origami_RSSI "Origami RSSI [%d %%]" (RSSI_Group)                      
 Switch WZ_Origami_Unreach "Origami unreachable" <siren> (Unreach_Group)                          {mqtt="<[broker:tasmota/sonoff-9F3BD8/tele/LWT:state:MAP(unreach.map)]"}
 Number WZ_Origami_Power "Origami Leistung [%.0f W]" <energy> (Wattages)
 
+Switch FK_Weihnachtsbaum "Weihnachtsbaum" <light> (FK,Lights)                                    {mqtt=">[broker:tasmota/sonoff-F94D0A/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
+Number FK_Weihnachtsbaum_RSSI "Weihnachtsbaum RSSI [%d %%]" (RSSI_Group)                         {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch FK_Weihnachtsbaum_Unreach "Weihnachtsbaum unreachable" <siren> (Unreach_Group)            {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/LWT:state:MAP(unreach.map)]"}
+
 // Sonoff S20 Smart Socket + DS18B20
 Switch BK_Balkonmagic "Balkonmagic" <stars> (BK,Lights)                                          {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
 Number BK_Balkonmagic_RSSI "Balkonmagic RSSI [%d %%]" (RSSI_Group)                               {mqtt="<[broker:tasmota/sonoff-A00EEA/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}

@@ -22,15 +22,15 @@ generateSummary = [Heater_Mode, Heater_Act_Temp, Heater_Set_Temp, Heater_Valve_P
         val mode = Heater_Mode.state as StringType
         
         summary = //
-            if (Window_Mode.state == ON)   String::format("( ↻ Fenster offen) %.1f °C", actTemp)
-            else if (mode == "BOOST-MODE") String::format("( 🔥 Boost) %.1f °C", actTemp)
-            else if (mode == "AUTO-MODE")  String::format("( ⚙ %.1f °C) %.1f °C", setTemp, actTemp)
-            else if (valvePos > 60)        String::format("( ⟰ %.1f °C) %.1f °C", setTemp, actTemp)
-            else if (valvePos > 40)        String::format("( ⤊ %.1f °C) %.1f °C", setTemp, actTemp)
-            else if (valvePos > 20)        String::format("( ⇈ %.1f °C) %.1f °C", setTemp, actTemp)
-            else if (valvePos > 0)         String::format("( ↑ %.1f °C) %.1f °C", setTemp, actTemp)
-            else if (setTemp > actTemp)    String::format("( • %.1f °C) %.1f °C", setTemp, actTemp)
-            else "(unbekannter Zustand)"
+            if (Window_Mode.state == ON)   String::format("( ↻ Fenster offen ) %.1f °C", actTemp)
+            else if (mode == "BOOST-MODE") String::format("( 🔥 Boost ) %.1f °C", actTemp)
+            else if (mode == "AUTO-MODE")  String::format("( ⚙ %.1f °C ) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 60)        String::format("( ⟰ %.1f °C ) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 40)        String::format("( ⤊ %.1f °C ) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 20)        String::format("( ⇈ %.1f °C ) %.1f °C", setTemp, actTemp)
+            else if (valvePos > 0)         String::format("( ↑ %.1f °C ) %.1f °C", setTemp, actTemp)
+            else if (setTemp > actTemp)    String::format("( • %.1f °C ) %.1f °C", setTemp, actTemp)
+            else String::format("%.1f °C", actTemp)
     }
     return summary
 ]
@@ -62,16 +62,16 @@ then
 end
 
 ///////////////////////////////////////////////////////////////////////////////
-// Heizung Fensterabsenkung detektieren
-rule "Heizung Fensterabsenkung detektieren"
+// *_Fenster_State Auswertung
+rule "*_Fenster_State Auswertung"
 when
-    //Item WZ_Fenster_State received update or
-    Item FK_Fenster_State received update or
-    Item SZ_Fenster_State received update or
-    Item BD_Fenster_State received update
+    //Item WZ_Fenster_State changed or
+    Item FK_Fenster_State changed or
+    Item SZ_Fenster_State changed or
+    Item BD_Fenster_State changed
 then {
     createTimer(now.plusSeconds(15)) [|
-        logInfo(filename, "Heizung Fensterabsenkung detektieren")
+        logInfo(filename, "*_Fenster_State Auswertung")
         //WZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(WZ_Fenster_State, WZ_Heizung_SetTemp))
         FK_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(FK_Fenster_State, FK_Heizung_SetTemp))
         SZ_Heizung_WindowMode.postUpdate(heaterInWindowMode.apply(SZ_Fenster_State, SZ_Heizung_SetTemp))

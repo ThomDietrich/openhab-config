@@ -44,7 +44,7 @@ then
     })
     Bat_Volts.members.forEach(item | {
         //logInfo(filename, "Wartung - Batterie (Volts) '" + item.label + "' Type (" + item.type + "): " + item.state)
-        if (item.state <= 2.6) {
+        if (item.state <= 2.5) {
             logWarn(filename, "Wartung - Batterie schwach: " + item.label)
             pushover(item.label + " schwach (" + item.state + "V)")
         }

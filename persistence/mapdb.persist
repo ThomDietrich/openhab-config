@@ -1,0 +1,6 @@
+Strategies {
+}
+
+Items {
+    Whg_Heating_Mode : strategy = everyUpdate, restoreOnStartup
+}

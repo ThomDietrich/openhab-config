@@ -1,10 +1,18 @@
+// Waschmaschine/Spülmaschine
 0=Aus ✘
 1=Standby …
 2=Aktiv ↻
 3=Fertig ‼
 
+// Staubsauger
 11=Unterwegs ⤨
 12=Aufladen ↻
+
+// Logitech SoundSystem
+ON=Ein ✔
+OFF=Aus ✘
+INPUT_PC=(Quelle: PC/Kodi) Ein ✔
+INPUT_SONOS=(Quelle: Sonos) Ein ✔
 
 //
 NULL=unbekannt ⁉

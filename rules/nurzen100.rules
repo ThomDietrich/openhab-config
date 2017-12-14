@@ -3,7 +3,7 @@ val String filename = "nurzen100.rules"
 
 // Timer für das automatische Ausschalten
 var Timer hold_timer = null
-var int irene_timer_seconds = 60
+var int irene_timer_seconds = 360
 
 rule "Sonoff Touch Vorbau verschiedene Tastarten"
 when
@@ -39,7 +39,7 @@ rule "Sonoff 100 Vorbau mit Irene einschalten"
 when
     Item N100_Hoflicht_Irene_Status changed
 then
-    if (N100_Hoflicht_Irene_Status.state == ON ) {
+    if (N100_Hoflicht_Irene_Status.state == ON) {
         if (N100_Hoflicht_Vorbau.state != ON) {
             N100_Hoflicht_Vorbau.sendCommand(ON)
             createTimer(now.plusSeconds(irene_timer_seconds)) [ |
@@ -55,5 +55,5 @@ rule "Sonoff Touch virtuelles Item updaten"
 when
     Item N100_Hoflicht_Irene received command
 then
-    if (receivedCommand == ON ) N100_Hoflicht_Irene_Relay.sendCommand(ON)
+    if (receivedCommand == ON) N100_Hoflicht_Irene_Relay.sendCommand(ON)
 end

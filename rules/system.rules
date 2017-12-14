@@ -10,7 +10,7 @@ then
         Wattages.members.forEach(item |
             if (item.state == NULL) item.postUpdate(0)
         )
-        Homematic_Reload_Datapoints.sendCommand(ON)
+        //Homematic_Reload_Datapoints.sendCommand(ON)
         Rule_BD_Door_Light.postUpdate(ON)
         Rule_WhgDoor_Notification.postUpdate(ON)
     ]

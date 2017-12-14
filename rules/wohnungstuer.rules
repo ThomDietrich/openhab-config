@@ -31,7 +31,8 @@ when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
     if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && Presence_Th_Phone.state == OFF) {
-        FK_Edison_Dimmer_Level.sendCommand(70)
+        //FK_Edison_Dimmer_Level.sendCommand(70)
+        FK_Weihnachtsbaum.sendCommand(ON)
         FK_Sonos_Control.sendCommand(PLAY)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
@@ -45,7 +46,7 @@ then
                 willkommen_timer = null
                 Wohnungstuer_TimerActive.postUpdate(OFF)
                 logInfo (filename, "Timer abgelaufen, Eddison aus.")
-                sendCommand(FK_Edison_Dimmer_Level, 0)
+                FK_Edison_Dimmer_Level.sendCommand(0)
                 FK_Sonos_Control.sendCommand(PAUSE)
             }
         ]

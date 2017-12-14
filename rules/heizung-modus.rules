@@ -30,6 +30,7 @@ then
         logInfo(filename, "Whg_Heating system started")
         if (Whg_Heating_Mode.state == NULL) Whg_Heating_Mode.postUpdate("NORMAL")
         Heating_TargetPresets.members.filter[item | item.state == NULL].forEach[item | item.postUpdate(tempMid)]
+        Whg_Heating_UpdateHeater.sendCommand(ON)
     ]
 end
 

@@ -115,12 +115,17 @@ sitemap w66a label="W66a openHAB Installation" {
                 //    url="http://192.168.11.230:3000/render/dashboard-solo/db/w66a?panelId=5&width=700&height=350&from=now-48h&to=now"
             }
         }
-        Switch item=WZ_zMote_sendkey label="Logitech Sound System []" icon="logitech" mappings=[ "KEY_POWER"="Power", "KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+" ]
-        Switch item=WZ_zMote_sendcode label="Logitech Sound System Input []" icon="logitech" mappings=[
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Wechseln ⤓",
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="PC",
-            "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="Sonos"
-        ]
+        Text item=WZ_SoundSystem_OpState label="zMote Wi-Fi Universal Remote [N/A ✘]" icon="error2" visibility=[WZ_zMote_reachable != ON]
+        Text item=WZ_SoundSystem_OpState label="Logitech Sound System [MAP(operation.map):%s]" visibility=[WZ_zMote_reachable == ON] {
+            Text item=WZ_SoundSystem_OpState label="Logitech Sound System [MAP(operation.map):%s]"
+            Switch item=WZ_zMote_sendkey label="Ein/Ausschalten []" mappings=["KEY_POWER"="Power"]
+            Switch item=WZ_zMote_sendkey label="Lautstärke []" mappings=["KEY_VOLUMEDOWN"="Vol-", "KEY_VOLUMEUP"="Vol+"]
+            Switch item=WZ_zMote_sendcode label="Input []" mappings=[
+                //"38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBBCBBBBCCCBCCCC21,1672,343,86,21,3730"="Wechseln ⤓",
+                "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730"="PC",
+                "38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730"="Sonos"
+            ]
+        }
     }
     Frame  item=Lights label="Beleuchtung [Aktiv: %d]" {
         Switch item=Whg_Light_Preset icon="light" label="[]" mappings=[0="Aus", 1="Normal", 2="Relax", 3="Voll"]
@@ -164,6 +169,9 @@ sitemap w66a label="W66a openHAB Installation" {
         //
         Text item=Wohnungstuer_TimerDuration visibility=[Wohnungstuer_TimerActive == ON]
         Text item=BD_Deckenlicht_TimerDuration visibility=[BD_Deckenlicht_TimerActive == ON]
+        // Delete me:
+        Switch item=FK_Weihnachtsbaum visibility=[FK_Weihnachtsbaum_Unreach == OFF] icon="stars"
+        Text   item=FK_Weihnachtsbaum visibility=[FK_Weihnachtsbaum_Unreach != OFF] icon="error2" label="Weihnachtsbaum [N/A ✘]"
     }
 
     Frame label="Temperaturen und Heizung" {

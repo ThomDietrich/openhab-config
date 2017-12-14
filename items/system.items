@@ -51,6 +51,7 @@ Switch      Rule_WhgDoor_Notification       "Wohnungstür Benachr."             
 
 Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d]"       <washingmach>   (W66a)
 Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d]"        <dishwasher>    (W66a)
+String      WZ_SoundSystem_OpState          "Betriebszustand Soundsystem [%s]"         <logitech>      (W66a)
 
 Switch      Whg_Wartung_Trigger             "Wartungsroutinen auslösen"                                 (W66a) {expire="5s"}
 

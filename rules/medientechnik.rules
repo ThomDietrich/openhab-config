@@ -1,0 +1,95 @@
+
+val String filename = "medientechnik.rules"
+
+rule "BirkePC Command"
+when
+    Item WZ_BirkePC_Command received command
+then 
+    logInfo(filename, "BirkePC command: " + receivedCommand)
+
+    switch (receivedCommand) {
+        case "shutdown" : {
+            publish("broker", "winthing-birke/system/commands/shutdown", "now") 
+          }
+          case "sleep" : {
+              publish("broker", "winthing-birke/system/commands/run", '["rundll32.exe", "powrprof.dll,SetSuspendState 0,1,0"]')
+          }
+        case "kodi" : {
+            publish("broker", "winthing-birke/system/commands/run", '["C:/Program Files (x86)/Kodi/Kodi.exe"]')
+        }
+        case "notepad" : {
+            publish("broker", "winthing-birke/system/commands/run", '["notepad.exe"]')
+        }
+    }
+    WZ_BirkePC_Command.postUpdate(NULL)
+end
+
+rule "Sound System: Turn on/off following PC"
+when
+    Item Presence_PC changed
+then
+    if (Presence_PC.state == ON && WZ_SoundSystem_OpState.state == "OFF") {
+        WZ_SoundSystem_OpState.sendCommand("ON")
+    }
+    else if (Presence_PC.state == OFF && WZ_SoundSystem_OpState.state == "ON") {
+        WZ_SoundSystem_OpState.sendCommand("OFF")
+    }
+end
+
+rule "Sound System: Detect current OpState from Power"
+when
+    Item WZ_SoundSystem_PowerHigh changed
+then
+    if (WZ_SoundSystem_PowerHigh.state == ON && WZ_SoundSystem_OpState.state == "OFF") {
+        WZ_SoundSystem_OpState.postUpdate("ON")
+    }
+    else if (WZ_SoundSystem_PowerHigh.state == OFF && WZ_SoundSystem_OpState.state != "OFF") {
+        WZ_SoundSystem_OpState.postUpdate("OFF")
+    }
+end
+
+rule "Sound System: Switch via Infrared"
+when
+    Item WZ_SoundSystem_OpState received update
+then
+    if (WZ_SoundSystem_OpState.state == "ON" && WZ_SoundSystem_PowerHigh.state == OFF) {
+        WZ_zMote_sendkey.sendCommand("KEY_POWER")
+    }
+    else if (WZ_SoundSystem_OpState.state == "OFF" && WZ_SoundSystem_PowerHigh.state == ON) {
+        WZ_zMote_sendkey.sendCommand("KEY_POWER")
+    }
+    else if (WZ_SoundSystem_OpState.state == "INPUT_PC") {
+        WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBBCBBBBBCCBCCCCC21,1672,343,86,21,3730")
+    }
+    else if (WZ_SoundSystem_OpState.state == "INPUT_SONOS") {
+        WZ_zMote_sendcode.sendCommand("38000,2,69,343,171,21,22,21,65BBBBBBBBBBBCBCBCBBBBBCCBCCCCCB21,1672,343,86,21,3730")
+    }
+end
+
+rule "Sound System: Kodi Play, Switch INPUT"
+when
+    Item Kodi_Player_State changed
+then
+    if (WZ_SoundSystem_OpState.state == "OFF") {
+        logInfo(filename, "Not switching SoundSystem OpState to Input because OpState is OFF")
+    } else {
+        if (Kodi_Player_State.state == "Play") {
+            WZ_SoundSystem_OpState.postUpdate("INPUT_PC")
+        } else if (Kodi_Player_State.state == "Stop") {
+            WZ_SoundSystem_OpState.postUpdate("INPUT_SONOS")
+        }
+    }
+end
+
+rule "Sound System: Sonos Play, Switch INPUT"
+when
+    Item FK_Sonos_Control changed to PLAY
+then
+    if (WZ_SoundSystem_OpState.state == "OFF") {
+        logInfo(filename, "Not switching SoundSystem OpState to Input because OpState is OFF")
+    } else {
+        if (Kodi_Player_State.state != "Play") {
+            WZ_SoundSystem_OpState.sendCommand("INPUT_SONOS")
+        }
+    }
+end

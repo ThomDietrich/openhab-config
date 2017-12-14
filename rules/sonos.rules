@@ -20,7 +20,7 @@ when
     Item FK_Sonos_Volume changed
 then
     //logInfo(filename, "--> Sonos Summary update")
-    if (FK_Sonos_CurrentArtist.state == NULL || FK_Sonos_CurrentTitle.state == NULL || FK_Sonos_State.state == NULL) { return }
+    if (FK_Sonos_CurrentArtist.state == UNDEF || FK_Sonos_CurrentArtist.state == NULL || FK_Sonos_CurrentTitle.state == NULL || FK_Sonos_State.state == NULL) { return }
     
     if (FK_Sonos_State.state == "PLAYING" || FK_Sonos_State.state == "TRANSITIONING") {
         val String artist = (FK_Sonos_CurrentArtist.state as StringType).toString
