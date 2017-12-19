@@ -22,13 +22,13 @@ end
 rule "Sonoff Maintenance"
 when
     Item Sonoff_Action received command
-then 
+then
     logInfo(filename, "Sonoff Maintenance on all devices: " + receivedCommand)
     
     for (String device_id : sonoff_device_ids) {
         switch (receivedCommand) {
             case "restart" : {
-                publish("broker", "cmnd/" + device_id + "/restart", "1") 
+                publish("broker", "cmnd/" + device_id + "/restart", "1")
               }
             case "queryFW" : {
                 publish("broker", "cmnd/" + device_id + "/status", "2")
@@ -50,3 +50,5 @@ when
 then
     FK_KuehlschrankTemp_Summary.postUpdate(String::format("%s °C / %s °C", FK_KuehlschrankTemp_Kuehl.state, FK_KuehlschrankTemp_Gefrier.state))
 end
+
+// vim: syntax=Xtend

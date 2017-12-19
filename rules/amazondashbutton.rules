@@ -11,3 +11,5 @@ then
         BK_Balkonmagic.sendCommand(OFF)
     }
 end
+
+// vim: syntax=Xtend

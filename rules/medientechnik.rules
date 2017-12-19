@@ -4,12 +4,12 @@ val String filename = "medientechnik.rules"
 rule "BirkePC Command"
 when
     Item WZ_BirkePC_Command received command
-then 
+then
     logInfo(filename, "BirkePC command: " + receivedCommand)
 
     switch (receivedCommand) {
         case "shutdown" : {
-            publish("broker", "winthing-birke/system/commands/shutdown", "now") 
+            publish("broker", "winthing-birke/system/commands/shutdown", "now")
           }
           case "sleep" : {
               publish("broker", "winthing-birke/system/commands/run", '["rundll32.exe", "powrprof.dll,SetSuspendState 0,1,0"]')
@@ -93,3 +93,5 @@ then
         }
     }
 end
+
+// vim: syntax=Xtend

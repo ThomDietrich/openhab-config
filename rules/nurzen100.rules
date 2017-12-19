@@ -57,3 +57,5 @@ when
 then
     if (receivedCommand == ON) N100_Hoflicht_Irene_Relay.sendCommand(ON)
 end
+
+// vim: syntax=Xtend

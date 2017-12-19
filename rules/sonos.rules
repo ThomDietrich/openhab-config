@@ -36,3 +36,5 @@ then
         Sonos_Summary.postUpdate("Pausiert ⏸")
     }
 end
+
+// vim: syntax=Xtend
