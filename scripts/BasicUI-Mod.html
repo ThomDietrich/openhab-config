@@ -1,0 +1,37 @@
+<head>
+    <style>
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+        function addStyleSheet(filename) {
+            var head = window.parent.document.head
+            var link = window.parent.document.createElement('link')
+            link.type = 'text/css'
+            link.rel = 'stylesheet'
+            link.href = filename
+            head.appendChild(link)
+        }
+
+        function addStyleString(str) {
+            var node = window.parent.document.createElement('style');
+            node.innerHTML = str;
+            window.parent.document.head.appendChild(node);
+        }
+
+        var _headers = window.parent.document.body.getElementsByClassName("mdl-layout__header mdl-layout__header--scroll navigation navigation-home");
+        var _header = _headers[0];
+        //_header.style.display = "none";
+
+        // Hide the last web element of the page ...
+        _webViewElements = window.parent.document.body.getElementsByClassName("mdl-form__row mdl-form__row--height-auto mdl-cell mdl-cell--12-col");
+        _lastWebViewElement = _webViewElements[_webViewElements.length - 1];
+        _lastWebViewElement.style.display = "none";
+
+        // Change the style for images ...
+        // addStyleString('div > img { border-radius: 15px !important; height: 200px !important; width: 200px !important; position: relative; float: right; }');
+        addStyleSheet("../static/BasicUI-Mod.css")
+    </script>
+</body>
