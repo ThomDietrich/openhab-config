@@ -1,1 +1,1 @@
-Thing zmote:zmt2:CI00070700 [ uuid="CI00070700", configFile="/etc/openhab2/logitech-z906.json" ]
+Thing zmote:zmt2:myzmote [uuid="CI00070700", configFile="/etc/openhab2/logitech-z906.json"]

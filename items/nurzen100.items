@@ -61,3 +61,12 @@ Number N100_Pferdestall_Luftfeuchte "Pferdestall Außen Luftfeuchte [%.0f %%]" <
     {mqtt="<[broker:tasmota/sonoff-83AF57/tele/SENSOR:state:JSONPATH($.BME280.Humidity)]"}
 Number N100_Pferdestall_Luftdruck "Pferdestall Außen Luftdruck [%.0f hPa]" <pressure> (N100)
     {mqtt="<[broker:tasmota/sonoff-83AF57/tele/SENSOR:state:JSONPATH($.BME280.Pressure)]"}
+
+Switch N100_Aquarium "Aquarium Beleuchtung" <light> (N100)
+    {mqtt=">[broker:tasmota/sonoff-F94D0A/cmnd/POWER:command:*:default],
+           <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
+Number N100_Aquarium_RSSI "Aquarium RSSI [%d %%]" (N100)
+    {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch N100_Aquarium_Unreach "Aquarium unreachable" <siren> (N100)
+    {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/LWT:state:MAP(unreach.map)]"}
+

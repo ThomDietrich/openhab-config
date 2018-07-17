@@ -5,14 +5,14 @@ rule "Weihnachtsbaum an"
 when
   Time cron "0 0 18 * * ?"
 then
-  sendCommand(FK_Weihnachtsbaum, ON)
+  sendCommand(KU_Weihnachtsbaum, ON)
 end
 
 rule "Weihnachtsbaum aus"
 when
   Time cron "0 30 1 * * ?"
 then
-  sendCommand(FK_Weihnachtsbaum, OFF)
+  sendCommand(KU_Weihnachtsbaum, OFF)
 end
 
 // vim: syntax=Xtend

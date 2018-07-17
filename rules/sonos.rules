@@ -12,19 +12,70 @@ then
     ]
 end
 
+rule "Lautstärke Morgens"
+when
+  Time cron "0 30 9 * * ?"
+then
+  WZ_Sonos_Volume.sendCommand(55)
+  KU_Sonos_Volume.sendCommand(35)
+  SZ_Sonos_Volume.sendCommand(30)
+  BD_Sonos_Volume.sendCommand(30)
+  /*
+  // group building
+  KU_Sonos_LocalCoordinator.sendCommand(ON)
+  WZ_Sonos_Coordinator.sendCommand("RINCON_B8E93736496A01400")
+  KU_Sonos_Coordinator.sendCommand("RINCON_B8E93736496A01400")
+  SZ_Sonos_Coordinator.sendCommand("RINCON_B8E93736496A01400")
+  BD_Sonos_Coordinator.sendCommand("RINCON_B8E93736496A01400")
+  WZ_Sonos_CurrentAVtransportURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  //KU_Sonos_CurrentAVtransportURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  SZ_Sonos_CurrentAVtransportURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  BD_Sonos_CurrentAVtransportURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  WZ_Sonos_CurrenttrackURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  //KU_Sonos_CurrenttrackURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  SZ_Sonos_CurrenttrackURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  BD_Sonos_CurrenttrackURI.sendCommand("x-rincon:RINCON_B8E93736496A01400")
+  WZ_Sonos_Repeat.sendCommand("ALL")
+  KU_Sonos_Repeat.sendCommand("ALL")
+  SZ_Sonos_Repeat.sendCommand("ALL")
+  BD_Sonos_Repeat.sendCommand("ALL")
+  WZ_Sonos_Control.sendCommand("PLAY")
+  */
+end
+
+rule "Lautstärke Abends"
+when
+  Time cron "0 0 19 * * ?"
+then
+  WZ_Sonos_Volume.sendCommand(55)
+  KU_Sonos_Volume.sendCommand(30)
+  SZ_Sonos_Volume.sendCommand(20)
+  BD_Sonos_Volume.sendCommand(20)
+end
+
+rule "Lautstärke Nacht"
+when
+  Time cron "0 30 0 * * ?"
+then
+  WZ_Sonos_Volume.sendCommand(45)
+  KU_Sonos_Volume.sendCommand(14)
+  SZ_Sonos_Volume.sendCommand(8)
+  BD_Sonos_Volume.sendCommand(8)
+end
+
 rule "Sonos Summary update"
 when
-    Item FK_Sonos_CurrentArtist changed or
-    Item FK_Sonos_CurrentTitle changed or
-    Item FK_Sonos_State changed or
-    Item FK_Sonos_Volume changed
+    Item KU_Sonos_CurrentArtist changed or
+    Item KU_Sonos_CurrentTitle changed or
+    Item KU_Sonos_State changed or
+    Item KU_Sonos_Volume changed
 then
     //logInfo(filename, "--> Sonos Summary update")
-    if (FK_Sonos_CurrentArtist.state == UNDEF || FK_Sonos_CurrentArtist.state == NULL || FK_Sonos_CurrentTitle.state == NULL || FK_Sonos_State.state == NULL) { return }
+    if (KU_Sonos_CurrentArtist.state == UNDEF || KU_Sonos_CurrentArtist.state == NULL || KU_Sonos_CurrentTitle.state == NULL || KU_Sonos_State.state == NULL) { return }
     
-    if (FK_Sonos_State.state == "PLAYING" || FK_Sonos_State.state == "TRANSITIONING") {
-        val String artist = (FK_Sonos_CurrentArtist.state as StringType).toString
-        val String title = (FK_Sonos_CurrentTitle.state as StringType).toString
+    if (KU_Sonos_State.state == "PLAYING" || KU_Sonos_State.state == "TRANSITIONING") {
+        val String artist = (KU_Sonos_CurrentArtist.state as StringType).toString
+        val String title = (KU_Sonos_CurrentTitle.state as StringType).toString
         val String volume = ((Sonos_Volumes.state as Number).intValue).toString
         var String summary = artist + ": " + title
         if (summary.length > shorten_length) {

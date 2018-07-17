@@ -14,8 +14,8 @@ Items {
     RSSI_Group*                                                            : strategy = everyChange
     SpeedtestResultDown, SpeedtestResultUp, SpeedtestResultPing            : strategy = everyChange
     Presence_ThN5                                                          : strategy = everyChange
-    FK_Senseo_BrewedSize                                                   : strategy = everyChange
-    FK_Senseo_OnOff                                                        : strategy = everyChange, everyDay
+    KU_Senseo_BrewedSize                                                   : strategy = everyChange
+    KU_Senseo_OnOff                                                        : strategy = everyChange, everyDay
 }
 
 // vim: syntax=Xtend

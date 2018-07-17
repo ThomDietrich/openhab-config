@@ -59,8 +59,8 @@ then if (WZ_Goldfruchtpalme.state == ON) WZ_Goldfruchtpalme_Power.postUpdate(40.
 
 
 
-rule "FK_Arbeit_Power" when Item FK_Arbeit received update
-then if (FK_Arbeit.state == ON) FK_Arbeit_Power.postUpdate(8.5) else FK_Arbeit_Power.postUpdate(0) end
+rule "KU_Arbeit_Power" when Item KU_Arbeit received update
+then if (KU_Arbeit.state == ON) KU_Arbeit_Power.postUpdate(8.5) else KU_Arbeit_Power.postUpdate(0) end
 
 
 
@@ -70,8 +70,8 @@ then if (BK_Balkonmagic.state == ON) BK_Balkonmagic_Power.postUpdate(42.0) else 
 
 
 //Curve Fitting done by https://www.mycurvefit.com
-rule "FK_Edison_Dimmer_Power" when Item FK_Edison_Dimmer_Level received update
-then FK_Edison_Dimmer_Power.postUpdate((1.170909 * (FK_Edison_Dimmer_Level.state as PercentType)).intValue()) end
+rule "KU_Edison_Dimmer_Power" when Item KU_Edison_Dimmer_Level received update
+then KU_Edison_Dimmer_Power.postUpdate((1.170909 * (KU_Edison_Dimmer_Level.state as PercentType)).intValue()) end
 
 
 // vim: syntax=Xtend

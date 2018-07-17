@@ -5,3 +5,8 @@ Offline=ON
 //SenseoWifi
 true=OFF
 false=ON
+
+//
+NULL=unbekannt ⁉
+UNDEF=unbekannt ⁉
+-=unbekannt ⁉

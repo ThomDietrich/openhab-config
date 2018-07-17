@@ -30,10 +30,10 @@ rule "Willkommenslicht nach Wohnungstuer"
 when
     Item Wohnungstuer_State changed from CLOSED to OPEN
 then
-    if (Night_State.state == ON && FK_Edison_Dimmer_Level.state == 0 && Presence_Th_Phone.state == OFF) {
-        //FK_Edison_Dimmer_Level.sendCommand(70)
-        FK_Weihnachtsbaum.sendCommand(ON)
-        FK_Sonos_Control.sendCommand(PLAY)
+    if (Night_State.state == ON && KU_Edison_Dimmer_Level.state == 0 && Presence_Th_Phone.state == OFF) {
+        //KU_Edison_Dimmer_Level.sendCommand(70)
+        KU_Weihnachtsbaum.sendCommand(ON)
+        KU_Sonos_Control.sendCommand(PLAY)
 
         var DateTime deadline = now.plusSeconds(willkommen_timer_minutes * 60)
         Wohnungstuer_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
@@ -46,12 +46,12 @@ then
                 willkommen_timer = null
                 Wohnungstuer_TimerActive.postUpdate(OFF)
                 logInfo (filename, "Timer abgelaufen, Eddison aus.")
-                FK_Edison_Dimmer_Level.sendCommand(0)
-                FK_Sonos_Control.sendCommand(PAUSE)
+                KU_Edison_Dimmer_Level.sendCommand(0)
+                KU_Sonos_Control.sendCommand(PAUSE)
             }
         ]
     } else {
-        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + FK_Edison_Dimmer_Level.state + " " + Presence_Th_Phone.state)
+        logInfo(filename, "Willkommenslicht nicht geschalten: " + Night_State.state + " " + KU_Edison_Dimmer_Level.state + " " + Presence_Th_Phone.state)
     }
 end
 

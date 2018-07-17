@@ -1,5 +1,5 @@
 
-Group Astro <sun_clouds> (W66a)
+Group Astro <sun_clouds> (Whg)
 
 //
 DateTime    Current_DateTime     "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                       <clock>  (Astro) {channel="ntp:ntp:local:dateTime"}
@@ -26,36 +26,5 @@ Number      Radiation_Diffuse    "Diffuse Radiation"                            
 
 //
 String      Time_Of_Day          "Current Time of Day [%s]"                                        (Astro)
-
-/* EXAMPLE
- * https://community.openhab.org/t/explanation-of-eveningnight-and-morningnight/2194
- *
- * MorningNight_Start   00:00
- * MorningNight_Stop    04:00
- * Night_Stop           05:02
- * AstroDawn_Start      05:00
- * AstroDawn_Stop       05:45
- * NauticDawn_Start     05:45
- * NauticDawn_Stop      06:27
- * CivilDawn_Start      06:27
- * CivilDawn_Stop       07:02
- * Sunrise_Start        07:02
- * Sunrise_Stop         07:06
- * Daylight_Start       07:06
- * Noon_Start           13:17
- * Noon_Stop            13:18
- * Daylight_Stop        19:27
- * Sunset_Start         19:27
- * Sunset_Stop          19:31
- * CivilDusk_Start      19:31
- * CivilDusk_Stop       20:06
- * NauticDusk_Start     20:06
- * NauticDusk_Stop      20:48
- * AstroDusk_Start      20:48
- * AstroDusk_Stop       21:33
- * Night_Start          21:33
- * EveningNight_Start   21:33
- * EveningNight_Stop    00:00
- */
 
 // vim: syntax=Xtend

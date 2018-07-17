@@ -1,15 +1,23 @@
 
 val String filename = "lichtprogramm.rules"
 
+rule "Lichtprogramm Init"
+when
+    System started
+then
+    createTimer(now.plusSeconds(270)) [|
+      Lights.members.filter[item | item.state == NULL].forEach[item | item.sendCommand(OFF)]
+    ]
+end
 
 rule "Schranktaster Arbeitsbeleuchtung ON"
 when
-    Item FK_Taster_Schrank_2Short changed to ON
+    Item KU_Taster_Schrank_2Short changed to ON
 then
-    if (FK_Arbeit.state == OFF) {
-        FK_Arbeit.sendCommand(ON)
-    } else if (FK_Edison_Dimmer_Level.state != 70) {
-        FK_Edison_Dimmer_Level.sendCommand(70)
+    if (KU_Arbeit.state == OFF) {
+        KU_Arbeit.sendCommand(ON)
+    } else if (KU_Edison_Dimmer_Level.state != 70) {
+        KU_Edison_Dimmer_Level.sendCommand(70)
     } else {
         Kueche_Deckenlicht.sendCommand(ON)
     }
@@ -18,17 +26,17 @@ end
 
 rule "Schranktaster Arbeitsbeleuchtung OFF"
 when
-    Item FK_Taster_Schrank_1Short changed to ON
+    Item KU_Taster_Schrank_1Short changed to ON
 then
-    FK_Arbeit.sendCommand(OFF)
+    KU_Arbeit.sendCommand(OFF)
     Kueche_Deckenlicht.sendCommand(OFF)
-    if (FK_Edison_Dimmer_Level.state == 30) FK_Edison_Dimmer_Level.sendCommand(OFF)
-    if (FK_Edison_Dimmer_Level.state == 70) FK_Edison_Dimmer_Level.sendCommand(30)
+    if (KU_Edison_Dimmer_Level.state == 30) KU_Edison_Dimmer_Level.sendCommand(OFF)
+    if (KU_Edison_Dimmer_Level.state == 70) KU_Edison_Dimmer_Level.sendCommand(30)
 end
 
 
-rule "Schranktaster Hauptleuchte ON"  when Item FK_Taster_Schrank_2Long changed to ON then Kueche_Deckenlicht.sendCommand(ON) end
-rule "Schranktaster Hauptleuchte OFF" when Item FK_Taster_Schrank_1Long changed to ON then Kueche_Deckenlicht.sendCommand(OFF) end
+rule "Schranktaster Hauptleuchte ON"  when Item KU_Taster_Schrank_2Long changed to ON then Kueche_Deckenlicht.sendCommand(ON) end
+rule "Schranktaster Hauptleuchte OFF" when Item KU_Taster_Schrank_1Long changed to ON then Kueche_Deckenlicht.sendCommand(OFF) end
 
 
 rule "Whg_Light_Preset (Sitemap -> Homematic)"
@@ -37,40 +45,39 @@ when
 then
     //logInfo(filename, "Whg_Light_Preset (Sitemap -> Homematic).")
     switch (receivedCommand){
-        case 0: {
+        case "OFF": {
             Lights.members.filter[item | item.state != OFF].forEach[item | item.sendCommand(OFF)]
             logInfo(filename, "Lichtprogramm 0 - Aus")
         }
-        case 1: {
-            logInfo(filename, "Lichtprogramm 1 - Normal")
+        case "NORMAL": {
             BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
             WZ_Origami.sendCommand(ON)
             WZ_Expedit.sendCommand(ON)
-            FK_Arbeit.sendCommand(ON)
-            FK_Edison_Dimmer_Level.sendCommand(70)
+            SZ_Orakel.sendCommand(ON)
+            KU_Arbeit.sendCommand(ON)
+            KU_Edison_Dimmer_Level.sendCommand(70)
             WZ_Goldfruchtpalme.sendCommand(OFF)
             WZ_Lacks_Lampe.sendCommand(OFF)
             Flur_Deckenlicht.sendCommand(OFF)
             Kueche_Deckenlicht.sendCommand(OFF)
-            Lights.members.filter[item | item.state == NULL].forEach[item | item.sendCommand(OFF)]
+            logInfo(filename, "Lichtprogramm 1 - Normal")
         }
-        case 2: {
-            logInfo(filename, "Lichtprogramm 2 - Relax")
+        case "RELAX": {
             BK_Balkonmagic.sendCommand(ON)
             WZ_Lacks_LEDs.sendCommand(ON)
             WZ_Origami.sendCommand(ON)
             WZ_Expedit.sendCommand(ON)
-            //FK_Arbeit.sendCommand(ON)
-            //FK_Edison_Dimmer_Level.sendCommand(30)
+            KU_Arbeit.sendCommand(ON)
+            KU_Edison_Dimmer_Level.sendCommand(30)
             WZ_Goldfruchtpalme.sendCommand(OFF)
             WZ_Lacks_Lampe.sendCommand(OFF)
             Flur_Deckenlicht.sendCommand(OFF)
             Kueche_Deckenlicht.sendCommand(OFF)
             SZ_Deckenlicht.sendCommand(OFF)
-            Lights.members.filter[item | item.state == NULL].forEach[item | item.sendCommand(OFF)]
+            logInfo(filename, "Lichtprogramm 2 - Relax")
         }
-        case 3: {
+        case "FULL": {
             Lights.members.filter[item | item.state != ON].forEach[item | item.sendCommand(ON)]
             logInfo(filename, "Lichtprogramm 3 - Voll")
         }
@@ -116,30 +123,30 @@ when
     Item Fernbedienung_Taste5 received update ON
 then
     logInfo(filename, "Fernbedienung 3.Reihe links")
-    FK_Arbeit.sendCommand(ON)
-    FK_Edison_Dimmer_Level.sendCommand(70)
+    KU_Arbeit.sendCommand(ON)
+    KU_Edison_Dimmer_Level.sendCommand(70)
 end
 rule "Fernbedienung Regel 6"
 when
     Item Fernbedienung_Taste6 received update ON
 then
     logInfo(filename, "Fernbedienung 3.Reihe rechts")
-    FK_Arbeit.sendCommand(OFF)
-    FK_Edison_Dimmer_Level.sendCommand(0)
+    KU_Arbeit.sendCommand(OFF)
+    KU_Edison_Dimmer_Level.sendCommand(0)
 end
 rule "Fernbedienung Regel 7"
 when
     Item Fernbedienung_Taste7 received update ON
 then
     logInfo(filename, "Fernbedienung 4.Reihe links")
-    Whg_Light_Preset.sendCommand(2)
+    Whg_Light_Preset.sendCommand("RELAX")
 end
 rule "Fernbedienung Regel 8"
 when
     Item Fernbedienung_Taste8 received update ON
 then
     logInfo(filename, "Fernbedienung 4.Reihe rechts")
-    Whg_Light_Preset.sendCommand(0)
+    Whg_Light_Preset.sendCommand("OFF")
 end
 
 
@@ -161,14 +168,14 @@ when
     Item Keychain_Taste3 changed to ON
 then
     logInfo(filename, "Schlüsselanhänger Taste 3 - Ein/Aus")
-    Whg_Light_Preset.sendCommand(0)
+    Whg_Light_Preset.sendCommand("OFF")
 end
 rule "Schlüsselanhänger Taste 4"
 when
     Item Keychain_Taste4 changed to ON
 then
     logInfo(filename, "Schlüsselanhänger Taste 4 - Licht")
-    Whg_Light_Preset.sendCommand(2)
+    Whg_Light_Preset.sendCommand("RELAX")
 end
 
 // Wohnzimmer Taster Eingang
@@ -198,38 +205,38 @@ end
 // Flurtaster links (Fuse) und rechts (Tokyo)
 rule "Flur beide Taster oben kurz"
 when
-    Item FK_Taster_Tokyo_2Short changed to ON or
-    Item FK_Taster_Fuse_2Short changed to ON
+    Item KU_Taster_Tokyo_2Short changed to ON or
+    Item KU_Taster_Fuse_2Short changed to ON
 then
-    Whg_Light_Preset.sendCommand(2)
-    FK_Sonos_Control.sendCommand(PLAY)
+    Whg_Light_Preset.sendCommand("RELAX")
+    KU_Sonos_Control.sendCommand(PLAY)
 end
 
 rule "Flur beide Taster oben lang"
 when
-    Item FK_Taster_Tokyo_2Long changed to ON or
-    Item FK_Taster_Fuse_2Long changed to ON
+    Item KU_Taster_Tokyo_2Long changed to ON or
+    Item KU_Taster_Fuse_2Long changed to ON
 then
-    Whg_Light_Preset.sendCommand(1)
-    FK_Sonos_Control.sendCommand(PLAY)
+    Whg_Light_Preset.sendCommand("NORMAL")
+    KU_Sonos_Control.sendCommand(PLAY)
 end
 
 rule "Flur beide Taster unten kurz"
 when
-    Item FK_Taster_Tokyo_1Short changed to ON or
-    Item FK_Taster_Fuse_1Short changed to ON
+    Item KU_Taster_Tokyo_1Short changed to ON or
+    Item KU_Taster_Fuse_1Short changed to ON
 then
-    Whg_Light_Preset.sendCommand(0)
-    FK_Sonos_Control.sendCommand(PAUSE)
+    Whg_Light_Preset.sendCommand("OFF")
+    KU_Sonos_Control.sendCommand(PAUSE)
 end
 
 rule "Flur beide Taster unten lang"
 when
-    Item FK_Taster_Tokyo_1Long changed to ON or
-    Item FK_Taster_Fuse_1Long changed to ON
+    Item KU_Taster_Tokyo_1Long changed to ON or
+    Item KU_Taster_Fuse_1Long changed to ON
 then
-    Whg_Light_Preset.sendCommand(0)
-    FK_Sonos_Control.sendCommand(PAUSE)
+    Whg_Light_Preset.sendCommand("OFF")
+    KU_Sonos_Control.sendCommand(PAUSE)
 end
 
 // vim: syntax=Xtend

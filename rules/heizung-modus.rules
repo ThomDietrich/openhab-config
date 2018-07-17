@@ -13,6 +13,7 @@ val Number tempOff = 4.5
 
 // Heizmodi für die ganze Wohnung:
 //  NORMAL: Betriebsmodus für die normale Arbeitswoche
+//  HOMEOFFICE: Folgt Normal
 //  PARTY: Konstante Beheizung, automatischer Wechsel zu NORMAL in der Nacht (nach der Party oder dem besonderen Tag)
 //  SICKDAY: Wärmere Beheizung für den laufenden Tag (Krank zuhause)
 //  WEEKEND_TRIP: leicht abgesenkte Temperatur über das Wochenende, automatischer Wechsel zu NORMAL am nächsten Montag morgen
@@ -44,37 +45,43 @@ then
     switch Whg_Heating_Mode.state {
         case "NORMAL" : {
             WZ_Heizung_Manu.sendCommand(WZ_Heizung_PresetTemp.state as Number)
-            FK_Heizung_Manu.sendCommand(FK_Heizung_PresetTemp.state as Number)
+            KU_Heizung_Manu.sendCommand(KU_Heizung_PresetTemp.state as Number)
+            SZ_Heizung_Manu.sendCommand(SZ_Heizung_PresetTemp.state as Number)
+            BD_Heizung_Manu.sendCommand(BD_Heizung_PresetTemp.state as Number)
+        }
+        case "HOMEOFFICE" : {
+            WZ_Heizung_Manu.sendCommand(WZ_Heizung_PresetTemp.state as Number)
+            KU_Heizung_Manu.sendCommand(KU_Heizung_PresetTemp.state as Number)
             SZ_Heizung_Manu.sendCommand(SZ_Heizung_PresetTemp.state as Number)
             BD_Heizung_Manu.sendCommand(BD_Heizung_PresetTemp.state as Number)
         }
         case "PARTY" : {
             WZ_Heizung_Manu.sendCommand(tempComfort)
-            FK_Heizung_Manu.sendCommand(tempComfort)
+            KU_Heizung_Manu.sendCommand(tempComfort)
             SZ_Heizung_Manu.sendCommand(tempChill)
             BD_Heizung_Manu.sendCommand(tempMid)
         }
         case "SICKDAY" : {
             WZ_Heizung_Manu.sendCommand(tempHigh)
-            FK_Heizung_Manu.sendCommand(tempHigh)
+            KU_Heizung_Manu.sendCommand(tempHigh)
             SZ_Heizung_Manu.sendCommand(tempMid)
             BD_Heizung_Manu.sendCommand(tempHigh)
         }
         case "WEEKEND_TRIP" : {
             WZ_Heizung_Manu.sendCommand(tempAway)
-            FK_Heizung_Manu.sendCommand(tempAway)
+            KU_Heizung_Manu.sendCommand(tempAway)
             SZ_Heizung_Manu.sendCommand(tempAway)
             BD_Heizung_Manu.sendCommand(tempAway)
         }
         case "AWAY" : {
             WZ_Heizung_Manu.sendCommand(tempAwayLonger)
-            FK_Heizung_Manu.sendCommand(tempAwayLonger)
+            KU_Heizung_Manu.sendCommand(tempAwayLonger)
             SZ_Heizung_Manu.sendCommand(tempAwayLonger)
             BD_Heizung_Manu.sendCommand(tempAwayLonger)
         }
         case "OFF_SUMMER" : {
             WZ_Heizung_Manu.sendCommand(tempOff)
-            FK_Heizung_Manu.sendCommand(tempOff)
+            KU_Heizung_Manu.sendCommand(tempOff)
             SZ_Heizung_Manu.sendCommand(tempOff)
             BD_Heizung_Manu.sendCommand(tempOff)
         }
@@ -123,12 +130,13 @@ when
 then
     logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
     WZ_Heizung_PresetTemp.postUpdate(17.0)
-    FK_Heizung_PresetTemp.postUpdate(17.0)
-    SZ_Heizung_PresetTemp.postUpdate(15.0)
+    KU_Heizung_PresetTemp.postUpdate(17.0)
+    SZ_Heizung_PresetTemp.postUpdate(10.0)
     BD_Heizung_PresetTemp.postUpdate(17.0)
     Whg_Heating_UpdateHeater.sendCommand(ON)
 end
 
+/*
 rule "8:30 Uhr (Wochentag Bad)"
 when
     Time cron "0 30 8 ? * MON-FRI *"
@@ -146,6 +154,7 @@ then
     BD_Heizung_PresetTemp.postUpdate(17.0)
     Whg_Heating_UpdateHeater.sendCommand(ON)
 end
+*/
 
 rule "9:00 Uhr (Wochenende)"
 when
@@ -153,10 +162,21 @@ when
 then
     logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
     WZ_Heizung_PresetTemp.postUpdate(21.0)
-    FK_Heizung_PresetTemp.postUpdate(19.0)
-    SZ_Heizung_PresetTemp.postUpdate(17.0)
-    BD_Heizung_PresetTemp.postUpdate(21.0)
+    KU_Heizung_PresetTemp.postUpdate(19.0)
+    //SZ_Heizung_PresetTemp.postUpdate(17.0) //will interfere with open window!
+    BD_Heizung_PresetTemp.postUpdate(19.0)
     Whg_Heating_UpdateHeater.sendCommand(ON)
+end
+
+rule "10:00 Uhr (Woche Homeoffice)"
+when
+    Time cron "0 0 10 ? * MON-FRI *"
+then
+    if (Whg_Heating_Mode.state == "HOMEOFFICE") {
+        logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
+        WZ_Heizung_PresetTemp.postUpdate(21.0)
+        Whg_Heating_UpdateHeater.sendCommand(ON)
+    }
 end
 
 rule "18:00 Uhr"
@@ -165,7 +185,7 @@ when
 then
     logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
     WZ_Heizung_PresetTemp.postUpdate(21.0)
-    FK_Heizung_PresetTemp.postUpdate(19.0)
+    KU_Heizung_PresetTemp.postUpdate(19.0)
     SZ_Heizung_PresetTemp.postUpdate(17.0)
     BD_Heizung_PresetTemp.postUpdate(20.0)
     Whg_Heating_UpdateHeater.sendCommand(ON)
@@ -177,7 +197,7 @@ when
 then
     logInfo(filename, "Wohnung Heizmodus: Zeitprogramm: " + now.toString)
     WZ_Heizung_PresetTemp.postUpdate(22.0)
-    FK_Heizung_PresetTemp.postUpdate(19.0)
+    KU_Heizung_PresetTemp.postUpdate(19.0)
     SZ_Heizung_PresetTemp.postUpdate(16.0)
     BD_Heizung_PresetTemp.postUpdate(20.0)
     Whg_Heating_UpdateHeater.sendCommand(ON)

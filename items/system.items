@@ -1,58 +1,59 @@
 
 // Hauptgruppe für Wohnung
-Group   W66a "Hotel zur Birke"  <house>
+Group   Whg "Hotel zur Birke"   <house>
 // Räume
-Group   BD  "Bad"              <bath>      (W66a)
-Group   FK  "Flur-Küche"       <kitchen>   (W66a)
-Group   SZ  "Schlafzimmer"     <bedroom>   (W66a)
-Group   WZ  "Wohnzimmer"       <video>     (W66a)
-Group   BK  "Balkon"           <garden>    (W66a)
+Group   BD  "Bad"               <bath>      (Whg)
+Group   KU  "Küche"             <kitchen>   (Whg)
+Group   SZ  "Schlafzimmer"      <bedroom>   (Whg)
+Group   WZ  "Wohnzimmer"        <video>     (Whg)
+Group   BK  "Balkon"            <garden>    (Whg)
+Group   FL  "Flur"                          (Whg)
 
 // horizontale Gruppen
-Group:Switch:OR(ON, OFF)        Lights           "Komplette Beleuchtung [%d]"           <light>         (W66a)
-Group:Number:AVG                Temperatures     "Raumtemperaturen [%.1f °C]"           <temperature>   (W66a)
-Group:Contact:OR(OPEN, CLOSED)  Windows          "Offene Fenster [%d]"                  <contact>       (W66a)
-Group:Number:SUM                Wattages         "Aktueller Stromverbrauch [%.1f W]"    <energy>        (W66a)
-Group:Number:SUM                EnergyCons       "Energiezähler [%.1f Wh]"              <energy>        (W66a)
-Group                           Batteries        "Batteriezustände"                     <battery>       (W66a)
+Group:Switch:OR(ON, OFF)        Lights           "Komplette Beleuchtung [%d]"           <light>         (Whg)
+Group:Number:AVG                Temperatures     "Raumtemperaturen [%.1f °C]"           <temperature>   (Whg)
+Group:Contact:OR(OPEN, CLOSED)  Windows          "Offene Fenster [%d]"                  <contact>       (Whg)
+Group:Number:SUM                Wattages         "Aktueller Stromverbrauch [%.1f W]"    <energy>        (Whg)
+Group:Number:SUM                EnergyCons       "Energiezähler [%.1f Wh]"              <energy>        (Whg)
+Group                           Batteries        "Batteriezustände"                     <battery>       (Whg)
 Group:Number:SUM                Bat_Binary       "Batteriezustände (Binary) [%d]"       <battery>       (Batteries)
 Group:Number:MIN                Bat_Percent      "Batteriezustände (%) [%d %%]"         <battery>       (Batteries)
 Group:Number:MIN                Bat_Volts        "Batteriezustände (Volt) [%.1f V]"     <battery>       (Batteries)
 
 // Wartung / Maintenance
-Group:Number:MIN                RSSI_Group       "RSSI aller Geräte [%d dBm]"           <line>          (W66a)
-Group:Number:SUM                Unreach_Group    "Nicht erreichbare Geräte [%d]"        <siren>         (W66a)
-Group:Number:SUM                Pending_Group    "Geräte mit ausstehender Konfig. [%d]" <siren>         (W66a)
-Group:Number:SUM                Error_Group      "Geräte mit Fehlerzustand [%d]"        <error2>        (W66a)
+Group:Number:MIN                RSSI_Group       "RSSI aller Geräte [%d dBm]"           <line>          (Whg)
+Group:Number:SUM                Unreach_Group    "Nicht erreichbare Geräte [%d]"        <siren>         (Whg)
+Group:Number:SUM                Pending_Group    "Geräte mit ausstehender Konfig. [%d]" <siren>         (Whg)
+Group:Number:SUM                Error_Group      "Geräte mit Fehlerzustand [%d]"        <error2>        (Whg)
 
 Switch      Presence_PC                     "Zustand PC"                                <present>       (WZ) {channel="network:pingdevice:BirkePC:online"}
-Switch      Presence_Th_Phone               "Anwesenheit ThOP3"                         <present>       (W66a) {channel="network:pingdevice:ThOP3:online"}
-Switch      Presence_Th_N9                  "Anwesenheit ThN9"                          <present>       (W66a) {channel="network:pingdevice:ThN9:online"}
+Switch      Presence_Th_Phone               "Anwesenheit ThOP3"                         <present>       (Whg) {channel="network:pingdevice:ThOP3:online"}
+Switch      Presence_Th_N9                  "Anwesenheit ThN9"                          <present>       (Whg) {channel="network:pingdevice:ThN9:online"}
 
 Switch      WZ_BirkePC_WakeOnLAN            "BirkePC WakeOnLAN"                                         (WZ) {wol="192.168.0.255#90:2b:34:33:04:02"}
 Switch      WZ_BirkePC_Online               "BirkePC WinThing Online"                   <light>         (WZ) {mqtt="<[broker:winthing-birke/system/system/online:state:MAP(truefalse.map)]"}
 String      WZ_BirkePC_Command              "BirkePC Command"                           <switch>        (WZ)
 
-Number      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%d]"   <switch>        (W66a) {expire="1s"}
+String      Whg_Light_Preset                "Wohnung Beleuchtung Schnellauswahl [%s]"   <switch>        (Whg) {expire="1s"}
 
-String      Whg_Heating_Mode                "Wohnung Heizmodus [%s]"                    <heating>       (W66a)
-Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (W66a)
+String      Whg_Heating_Mode                "Wohnung Heizmodus [%s]"                    <heating>       (Whg)
+Switch      Whg_Heating_UpdateHeater        "Sende Soll-Temperaturen an Heizkörper"     <heating>       (Whg)
 
 Switch      BD_Deckenlicht_TimerActive      "Bad Deckenlicht Timer Active"                              (BD)
 DateTime    BD_Deckenlicht_TimerEnd         "Bad Deckenlicht Timer [%1$tH:%1$tM Uhr]"                   (BD)
 Number      BD_Deckenlicht_TimerDuration    "Bad Deckenlicht Restzeit [%d min]"                         (BD)
 
-Switch      Wohnungstuer_TimerActive        "Wohnungstür Timer Active"                                  (W66a)
-DateTime    Wohnungstuer_TimerEnd           "Wohnungstür Timer [%1$tH:%1$tM Uhr]"                       (W66a)
-Number      Wohnungstuer_TimerDuration      "Wohnungstür Timer Restzeit [%d min]"                       (W66a)
+Switch      Wohnungstuer_TimerActive        "Wohnungstür Timer Active"                                  (Whg)
+DateTime    Wohnungstuer_TimerEnd           "Wohnungstür Timer [%1$tH:%1$tM Uhr]"                       (Whg)
+Number      Wohnungstuer_TimerDuration      "Wohnungstür Timer Restzeit [%d min]"                       (Whg)
 
-Switch      Rule_BD_Door_Light              "Automatisches Bad Licht"                                   (W66a)
-Switch      Rule_WhgDoor_Notification       "Wohnungstür Benachr."                                      (W66a)
+Switch      Rule_BD_Door_Light              "Automatisches Bad Licht"                                   (Whg)
+Switch      Rule_WhgDoor_Notification       "Wohnungstür Benachr."                                      (Whg)
 
-Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d]"       <washingmach>   (W66a)
-Number      FK_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d]"        <dishwasher>    (W66a)
-String      WZ_SoundSystem_OpState          "Betriebszustand Soundsystem [%s]"         <logitech>      (W66a)
+Number      BD_Waschmaschine_OpState        "Betriebszustand Waschmaschine [%d]"       <washingmach>    (BD)
+Number      KU_Spuelmaschine_OpState        "Betriebszustand Spülmaschine [%d]"        <dishwasher>     (KU)
+String      WZ_SoundSystem_OpState          "Betriebszustand Soundsystem [%s]"         <logitech>       (WZ)
 
-Switch      Whg_Wartung_Trigger             "Wartungsroutinen auslösen"                                 (W66a) {expire="5s"}
+Switch      Whg_Wartung_Trigger             "Wartungsroutinen auslösen"                                 (Whg) {expire="5s"}
 
 // vim: syntax=Xtend

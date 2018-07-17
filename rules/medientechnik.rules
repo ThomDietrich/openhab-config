@@ -31,7 +31,7 @@ then
     if (Presence_PC.state == ON && WZ_SoundSystem_OpState.state == "OFF") {
         WZ_SoundSystem_OpState.sendCommand("ON")
     }
-    else if (Presence_PC.state == OFF && WZ_SoundSystem_OpState.state == "ON") {
+    else if (Presence_PC.state == OFF && WZ_SoundSystem_OpState.state != "OFF") {
         WZ_SoundSystem_OpState.sendCommand("OFF")
     }
 end
@@ -83,7 +83,7 @@ end
 
 rule "Sound System: Sonos Play, Switch INPUT"
 when
-    Item FK_Sonos_Control changed to PLAY
+    Item KU_Sonos_Control changed to PLAY
 then
     if (WZ_SoundSystem_OpState.state == "OFF") {
         logInfo(filename, "Not switching SoundSystem OpState to Input because OpState is OFF")

@@ -15,7 +15,7 @@ when
     System started
 then
     createTimer(now.plusSeconds(195)) [|
-        if (FK_KuehlschrankTemp_Summary.state == NULL || FK_KuehlschrankTemp_Summary.state == "") FK_KuehlschrankTemp_Summary.postUpdate("(unbekannt) ⁉")
+        if (KU_KuehlschrankTemp_Summary.state == NULL || KU_KuehlschrankTemp_Summary.state == "") KU_KuehlschrankTemp_Summary.postUpdate("(unbekannt) ⁉")
     ]
 end
 
@@ -45,10 +45,10 @@ end
 
 rule "Sonoff Kuehlschrank Summary"
 when
-    Item FK_KuehlschrankTemp_Kuehl changed or
-    Item FK_KuehlschrankTemp_Gefrier changed
+    Item KU_KuehlschrankTemp_Kuehl changed or
+    Item KU_KuehlschrankTemp_Gefrier changed
 then
-    FK_KuehlschrankTemp_Summary.postUpdate(String::format("%s °C / %s °C", FK_KuehlschrankTemp_Kuehl.state, FK_KuehlschrankTemp_Gefrier.state))
+    KU_KuehlschrankTemp_Summary.postUpdate(String::format("%s °C / %s °C", KU_KuehlschrankTemp_Kuehl.state, KU_KuehlschrankTemp_Gefrier.state))
 end
 
 // vim: syntax=Xtend

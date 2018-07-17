@@ -15,7 +15,7 @@ when
 then
     createTimer(now.plusSeconds(170)) [|
         if (BD_Waschmaschine_OpState == NULL) BD_Waschmaschine_OpState.postUpdate(MODE_OFF)
-        if (FK_Spuelmaschine_OpState == NULL) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+        if (KU_Spuelmaschine_OpState == NULL) KU_Spuelmaschine_OpState.postUpdate(MODE_OFF)
     ]
 end
 
@@ -58,22 +58,22 @@ end
 
 rule "Spuelmaschine Überwachung: Verbrauchszuordnung"
 when
-    Item FK_Spuelmaschine_Power changed
+    Item KU_Spuelmaschine_Power changed
 then
     //logInfo(filename, "Waschmaschine Überwachung: Verbrauchszuordnung")
-    if (FK_Spuelmaschine_Power.state < 0.03) FK_Spuelmaschine_OpState.postUpdate(MODE_OFF)
-    else if (FK_Spuelmaschine_Power.state > 5) FK_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
-    else if (FK_Spuelmaschine_Power.state < 0.75) {
-        if (FK_Spuelmaschine_OpState.state == MODE_OFF) FK_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
-        else if (FK_Spuelmaschine_OpState.state == MODE_ACTIVE) FK_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
+    if (KU_Spuelmaschine_Power.state < 0.03) KU_Spuelmaschine_OpState.postUpdate(MODE_OFF)
+    else if (KU_Spuelmaschine_Power.state > 5) KU_Spuelmaschine_OpState.postUpdate(MODE_ACTIVE)
+    else if (KU_Spuelmaschine_Power.state < 0.75) {
+        if (KU_Spuelmaschine_OpState.state == MODE_OFF) KU_Spuelmaschine_OpState.postUpdate(MODE_STANDBY)
+        else if (KU_Spuelmaschine_OpState.state == MODE_ACTIVE) KU_Spuelmaschine_OpState.postUpdate(MODE_FINISHED)
     }
 end
 
 rule "Spuelmaschine Überwachung: Benachrichtigung"
 when
-    Item FK_Spuelmaschine_OpState changed
+    Item KU_Spuelmaschine_OpState changed
 then
-    if (FK_Spuelmaschine_OpState.state == MODE_FINISHED) {
+    if (KU_Spuelmaschine_OpState.state == MODE_FINISHED) {
       pushover("Spühlmaschine fertig!")
     }
 end

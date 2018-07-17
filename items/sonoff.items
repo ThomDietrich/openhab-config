@@ -4,29 +4,25 @@ Number WZ_Goldfruchtpalme_RSSI "Goldfruchtpalme RSSI [%d %%]" (RSSI_Group)      
 Switch WZ_Goldfruchtpalme_Unreach "Goldfruchtpalme unreachable" <siren> (Unreach_Group)          {mqtt="<[broker:tasmota/sonoff-CBF6BE/tele/LWT:state:MAP(unreach.map)]"}
 Number WZ_Goldfruchtpalme_Power "Goldfruchtpalme Leistung [%.0f W]" <energy> (Wattages)
 
-Switch FK_Arbeit "Arbeitsbeleuchtung" <light> (FK,Lights)                                        {mqtt=">[broker:tasmota/sonoff-96504C/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96504C/stat/POWER:state:default]"}
-Number FK_Arbeit_RSSI "Arbeitsbeleuchtung RSSI [%d %%]" (RSSI_Group)                             {mqtt="<[broker:tasmota/sonoff-96504C/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
-Switch FK_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" <siren> (Unreach_Group)                {mqtt="<[broker:tasmota/sonoff-96504C/tele/LWT:state:MAP(unreach.map)]"}
-Number FK_Arbeit_Power "Arbeitsbeleuchtung Leistung [%.0f W]" <energy> (Wattages)
+Switch KU_Arbeit "Arbeitsbeleuchtung" <light> (KU,Lights)                                        {mqtt=">[broker:tasmota/sonoff-96504C/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96504C/stat/POWER:state:default]"}
+Number KU_Arbeit_RSSI "Arbeitsbeleuchtung RSSI [%d %%]" (RSSI_Group)                             {mqtt="<[broker:tasmota/sonoff-96504C/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch KU_Arbeit_Unreach "Arbeitsbeleuchtung unreachable" <siren> (Unreach_Group)                {mqtt="<[broker:tasmota/sonoff-96504C/tele/LWT:state:MAP(unreach.map)]"}
+Number KU_Arbeit_Power "Arbeitsbeleuchtung Leistung [%.0f W]" <energy> (Wattages)
 
 // Sonoff Basic + 2x DS18B20 (spezielle Firmware)
-//Switch FK_KuehlschrankTemp "Kühlschrank Temperatur" <light> (KU,Lights) ["Lighting"]             {mqtt=">[broker:tasmota/sonoff-96E5F6/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96E5F6/stat/POWER:state:default]"}
-Number FK_KuehlschrankTemp_RSSI "Kühlschrank Temperatur RSSI [%d %%]" (RSSI_Group)               {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
-Switch FK_KuehlschrankTemp_Unreach "Kühlschrank Temperatur unreachable" <siren> (Unreach_Group)  {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/LWT:state:MAP(unreach.map)]"}
-Number FK_KuehlschrankTemp_Power "Kühlschrank Temperatur Leistung [%.0f W]" <energy> (Wattages)
-Number FK_KuehlschrankTemp_Gefrier "Kühlschrank Temperatur Gefrierbereich [%.1f °C]" (KU)        {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS2.Temperature)]"}
-Number FK_KuehlschrankTemp_Kuehl "Kühlschrank Temperatur Kühlbereich [%.1f °C]" (KU)             {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18x20.DS1.Temperature)]"}
-String FK_KuehlschrankTemp_Summary "Kühlschrank Temperaturen [%s]" (KU)
+//Switch KU_KuehlschrankTemp "Kühlschrank Temperatur" <light> (KU,Lights)                          {mqtt=">[broker:tasmota/sonoff-96E5F6/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-96E5F6/stat/POWER:state:default]"}
+Number KU_KuehlschrankTemp_RSSI "Kühlschrank Temperatur RSSI [%d %%]" (RSSI_Group)               {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch KU_KuehlschrankTemp_Unreach "Kühlschrank Temperatur unreachable" <siren> (Unreach_Group)  {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/LWT:state:MAP(unreach.map)]"}
+Number KU_KuehlschrankTemp_Power "Kühlschrank Temperatur Leistung [%.0f W]" <energy> (Wattages)
+Number KU_KuehlschrankTemp_Kuehl "Kühlschrank Temperatur Kühlbereich [%.1f °C]" (KU)             {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18B20-1.Temperature)]"}
+Number KU_KuehlschrankTemp_Gefrier "Kühlschrank Temperatur Gefrierbereich [%.1f °C]" (KU)        {mqtt="<[broker:tasmota/sonoff-96E5F6/tele/SENSOR:state:JSONPATH($.DS18B20-2.Temperature)]"}
+String KU_KuehlschrankTemp_Summary "Kühlschrank Temperaturen [%s]" (KU)
 
 // Sonoff S20 Smart Socket
 Switch WZ_Origami "Origami" <light> (WZ,Lights)                                                  {mqtt=">[broker:tasmota/sonoff-9F3BD8/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
 Number WZ_Origami_RSSI "Origami RSSI [%d %%]" (RSSI_Group)                                       {mqtt="<[broker:tasmota/sonoff-9F3BD8/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
 Switch WZ_Origami_Unreach "Origami unreachable" <siren> (Unreach_Group)                          {mqtt="<[broker:tasmota/sonoff-9F3BD8/tele/LWT:state:MAP(unreach.map)]"}
 Number WZ_Origami_Power "Origami Leistung [%.0f W]" <energy> (Wattages)
-
-Switch FK_Weihnachtsbaum "Weihnachtsbaum" <light> (FK,Lights)                                    {mqtt=">[broker:tasmota/sonoff-F94D0A/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-9F3BD8/stat/POWER:state:default]"}
-Number FK_Weihnachtsbaum_RSSI "Weihnachtsbaum RSSI [%d %%]" (RSSI_Group)                         {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
-Switch FK_Weihnachtsbaum_Unreach "Weihnachtsbaum unreachable" <siren> (Unreach_Group)            {mqtt="<[broker:tasmota/sonoff-F94D0A/tele/LWT:state:MAP(unreach.map)]"}
 
 // Sonoff S20 Smart Socket + DS18B20
 Switch BK_Balkonmagic "Balkonmagic" <stars> (BK,Lights)                                          {mqtt=">[broker:tasmota/sonoff-A00EEA/cmnd/POWER:command:*:default], <[broker:tasmota/sonoff-A00EEA/stat/POWER:state:default]"}
@@ -46,6 +42,15 @@ Number WZ_SoundSystem_Power "Logitech System Leistung [%.1f W]" <energy> (Wattag
 Switch WZ_SoundSystem_PowerHigh "Logitech System Active/Standby" <speaker> (WZ)                  {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/MARGINS:state:JSONPATH($.PowerHigh)]"}
 Number WZ_SoundSystem_RSSI "Logitech System RSSI [%d %%]" (RSSI_Group)                           {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
 Switch WZ_SoundSystem_Unreach "Logitech System unreachable" <siren> (Unreach_Group)              {mqtt="<[broker:tasmota/sonoff-20DCAE/tele/LWT:state:MAP(unreach.map)]"}
+
+// AiLight
+Switch SZ_Orakel "Orakel" <crystallball> (SZ,Lights)                                             {mqtt=">[broker:tasmota/ailight-0B2B62/cmnd/POWER:command:*:default], <[broker:tasmota/ailight-0B2B62/stat/POWER:state:default]"}
+Dimmer SZ_Orakel_Dimmer "Orakel Dimmer" <light> (SZ)                                             {mqtt=">[broker:tasmota/ailight-0B2B62/cmnd/DIMMER:command:*:default], <[broker:tasmota/ailight-0B2B62/stat/RESULT:state:JSONPATH($.Dimmer)]"}
+String SZ_Orakel_ColorRGBWString "Orakel Farbe RGBW hex [0x%s]" <light> (SZ)                     {mqtt=">[broker:tasmota/ailight-0B2B62/cmnd/COLOR:command:*:default], <[broker:tasmota/ailight-0B2B62/stat/RESULT:state:JSONPATH($.Color)]"}
+Color  SZ_Orakel_ColorHSB "Orakel Farbe HSB" <light> (SZ)
+Dimmer SZ_Orakel_CWDimmer "Orakel Cold White" <light> (SZ)
+Number SZ_Orakel_RSSI "Orakel RSSI [%d %%]" (RSSI_Group)                                         {mqtt="<[broker:tasmota/ailight-0B2B62/tele/STATE:state:JSONPATH($.Wifi.RSSI)]"}
+Switch SZ_Orakel_Unreach "Orakel unreachable" <siren> (Unreach_Group)                            {mqtt="<[broker:tasmota/ailight-0B2B62/tele/LWT:state:MAP(unreach.map)]"}
 
 //Maintenance
 String    Sonoff_Action "Sonoff Action" <sonoff_basic>

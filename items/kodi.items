@@ -1,5 +1,5 @@
 
-Group  Kodi_Group "Kodi Mediacenter" <kodi> (W66a)
+Group  Kodi_Group "Kodi Mediacenter" <kodi> (Whg)
 
 Switch Kodi_System_State      "Kodi State"                <kodi>  (Kodi_Group) {xbmc="<[#livingRoom|System.State]"}
 String Kodi_Player_State      "Player State [%s]"         <like>  (Kodi_Group) {xbmc="<[#livingRoom|Player.State]"}

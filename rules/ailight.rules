@@ -1,0 +1,49 @@
+
+val String filename = "ailight.rules"
+
+rule "AiLight RGBW -> HSB+CW"
+when
+    Item SZ_Orakel_ColorRGBWString received update
+then
+    var rgbw = SZ_Orakel_ColorRGBWString.state.toString
+    
+    var r = Integer::parseInt(rgbw.substring(0, 2), 16)
+    var g = Integer::parseInt(rgbw.substring(2, 4), 16)
+    var b = Integer::parseInt(rgbw.substring(4, 6), 16)
+    var HSBType hsb = HSBType.fromRGB(r, g, b)
+    SZ_Orakel_ColorHSB.postUpdate(hsb)
+    
+    var cw_dimm = Integer::parseInt(rgbw.substring(6, 8), 16) * 100 / 255
+    SZ_Orakel_CWDimmer.postUpdate(cw_dimm)
+    
+    //logInfo(filename, "Input Conversion: r" + r + " g" + g + " b" + b)
+    //logInfo(filename, "Input Conversion: hsb" + hsb)
+    //logInfo(filename, "Input Conversion: cw_dimm" + cw_dimm)
+end
+
+rule "AiLight HSB+CW -> RGBW"
+when
+    Item SZ_Orakel_ColorHSB received command or
+    Item SZ_Orakel_CWDimmer received command
+then
+    //logInfo(filename, "Command received: " + receivedCommand)
+    if (receivedCommand instanceof OnOffType) {
+        if (receivedCommand == ON) {
+            SZ_Orakel.sendCommand(ON)
+        }
+        else {
+            SZ_Orakel.sendCommand(OFF)
+        }
+    return;
+    }
+    var r = ((SZ_Orakel_ColorHSB.state as HSBType).getRed * 255 / 100).intValue
+    var g = ((SZ_Orakel_ColorHSB.state as HSBType).getGreen * 255 / 100).intValue
+    var b = ((SZ_Orakel_ColorHSB.state as HSBType).getBlue * 255 / 100).intValue
+    var cw = ((SZ_Orakel_CWDimmer.state as Number) * 255 / 100).intValue
+    var rgbw = String.format("%02x%02x%02x%02x", r, g, b, cw)
+
+    SZ_Orakel_ColorRGBWString.sendCommand(rgbw)
+    
+    //logInfo(filename, "Output Conversion: r" + r + " g" + g + " b" + b + " cw" + cw)
+    //logInfo(filename, "Output Conversion: rgbw" + rgbw)
+end

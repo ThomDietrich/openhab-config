@@ -25,10 +25,10 @@ then
         var DateTime deadline = new DateTime((BD_Deckenlicht_TimerEnd.state as DateTimeType).calendar)
         var int countdown = Minutes.minutesBetween(now, deadline).getMinutes() + 1
         BD_Deckenlicht_TimerDuration.postUpdate(countdown)
-        logInfo(filename, "Deckenlicht Timer, Deadline: " + deadline + ", Duration: " + countdown)
+        //logInfo(filename, "Deckenlicht Timer, Deadline: " + deadline + ", Duration: " + countdown)
         if (countdown == 0) {
             BD_Deckenlicht_TimerActive.postUpdate(OFF)
-            logInfo(filename, "Deckenlicht Timer abgelaufen, Deckenlicht aus.")
+            logInfo(filename, "Bad Deckenlicht Timer abgelaufen, Deckenlicht aus.")
             BD_Deckenlicht.sendCommand(OFF)
         }
     }
@@ -43,7 +43,7 @@ then
         if (BD_Deckenlicht.state == OFF) {
             BD_Deckenlicht.sendCommand(ON)
             badlicht_on_by_rule = true
-            logInfo(filename, "Türsensor ausgelöst nach Dämmerung, Deckenlicht ein.")
+            logInfo(filename, "Bad Türsensor schaltet Deckenlicht ein, startet Timer.")
 
             var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
             BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
@@ -51,12 +51,12 @@ then
         } else {
             if (BD_Deckenlicht_TimerActive.state != ON) {
                 // light not turned on by door sensor -> no timer
-                logInfo(filename, "Deckenlicht bereits an, keine Aktion.")
+                //logInfo(filename, "Bad Deckenlicht bereits dauerhaft an, keine Aktion.")
             } else {
                 // extend deadline
                 var DateTime deadline = now.plusSeconds(badlicht_timer_minutes * 60)
                 BD_Deckenlicht_TimerEnd.postUpdate(new DateTimeType(deadline.toCalendar(null)))
-                logInfo(filename, "Deckenlicht Timer verlängert.")
+                logInfo(filename, "Bad Türsensor, verlängert Timer.")
             }
         }
     }
@@ -66,13 +66,13 @@ rule "Badtür-Automatik: Lichtschalter überschreibt"
 when
     Item BD_Deckenlicht changed
 then
-    logInfo (filename, "BD Tastendruck")
+    //logInfo (filename, "BD Tastendruck")
     if (badlicht_on_by_rule) {
-	    logInfo (filename, "BD Tastendruck durch Regel erzeugt, ignoriere...")
-    	badlicht_on_by_rule = false
+        //logInfo (filename, "Bad Tastendruck durch Regel erzeugt, ignoriere...")
+        badlicht_on_by_rule = false
     } else if (BD_Deckenlicht_TimerActive.state == ON) {
         BD_Deckenlicht_TimerActive.postUpdate(OFF)
-        logInfo (filename, "BD Tastendruck löscht laufenden Timer.")
+        logInfo (filename, "Bad Tastendruck löscht laufenden Timer.")
     }
     // schalten des Lichts geschieht bei diesem Schaltelement automatisch
 end

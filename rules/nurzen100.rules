@@ -58,4 +58,24 @@ then
     if (receivedCommand == ON) N100_Hoflicht_Irene_Relay.sendCommand(ON)
 end
 
+<<<<<<< Updated upstream
 // vim: syntax=Xtend
+=======
+
+rule "Aquarium Beleuchtung ein"
+when
+  Time cron "0 30 8 * * ?"
+  //Item Day_Phase changed to DAYLIGHT
+then
+  N100_Aquarium.sendCommand(ON)
+end
+
+rule "Aquarium Beleuchtung aus"
+when
+  Time cron "0 0 20 * * ?"
+  //Item Day_Phase changed to SUN_SET
+then
+  N100_Aquarium.sendCommand(OFF)
+end
+
+>>>>>>> Stashed changes

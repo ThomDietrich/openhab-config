@@ -1,0 +1,28 @@
+
+val String filename = "wakeup.rules"
+
+/*
+rule "Licht an"
+when
+  Time cron "0 30 9 * * ?"
+then
+  SZ_Orakel.sendCommand(ON)
+  SZ_Orakel_ColorRGBWString.sendCommand("ffffffff")
+end
+
+rule "Licht an"
+when
+  Time cron "0 0 10 * * ?"
+then
+  SZ_Deckenlicht.sendCommand(ON)
+end
+
+rule "Licht aus"
+when
+  Time cron "0 0 11 * * ?"
+then
+  SZ_Orakel_ColorRGBWString.sendCommand("00110000")
+  SZ_Orakel.sendCommand(OFF)
+  SZ_Deckenlicht.sendCommand(OFF)
+end
+*/

@@ -1,5 +1,5 @@
 
-Group Speedtest_Group <"network-icon"> (W66a)
+Group Speedtest_Group <"network-icon"> (Whg)
 
 String      SpeedtestSummary        "Speedtest [%s]"                                            <"speedtest_network">       (Speedtest_Group)
 Number      SpeedtestResultPing     "Ping [%.3f ms]"                                            <"speedtest_next5">         (Speedtest_Group)

@@ -32,6 +32,7 @@ sitemap nurzen100 label="Nurzen100 openHAB Installation" {
         Switch item=N100_Hoflicht_Pferdestall visibility=[N100_Hoflicht_Pferdestall_Unreach == OFF]
         Switch item=N100_Hoflicht_Scheune label="Hässliches Hoflicht (Scheune)" visibility=[N100_Hoflicht_Scheune_Unreach == OFF]
         Switch item=N100_Hoflicht_Irene label="Hoflicht Irene" mappings=[ON="Einschalten (6 min)"] visibility=[N100_Hoflicht_Irene_Unreach == OFF]
+        Text item=N100_Aquarium label="Aquarium Beleuchtung [MAP(active.map):%s]" visibility=[N100_Aquarium_Unreach == OFF]
     }
     Frame label="Außensensor" visibility=[N100_Hoflicht_Pferdestall_Unreach == OFF] {
         Text item=N100_Pferdestall_Temperatur label="Temperatur [%.1f °C]"

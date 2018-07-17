@@ -1,5 +1,5 @@
 
-val String filename = "senseo.rules"
+val String filename = "senseoWifi.rules"
 
 //rule "Senseo: Init"
 //when
@@ -9,13 +9,34 @@ val String filename = "senseo.rules"
 //    ]
 //end
 
+rule "Senseo: 1Cup"
+when
+    Item Alexa_KU_Senseo_Brew1Cup received command ON
+then
+    KU_Senseo_Brew.sendCommand("1cup")
+end
+
+rule "Senseo: 2Cup"
+when
+    Item Alexa_KU_Senseo_Brew2Cup received command ON
+then
+    KU_Senseo_Brew.sendCommand("2cup")
+end
+
 rule "Senseo Fertig: Benachrichtigung"
 when
-    Item FK_Senseo_BrewedSize changed
+    Item KU_Senseo_BrewedSize changed
 then
-    if (FK_Senseo_BrewedSize.state == 1 || FK_Senseo_BrewedSize.state == 2) {
-      pushover("Der Kaffee ist fertig!")
+    if (KU_Senseo_BrewedSize.state == 2) {
+      pushover("Der Kaffee ist fertig")
     }
+    else if (KU_Senseo_BrewedSize.state == 1) {
+      pushover("Der kleine Kaffee ist fertig")
+    }
+    else if (KU_Senseo_BrewedSize.state == 0) {
+      pushover("Irgend was mit Kaffee")
+    }
+    else logError(filename, "Senseo BrewedSize ungültig: " + KU_Senseo_BrewedSize.state)
 end
 
 // vim: syntax=Xtend
